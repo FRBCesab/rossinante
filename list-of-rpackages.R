@@ -28,6 +28,10 @@ install.packages(
     "ade", "adehabitatHR", "adehabitatHS", "betapart", "biomod2", "factoextra",
     "mclust", "sdmpredictors", "vegan",
 
+    ## Bayesian analyses ----
+
+    "brms", "nimble", "R2jags", "rstan",
+
     ## Phylogeny ----
     "ape",
 
