@@ -1,7 +1,7 @@
 ---
 title: |
   Rossinante -- Good practices\vspace{5cm}
-  ![](quichotte.jpg)
+  ![](images/quichotte.jpg)
   \vspace{2cm}
 author: Nicolas Casajus
 date: |
@@ -254,7 +254,7 @@ You will need to define these following parameters:
 
 To make the connection, click on **Quick connect**.
 
-![](filezilla.png)
+![](images/filezilla.png)
 
 The left panel (A) lists your local folders/files. The right panel (B) shows the
 content of your personal directory on Rossinante. 
@@ -333,7 +333,7 @@ already cloned
 1. Run analysis on Rossinante
 
 
-![](github-1.png)
+![](images/github-1.png)
 
 
 Once your analysis is finished, you can:
@@ -344,7 +344,7 @@ Once your analysis is finished, you can:
 
 
 
-![](github-2.png)
+![](images/github-2.png)
 
 
 At this stage, the project on your laptop, GitHub and Rossinante is in the same state.
@@ -356,7 +356,7 @@ datasets (added in the `.gitignore`), you need to send these files through sFTP
 or SCP.
 
 
-![](github-3.png)
+![](images/github-3.png)
 
 
 
@@ -422,7 +422,7 @@ Open a web browser (Firefox, Chrome, etc.) and enter the URL of the RStudio Serv
 After entering your Rossinante login information, you are connected to an
 RStudio Server.
 
-![](rstudio-server.png)
+![](images/rstudio-server.png)
 
 You can now use this interface as the one you knows (RStudio Desktop).
 
