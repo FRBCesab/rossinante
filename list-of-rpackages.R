@@ -5,8 +5,9 @@
 #' @lastupdate 2021/09/03
 #'
 #' @notes Some other packages will be installed. For instance, installing the
-#'   package `rmarkdown` will also install `knitr`, `htmltools`, `jsonlite`,
-#'   `tinytex`, and `stringr` (among others).
+#' package `rmarkdown` will also install `knitr`, `htmltools`, `jsonlite`,
+#' `tinytex`, and `stringr` (among others).
+#' A total of 459 packages will be installed (2.1GB).  
 
 ## CRAN Packages ----
 
