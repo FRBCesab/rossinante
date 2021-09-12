@@ -1,42 +1,133 @@
 ---
 title: |
-  Rossinante -- Good practices\vspace{5cm}
+  Rossinante -- User guide\vspace{5cm}
   ![](images/quichotte.jpg)
   \vspace{2cm}
 author: Nicolas Casajus
 date: |
-  September 10, 2021
+  September 13, 2021
   \newpage
-output: pdf_document
+output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    number_sections: true
+    highlight: zenburn
 geometry: margin=2.5cm
+links-as-notes: true
+header-includes: |
+  \usepackage{titlesec}
+  \titlespacing{\section}{0pt}{0.85cm}{0.50cm}
+  \titlespacing{\subsection}{0pt}{0.75cm}{0.50cm}
+  \usepackage{setspace}
+  \singlespacing
 ---
+
+
 
 \newpage
 
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+# Introduction {-}
+
+
+
+This tutorial presents how to use he FRB-CESAB server **Rossinante**, dedicated 
+to high performance scientific computing (Table 1). You can run programs coded
+in R, Python, Julia, C, and C++. Unlike traditional clusters, Rossinante
+does not have a job scheduling system (e.g. Slurm) meaning that you can launch
+jobs when you want (only if the server is available, see below the 
+**Good practices** section).
+
+
+
+
+| **Hardware** | **Specifications**                               |
+|--------------|--------------------------------------------------|
+| CPU          | 2 x Intel Xeon Gold 5218R (total 80 threads)     |
+| RAM          | 12 x Cells 32 Go RDIMM (total 384 GB)            |
+| Storage      | 8 x 960 GB SSD SATA (total 6.1 TB)               |
+| GPU          | NVIDIA Quadro RTX 6000                           |
+| OS           | Ubuntu Server 20.04 LTS (Focal Fossa)            |
+:Rossinante hardware specifications
+
+
+
+**When do you need to use Rossinante?** Rossinante is particularly appropriate 
+when:
+
+- you need to analyse large datasets (RAM operations), and/or
+- you need to repeat tasks many times (parallelization on CPU/GPU)
+
+
+
+\vspace{0.45cm}
+
+
+
+**What are the available software?** 
+
+- R 4.1 (and RStudio Server 1.4)
+- Python 3.8 (and its development environment)
+- Julia 1.6
+- LaTeX 3.14 and Pandoc 2.5
+- git 2.25
+- FFmpeg (transcoding multimedia files)
+- ImageMagick (image manipulation program)
+- Poppler (utility library for PDF)
+- Spatial tools (GDAL, GEOS, PROJ4)
+
+Other utilities are also available:
+
+- `htop`: CPU and RAM monitoring tool
+- `nvtop`: NVIDIA GPU monitoring tool
+- `nano`, `vi`, and `vim`: text editors
+- `screen` and `tmux`: terminal multiplexers
+- `tree`: recursive directory listing program
+- `curl` and `wget`: download managers
+- `zip` and `unzip`: ZIP files managers
+
+
+
+\vspace{0.45cm}
+
+
+
+**Can you do what you want on Rossinante?**
+
+No!
+
+
 
 
 - htop
 - Slack
 - New softwares
-- Directory access
+- Directory access (personal directory and shared directory `/home/cesab/`)
+- Administrator
 
 
-**Important:** Rossinante is **not a storage server**. Its 6 TB storage are shared
+
+\vspace{0.50cm}
+
+
+
+**Important --** Rossinante is **not a storage server**. Its 6 TB storage are shared
 among all users. You can store large datasets on your personal space to run yours
-analyses. But once you've finished, please remove your data.
+analyses, but once you've finished, please remove your data.
 
 
-\vspace{0.75cm}
 
-# 1. First connexion
+# First connexion
 
-\vspace{0.25cm}
 
-## 1.1. Secure Shell
 
-\vspace{0.25cm}
+...
+
+
+
+## Secure Shell
 
 
 The first connection to the Rossinante server must be done using the **SSH**
@@ -90,11 +181,11 @@ jdoe@rossinante:~$ exit
 ```
 
 
-\vspace{0.50cm}
 
-## 1.2. SSH configuration file
 
-\vspace{0.25cm}
+## SSH configuration file
+
+
 
 
 It can be painful to remember the IP address and the SSH port of Rossinante,
@@ -147,11 +238,8 @@ jane@laptop:~$ ssh rossinante
 ```
 
 
-\vspace{0.50cm}
 
-## 1.3. Generating SSH keys
-
-\vspace{0.25cm}
+## Generating SSH keys
 
 
 
@@ -168,7 +256,7 @@ Let's create a new SSH keys pair using the cryptosystem `RSA` and a key size of
 
 ```sh
 # Create a new SSH key pair ----
-ssh-keygen -f ~/.ssh/id_rossinante -t rsa -b 4096 -C "jane.doe@mail.com"
+jane@laptop:~$ ssh-keygen -f ~/.ssh/id_rossinante -t rsa -b 4096 -C "jane.doe@mail.com"
 ```
 
 If you want you can add a passphrase to increase the security of your key pair
@@ -228,15 +316,15 @@ jdoe@rossinante:~$ ls ~/.ssh
 
 
 
-\vspace{0.75cm}
+# Sending files
 
-# 2. Sending files
 
-\vspace{0.25cm}
 
-## 2.1. sFTP
+...
 
-\vspace{0.25cm}
+
+
+## sFTP
 
 
 
@@ -270,11 +358,9 @@ files in. Then select the files in B, right click, and click on Download.
 **Important:** If your project is tracked by git do not use this method. See section
 2.3.
 
-\vspace{0.50cm}
 
-## 2.2. scp
 
-\vspace{0.25cm}
+## scp
 
 
 
@@ -311,11 +397,9 @@ scp -r rossinante:projects/project_1 ~/Documents/
 
 
 
-\vspace{0.50cm}
+## Git and GitHub
 
-## 2.3. Git and GitHub
 
-\vspace{0.25cm}
 
 If your project is tracked by the versioning system control **git**, you may prefer
 sending files through GitHub (or GitLab).
@@ -360,15 +444,15 @@ or SCP.
 
 
 
-\vspace{0.75cm}
+# Git credentials
 
-# 3. Git credentials
 
-\vspace{0.25cm}
 
-## 3.1. Configuring git
+...
 
-\vspace{0.25cm}
+
+
+## Configuring git
 
 
 
@@ -386,11 +470,8 @@ jdoe@rossinante:~$ git config --global user.email jane.doe@mail.com
 
 
 
-\vspace{0.50cm}
+## GitHub SSH key
 
-## 3.2. GitHub SSH key
-
-\vspace{0.25cm}
 
 
 If you want to communicate with GitHub through the SSH protocol (recommended) 
@@ -403,15 +484,19 @@ jdoe@rossinante:~$ ssh -T git@github.com
 ## shell access.
 ```
 
-\vspace{0.75cm}
 
-# 4. RStudio Server
 
-\vspace{0.25cm}
+# RStudio Server
 
-## 4.1. Connection
 
-\vspace{0.25cm}
+
+...
+
+
+
+## Connection
+
+
 
 Open a web browser (Firefox, Chrome, etc.) and enter the URL of the RStudio Server:
 
@@ -431,29 +516,31 @@ You can now use this interface as the one you knows (RStudio Desktop).
 rm -rf ~/.local/share/rstudio/sessions/active/session-*
 ```
 
-\vspace{0.50cm}
 
-## 4.2. Installing packages
 
-\vspace{0.25cm}
+## Installing packages
+
+
 
 ...
 
-\vspace{0.50cm}
 
-## 4.3. R in the terminal
 
-\vspace{0.25cm}
+## R in the terminal
+
+
 
 ...
 
 - screen
 
-\vspace{0.75cm}
 
-# 5. Python
 
-\vspace{0.25cm}
+# Python
+
+
 
 ...
+
+
 
