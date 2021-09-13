@@ -15,5 +15,6 @@
 # R Environment Variables ----
 .Renviron
 
+# User Files ----
 rossinante.pptx
-
+*.html

@@ -14,7 +14,7 @@ output:
     number_sections: true
     highlight: zenburn
 geometry: margin=2.5cm
-links-as-notes: true
+links-as-notes: false
 header-includes: |
   \usepackage{titlesec}
   \titlespacing{\section}{0pt}{0.85cm}{0.50cm}
@@ -34,9 +34,9 @@ header-includes: |
 
 
 This tutorial presents how to use he FRB-CESAB server **Rossinante**, dedicated 
-to high performance scientific computing (Table 1). You can run programs coded
+to medium performance scientific computing (Table 1). You can run programs coded
 in R, Python, Julia, C, and C++. Unlike traditional clusters, Rossinante
-does not have a job scheduling system (e.g. Slurm) meaning that you can launch
+does not have a job scheduling system (e.g. SLURM) meaning that you can launch
 jobs when you want (only if the server is available, see below the 
 **Good practices** section).
 
@@ -54,11 +54,10 @@ jobs when you want (only if the server is available, see below the
 
 
 
-**When do you need to use Rossinante?** Rossinante is particularly appropriate 
-when:
+**When do you need to use Rossinante?** 
 
-- you need to analyse large datasets (RAM operations), and/or
-- you need to repeat tasks many times (parallelization on CPU/GPU)
+- You need to analyse large datasets (RAM operations), and/or,
+- you need to repeat tasks many times (parallelization on CPU/GPU).
 
 
 
@@ -78,7 +77,7 @@ when:
 - Poppler (utility library for PDF)
 - Spatial tools (GDAL, GEOS, PROJ4)
 
-Other utilities are also available:
+And some useful utilities:
 
 - `htop`: CPU and RAM monitoring tool
 - `nvtop`: NVIDIA GPU monitoring tool
@@ -96,21 +95,16 @@ Other utilities are also available:
 
 **Can you do what you want on Rossinante?**
 
-No!
+No! Rossinante has only one administrator, Nicolas Casajus[^0]. Regular users, 
+like you, have only access to a personal directory, `/home/you/` and to a shared
+directory `/home/cesab/`. You can store your files in one of these two folders. 
+But keep in mind that only you have access to your personal space whereas 
+everybody can access the shared space.
+
+[^0]: nicolas[dot]casajus[at]fondationbiodiversite[dot]fr
 
 
-
-
-- htop
-- Slack
-- New softwares
-- Directory access (personal directory and shared directory `/home/cesab/`)
-- Administrator
-
-
-
-\vspace{0.50cm}
-
+\vspace{0.45cm}
 
 
 **Important --** Rossinante is **not a storage server**. Its 6 TB storage are shared
@@ -118,27 +112,40 @@ among all users. You can store large datasets on your personal space to run your
 analyses, but once you've finished, please remove your data.
 
 
-
-# First connexion
-
+\vspace{0.45cm}
 
 
-...
+If you need to use a non-installed software, please contact the administrator. 
+Note that each user has a personal R library in which he can install every
+R package he wants (independently of other users).
 
 
 
-## Secure Shell
+# First steps
+
+When you connect to Rossinante for the first time, you'll be asked to change 
+your password. This first connection is made under the SSH protocol (Secure 
+Shell). This protocol is a cryptographic network protocol that allows you to 
+securely access a remote computer over an unsecured network.
 
 
-The first connection to the Rossinante server must be done using the **SSH**
-(Secure SHell) protocol. This protocol is a cryptographic network protocol
-that allows you to securely access a remote computer over an unsecured
-network.
+\vspace{0.45cm}
 
-For this tutorial, let's say your name is `Jane DOE`, your user name on your
-laptop is `jane`, your laptop name is `laptop`, your user name on Rossinante is
-`jdoe`, the public IP[^1] of Rossinante is `92.168.45.3`, and the port of the
-SSH server is `22`.
+
+For this tutorial, let's say:
+
+- your name is `Jane DOE`
+- your user name on your laptop is `jane`
+- your laptop name is `laptop`
+- your user name on Rossinante is `jdoe`
+- the public IP address[^1] of Rossinante is `92.168.45.3`
+- the port of the SSH server is `22`
+
+
+
+## SSH connection
+
+
 
 To open an SSH connection on Unix-based OS (macOS and Linux)[^2], open a terminal
 session and run:
@@ -147,7 +154,7 @@ session and run:
 server.
 
 [^2]: On Windows, you'll need to install the software
-[Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/).
+Putty (https://www.chiark.greenend.org.uk/~sgtatham/putty/).
 
 
 ```sh
@@ -507,7 +514,7 @@ Open a web browser (Firefox, Chrome, etc.) and enter the URL of the RStudio Serv
 After entering your Rossinante login information, you are connected to an
 RStudio Server.
 
-![](images/rstudio-server.png)
+![](images/rstudio-server.png){width=10cm}
 
 You can now use this interface as the one you knows (RStudio Desktop).
 
@@ -516,7 +523,8 @@ You can now use this interface as the one you knows (RStudio Desktop).
 rm -rf ~/.local/share/rstudio/sessions/active/session-*
 ```
 
-
+SSL certificate
+https://omicx.cc/posts/2021-07-21-setup-rstudio-server-over-nginx-https/
 
 ## Installing packages
 
@@ -539,6 +547,7 @@ rm -rf ~/.local/share/rstudio/sessions/active/session-*
 # Python
 
 
+https://github.com/jupyterhub/jupyterhub/wiki/Installation-of-Jupyterhub-on-remote-server
 
 ...
 
