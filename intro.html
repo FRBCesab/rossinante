@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Rossinante 1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setting up" href="setup.html" />
+    <link rel="prev" title="Rossinante’s User Guide" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Rossinante
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setting up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="good-practices.html">Good practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sending-files.html">Sending files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-r.html">Working with R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-python.html">Working with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-julia.html">Working with Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallelization.html">Parallelization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Admin guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Rossinante</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="index.html" class="btn btn-neutral float-left" title="Rossinante’s User Guide" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-right" title="Setting up" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+<p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
+<hr class="docutils" />
+<p>This tutorial presents how to use the FRB-CESAB server <strong>Rossinante</strong>, dedicated
+to <em>medium</em> performance scientific computing (Table 1). You can run programs
+implemented in R, Python, Julia, C, and C++. Unlike traditional clusters,
+Rossinante does not have a job scheduling system (e.g. SLURM) meaning that you
+can launch jobs whenever you want (only if the server is available, see <a class="reference internal" href="good-practices.html#good-practices"><span class="std std-ref">Good practices</span></a> section).</p>
+<table class="docutils align-center" id="id1" style="width: 100%">
+<caption><span class="caption-text"><strong>Table 1</strong> – Rossinante hardware specifications</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Hardware</strong></p></th>
+<th class="head"><p><strong>Specifications</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CPU</p></td>
+<td><p>2 x Intel Xeon Gold 5218R – <code class="docutils literal notranslate"><span class="pre">80</span> <span class="pre">threads</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>RAM</p></td>
+<td><p>12 x Cells 32 Go RDIMM – <code class="docutils literal notranslate"><span class="pre">384</span> <span class="pre">GB</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Storage</p></td>
+<td><p>8 x 960 GB SSD SATA – <code class="docutils literal notranslate"><span class="pre">6</span> <span class="pre">TB</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>GPU</p></td>
+<td><p>NVIDIA Quadro RTX 6000</p></td>
+</tr>
+<tr class="row-even"><td><p>OS</p></td>
+<td><p>Ubuntu Server 20.04 LTS (Focal Fossa)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="simple">
+<dt>When do you need to use Rossinante?</dt><dd><ul class="simple">
+<li><p>You need to analyse large datasets (RAM operations), and/or,</p></li>
+<li><p>You need to repeat tasks many times (parallelization on CPU/GPU).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="simple">
+<dt>What are the available software?</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://cran.r-project.org/">R 4.1</a></p></li>
+<li><p><a class="reference external" href="https://www.rstudio.com/products/rstudio/download-server/">RStudio Server</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/">Python 3.9</a></p></li>
+<li><p><a class="reference external" href="https://pip.pypa.io/">pip</a> and <a class="reference external" href="https://docs.conda.io/en/latest/">Conda</a> – Python packages managers</p></li>
+<li><p><a class="reference external" href="https://jupyter-notebook.readthedocs.io/">Jupyter Notebook</a> and <a class="reference external" href="https://jupyterlab.readthedocs.io/">JupyterLab</a></p></li>
+<li><p><a class="reference external" href="https://julialang.org/">Julia 1.6</a></p></li>
+<li><p><a class="reference external" href="https://www.latex-project.org/">LaTeX3</a></p></li>
+<li><p><a class="reference external" href="https://pandoc.org/">Pandoc</a></p></li>
+<li><p><a class="reference external" href="https://git-scm.com/">git</a></p></li>
+</ul>
+</dd>
+<dt>And some useful utilities:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://developer.nvidia.com/cuda-downloads">CUDA 11.4</a> and <a class="reference external" href="https://developer.nvidia.com/cudnn">NVIDIA cuDNN 8.1</a> – Deep Learning</p></li>
+<li><p><a class="reference external" href="https://ffmpeg.org/">FFmpeg</a> – Transcoding multimedia files</p></li>
+<li><p><a class="reference external" href="https://imagemagick.org">ImageMagick</a> – Image manipulation program</p></li>
+<li><p><a class="reference external" href="https://poppler.freedesktop.org/">Poppler</a> – PDF utility library</p></li>
+<li><p><a class="reference external" href="https://gdal.org/">GDAL</a>, <a class="reference external" href="https://trac.osgeo.org/geos">GEOS</a>, <a class="reference external" href="https://proj.org/">PROJ</a> – Spatial libraries</p></li>
+<li><p><a class="reference external" href="https://htop.dev/">htop</a> – CPU, RAM, and processes monitoring tool</p></li>
+<li><p><a class="reference external" href="https://github.com/Syllo/nvtop">nvtop</a> – NVIDIA GPU monitoring tool</p></li>
+<li><p><a class="reference external" href="https://www.nano-editor.org/">nano</a> and <a class="reference external" href="https://www.vim.org/">vim</a> – CLI text editors</p></li>
+<li><p><a class="reference external" href="https://www.gnu.org/software/screen/">screen</a> and <a class="reference external" href="https://github.com/tmux/tmux/wiki">tmux</a> – Terminal multiplexers</p></li>
+<li><p><a class="reference external" href="http://mama.indstate.edu/users/ice/tree/">tree</a> – Recursive directory listing program</p></li>
+<li><p><a class="reference external" href="https://curl.se/">curl</a> and <a class="reference external" href="https://www.gnu.org/software/wget/manual/wget.html">wget</a> – Download managers</p></li>
+<li><p><a class="reference external" href="https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/">zip</a> and <a class="reference external" href="https://linuxize.com/post/how-to-unzip-files-in-linux/">unzip</a> – ZIP files managers</p></li>
+</ul>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt>Can you do what you want on Rossinante?</dt><dd><p>No! Rossinante has only one administrator, Nicolas Casajus. Regular users,
+like you, have only access to a personal directory, <code class="docutils literal notranslate"><span class="pre">/home/you/</span></code> and to a shared
+directory <code class="docutils literal notranslate"><span class="pre">/home/cesab/</span></code>. You can store your files in one of these two folders.
+But keep in mind that only you have access to your personal space whereas
+everybody can access the shared space.</p>
+<p>If you need to use a non-installed software, please contact the administrator.
+Note that each user has a personal R library in which he can install every
+R package he wants (independently of other users).</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>Important –</strong> Rossinante is <strong>not a storage server</strong>. Its 6 TB storage are shared
+among all users. You can store large datasets on your personal space to run yours
+analyses, but once you’ve finished, please remove your files.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Rossinante’s User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-right" title="Setting up" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Nicolas Casajus.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

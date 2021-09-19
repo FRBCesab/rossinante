@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Working with R &mdash; Rossinante 1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Working with Python" href="working-with-python.html" />
+    <link rel="prev" title="Sending files" href="sending-files.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Rossinante
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setting up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="good-practices.html">Good practices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="sending-files.html">Sending files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with R</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rstudio-server">RStudio Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#r-in-the-terminal">R in the terminal</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-python.html">Working with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-julia.html">Working with Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallelization.html">Parallelization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Admin guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Rossinante</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Working with R</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/working-with-r.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="sending-files.html" class="btn btn-neutral float-left" title="Sending files" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="working-with-python.html" class="btn btn-neutral float-right" title="Working with Python" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="working-with-r">
+<h1>Working with R<a class="headerlink" href="#working-with-r" title="Permalink to this headline"></a></h1>
+<p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
+<hr class="docutils" />
+<p>To execute R code on Rossinante, you can use either the RStudio Server interface
+or directly the R console in the terminal. You can also use the <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>
+command.</p>
+<section id="rstudio-server">
+<span id="rstudio"></span><h2>RStudio Server<a class="headerlink" href="#rstudio-server" title="Permalink to this headline"></a></h2>
+<figure class="align-center" id="id1">
+<img alt="RStudio Server interface" src="_images/rstudio-server.png" />
+<figcaption>
+<p><span class="caption-text"><strong>Figure 5</strong> – RStudio Server interface</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>To start the RStudio Server interface, open a web browser (Firefox, Chrome,
+etc.) and enter the URL of the RStudio Server following by the port:
+<code class="docutils literal notranslate"><span class="pre">http://92.168.45.3:3528</span></code> (for example).</p>
+<p>After entering your Rossinante log in information, you are connected to a
+new RStudio Server instance. You can now use this interface as the one you
+know (RStudio Desktop).</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>Important –</strong> RStudio Server has two buttons to close the interface:
+<code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">out</span></code> (B in Figure 5) and <code class="docutils literal notranslate"><span class="pre">Quit</span> <span class="pre">current</span> <span class="pre">R</span> <span class="pre">session</span></code> (C in Figure 5).
+If you click on <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">out</span></code>, your session will be still active (in background)
+and you will have access to objects when you will log in again. You need to
+click on that button if you have launched time consuming analysis. If you click
+on <code class="docutils literal notranslate"><span class="pre">Quit</span> <span class="pre">current</span> <span class="pre">R</span> <span class="pre">session</span></code> you will stop all analyses and you were not able
+to access R objects. Click on that button to terminate your session.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>If you have been disconnected from RStudio Server (network crash, power failure,
+etc.), you may not be able to restart RStudio Server (blank page). In that case,
+you need to kill your previous R sessions (still active) as follow:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># SSH connection to Rossinante ----</span>
+jane@laptop:~$ ssh rossinante
+
+<span class="c1"># Erase all active R sessions ----</span>
+jdoe@rossinante:~$ rm -rf ~/.local/share/rstudio/sessions/active/session-*
+</pre></div>
+</div>
+<p><strong>Note –</strong> With RStudio Server, you can also upload distant files (D in Figure 5).</p>
+</section>
+<section id="r-in-the-terminal">
+<h2>R in the terminal<a class="headerlink" href="#r-in-the-terminal" title="Permalink to this headline"></a></h2>
+<p>An alternative is to launch the R console directly from the terminal of Rossinante.
+And this is very easy.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># SSH connection to Rossinante ----</span>
+jane@laptop:~$ ssh rossinante
+
+<span class="c1"># Launch R console from terminal ----</span>
+jdoe@rossinante:~$ R
+
+<span class="c1">## R version 4.1.1 (2021-08-10) -- &quot;Kick Things&quot;</span>
+<span class="c1">## Copyright (C) 2021 The R Foundation for Statistical Computing</span>
+<span class="c1">## Platform: x86_64-pc-linux-gnu (64-bit)</span>
+<span class="c1">##</span>
+<span class="c1">## R is free software and comes with ABSOLUTELY NO WARRANTY.</span>
+<span class="c1">## You are welcome to redistribute it under certain conditions.</span>
+<span class="c1">## Type &#39;license()&#39; or &#39;licence()&#39; for distribution details.</span>
+<span class="c1">##</span>
+<span class="c1">## R is a collaborative project with many contributors.</span>
+<span class="c1">## Type &#39;contributors()&#39; for more information and</span>
+<span class="c1">## &#39;citation()&#39; on how to cite R or R packages in publications.</span>
+<span class="c1">##</span>
+<span class="c1">## Type &#39;demo()&#39; for some demos, &#39;help()&#39; for on-line help, or</span>
+<span class="c1">## &#39;help.start()&#39; for an HTML browser interface to help.</span>
+<span class="c1">## Type &#39;q()&#39; to quit R.</span>
+<span class="c1">##</span>
+&gt;
+</pre></div>
+</div>
+<p>To close your R session:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Close R session ----</span>
+<span class="o">&gt;</span> <span class="nf">q</span><span class="p">(</span><span class="s">&quot;no&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want, you can also use the command <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> to run an R script
+(or R expression) without opening an R console, directly from the terminal.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run an R expression (option &#39;-e&#39;) ----</span>
+jdoe@rossinante:~$ Rscript -e <span class="s1">&#39;print(&quot;Hello World!&quot;)&#39;</span>
+<span class="c1">## [1] &quot;Hello World!&quot;</span>
+
+<span class="c1"># Write an R script on the personal folder ----</span>
+jdoe@rossinante:~$ <span class="nb">echo</span> <span class="s1">&#39;print(&quot;Hello World!&quot;)&#39;</span> &gt; ~/hello.R
+
+<span class="c1"># Print &#39;hello.R&#39; file content ----</span>
+jdoe@rossinante:~$ cat ~/hello.R
+<span class="c1">## print(&quot;Hello World!&quot;)</span>
+
+<span class="c1"># Run an R script ----</span>
+jdoe@rossinante:~$ Rscript ~/hello.R
+<span class="c1">## [1] &quot;Hello World!&quot;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>Important –</strong> If you launch R in the terminal (or <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>) and your code
+takes time to be computed, you cannot use the terminal until the computation is
+done. The job is running in foreground. Moreover, if your SSH connection is
+stopped, your R session is aborted and your work is lost.</p>
+<p><strong>Solution –</strong> You can use a terminal multiplexer like <code class="docutils literal notranslate"><span class="pre">screen</span></code> or <code class="docutils literal notranslate"><span class="pre">tmux</span></code>. These
+tools open <em>virtual</em> terminals (screens) in the main terminal and you can navigate between
+screens and the main terminal. The idea is to create (attach) a new screen, launch
+your analysis, go back to the main terminal (detach), and work on other stuffs.
+If you stop your SSH connection, the analysis is still running, and if you make
+a new SSH connection to Rossinante, you can reattach the screen and resume your R session.</p>
+<p>Let’s take an example with <code class="docutils literal notranslate"><span class="pre">screen</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># SSH connection to Rossinante ----</span>
+jane@laptop:~$ ssh rossinante
+
+<span class="c1"># Attach (create) a new screen (named &#39;r_analysis&#39;, for instance) ----</span>
+jdoe@rossinante:~$ screen -S r_analysis
+
+<span class="c1"># Open R console (in the new screen) ----</span>
+<span class="o">(</span>r_analysis<span class="o">)</span> jdoe@rossinante:~$ R
+
+<span class="c1"># Launch the analysis ----</span>
+<span class="o">(</span>r_analysis<span class="o">)</span> jdoe@rossinante:~$ source<span class="o">(</span><span class="s2">&quot;script_analysis.R&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>To detach from the screen session, type <code class="docutils literal notranslate"><span class="pre">CTRL</span> <span class="pre">+</span> <span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">D</span></code>.</p>
+<p>You can list running screens as follow:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># List running screens ----</span>
+jdoe@rossinante:~$ screen -ls
+<span class="c1">## There is a screen on:</span>
+<span class="c1">##         4002.r_analysis (Detached)</span>
+</pre></div>
+</div>
+<p>To reattach a screen session, use the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reattach a screen ----</span>
+jdoe@rossinante:~$ screen -r r_analysis
+
+<span class="o">(</span>r_analysis<span class="o">)</span> jdoe@rossinante:~$
+</pre></div>
+</div>
+<p>To close a screen, type <cite>exit</cite> in the screen or press <cite>CTRL + A`</cite> and <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sending-files.html" class="btn btn-neutral float-left" title="Sending files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="working-with-python.html" class="btn btn-neutral float-right" title="Working with Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Nicolas Casajus.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

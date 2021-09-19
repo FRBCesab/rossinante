@@ -1,0 +1,10 @@
+/* .wy-nav-content {
+  max-width: none;
+} */
+
+table caption .caption-text {
+  font-style: normal;
+  font-family: Lato, proxima-nova, Helvetica Neue, Arial, sans-serif;
+  font-weight: 400;
+  color: #404040;
+}
