@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Security &mdash; Rossinante 1 documentation</title>
+  <title>MOTD &mdash; Rossinante 1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,8 +18,6 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Monitoring" href="monitoring.html" />
-    <link rel="prev" title="Installation" href="installation.html" />
   <link href="_static/style.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -54,9 +52,9 @@
 <li class="toctree-l1"><a class="reference internal" href="parallelization.html">Parallelization</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Admin guide</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
 <li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
@@ -78,33 +76,89 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Security</li>
+      <li>MOTD</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/security.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/motd.rst.txt" rel="nofollow"> View page source</a>
       </li>
-  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="monitoring.html" class="btn btn-neutral float-right" title="Monitoring" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-  </div>
+  </ul>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="security">
-<h1>Security<a class="headerlink" href="#security" title="Permalink to this headline"></a></h1>
+  <section id="motd">
+<h1>MOTD<a class="headerlink" href="#motd" title="Permalink to this headline"></a></h1>
 <p><img alt="admin" src="https://img.shields.io/static/v1?label=-&amp;message=Admin%20only&amp;color=red&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
-<p>Coming soon…</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Firewall Configuration ----</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install package ----</span>
 
-$ sudo ufw disable
-$ sudo ufw default deny incoming
-$ sudo ufw allow <span class="m">22</span>
-$ sudo ufw allow <span class="m">8787</span>
-$ sudo ufw allow <span class="m">8888</span>
-$ sudo ufw <span class="nb">enable</span>
-$ sudo ufw status
+$ sudo apt install update-motd figlet
+
+
+<span class="c1">## Edit header ----</span>
+
+$ sudo cp /etc/update-motd.d/00-header /etc/update-motd.d/00-header.original
+$ sudo nano /etc/update-motd.d/00-header
+
+<span class="c1"># &gt;&gt;&gt; #!/bin/sh</span>
+<span class="c1"># &gt;&gt;&gt;</span>
+<span class="c1"># &gt;&gt;&gt; figlet -f small ROSSINANTE</span>
+
+
+<span class="c1">## Edit Landscape ----</span>
+
+$ sudo cp /etc/update-motd.d/50-landscape-sysinfo /etc/update-motd.d/50-landscape-sysinfo.original
+$ sudo nano /etc/update-motd.d/50-landscape-sysinfo
+
+<span class="c1"># &gt;&gt;&gt; #!/bin/sh</span>
+<span class="c1"># &gt;&gt;&gt; # pam_motd does not carry the environment</span>
+<span class="c1"># &gt;&gt;&gt; [ -f /etc/default/locale ] &amp;&amp; . /etc/default/locale</span>
+<span class="c1"># &gt;&gt;&gt; export LANG</span>
+<span class="c1"># &gt;&gt;&gt; os=$(lsb_release -s -d)</span>
+<span class="c1"># &gt;&gt;&gt; cores=$(grep -c ^processor /proc/cpuinfo 2&gt;/dev/null)</span>
+<span class="c1"># &gt;&gt;&gt; [ &quot;$cores&quot; -eq &quot;0&quot; ] &amp;&amp; cores=1</span>
+<span class="c1"># &gt;&gt;&gt; threshold=&quot;${cores:-1}.0&quot;</span>
+<span class="c1"># &gt;&gt;&gt; if [ $(echo &quot;`cut -f1 -d &#39; &#39; /proc/loadavg` &lt; $threshold&quot; | bc) -eq 1 ]; then</span>
+<span class="c1"># &gt;&gt;&gt;     echo</span>
+<span class="c1"># &gt;&gt;&gt;     echo &quot;(*) System Information&quot;</span>
+<span class="c1"># &gt;&gt;&gt;     #/bin/date</span>
+<span class="c1"># &gt;&gt;&gt;     echo &quot;\n  OS:             $os&quot;</span>
+<span class="c1"># &gt;&gt;&gt;     echo</span>
+<span class="c1"># &gt;&gt;&gt;     /usr/bin/landscape-sysinfo</span>
+<span class="c1"># &gt;&gt;&gt; else</span>
+<span class="c1"># &gt;&gt;&gt;     echo</span>
+<span class="c1"># &gt;&gt;&gt;     echo &quot; System information disabled due to load higher than $threshold&quot;</span>
+<span class="c1"># &gt;&gt;&gt; fi</span>
+
+
+<span class="c1">## Edit Updates ----</span>
+
+$ sudo cp /etc/update-motd.d/90-updates-available /etc/update-motd.d/90-updates-available.original
+$ sudo nano /etc/update-motd.d/90-updates-available
+
+<span class="c1"># &gt;&gt;&gt; #!/bin/sh</span>
+<span class="c1"># &gt;&gt;&gt;</span>
+<span class="c1"># &gt;&gt;&gt; echo &quot;\n(*) System Updates&quot;</span>
+<span class="c1"># &gt;&gt;&gt;</span>
+<span class="c1"># &gt;&gt;&gt; stamp=&quot;/var/lib/update-notifier/updates-available&quot;</span>
+<span class="c1"># &gt;&gt;&gt;</span>
+<span class="c1"># &gt;&gt;&gt; [ ! -r &quot;$stamp&quot; ] || cat &quot;$stamp&quot;</span>
+<span class="c1"># &gt;&gt;&gt;</span>
+<span class="c1"># &gt;&gt;&gt; find $stamp -newermt &#39;now-7 days&#39; 2&gt; /dev/null | grep -q -m 1 &#39;.&#39; || /usr/share/update-notifier/notify-updates-outdated</span>
+
+
+<span class="c1">## Disable infos ----</span>
+
+$ sudo chmod -x /etc/update-motd.d/00-header.original
+$ sudo chmod -x /etc/update-motd.d/50-landscape-sysinfo.original
+$ sudo chmod -x /etc/update-motd.d/90-updates-available.original
+$ sudo chmod -x /etc/update-motd.d/10-help-text
+$ sudo chmod -x /etc/update-motd.d/50-motd-news
+
+
+<span class="c1">## Update MOTD ----</span>
+
+$ sudo update-motd
 </pre></div>
 </div>
 </section>
@@ -112,10 +166,7 @@ $ sudo ufw status
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="monitoring.html" class="btn btn-neutral float-right" title="Monitoring" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

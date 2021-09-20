@@ -55,13 +55,35 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Admin guide</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#disk-partitioning">Disk partitioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-update">System update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openssh-server">OpenSSH server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-linux-users">Create Linux users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#softwares-installation">Softwares installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#r-and-rstudio-server">R and RStudio Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-and-miniconda">Python and Miniconda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#julia">Julia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker">Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nvidia-driver">NVIDIA driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cuda-and-cudnn">CUDA and cuDNN</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cuda-toolkit-11-4">CUDA Toolkit 11.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cudnn-8-2">cuDNN 8.2</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
 <li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 </ul>
 
         </div>
@@ -95,7 +117,480 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
 <p><img alt="admin" src="https://img.shields.io/static/v1?label=-&amp;message=Admin%20only&amp;color=red&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
-<p>Coming soon…</p>
+<section id="disk-partitioning">
+<h2>Disk partitioning<a class="headerlink" href="#disk-partitioning" title="Permalink to this headline"></a></h2>
+<table class="docutils align-center" id="id1" style="width: 100%">
+<caption><span class="caption-text"><strong>Table 1</strong> – Rossinante disks partitioning</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 14%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Storage virtualization technology</p></th>
+<th class="head"><p>Space</p></th>
+<th class="head"><p>Path</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>RAID 1</p></td>
+<td><p>512 Mo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/boot/efi</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>8 Go</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">swap</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>438 Go</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>RAID 5</p></td>
+<td><p>6 To</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/home</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="system-update">
+<h2>System update<a class="headerlink" href="#system-update" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Update System ----</span>
+
+$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt full-upgrade -y
+$ sudo apt autoremove <span class="o">&amp;&amp;</span> sudo apt autoclean
+
+$ sudo reboot
+</pre></div>
+</div>
+</section>
+<section id="network">
+<h2>Network<a class="headerlink" href="#network" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Identify Ethernet Interfaces ----</span>
+
+$ ip link
+
+
+<span class="c1">## Set Network parameters ----</span>
+
+$ sudo nano /etc/netplan/00-installer-config.yaml
+
+<span class="c1"># ... add the following content</span>
+<span class="c1"># ... (replace {{ID}} by network card id)</span>
+
+<span class="c1"># &gt;&gt;&gt; network:</span>
+<span class="c1"># &gt;&gt;&gt;   version: 2</span>
+<span class="c1"># &gt;&gt;&gt;   renderer: networkd</span>
+<span class="c1"># &gt;&gt;&gt;   ethernets:</span>
+<span class="c1"># &gt;&gt;&gt;     {{ID}}:</span>
+<span class="c1"># &gt;&gt;&gt;      dhcp4: no</span>
+<span class="c1"># &gt;&gt;&gt;      addresses:</span>
+<span class="c1"># &gt;&gt;&gt;        - 192.168.XXX.XXX/24</span>
+<span class="c1"># &gt;&gt;&gt;      gateway4: 192.168.XXX.XXX</span>
+<span class="c1"># &gt;&gt;&gt;      nameservers:</span>
+<span class="c1"># &gt;&gt;&gt;          addresses: [8.8.8.8, 1.1.1.1]                   ## Change for Encrypted DNS Resolvers !!!</span>
+
+
+<span class="c1">## Apply changes ----</span>
+
+$ sudo netplan apply
+
+
+<span class="c1">## Check ----</span>
+
+$ ip addr show dev <span class="o">{{</span>ID<span class="o">}}</span>
+</pre></div>
+</div>
+</section>
+<section id="openssh-server">
+<h2>OpenSSH server<a class="headerlink" href="#openssh-server" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install SSH server ----</span>
+
+$ sudo apt install openssh-server
+
+
+<span class="c1">## Change parameters ----</span>
+
+$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original   <span class="c1">## Backup original config file</span>
+
+$ sudo nano /etc/ssh/sshd_config
+
+<span class="c1">#... change the following parameters:</span>
+
+<span class="c1"># &gt;&gt;&gt; Port XXXX</span>
+<span class="c1"># &gt;&gt;&gt; LoginGraceTime 30s</span>
+<span class="c1"># &gt;&gt;&gt; MaxAuthTries 6</span>
+<span class="c1"># &gt;&gt;&gt; PermitRootLogin no</span>
+<span class="c1"># &gt;&gt;&gt; PermitEmptyPasswords no</span>
+<span class="c1"># &gt;&gt;&gt; PubkeyAuthentication yes</span>
+<span class="c1"># &gt;&gt;&gt; AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2</span>
+<span class="c1"># &gt;&gt;&gt; AllowGroups sshlogin</span>
+
+
+<span class="c1">## Apply changes ----</span>
+
+$ sudo service ssh restart
+
+
+<span class="c1">## Create new Linux group ----</span>
+
+$ sudo groupadd sshlogin
+$ sudo usermod -aG sshlogin jdoe                               <span class="c1">## Add jdoe to &#39;sshlogin&#39; group (SSH access)</span>
+</pre></div>
+</div>
+</section>
+<section id="create-linux-users">
+<h2>Create Linux users<a class="headerlink" href="#create-linux-users" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Change default adduser parameters ----</span>
+
+$ sudo cp /etc/adduser.conf /etc/adduser.conf.original         <span class="c1">## Backup original config file</span>
+
+$ sudo nano /etc/adduser.conf
+
+<span class="c1">#... change the following parameters:</span>
+
+<span class="c1"># &gt;&gt;&gt; DIR_MODE=0750                                            ## Only user and group can access user personal space</span>
+
+
+<span class="c1">## Create new user ----</span>
+
+$ sudo adduser psmith                                          <span class="c1">## Create new user &#39;psmith&#39;</span>
+$ sudo passwd -e psmith                                        <span class="c1">## &#39;psmith&#39; needs to change its password at first login</span>
+$ sudo usermod -aG sshlogin psmith                             <span class="c1">## Add &#39;psmith&#39; to &#39;sshlogin&#39; group (SSH access)</span>
+</pre></div>
+</div>
+</section>
+<section id="softwares-installation">
+<h2>Softwares installation<a class="headerlink" href="#softwares-installation" title="Permalink to this headline"></a></h2>
+<section id="utilities">
+<h3>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Utilities installation ----</span>
+
+$ sudo apt update
+
+$ sudo apt install  <span class="se">\</span>
+    build-essential <span class="se">\ </span>               <span class="c1">## Tools for compiling software</span>
+    fail2ban        <span class="se">\ </span>               <span class="c1">## Intrusion prevention software</span>
+    ffmpeg          <span class="se">\ </span>               <span class="c1">## Tools for transcoding multimedia files</span>
+    git             <span class="se">\ </span>               <span class="c1">## Revision control system</span>
+    imagemagick     <span class="se">\ </span>               <span class="c1">## Image manipulation program</span>
+    nvtop           <span class="se">\ </span>               <span class="c1">## GPU monitor</span>
+    tree            <span class="se">\ </span>               <span class="c1">## Displays an indented directory tree</span>
+    tldr            <span class="se">\ </span>               <span class="c1">## Haskell tldr client</span>
+    unzip           <span class="se">\ </span>               <span class="c1">## De-archiver for .zip files</span>
+    zip             <span class="se">\ </span>               <span class="c1">## Archiver for .zip files</span>
+    zsh                              <span class="c1">## Shell with lots of feature</span>
+</pre></div>
+</div>
+</section>
+<section id="r-and-rstudio-server">
+<h3>R and RStudio Server<a class="headerlink" href="#r-and-rstudio-server" title="Permalink to this headline"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add the R 4.0 repository from CRAN ----</span>
+
+$ sudo add-apt-repository <span class="s1">&#39;deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/&#39;</span>
+
+
+<span class="c1">## Add GPG keys ----</span>
+
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+$ sudo apt update
+
+
+<span class="c1">## Install R ----</span>
+
+$ sudo apt install r-base r-base-dev
+
+
+<span class="c1">## Install system libraries ----</span>
+
+$ sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
+$ sudo apt install libnode-dev libcairo2-dev libnetcdf-dev
+$ sudo apt install libmagick++-dev libpoppler-cpp-dev libgmp3-dev
+
+
+<span class="c1">## Install LaTeX and Pandoc ----</span>
+
+$ sudo apt install pandoc pandoc-citeproc texlive-full
+
+
+<span class="c1">## Install RStudio Server ----</span>
+
+$ sudo apt install gdebi-core
+$ wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
+
+$ sudo gdebi rstudio-server-1.4.1717-amd64.deb
+$ rm rstudio-server-1.4.1717-amd64.deb
+
+
+<span class="c1">## Open Firewall Port ----</span>
+sudo ufw allow <span class="m">8787</span>
+</pre></div>
+</div>
+</section>
+<section id="python-and-miniconda">
+<h3>Python and Miniconda<a class="headerlink" href="#python-and-miniconda" title="Permalink to this headline"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Python utilities ----</span>
+
+$ sudo apt install python3-pip python3-venv python3-sphinx python3-dev
+
+
+<span class="c1">## Download MiniConda installer ----</span>
+
+$ wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
+
+
+<span class="c1">## Check integrity with SHA-256 ----</span>
+
+$ sha256sum Miniconda3-py39_4.10.3-Linux-x86_64.sh
+
+
+<span class="c1">## Install MiniConda ----</span>
+
+$ sudo sh Miniconda3-py39_4.10.3-Linux-x86_64.sh  <span class="c1"># !!! Location: /opt/miniconda3</span>
+
+
+<span class="c1">## Create a conda group ----</span>
+
+$ sudo addgroup conda
+
+
+<span class="c1">## Change group binaries owner ----</span>
+
+$ sudo chgrp -R conda /opt/miniconda3
+
+
+<span class="c1">## Change permissions ----</span>
+
+$ sudo chmod <span class="m">770</span> -R /opt/miniconda3
+
+
+<span class="c1">## Add user to conda group ----</span>
+
+$ sudo usermod -aG conda psmith
+
+
+<span class="c1">## Add conda binaries to path ---</span>
+
+$ sudo <span class="nb">echo</span> <span class="s2">&quot;PATH=</span><span class="nv">$PATH</span><span class="s2">:/opt/miniconda3/bin&quot;</span> &gt;&gt; /etc/profile
+$ sudo <span class="nb">echo</span> <span class="s2">&quot;PATH=</span><span class="nv">$PATH</span><span class="s2">:/opt/miniconda3/bin&quot;</span> &gt;&gt; /etc/zsh/zprofile
+
+
+<span class="c1">## Create global config file ----</span>
+
+$ sudo touch /opt/miniconda3/.condarc
+$ sudo chown root:conda /opt/miniconda3/.condarc
+
+
+<span class="c1">## Remove (base) from prompt ----</span>
+
+$ conda config --set auto_activate_base <span class="nb">false</span>
+
+
+<span class="c1">## Cleanup ----</span>
+
+$ rm Miniconda3-py39_4.10.3-Linux-x86_64.sh
+
+<span class="c1"># &gt;&gt;&gt; Logout</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install Python packages ----</span>
+
+$ conda install jupyter scipy matplotlib numpy requests keras pytorch pandas statsmodels
+$ conda install scikit-learn scikit-learn-intelex bokeh seaborn plotly future
+
+$ conda install -c r r-irkernel    <span class="c1"># R in Jupyter Notebook</span>
+
+$ conda install -c conda-forge jupyterlab
+</pre></div>
+</div>
+</section>
+<section id="julia">
+<h3>Julia<a class="headerlink" href="#julia" title="Permalink to this headline"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Download compressed binaries ----</span>
+
+$ wget https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.2-linux-x86_64.tar.gz
+
+
+<span class="c1">## Extract binaries ----</span>
+
+$ tar -xvzf julia-1.6.2-linux-x86_64.tar.gz
+
+
+<span class="c1">## Copy binaries to /opt/ folder (third-party applications directory) ----</span>
+
+$ sudo cp -r julia-1.6.2 /opt/
+
+
+<span class="c1">## Create symbolic link to julia inside the /usr/local/bin folder ----</span>
+
+$ sudo ln -s /opt/julia-1.6.2/bin/julia /usr/local/bin/julia
+
+
+<span class="c1">## Cleanup ----</span>
+
+$ rm -f julia-1.6.2-linux-x86_64.tar.gz
+$ rm -rf julia-1.6.2
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">## Add Julia to Jupyter Notebook ----</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="k">using</span> <span class="n">Pkg</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;IJulia&quot;</span><span class="p">)</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="docker">
+<h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install tools ----</span>
+
+$ sudo apt install apt-transport-https ca-certificates software-properties-common
+
+
+<span class="c1">## Add GPG key ----</span>
+
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo apt-key add -
+
+
+<span class="c1">## Add Docker repository ----</span>
+
+$ sudo add-apt-repository <span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable&quot;</span>
+$ sudo apt update
+
+$ sudo apt install docker-ce docker-compose
+
+
+<span class="c1">## Check daemon ----</span>
+
+$ sudo systemctl status docker
+
+
+<span class="c1">## Use Docker without sudo ----</span>
+
+$ sudo usermod -aG docker psmith
+</pre></div>
+</div>
+</section>
+</section>
+<section id="nvidia-driver">
+<h2>NVIDIA driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Disable Nouveau driver ----</span>
+<span class="c1"># (https://clay-atlas.com/us/blog/2021/06/22/linux-en-nvidia-driver-nouveau-kernel/)</span>
+
+$ sudo nano /etc/modprobe.d/nvidia-installer-disable-nouveau.conf
+<span class="c1"># &gt;&gt;&gt; ... add the two following lines:</span>
+<span class="c1"># &gt;&gt;&gt; blacklist nouveau</span>
+<span class="c1"># &gt;&gt;&gt; options nouveau modeset=0</span>
+
+
+<span class="c1">## Regenerate kernel ----</span>
+
+$ sudo update-initramfs -u
+$ sudo reboot
+
+
+<span class="c1">## Check ----</span>
+
+$ lsmod <span class="p">|</span> grep nouveau
+
+
+<span class="c1">## Install utilities ----</span>
+
+$ sudo apt install pkg-config libglvnd-dev
+
+
+<span class="c1">## Download NVIDIA driver installer ---</span>
+<span class="c1"># (https://www.nvidia.fr/Download/Find.aspx)</span>
+
+$ wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.91.03/NVIDIA-Linux-x86_64-460.91.03.run
+
+
+<span class="c1">## Make it executable ----</span>
+
+$ chmod +x NVIDIA-Linux-x86_64-460.91.03.run
+
+
+<span class="c1">## Install NVIDIA driver ----</span>
+
+$ sudo ./NVIDIA-Linux-x86_64-460.91.03.run
+
+$ sudo reboot
+
+
+<span class="c1">## Check ---</span>
+
+$ nvtop
+</pre></div>
+</div>
+</section>
+<section id="cuda-and-cudnn">
+<h2>CUDA and cuDNN<a class="headerlink" href="#cuda-and-cudnn" title="Permalink to this headline"></a></h2>
+<section id="cuda-toolkit-11-4">
+<h3>CUDA Toolkit 11.4<a class="headerlink" href="#cuda-toolkit-11-4" title="Permalink to this headline"></a></h3>
+<p>Source: <a class="reference external" href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install CUDA Toolkit 11.4 ----</span>
+
+$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+
+$ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+
+$ wget https://developer.download.nvidia.com/compute/cuda/11.4.2/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.2-470.57.02-1_amd64.deb
+
+$ sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.2-470.57.02-1_amd64.deb
+$ sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
+$ sudo apt update
+$ sudo apt install cuda
+</pre></div>
+</div>
+</section>
+<section id="cudnn-8-2">
+<h3>cuDNN 8.2<a class="headerlink" href="#cudnn-8-2" title="Permalink to this headline"></a></h3>
+<p>Visit the page: <a class="reference external" href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html</a>,
+and download from a web browser on local device (login required):</p>
+<ul class="simple">
+<li><p>cuDNN Library for Linux (x86_64)</p></li>
+<li><p>cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)</p></li>
+<li><p>cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)</p></li>
+<li><p>cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)</p></li>
+</ul>
+<p>Then send these files through SSH to Rossinante:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ scp cudnn-11.4-linux-x64-v8.2.4.15.tgz rossinante:~/
+$ scp libcudnn8* rossinante:~/
+</pre></div>
+</div>
+<p>On Rossinante:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install cuDNN ----</span>
+
+$ tar -xzvf cudnn-11.4-linux-x64-v8.2.4.15.tgz
+
+$ sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
+$ sudo cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64
+
+$ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+
+$ sudo dpkg -i libcudnn8_2.4.15-1+cuda11.4_amd64.deb
+$ sudo dpkg -i libcudnn8-dev_8.2.4.15-1+cuda11.4_amd64.deb
+$ sudo dpkg -i libcudnn8-samples_8.2.4.15-1+cuda11.4_amd64.deb
+
+$ sudo apt install libfreeimage3 libfreeimage-dev
+
+
+<span class="c1">## Check install ----</span>
+
+$ cp -r /usr/src/cudnn_samples_v8/ <span class="nv">$HOME</span>
+$ <span class="nb">cd</span> <span class="nv">$HOME</span>/cudnn_samples_v8/mnistCUDNN
+
+$ make clean <span class="o">&amp;&amp;</span> make
+$ ./mnistCUDNN
+
+
+<span class="c1">## Cleanup ----</span>
+
+rm libcudnn8*
+rm cudnn-11.4-linux-x64-v8.2.4.15.tgz
+rm -rf cudnn_samples_v8
+rm -rf cuda
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
 
