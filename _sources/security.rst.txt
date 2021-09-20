@@ -8,3 +8,17 @@ Security
 -----
 
 Coming soon...
+
+
+
+.. code-block:: shell
+
+  ## Firewall Configuration ----
+
+  $ sudo ufw disable
+  $ sudo ufw default deny incoming
+  $ sudo ufw allow 22
+  $ sudo ufw allow 8787
+  $ sudo ufw allow 8888
+  $ sudo ufw enable
+  $ sudo ufw status

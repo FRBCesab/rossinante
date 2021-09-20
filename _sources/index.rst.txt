@@ -45,3 +45,4 @@ Rossinante's User Guide
   :caption: Appendix
 
   ./linux-cmd.rst
+  ./motd.rst
