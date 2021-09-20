@@ -16,5 +16,5 @@
 .Renviron
 
 # User Files ----
-rossinante.pptx
-*.html
+lib/
+bin/
