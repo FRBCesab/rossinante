@@ -17,8 +17,6 @@ Coming soon...
 
   $ sudo ufw disable
   $ sudo ufw default deny incoming
-  $ sudo ufw allow 22
-  $ sudo ufw allow 8787
-  $ sudo ufw allow 8888
+  $ sudo ufw allow 22/tcp
   $ sudo ufw enable
   $ sudo ufw status

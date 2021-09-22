@@ -10,9 +10,11 @@ Introduction
 
 This tutorial presents how to use the FRB-CESAB server **Rossinante**, dedicated
 to *medium* performance scientific computing (Table 1). You can run programs
-implemented in R, Python, Julia, C, and C++. Unlike traditional clusters,
-Rossinante does not have a job scheduling system (e.g. SLURM) meaning that you
-can launch jobs whenever you want (only if the server is available, see :ref:`good-practices` section).
+implemented in R, Python, Julia, C, and C++ directly from a terminal or using
+Web clients like RStudio Server and Jupyter Notebook. Unlike traditional clusters,
+Rossinante does not have a job scheduling system (e.g. SLURM, Torque) meaning
+that you can launch jobs whenever you want. But only if there is cores and
+RAM available (see :ref:`good-practices` section).
 
 
 .. table:: **Table 1** -- Rossinante hardware specifications
@@ -39,7 +41,6 @@ When do you need to use Rossinante?
   * You need to analyse large datasets (RAM operations), and/or,
   * You need to repeat tasks many times (parallelization on CPU/GPU).
 
-|
 
 What are the available software?
   * `R 4.1 <https://cran.r-project.org/>`_
@@ -80,12 +81,13 @@ Can you do what you want on Rossinante?
 
   If you need to use a non-installed software, please contact the administrator.
   Note that each user has a personal R library in which he can install every
-  R package he wants (independently of other users).
+  R packages he wants (independently of other users). For Python, packages are
+  shared among all users (except if you work with virtual environments [recommended]).
 
 
-|
+
 
 
 **Important --** Rossinante is **not a storage server**. Its 6 TB storage are shared
 among all users. You can store large datasets on your personal space to run yours
-analyses, but once you've finished, please remove your files.
+analyses, but once you've finished, please remove large files.

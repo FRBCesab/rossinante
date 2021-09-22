@@ -50,6 +50,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Sending files</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#sftp">sFTP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#scp-command">scp command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsync">rsync</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#github">GitHub</a></li>
 </ul>
 </li>
@@ -67,6 +68,7 @@
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 </ul>
 
         </div>
@@ -101,7 +103,7 @@
 <p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
 <p>When you want to run analyses on Rossinante, you need to transfer files (code
-and data) from your laptop to the server. Here we will see three methods.</p>
+and data) from your laptop to the server. Here we will see four methods.</p>
 <section id="sftp">
 <h2>sFTP<a class="headerlink" href="#sftp" title="Permalink to this headline"></a></h2>
 <p>The easiest way to transfer files from your laptop to Rossinante (or vice versa)
@@ -137,7 +139,7 @@ on <strong>Download</strong>.</p>
 <section id="scp-command">
 <h2>scp command<a class="headerlink" href="#scp-command" title="Permalink to this headline"></a></h2>
 <p>An alternative to transfer files is by using the command <code class="docutils literal notranslate"><span class="pre">scp</span></code> that allows
-to copy files using the SSH protocol.</p>
+to copy files using the SSH protocol (secure copy).</p>
 <p>Let’s say we want to copy the local file <code class="docutils literal notranslate"><span class="pre">script.R</span></code>, located in the
 <code class="docutils literal notranslate"><span class="pre">Documents/</span></code> folder, to Rossinante (in the folder <code class="docutils literal notranslate"><span class="pre">~/projects/</span></code>).
 We will use <code class="docutils literal notranslate"><span class="pre">scp</span></code> as follow:</p>
@@ -165,6 +167,11 @@ you want to copy a project tracked by <strong>git</strong>.</p>
 jane@laptop:~$ scp -r -p ~/Documents/project_1 rossinante:projects/
 </pre></div>
 </div>
+</section>
+<section id="rsync">
+<h2>rsync<a class="headerlink" href="#rsync" title="Permalink to this headline"></a></h2>
+<p>The command <code class="docutils literal notranslate"><span class="pre">rsync</span></code> is an alternative to <code class="docutils literal notranslate"><span class="pre">scp</span></code> and has the advantage to copy
+files only if necessary. It’s also can be used as a backup system.</p>
 </section>
 <section id="github">
 <h2>GitHub<a class="headerlink" href="#github" title="Permalink to this headline"></a></h2>

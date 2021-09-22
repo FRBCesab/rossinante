@@ -48,6 +48,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#generating-ssh-keys">Generating SSH keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#git-credentials">Git credentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#github-ssh-keys">GitHub SSH keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github-pat">GitHub PAT</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="good-practices.html">Good practices</a></li>
@@ -69,6 +70,7 @@
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 </ul>
 
         </div>
@@ -132,7 +134,7 @@ it looks like <code class="docutils literal notranslate"><span class="pre">C:\Us
 <p>You’ll be asked to change your password. Enter the old password and set your new
 password (twice). Then, your prompt will look like (a reconnection may be
 necessary): <code class="docutils literal notranslate"><span class="pre">jdoe&#64;rossinante:~$</span></code>. This means that you are now connected to
-Rossinante under the username <cite>jdoe</cite>.</p>
+Rossinante under the username <code class="docutils literal notranslate"><span class="pre">jdoe</span></code>.</p>
 <p>You can check your current directory with the command <code class="docutils literal notranslate"><span class="pre">pwd</span></code>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print working (current) directory ----</span>
 jdoe@rossinante:~$ <span class="nb">pwd</span>
@@ -151,9 +153,10 @@ jdoe@rossinante:~$ <span class="nb">exit</span>
 <p>It can be painful to remember the IP address and the SSH port of Rossinante,
 especially if you use several servers. Fortunately you can store Rossinante
 connection information in a special file located on <strong>your laptop</strong>
-(not in the server): <code class="docutils literal notranslate"><span class="pre">config</span></code>. The file must be stored on an hidden folder
+(not in the server): <code class="docutils literal notranslate"><span class="pre">config</span></code>. The file must be stored in an hidden folder
 <code class="docutils literal notranslate"><span class="pre">.ssh/</span></code> located in your personal home directory.</p>
-<p>To create this <code class="docutils literal notranslate"><span class="pre">config</span></code> file, open a Terminal and follow these steps:</p>
+<p>To create this <code class="docutils literal notranslate"><span class="pre">config</span></code> file, open a Terminal and follow these steps (works
+only for Unix systems):</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Navigate to your home directory (symbolized by ~) ----</span>
 jane@laptop:~$ <span class="nb">cd</span> ~
 
@@ -182,7 +185,8 @@ jane@laptop:~$ nano ~/.ssh/config
    <span class="n">User</span> <span class="n">jdoe</span>
 </pre></div>
 </div>
-<p>To save changes press <code class="docutils literal notranslate"><span class="pre">CTRL</span> <span class="pre">+</span> <span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code>/<code class="docutils literal notranslate"><span class="pre">O</span></code> and then press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
+<p>To save changes press <code class="docutils literal notranslate"><span class="pre">CTRL</span> <span class="pre">+</span> <span class="pre">X</span></code> (to quit) and <code class="docutils literal notranslate"><span class="pre">Y</span></code>/<code class="docutils literal notranslate"><span class="pre">O</span></code> (to save changes)
+and then press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
 <p>You can now connect to Rossinante as follow:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>jane@laptop:~$ ssh rossinante
 </pre></div>
@@ -196,14 +200,14 @@ an SSH key pair consists in creating two long strings of characters: a public
 and a private key. You can place the public key on any server, and then connect
 to the server using a device that has access to the private key.</p>
 <p>Let’s create a new SSH keys pair using the cryptosystem <code class="docutils literal notranslate"><span class="pre">RSA</span></code> and a key size
-of <code class="docutils literal notranslate"><span class="pre">4096</span></code> bits. You will create this SSH keys pair locally (i.e. on your
-laptop).</p>
+of <code class="docutils literal notranslate"><span class="pre">4096</span></code> bits. You will create this SSH keys pair locally (i.e. on <strong>your
+laptop</strong>).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a new SSH key pair (on your laptop) ----
 jane@laptop:~$ ssh-keygen -f ~/.ssh/id_rossinante -t rsa -b 4096 -C &quot;jane.doe@mail.com&quot;
 </pre></div>
 </div>
 <p>If you want, you can add a passphrase to increase the security of your key pair
-but each time you will connect to Rossinante you will be asked to enter it. It’s
+(recommended) but each time you will connect to Rossinante you will be asked to enter it. It’s
 up to you.</p>
 <p>This SSH key pair has been stored in <code class="docutils literal notranslate"><span class="pre">~/.ssh/</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Content of the ~/.ssh folder ----
@@ -214,11 +218,11 @@ jane@laptop:~$ ls ~/.ssh/
 <p>The private key is <cite>id_rossinante</cite> and the public one <cite>id_rossinante.pub</cite>.
 Nobody (except you) can have access to the private key. So you need to change
 the permissions of this file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Change private key permissions (only Jane can read this file) ----
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Change private key permissions (only Jane can only read this file) ----
 jane@laptop:~$ chmod 400 ~/.ssh/id_rossinante
 </pre></div>
 </div>
-<p>On the opposite your public can be deployed everywhere. In our case, we will store
+<p>On the opposite your SSH public key can be deployed everywhere. In our case, we will store
 it on the Rossinante server.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Copying public key to Rossinante ----
 jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_rossinante.pub rossinante
@@ -236,7 +240,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 </pre></div>
 </div>
 <p>Just write <code class="docutils literal notranslate"><span class="pre">yes</span></code> and press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
-<p>Our public key on Rossinante has been stored under the name <code class="docutils literal notranslate"><span class="pre">authorized_keys</span></code>.</p>
+<p>Our SSH public key on Rossinante has been stored under the name <code class="docutils literal notranslate"><span class="pre">authorized_keys</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Content of the ~/.ssh folder ----
 jdoe@rossinante:~$ ls ~/.ssh
 ## authorized_keys
@@ -247,8 +251,9 @@ your password.</p>
 </section>
 <section id="git-credentials">
 <h2>Git credentials<a class="headerlink" href="#git-credentials" title="Permalink to this headline"></a></h2>
-<p>If you want to use <strong>git</strong> on Rossinante, you need to set your user name and
-email (required for commits). Run the following lines:</p>
+<p>The version control system <strong>git</strong> is already installed on Rossinante, but you
+need to (globally) set your username and email (required for commits).
+Run the following lines:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connection to Rossinante ----</span>
 jane@laptop:~$ ssh rossinante
 
@@ -265,7 +270,7 @@ jdoe@rossinante:~$ cat ~/.gitconfig
 <span class="c1">##          email = jane.doe@mail.com</span>
 </pre></div>
 </div>
-<p>You can also define git parameters locally, i.e. specific to a project. For more
+<p>You can also define <strong>git</strong> parameters locally, i.e. specific to a project. For more
 information: <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup</a>.</p>
 </section>
 <section id="github-ssh-keys">
@@ -274,7 +279,7 @@ information: <a class="reference external" href="https://git-scm.com/book/en/v2/
 you need to generate a new SSH key pair (different from the one used to connect
 to Rossinante).</p>
 <p>Let’s create a new SSH keys pair using the cryptosystem <code class="docutils literal notranslate"><span class="pre">RSA</span></code> and a key size of
-<code class="docutils literal notranslate"><span class="pre">4096</span></code> bits. But this time, this SSH keys pair will be generated on Rossinante.</p>
+<code class="docutils literal notranslate"><span class="pre">4096</span></code> bits. But this time, this SSH keys pair will be generated <strong>on Rossinante</strong>.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new SSH key pair ----</span>
 jdoe@rossinante:~$ ssh-keygen -f ~/.ssh/id_rsa -t rsa -b <span class="m">4096</span> -C <span class="s2">&quot;jane.doe@mail.com&quot;</span>
 </pre></div>
@@ -288,18 +293,18 @@ jdoe@rossinante:~$ ls ~/.ssh/
 </pre></div>
 </div>
 <p>Let’s restrict the access to the private key.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change private key permissions (only jdoe can read this file) ----</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change private key permissions (only jdoe can only read this file) ----</span>
 jdoe@rossinante:~$ chmod <span class="m">400</span> ~/.ssh/id_rsa
 </pre></div>
 </div>
 <p>Now we need to store the public key on GitHub server. Go to this page
 <a class="reference external" href="https://github.com/settings/keys">https://github.com/settings/keys</a> and click on <strong>New SSH key</strong>.</p>
-<p>On Rossinante, print the <strong>public</strong> SSH key and copy it.</p>
+<p>On Rossinante, print the SSH <strong>public</strong> key and copy it.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print GitHub public SSH key ----</span>
 jdoe@rossinante:~$ cat ~/.ssh/id_rsa.pub
 </pre></div>
 </div>
-<p>On GitHub, give a title to you new SSH key (for example <em>Rossinante key</em>) and
+<p>Go back to GitHub, give a title to your new SSH key (for example <em>Rossinante key</em>) and
 paste your public SSH key. Click on <strong>Add SSH key</strong>.</p>
 <p>Congratulation! You can know communicate with GitHub using the SSH protocol.
 Let’s test the SSH connection between Rossinante and GitHub:</p>
@@ -311,8 +316,23 @@ jdoe@rossinante:~$ ssh -T git@github.com
 <p><strong>Important –</strong> If you lose your private SSH key you won’t be able to establish
 a connection with GitHub (from Rossinante). You’ll need to delete your SSH key
 on GitHub (i.e. <em>Rossinante key</em>) and to create a new one.</p>
-<p><strong>NB –</strong> You will need to add your private GitHub SSH key on yours other devices.
+<p><strong>NB –</strong> You will need to add your private GitHub SSH key on your other devices.
 Alternatively (recommended) you can create a new GitHub SSH keys pair on each device.</p>
+</section>
+<section id="github-pat">
+<h2>GitHub PAT<a class="headerlink" href="#github-pat" title="Permalink to this headline"></a></h2>
+<p>If you want to use the GitHub API, essentially with the R package <a class="reference external" href="https://usethis.r-lib.org/">usethis</a>
+you need to create a GitHub Personal Access Token (PAT). Visit the page
+<a class="reference external" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a> and click on <strong>Generate new token</strong>.
+Choose a name for the token (for example <em>Rossinante token</em>), select
+an expiration date, and choose the scope (at least): <strong>repo</strong> and <strong>workflow</strong>.</p>
+<p>Copy the GitHub PAT and go back to Rossinante shell. You will store this
+token in the file <code class="docutils literal notranslate"><span class="pre">~/.Renviron</span></code> (readable by R).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store GitHub PAT on Rossinante (for R only) ----</span>
+jdoe@rossinante:~$ <span class="nb">echo</span> <span class="s2">&quot;GITHUB_PAT=&#39;XXX&#39;&quot;</span> &gt;&gt; ~/.Renvion
+</pre></div>
+</div>
+<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">XXX</span></code> by your token value.</p>
 </section>
 </section>
 

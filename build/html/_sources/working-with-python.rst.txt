@@ -29,3 +29,10 @@ Coming soon...
   ## On local browser ----
 
   http://127.0.0.1:8000
+
+
+  ## Open RStudio through SSH tunnel port forwarding in background ----
+
+  $ ssh -Nf -L 8787:localhost:8787 rossinante
+  $ ps aux | grep ssh
+  $ kill ${pid}

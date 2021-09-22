@@ -73,6 +73,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#cuda-and-cudnn">CUDA and cuDNN</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cuda-toolkit-11-4">CUDA Toolkit 11.4</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cudnn-8-2">cuDNN 8.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -154,7 +155,7 @@
 <h2>System update<a class="headerlink" href="#system-update" title="Permalink to this headline"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Update System ----</span>
 
-$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt full-upgrade -y
+$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt full-upgrade
 $ sudo apt autoremove <span class="o">&amp;&amp;</span> sudo apt autoclean
 
 $ sudo reboot
@@ -587,6 +588,20 @@ rm libcudnn8*
 rm cudnn-11.4-linux-x64-v8.2.4.15.tgz
 rm -rf cudnn_samples_v8
 rm -rf cuda
+</pre></div>
+</div>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline"></a></h3>
+<p><a class="reference external" href="https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/">https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/</a>
+<a class="reference external" href="https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux">https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux</a>
+<a class="reference external" href="https://linuxize.com/post/how-to-nvidia-drivers-on-ubuntu-20-04/">https://linuxize.com/post/how-to-nvidia-drivers-on-ubuntu-20-04/</a>
+<a class="reference external" href="https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/">https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/</a>
+<a class="reference external" href="https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/">https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/</a>
+<a class="reference external" href="https://libredns.gr/">https://libredns.gr/</a>
+<a class="reference external" href="https://linuxize.com/post/bash-write-to-file/">https://linuxize.com/post/bash-write-to-file/</a>
+<a class="reference external" href="https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/">https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/</a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get install --no-install-recommends nvidia-driver-*
 </pre></div>
 </div>
 </section>

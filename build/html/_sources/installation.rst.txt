@@ -35,7 +35,7 @@ System update
 
   ## Update System ----
 
-  $ sudo apt update && sudo apt full-upgrade -y
+  $ sudo apt update && sudo apt full-upgrade
   $ sudo apt autoremove && sudo apt autoclean
 
   $ sudo reboot
@@ -517,3 +517,21 @@ On Rossinante:
   rm cudnn-11.4-linux-x64-v8.2.4.15.tgz
   rm -rf cudnn_samples_v8
   rm -rf cuda
+
+
+
+Notes
+~~~~~
+
+https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/
+https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux
+https://linuxize.com/post/how-to-nvidia-drivers-on-ubuntu-20-04/
+https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/
+https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/
+https://libredns.gr/
+https://linuxize.com/post/bash-write-to-file/
+https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/
+
+.. code-block:: shell
+
+  sudo apt-get install --no-install-recommends nvidia-driver-*

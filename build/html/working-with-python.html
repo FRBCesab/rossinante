@@ -62,6 +62,7 @@
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 </ul>
 
         </div>
@@ -114,6 +115,13 @@ $ jupyter lab --no-browser --port <span class="m">8989</span>
 <span class="c1">## On local browser ----</span>
 
 http://127.0.0.1:8000
+
+
+<span class="c1">## Open RStudio through SSH tunnel port forwarding in background ----</span>
+
+$ ssh -Nf -L <span class="m">8787</span>:localhost:8787 rossinante
+$ ps aux <span class="p">|</span> grep ssh
+$ <span class="nb">kill</span> <span class="si">${</span><span class="nv">pid</span><span class="si">}</span>
 </pre></div>
 </div>
 </section>

@@ -10,7 +10,7 @@ Sending files
 
 
 When you want to run analyses on Rossinante, you need to transfer files (code
-and data) from your laptop to the server. Here we will see three methods.
+and data) from your laptop to the server. Here we will see four methods.
 
 
 
@@ -60,7 +60,7 @@ scp command
 
 
 An alternative to transfer files is by using the command ``scp`` that allows
-to copy files using the SSH protocol.
+to copy files using the SSH protocol (secure copy).
 
 Let's say we want to copy the local file ``script.R``, located in the
 ``Documents/`` folder, to Rossinante (in the folder ``~/projects/``).
@@ -109,6 +109,13 @@ you want to copy a project tracked by **git**.
   # Send a folder from local to Rossinante (preserve modification times) ----
   jane@laptop:~$ scp -r -p ~/Documents/project_1 rossinante:projects/
 
+
+
+rsync
+-----
+
+The command ``rsync`` is an alternative to ``scp`` and has the advantage to copy
+files only if necessary. It's also can be used as a backup system.
 
 
 GitHub

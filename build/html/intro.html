@@ -62,6 +62,7 @@
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 </ul>
 
         </div>
@@ -97,9 +98,11 @@
 <hr class="docutils" />
 <p>This tutorial presents how to use the FRB-CESAB server <strong>Rossinante</strong>, dedicated
 to <em>medium</em> performance scientific computing (Table 1). You can run programs
-implemented in R, Python, Julia, C, and C++. Unlike traditional clusters,
-Rossinante does not have a job scheduling system (e.g. SLURM) meaning that you
-can launch jobs whenever you want (only if the server is available, see <a class="reference internal" href="good-practices.html#good-practices"><span class="std std-ref">Good practices</span></a> section).</p>
+implemented in R, Python, Julia, C, and C++ directly from a terminal or using
+Web clients like RStudio Server and Jupyter Notebook. Unlike traditional clusters,
+Rossinante does not have a job scheduling system (e.g. SLURM, Torque) meaning
+that you can launch jobs whenever you want. But only if there is cores and
+RAM available (see <a class="reference internal" href="good-practices.html#good-practices"><span class="std std-ref">Good practices</span></a> section).</p>
 <table class="docutils align-center" id="id1" style="width: 100%">
 <caption><span class="caption-text"><strong>Table 1</strong> – Rossinante hardware specifications</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
 <colgroup>
@@ -138,11 +141,6 @@ can launch jobs whenever you want (only if the server is available, see <a class
 <li><p>You need to repeat tasks many times (parallelization on CPU/GPU).</p></li>
 </ul>
 </dd>
-</dl>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<dl class="simple">
 <dt>What are the available software?</dt><dd><ul class="simple">
 <li><p><a class="reference external" href="https://cran.r-project.org/">R 4.1</a></p></li>
 <li><p><a class="reference external" href="https://www.rstudio.com/products/rstudio/download-server/">RStudio Server</a></p></li>
@@ -182,15 +180,13 @@ But keep in mind that only you have access to your personal space whereas
 everybody can access the shared space.</p>
 <p>If you need to use a non-installed software, please contact the administrator.
 Note that each user has a personal R library in which he can install every
-R package he wants (independently of other users).</p>
+R packages he wants (independently of other users). For Python, packages are
+shared among all users (except if you work with virtual environments [recommended]).</p>
 </dd>
 </dl>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p><strong>Important –</strong> Rossinante is <strong>not a storage server</strong>. Its 6 TB storage are shared
 among all users. You can store large datasets on your personal space to run yours
-analyses, but once you’ve finished, please remove your files.</p>
+analyses, but once you’ve finished, please remove large files.</p>
 </section>
 
 
