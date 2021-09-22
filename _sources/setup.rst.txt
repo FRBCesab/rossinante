@@ -50,7 +50,7 @@ it looks like ``C:\Users\jane>``.
 You'll be asked to change your password. Enter the old password and set your new
 password (twice). Then, your prompt will look like (a reconnection may be
 necessary): ``jdoe@rossinante:~$``. This means that you are now connected to
-Rossinante under the username `jdoe`.
+Rossinante under the username ``jdoe``.
 
 
 You can check your current directory with the command ``pwd``:
@@ -80,10 +80,11 @@ SSH config file
 It can be painful to remember the IP address and the SSH port of Rossinante,
 especially if you use several servers. Fortunately you can store Rossinante
 connection information in a special file located on **your laptop**
-(not in the server): ``config``. The file must be stored on an hidden folder
+(not in the server): ``config``. The file must be stored in an hidden folder
 ``.ssh/`` located in your personal home directory.
 
-To create this ``config`` file, open a Terminal and follow these steps:
+To create this ``config`` file, open a Terminal and follow these steps (works
+only for Unix systems):
 
 
 .. code-block:: shell
@@ -118,7 +119,8 @@ Now add the follow lines in the SSH config file:
      Port 22
      User jdoe
 
-To save changes press ``CTRL + X`` and ``Y``/``O`` and then press ``Enter``.
+To save changes press ``CTRL + X`` (to quit) and ``Y``/``O`` (to save changes)
+and then press ``Enter``.
 
 
 You can now connect to Rossinante as follow:
@@ -141,8 +143,8 @@ and a private key. You can place the public key on any server, and then connect
 to the server using a device that has access to the private key.
 
 Let's create a new SSH keys pair using the cryptosystem ``RSA`` and a key size
-of ``4096`` bits. You will create this SSH keys pair locally (i.e. on your
-laptop).
+of ``4096`` bits. You will create this SSH keys pair locally (i.e. on **your
+laptop**).
 
 
 
@@ -154,7 +156,7 @@ laptop).
 
 
 If you want, you can add a passphrase to increase the security of your key pair
-but each time you will connect to Rossinante you will be asked to enter it. It's
+(recommended) but each time you will connect to Rossinante you will be asked to enter it. It's
 up to you.
 
 This SSH key pair has been stored in ``~/.ssh/``.
@@ -177,12 +179,12 @@ the permissions of this file.
 
 .. code-block::
 
-  # Change private key permissions (only Jane can read this file) ----
+  # Change private key permissions (only Jane can only read this file) ----
   jane@laptop:~$ chmod 400 ~/.ssh/id_rossinante
 
 
 
-On the opposite your public can be deployed everywhere. In our case, we will store
+On the opposite your SSH public key can be deployed everywhere. In our case, we will store
 it on the Rossinante server.
 
 
@@ -219,7 +221,7 @@ The first time you use your new SSH keys pair you will see:
 
 Just write ``yes`` and press ``Enter``.
 
-Our public key on Rossinante has been stored under the name ``authorized_keys``.
+Our SSH public key on Rossinante has been stored under the name ``authorized_keys``.
 
 
 
@@ -241,8 +243,9 @@ Git credentials
 
 
 
-If you want to use **git** on Rossinante, you need to set your user name and
-email (required for commits). Run the following lines:
+The version control system **git** is already installed on Rossinante, but you
+need to (globally) set your username and email (required for commits).
+Run the following lines:
 
 
 
@@ -269,7 +272,7 @@ A ``~/.gitconfig`` file has been created:
 
 
 
-You can also define git parameters locally, i.e. specific to a project. For more
+You can also define **git** parameters locally, i.e. specific to a project. For more
 information: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup.
 
 
@@ -284,7 +287,7 @@ you need to generate a new SSH key pair (different from the one used to connect
 to Rossinante).
 
 Let's create a new SSH keys pair using the cryptosystem ``RSA`` and a key size of
-``4096`` bits. But this time, this SSH keys pair will be generated on Rossinante.
+``4096`` bits. But this time, this SSH keys pair will be generated **on Rossinante**.
 
 
 
@@ -316,7 +319,7 @@ Let's restrict the access to the private key.
 
 .. code-block:: shell
 
-  # Change private key permissions (only jdoe can read this file) ----
+  # Change private key permissions (only jdoe can only read this file) ----
   jdoe@rossinante:~$ chmod 400 ~/.ssh/id_rsa
 
 
@@ -326,7 +329,7 @@ https://github.com/settings/keys and click on **New SSH key**.
 
 
 
-On Rossinante, print the **public** SSH key and copy it.
+On Rossinante, print the SSH **public** key and copy it.
 
 
 
@@ -337,7 +340,7 @@ On Rossinante, print the **public** SSH key and copy it.
 
 
 
-On GitHub, give a title to you new SSH key (for example *Rossinante key*) and
+Go back to GitHub, give a title to your new SSH key (for example *Rossinante key*) and
 paste your public SSH key. Click on **Add SSH key**.
 
 
@@ -356,5 +359,26 @@ Let's test the SSH connection between Rossinante and GitHub:
 a connection with GitHub (from Rossinante). You'll need to delete your SSH key
 on GitHub (i.e. *Rossinante key*) and to create a new one.
 
-**NB --** You will need to add your private GitHub SSH key on yours other devices.
+**NB --** You will need to add your private GitHub SSH key on your other devices.
 Alternatively (recommended) you can create a new GitHub SSH keys pair on each device.
+
+
+
+GitHub PAT
+----------
+
+If you want to use the GitHub API, essentially with the R package `usethis <https://usethis.r-lib.org/>`_
+you need to create a GitHub Personal Access Token (PAT). Visit the page
+https://github.com/settings/tokens and click on **Generate new token**.
+Choose a name for the token (for example *Rossinante token*), select
+an expiration date, and choose the scope (at least): **repo** and **workflow**.
+
+Copy the GitHub PAT and go back to Rossinante shell. You will store this
+token in the file ``~/.Renviron`` (readable by R).
+
+.. code-block:: shell
+
+  # Store GitHub PAT on Rossinante (for R only) ----
+  jdoe@rossinante:~$ echo "GITHUB_PAT='XXX'" >> ~/.Renvion
+
+Make sure to replace ``XXX`` by your token value.
