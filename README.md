@@ -1,8 +1,9 @@
 rossinante
 ================
 
+[![Build and Deploy Website](https://github.com/FRBCesab/rossinante/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/FRBCesab/rossinante/actions/workflows/gh-pages.yml)
 
-A Toolbox for Rossinante
+This repository contains the Sphinx documentation of the FRB-CESAB server. 
 
 
 
