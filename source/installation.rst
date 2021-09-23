@@ -386,6 +386,11 @@ Docker
 NVIDIA driver
 -------------
 
+
+.. code-block:: shell
+
+  sudo apt install ubuntu-drivers-common
+
 .. code-block:: shell
 
   ## Disable Nouveau driver ----
