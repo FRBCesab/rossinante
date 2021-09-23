@@ -46,3 +46,4 @@ Rossinante's User Guide
 
   ./linux-cmd.rst
   ./motd.rst
+  ./shell.rst

@@ -142,24 +142,23 @@ an SSH key pair consists in creating two long strings of characters: a public
 and a private key. You can place the public key on any server, and then connect
 to the server using a device that has access to the private key.
 
-Let's create a new SSH keys pair using the cryptosystem ``RSA`` and a key size
-of ``4096`` bits. You will create this SSH keys pair locally (i.e. on **your
-laptop**).
+Let's create a new SSH keys pair using the cryptosystem ``ed25519``. You will
+create this SSH keys pair locally (i.e. on **your laptop**).
 
 
 
 .. code-block::
 
   # Create a new SSH key pair (on your laptop) ----
-  jane@laptop:~$ ssh-keygen -f ~/.ssh/id_rossinante -t rsa -b 4096 -C "jane.doe@mail.com"
+  jane@laptop:~$ ssh-keygen -t ed25519 -C "jane.doe@mail.com"
 
 
 
 If you want, you can add a passphrase to increase the security of your key pair
-(recommended) but each time you will connect to Rossinante you will be asked to enter it. It's
-up to you.
+(recommended) but each time you will connect to Rossinante you will be asked
+to enter it. It's up to you.
 
-This SSH key pair has been stored in ``~/.ssh/``.
+This SSH keys pair has been stored in ``~/.ssh/``.
 
 
 
@@ -167,11 +166,11 @@ This SSH key pair has been stored in ``~/.ssh/``.
 
   # Content of the ~/.ssh folder ----
   jane@laptop:~$ ls ~/.ssh/
-  ## config       id_rossinante       id_rossinante.pub
+  ## config       id_ed25519       id_ed25519.pub
 
 
 
-The private key is `id_rossinante` and the public one `id_rossinante.pub`.
+The private key is `id_ed25519` and the public one `id_ed25519.pub`.
 Nobody (except you) can have access to the private key. So you need to change
 the permissions of this file.
 
@@ -180,7 +179,7 @@ the permissions of this file.
 .. code-block::
 
   # Change private key permissions (only Jane can only read this file) ----
-  jane@laptop:~$ chmod 400 ~/.ssh/id_rossinante
+  jane@laptop:~$ chmod 400 ~/.ssh/id_ed25519
 
 
 
@@ -192,7 +191,7 @@ it on the Rossinante server.
 .. code-block::
 
   # Copying public key to Rossinante ----
-  jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_rossinante.pub rossinante
+  jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_ed25519.pub rossinante
 
 
 
@@ -379,6 +378,6 @@ token in the file ``~/.Renviron`` (readable by R).
 .. code-block:: shell
 
   # Store GitHub PAT on Rossinante (for R only) ----
-  jdoe@rossinante:~$ echo "GITHUB_PAT='XXX'" >> ~/.Renvion
+  jdoe@rossinante:~$ echo "GITHUB_PAT=XXX" >> ~/.Renviron
 
 Make sure to replace ``XXX`` by your token value.

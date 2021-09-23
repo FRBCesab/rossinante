@@ -114,6 +114,9 @@ you want to copy a project tracked by **git**.
 rsync
 -----
 
+Tutorial:
+  * https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/
+
 The command ``rsync`` is an alternative to ``scp`` and has the advantage to copy
 files only if necessary. It's also can be used as a backup system.
 

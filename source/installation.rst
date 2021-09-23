@@ -28,8 +28,13 @@ Disk partitioning
   +-----------------------------------+--------+---------------+
 
 
+|
+
+
 System update
 -------------
+
+
 
 .. code-block:: shell
 
@@ -38,11 +43,21 @@ System update
   $ sudo apt update && sudo apt full-upgrade
   $ sudo apt autoremove && sudo apt autoclean
 
-  $ sudo reboot
-
+|
 
 Network
 -------
+
+
+
+Tutorials:
+  - https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/
+  - https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/
+  - https://www.privacyguides.org/providers/dns/
+  - https://libredns.gr/
+
+-----
+
 
 .. code-block:: shell
 
@@ -53,22 +68,19 @@ Network
 
   ## Set Network parameters ----
 
-  $ sudo nano /etc/netplan/00-installer-config.yaml
-
-  # ... add the following content
-  # ... (replace {{ID}} by network card id)
-
-  # >>> network:
-  # >>>   version: 2
-  # >>>   renderer: networkd
-  # >>>   ethernets:
-  # >>>     {{ID}}:
-  # >>>      dhcp4: no
-  # >>>      addresses:
-  # >>>        - 192.168.XXX.XXX/24
-  # >>>      gateway4: 192.168.XXX.XXX
-  # >>>      nameservers:
-  # >>>          addresses: [8.8.8.8, 1.1.1.1]                   ## Change for Encrypted DNS Resolvers !!!
+  $ sudo cat << EOF > /etc/netplan/00-installer-config.yaml
+  network:
+    version: 2
+    renderer: networkd
+    ethernets:
+      eno1np0:
+        dhcp4: no
+        addresses:
+          - 192.168.0.42/24
+        gateway4: 192.168.0.254
+        nameservers:
+          addresses: [116.202.176.26,208.91.112.52,208.91.112.53]
+  EOF
 
 
   ## Apply changes ----
@@ -78,7 +90,46 @@ Network
 
   ## Check ----
 
-  $ ip addr show dev {{ID}}
+  $ ip addr show dev eno1np0
+
+
+|
+
+
+NVIDIA driver
+-------------
+
+
+Tutorial:
+  - https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux
+
+-----
+
+
+
+.. code-block:: shell
+
+  ## Install utilities ----
+
+  $ sudo apt install ubuntu-drivers-common
+
+
+  ## Detect NVIDIA card ----
+
+  $ ubuntu-drivers devices
+
+
+  ## Install recommended driver ----
+
+  $ sudo apt install --no-install-recommends nvidia-driver-470
+
+  $ sudo reboot
+
+**NB --** It's recommended to install the driver from Ubuntu repository.
+The option ``--no-install-recommends`` avoids to install ``gnome-shell``.
+
+
+|
 
 
 OpenSSH server
@@ -92,58 +143,102 @@ OpenSSH server
   $ sudo apt install openssh-server
 
 
-  ## Change parameters ----
+  ## Backup original config file ----
 
-  $ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original   ## Backup original config file
+  $ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
+
+
+  ## Edit config file ----
 
   $ sudo nano /etc/ssh/sshd_config
 
-  #... change the following parameters:
 
-  # >>> Port XXXX
-  # >>> LoginGraceTime 30s
-  # >>> MaxAuthTries 6
-  # >>> PermitRootLogin no
-  # >>> PermitEmptyPasswords no
-  # >>> PubkeyAuthentication yes
-  # >>> AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2
-  # >>> AllowGroups sshlogin
 
+Let's change the following parameters in the ``sshd_config`` file.
+
+.. code-block:: shell
+
+  Port 2222
+  LoginGraceTime 30s
+  MaxAuthTries 6
+  PermitRootLogin no
+  PermitEmptyPasswords no
+  PubkeyAuthentication yes
+  AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2
+  AllowGroups sshlogin
+
+
+Let's create a new Linux group ``sshlogin``. Only users who are members of this
+group can connect to the server via the SSH protocol.
+
+.. code-block:: shell
+
+  ## Create new Linux group ----
+
+  $ sudo groupadd sshlogin
+  $ sudo usermod -aG sshlogin dquichotte
+
+
+
+Apply new SSH config.
+
+.. code-block:: shell
 
   ## Apply changes ----
 
   $ sudo service ssh restart
 
 
-  ## Create new Linux group ----
-
-  $ sudo groupadd sshlogin
-  $ sudo usermod -aG sshlogin jdoe                               ## Add jdoe to 'sshlogin' group (SSH access)
-
+|
 
 
 Create Linux users
 ------------------
 
+First let's change some default parameters of the create user system. We will
+increase privacy of user personal directory in such manner that only the user
+and its primary group can access to this content.
+
 .. code-block:: shell
 
-  ## Change default adduser parameters ----
+  ## Backup original config file ----
 
-  $ sudo cp /etc/adduser.conf /etc/adduser.conf.original         ## Backup original config file
+  $ sudo cp /etc/adduser.conf /etc/adduser.conf.original
+
+
+  ## Edit adduser config file ----
 
   $ sudo nano /etc/adduser.conf
 
-  #... change the following parameters:
 
-  # >>> DIR_MODE=0750                                            ## Only user and group can access user personal space
 
+Let's change the following parameters in the ``adduser.conf`` file.
+
+.. code-block:: shell
+
+  DIR_MODE=0750                                ## Personal directory permissions
+
+
+
+Finally let's create the user ``psmith``.
+
+
+.. code-block:: shell
 
   ## Create new user ----
 
-  $ sudo adduser psmith                                          ## Create new user 'psmith'
-  $ sudo passwd -e psmith                                        ## 'psmith' needs to change its password at first login
-  $ sudo usermod -aG sshlogin psmith                             ## Add 'psmith' to 'sshlogin' group (SSH access)
+  $ sudo adduser psmith                        ## Create new user 'psmith'
+  $ sudo passwd -e psmith                      ## 'psmith' needs to change its password at first login
 
+
+.. code-block:: shell
+
+  ## Add 'psmith' to the group 'sshlogin' ----
+
+  $ sudo usermod -aG sshlogin psmith
+
+
+|
 
 
 Softwares installation
@@ -176,19 +271,32 @@ Utilities
       zsh                              ## Shell with lots of feature
 
 
+
 R and RStudio Server
 ~~~~~~~~~~~~~~~~~~~~
 
+
+
+Tutorials:
+  * https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/
+  * https://rtask.thinkr.fr/fr/installation-de-r-4-0-sur-ubuntu-20-04-lts-et-astuces-pour-les-packages-de-cartographie/
+
+
+
 .. code-block:: shell
+
+  ## Add GPG keys ----
+
+  $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+
 
   ## Add the R 4.0 repository from CRAN ----
 
   $ sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 
 
-  ## Add GPG keys ----
+  ## Update packages list ----
 
-  $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
   $ sudo apt update
 
 
@@ -209,6 +317,13 @@ R and RStudio Server
   $ sudo apt install pandoc pandoc-citeproc texlive-full
 
 
+
+RStudio Server
+^^^^^^^^^^^^^^
+
+
+.. code-block:: shell
+
   ## Install RStudio Server ----
 
   $ sudo apt install gdebi-core
@@ -218,8 +333,47 @@ R and RStudio Server
   $ rm rstudio-server-1.4.1717-amd64.deb
 
 
-  ## Open Firewall Port ----
-  sudo ufw allow 8787
+Let's configure RStudio Server.
+
+.. code-block:: shell
+
+  ## Edit server config file ----
+
+  $ sudo nano /etc/rstudio/rserver.conf
+
+
+Let's add the following line:
+
+.. code-block:: shell
+
+  www-port=8787
+  # www-address=127.0.0.1                     ## Replace by VPN address
+
+
+Apply changes.
+
+.. code-block:: shell
+
+  $ sudo rstudio-server restart
+
+
+Let's configure users sessions.
+
+.. code-block:: shell
+
+  ## Edit server config file ----
+
+  $ sudo nano /etc/rstudio/rsession.conf
+
+
+Let's add the following option (no limit).
+
+.. code-block:: shell
+
+  session-timeout-minutes=0
+
+
+|
 
 
 
@@ -281,16 +435,17 @@ Python and Miniconda
   $ sudo chown root:conda /opt/miniconda3/.condarc
 
 
-  ## Remove (base) from prompt ----
-
-  $ conda config --set auto_activate_base false
-
-
   ## Cleanup ----
 
   $ rm Miniconda3-py39_4.10.3-Linux-x86_64.sh
 
   # >>> Logout
+
+  ## Remove (base) from prompt ----
+
+  $ conda config --set auto_activate_base false
+
+
 
 
 .. code-block:: shell
@@ -381,66 +536,7 @@ Docker
   $ sudo usermod -aG docker psmith
 
 
-
-
-NVIDIA driver
--------------
-
-
-.. code-block:: shell
-
-  sudo apt install ubuntu-drivers-common
-
-.. code-block:: shell
-
-  ## Disable Nouveau driver ----
-  # (https://clay-atlas.com/us/blog/2021/06/22/linux-en-nvidia-driver-nouveau-kernel/)
-
-  $ sudo nano /etc/modprobe.d/nvidia-installer-disable-nouveau.conf
-  # >>> ... add the two following lines:
-  # >>> blacklist nouveau
-  # >>> options nouveau modeset=0
-
-
-  ## Regenerate kernel ----
-
-  $ sudo update-initramfs -u
-  $ sudo reboot
-
-
-  ## Check ----
-
-  $ lsmod | grep nouveau
-
-
-  ## Install utilities ----
-
-  $ sudo apt install pkg-config libglvnd-dev
-
-
-  ## Download NVIDIA driver installer ---
-  # (https://www.nvidia.fr/Download/Find.aspx)
-
-  $ wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.91.03/NVIDIA-Linux-x86_64-460.91.03.run
-
-
-  ## Make it executable ----
-
-  $ chmod +x NVIDIA-Linux-x86_64-460.91.03.run
-
-
-  ## Install NVIDIA driver ----
-
-  $ sudo ./NVIDIA-Linux-x86_64-460.91.03.run
-
-  $ sudo reboot
-
-
-  ## Check ---
-
-  $ nvtop
-
-
+|
 
 CUDA and cuDNN
 --------------
@@ -522,21 +618,3 @@ On Rossinante:
   rm cudnn-11.4-linux-x64-v8.2.4.15.tgz
   rm -rf cudnn_samples_v8
   rm -rf cuda
-
-
-
-Notes
-~~~~~
-
-https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/
-https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux
-https://linuxize.com/post/how-to-nvidia-drivers-on-ubuntu-20-04/
-https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/
-https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/
-https://libredns.gr/
-https://linuxize.com/post/bash-write-to-file/
-https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/
-
-.. code-block:: shell
-
-  sudo apt-get install --no-install-recommends nvidia-driver-*
