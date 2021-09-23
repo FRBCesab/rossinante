@@ -199,33 +199,32 @@ are not vulnerable to common brute-force password hacking attacks. Generating
 an SSH key pair consists in creating two long strings of characters: a public
 and a private key. You can place the public key on any server, and then connect
 to the server using a device that has access to the private key.</p>
-<p>Let’s create a new SSH keys pair using the cryptosystem <code class="docutils literal notranslate"><span class="pre">RSA</span></code> and a key size
-of <code class="docutils literal notranslate"><span class="pre">4096</span></code> bits. You will create this SSH keys pair locally (i.e. on <strong>your
-laptop</strong>).</p>
+<p>Let’s create a new SSH keys pair using the cryptosystem <code class="docutils literal notranslate"><span class="pre">ed25519</span></code>. You will
+create this SSH keys pair locally (i.e. on <strong>your laptop</strong>).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a new SSH key pair (on your laptop) ----
-jane@laptop:~$ ssh-keygen -f ~/.ssh/id_rossinante -t rsa -b 4096 -C &quot;jane.doe@mail.com&quot;
+jane@laptop:~$ ssh-keygen -t ed25519 -C &quot;jane.doe@mail.com&quot;
 </pre></div>
 </div>
 <p>If you want, you can add a passphrase to increase the security of your key pair
-(recommended) but each time you will connect to Rossinante you will be asked to enter it. It’s
-up to you.</p>
-<p>This SSH key pair has been stored in <code class="docutils literal notranslate"><span class="pre">~/.ssh/</span></code>.</p>
+(recommended) but each time you will connect to Rossinante you will be asked
+to enter it. It’s up to you.</p>
+<p>This SSH keys pair has been stored in <code class="docutils literal notranslate"><span class="pre">~/.ssh/</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Content of the ~/.ssh folder ----
 jane@laptop:~$ ls ~/.ssh/
-## config       id_rossinante       id_rossinante.pub
+## config       id_ed25519       id_ed25519.pub
 </pre></div>
 </div>
-<p>The private key is <cite>id_rossinante</cite> and the public one <cite>id_rossinante.pub</cite>.
+<p>The private key is <cite>id_ed25519</cite> and the public one <cite>id_ed25519.pub</cite>.
 Nobody (except you) can have access to the private key. So you need to change
 the permissions of this file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Change private key permissions (only Jane can only read this file) ----
-jane@laptop:~$ chmod 400 ~/.ssh/id_rossinante
+jane@laptop:~$ chmod 400 ~/.ssh/id_ed25519
 </pre></div>
 </div>
 <p>On the opposite your SSH public key can be deployed everywhere. In our case, we will store
 it on the Rossinante server.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Copying public key to Rossinante ----
-jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_rossinante.pub rossinante
+jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_ed25519.pub rossinante
 </pre></div>
 </div>
 <p>Now we can connect to Rossinante without entering any password (except if you
@@ -329,7 +328,7 @@ an expiration date, and choose the scope (at least): <strong>repo</strong> and <
 <p>Copy the GitHub PAT and go back to Rossinante shell. You will store this
 token in the file <code class="docutils literal notranslate"><span class="pre">~/.Renviron</span></code> (readable by R).</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store GitHub PAT on Rossinante (for R only) ----</span>
-jdoe@rossinante:~$ <span class="nb">echo</span> <span class="s2">&quot;GITHUB_PAT=&#39;XXX&#39;&quot;</span> &gt;&gt; ~/.Renvion
+jdoe@rossinante:~$ <span class="nb">echo</span> <span class="s2">&quot;GITHUB_PAT=XXX&quot;</span> &gt;&gt; ~/.Renviron
 </pre></div>
 </div>
 <p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">XXX</span></code> by your token value.</p>

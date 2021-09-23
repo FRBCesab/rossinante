@@ -30,25 +30,25 @@ MOTD
   $ sudo cp /etc/update-motd.d/50-landscape-sysinfo /etc/update-motd.d/50-landscape-sysinfo.original
   $ sudo nano /etc/update-motd.d/50-landscape-sysinfo
 
-  # >>> #!/bin/sh
-  # >>> # pam_motd does not carry the environment
-  # >>> [ -f /etc/default/locale ] && . /etc/default/locale
-  # >>> export LANG
-  # >>> os=$(lsb_release -s -d)
-  # >>> cores=$(grep -c ^processor /proc/cpuinfo 2>/dev/null)
-  # >>> [ "$cores" -eq "0" ] && cores=1
-  # >>> threshold="${cores:-1}.0"
-  # >>> if [ $(echo "`cut -f1 -d ' ' /proc/loadavg` < $threshold" | bc) -eq 1 ]; then
-  # >>>     echo
-  # >>>     echo "(*) System Information"
-  # >>>     #/bin/date
-  # >>>     echo "\n  OS:             $os"
-  # >>>     echo
-  # >>>     /usr/bin/landscape-sysinfo
-  # >>> else
-  # >>>     echo
-  # >>>     echo " System information disabled due to load higher than $threshold"
-  # >>> fi
+  #!/bin/sh
+  # pam_motd does not carry the environment
+  [ -f /etc/default/locale ] && . /etc/default/locale
+  export LANG
+  os=$(lsb_release -s -d)
+  cores=$(grep -c ^processor /proc/cpuinfo 2>/dev/null)
+  [ "$cores" -eq "0" ] && cores=1
+  threshold="${cores:-1}.0"
+  if [ $(echo "`cut -f1 -d ' ' /proc/loadavg` < $threshold" | bc) -eq 1 ]; then
+      echo
+      echo "(*) System Information"
+      #/bin/date
+      echo "\n  OS:             $os"
+      echo
+      /usr/bin/landscape-sysinfo
+  else
+      echo
+      echo " System information disabled due to load higher than $threshold"
+  fi
 
 
   ## Edit Updates ----
@@ -58,13 +58,13 @@ MOTD
 
   # >>> #!/bin/sh
   # >>>
-  # >>> echo "\n(*) System Updates"
-  # >>>
-  # >>> stamp="/var/lib/update-notifier/updates-available"
-  # >>>
-  # >>> [ ! -r "$stamp" ] || cat "$stamp"
-  # >>>
-  # >>> find $stamp -newermt 'now-7 days' 2> /dev/null | grep -q -m 1 '.' || /usr/share/update-notifier/notify-updates-outdated
+  echo "\n(*) System Updates"
+
+  stamp="/var/lib/update-notifier/updates-available"
+
+  [ ! -r "$stamp" ] || cat "$stamp"
+
+  find $stamp -newermt 'now-7 days' 2> /dev/null | grep -q -m 1 '.' || /usr/share/update-notifier/notify-updates-outdated
 
 
   ## Disable infos ----

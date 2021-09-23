@@ -18,6 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pimp your shell" href="shell.html" />
     <link rel="prev" title="Linux Cheat Sheet" href="linux-cmd.html" />
   <link href="_static/style.css" rel="stylesheet" type="text/css">
 
@@ -62,6 +63,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">MOTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
 </ul>
 
         </div>
@@ -84,6 +86,7 @@
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="linux-cmd.html" class="btn btn-neutral float-left" title="Linux Cheat Sheet" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="shell.html" class="btn btn-neutral float-right" title="Pimp your shell" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -114,25 +117,25 @@ $ sudo nano /etc/update-motd.d/00-header
 $ sudo cp /etc/update-motd.d/50-landscape-sysinfo /etc/update-motd.d/50-landscape-sysinfo.original
 $ sudo nano /etc/update-motd.d/50-landscape-sysinfo
 
-<span class="c1"># &gt;&gt;&gt; #!/bin/sh</span>
-<span class="c1"># &gt;&gt;&gt; # pam_motd does not carry the environment</span>
-<span class="c1"># &gt;&gt;&gt; [ -f /etc/default/locale ] &amp;&amp; . /etc/default/locale</span>
-<span class="c1"># &gt;&gt;&gt; export LANG</span>
-<span class="c1"># &gt;&gt;&gt; os=$(lsb_release -s -d)</span>
-<span class="c1"># &gt;&gt;&gt; cores=$(grep -c ^processor /proc/cpuinfo 2&gt;/dev/null)</span>
-<span class="c1"># &gt;&gt;&gt; [ &quot;$cores&quot; -eq &quot;0&quot; ] &amp;&amp; cores=1</span>
-<span class="c1"># &gt;&gt;&gt; threshold=&quot;${cores:-1}.0&quot;</span>
-<span class="c1"># &gt;&gt;&gt; if [ $(echo &quot;`cut -f1 -d &#39; &#39; /proc/loadavg` &lt; $threshold&quot; | bc) -eq 1 ]; then</span>
-<span class="c1"># &gt;&gt;&gt;     echo</span>
-<span class="c1"># &gt;&gt;&gt;     echo &quot;(*) System Information&quot;</span>
-<span class="c1"># &gt;&gt;&gt;     #/bin/date</span>
-<span class="c1"># &gt;&gt;&gt;     echo &quot;\n  OS:             $os&quot;</span>
-<span class="c1"># &gt;&gt;&gt;     echo</span>
-<span class="c1"># &gt;&gt;&gt;     /usr/bin/landscape-sysinfo</span>
-<span class="c1"># &gt;&gt;&gt; else</span>
-<span class="c1"># &gt;&gt;&gt;     echo</span>
-<span class="c1"># &gt;&gt;&gt;     echo &quot; System information disabled due to load higher than $threshold&quot;</span>
-<span class="c1"># &gt;&gt;&gt; fi</span>
+<span class="c1">#!/bin/sh</span>
+<span class="c1"># pam_motd does not carry the environment</span>
+<span class="o">[</span> -f /etc/default/locale <span class="o">]</span> <span class="o">&amp;&amp;</span> . /etc/default/locale
+<span class="nb">export</span> LANG
+<span class="nv">os</span><span class="o">=</span><span class="k">$(</span>lsb_release -s -d<span class="k">)</span>
+<span class="nv">cores</span><span class="o">=</span><span class="k">$(</span>grep -c ^processor /proc/cpuinfo <span class="m">2</span>&gt;/dev/null<span class="k">)</span>
+<span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$cores</span><span class="s2">&quot;</span> -eq <span class="s2">&quot;0&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">cores</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">threshold</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cores</span><span class="k">:-</span><span class="nv">1</span><span class="si">}</span><span class="s2">.0&quot;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;`cut -f1 -d &#39; &#39; /proc/loadavg` &lt; </span><span class="nv">$threshold</span><span class="s2">&quot;</span> <span class="p">|</span> bc<span class="k">)</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span>
+    <span class="nb">echo</span> <span class="s2">&quot;(*) System Information&quot;</span>
+    <span class="c1">#/bin/date</span>
+    <span class="nb">echo</span> <span class="s2">&quot;\n  OS:             </span><span class="nv">$os</span><span class="s2">&quot;</span>
+    <span class="nb">echo</span>
+    /usr/bin/landscape-sysinfo
+<span class="k">else</span>
+    <span class="nb">echo</span>
+    <span class="nb">echo</span> <span class="s2">&quot; System information disabled due to load higher than </span><span class="nv">$threshold</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
 
 
 <span class="c1">## Edit Updates ----</span>
@@ -142,13 +145,13 @@ $ sudo nano /etc/update-motd.d/90-updates-available
 
 <span class="c1"># &gt;&gt;&gt; #!/bin/sh</span>
 <span class="c1"># &gt;&gt;&gt;</span>
-<span class="c1"># &gt;&gt;&gt; echo &quot;\n(*) System Updates&quot;</span>
-<span class="c1"># &gt;&gt;&gt;</span>
-<span class="c1"># &gt;&gt;&gt; stamp=&quot;/var/lib/update-notifier/updates-available&quot;</span>
-<span class="c1"># &gt;&gt;&gt;</span>
-<span class="c1"># &gt;&gt;&gt; [ ! -r &quot;$stamp&quot; ] || cat &quot;$stamp&quot;</span>
-<span class="c1"># &gt;&gt;&gt;</span>
-<span class="c1"># &gt;&gt;&gt; find $stamp -newermt &#39;now-7 days&#39; 2&gt; /dev/null | grep -q -m 1 &#39;.&#39; || /usr/share/update-notifier/notify-updates-outdated</span>
+<span class="nb">echo</span> <span class="s2">&quot;\n(*) System Updates&quot;</span>
+
+<span class="nv">stamp</span><span class="o">=</span><span class="s2">&quot;/var/lib/update-notifier/updates-available&quot;</span>
+
+<span class="o">[</span> ! -r <span class="s2">&quot;</span><span class="nv">$stamp</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">||</span> cat <span class="s2">&quot;</span><span class="nv">$stamp</span><span class="s2">&quot;</span>
+
+find <span class="nv">$stamp</span> -newermt <span class="s1">&#39;now-7 days&#39;</span> <span class="m">2</span>&gt; /dev/null <span class="p">|</span> grep -q -m <span class="m">1</span> <span class="s1">&#39;.&#39;</span> <span class="o">||</span> /usr/share/update-notifier/notify-updates-outdated
 
 
 <span class="c1">## Disable infos ----</span>
@@ -172,6 +175,7 @@ $ sudo update-motd
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="linux-cmd.html" class="btn btn-neutral float-left" title="Linux Cheat Sheet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="shell.html" class="btn btn-neutral float-right" title="Pimp your shell" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

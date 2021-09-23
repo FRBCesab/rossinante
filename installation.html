@@ -59,21 +59,23 @@
 <li class="toctree-l2"><a class="reference internal" href="#disk-partitioning">Disk partitioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#system-update">System update</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nvidia-driver">NVIDIA driver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#openssh-server">OpenSSH server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-linux-users">Create Linux users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#softwares-installation">Softwares installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#r-and-rstudio-server">R and RStudio Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#r-and-rstudio-server">R and RStudio Server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rstudio-server">RStudio Server</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#python-and-miniconda">Python and Miniconda</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#julia">Julia</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#docker">Docker</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#nvidia-driver">NVIDIA driver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cuda-and-cudnn">CUDA and cuDNN</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cuda-toolkit-11-4">CUDA Toolkit 11.4</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cudnn-8-2">cuDNN 8.2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -85,6 +87,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
 </ul>
 
         </div>
@@ -150,6 +153,9 @@
 </tr>
 </tbody>
 </table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="system-update">
 <h2>System update<a class="headerlink" href="#system-update" title="Permalink to this headline"></a></h2>
@@ -157,13 +163,24 @@
 
 $ sudo apt update <span class="o">&amp;&amp;</span> sudo apt full-upgrade
 $ sudo apt autoremove <span class="o">&amp;&amp;</span> sudo apt autoclean
-
-$ sudo reboot
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="network">
 <h2>Network<a class="headerlink" href="#network" title="Permalink to this headline"></a></h2>
+<dl class="simple">
+<dt>Tutorials:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/">https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/</a></p></li>
+<li><p><a class="reference external" href="https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/">https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/</a></p></li>
+<li><p><a class="reference external" href="https://www.privacyguides.org/providers/dns/">https://www.privacyguides.org/providers/dns/</a></p></li>
+<li><p><a class="reference external" href="https://libredns.gr/">https://libredns.gr/</a></p></li>
+</ul>
+</dd>
+</dl>
+<hr class="docutils" />
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Identify Ethernet Interfaces ----</span>
 
 $ ip link
@@ -171,22 +188,19 @@ $ ip link
 
 <span class="c1">## Set Network parameters ----</span>
 
-$ sudo nano /etc/netplan/00-installer-config.yaml
-
-<span class="c1"># ... add the following content</span>
-<span class="c1"># ... (replace {{ID}} by network card id)</span>
-
-<span class="c1"># &gt;&gt;&gt; network:</span>
-<span class="c1"># &gt;&gt;&gt;   version: 2</span>
-<span class="c1"># &gt;&gt;&gt;   renderer: networkd</span>
-<span class="c1"># &gt;&gt;&gt;   ethernets:</span>
-<span class="c1"># &gt;&gt;&gt;     {{ID}}:</span>
-<span class="c1"># &gt;&gt;&gt;      dhcp4: no</span>
-<span class="c1"># &gt;&gt;&gt;      addresses:</span>
-<span class="c1"># &gt;&gt;&gt;        - 192.168.XXX.XXX/24</span>
-<span class="c1"># &gt;&gt;&gt;      gateway4: 192.168.XXX.XXX</span>
-<span class="c1"># &gt;&gt;&gt;      nameservers:</span>
-<span class="c1"># &gt;&gt;&gt;          addresses: [8.8.8.8, 1.1.1.1]                   ## Change for Encrypted DNS Resolvers !!!</span>
+$ sudo cat <span class="s">&lt;&lt; EOF &gt; /etc/netplan/00-installer-config.yaml</span>
+<span class="s">network:</span>
+<span class="s">  version: 2</span>
+<span class="s">  renderer: networkd</span>
+<span class="s">  ethernets:</span>
+<span class="s">    eno1np0:</span>
+<span class="s">      dhcp4: no</span>
+<span class="s">      addresses:</span>
+<span class="s">        - 192.168.0.42/24</span>
+<span class="s">      gateway4: 192.168.0.254</span>
+<span class="s">      nameservers:</span>
+<span class="s">        addresses: [116.202.176.26,208.91.112.52,208.91.112.53]</span>
+<span class="s">EOF</span>
 
 
 <span class="c1">## Apply changes ----</span>
@@ -196,8 +210,43 @@ $ sudo netplan apply
 
 <span class="c1">## Check ----</span>
 
-$ ip addr show dev <span class="o">{{</span>ID<span class="o">}}</span>
+$ ip addr show dev eno1np0
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="nvidia-driver">
+<h2>NVIDIA driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this headline"></a></h2>
+<dl class="simple">
+<dt>Tutorial:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux">https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux</a></p></li>
+</ul>
+</dd>
+</dl>
+<hr class="docutils" />
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install utilities ----</span>
+
+$ sudo apt install ubuntu-drivers-common
+
+
+<span class="c1">## Detect NVIDIA card ----</span>
+
+$ ubuntu-drivers devices
+
+
+<span class="c1">## Install recommended driver ----</span>
+
+$ sudo apt install --no-install-recommends nvidia-driver-470
+
+$ sudo reboot
+</pre></div>
+</div>
+<p><strong>NB –</strong> It’s recommended to install the driver from Ubuntu repository.
+The option <code class="docutils literal notranslate"><span class="pre">--no-install-recommends</span></code> avoids to install <code class="docutils literal notranslate"><span class="pre">gnome-shell</span></code>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="openssh-server">
@@ -207,55 +256,78 @@ $ ip addr show dev <span class="o">{{</span>ID<span class="o">}}</span>
 $ sudo apt install openssh-server
 
 
-<span class="c1">## Change parameters ----</span>
+<span class="c1">## Backup original config file ----</span>
 
-$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original   <span class="c1">## Backup original config file</span>
+$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
+
+
+<span class="c1">## Edit config file ----</span>
 
 $ sudo nano /etc/ssh/sshd_config
-
-<span class="c1">#... change the following parameters:</span>
-
-<span class="c1"># &gt;&gt;&gt; Port XXXX</span>
-<span class="c1"># &gt;&gt;&gt; LoginGraceTime 30s</span>
-<span class="c1"># &gt;&gt;&gt; MaxAuthTries 6</span>
-<span class="c1"># &gt;&gt;&gt; PermitRootLogin no</span>
-<span class="c1"># &gt;&gt;&gt; PermitEmptyPasswords no</span>
-<span class="c1"># &gt;&gt;&gt; PubkeyAuthentication yes</span>
-<span class="c1"># &gt;&gt;&gt; AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2</span>
-<span class="c1"># &gt;&gt;&gt; AllowGroups sshlogin</span>
-
-
-<span class="c1">## Apply changes ----</span>
-
-$ sudo service ssh restart
-
-
-<span class="c1">## Create new Linux group ----</span>
+</pre></div>
+</div>
+<p>Let’s change the following parameters in the <code class="docutils literal notranslate"><span class="pre">sshd_config</span></code> file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Port <span class="m">2222</span>
+LoginGraceTime 30s
+MaxAuthTries <span class="m">6</span>
+PermitRootLogin no
+PermitEmptyPasswords no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2
+AllowGroups sshlogin
+</pre></div>
+</div>
+<p>Let’s create a new Linux group <code class="docutils literal notranslate"><span class="pre">sshlogin</span></code>. Only users who are members of this
+group can connect to the server via the SSH protocol.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create new Linux group ----</span>
 
 $ sudo groupadd sshlogin
-$ sudo usermod -aG sshlogin jdoe                               <span class="c1">## Add jdoe to &#39;sshlogin&#39; group (SSH access)</span>
+$ sudo usermod -aG sshlogin dquichotte
 </pre></div>
+</div>
+<p>Apply new SSH config.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Apply changes ----</span>
+
+$ sudo service ssh restart
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="create-linux-users">
 <h2>Create Linux users<a class="headerlink" href="#create-linux-users" title="Permalink to this headline"></a></h2>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Change default adduser parameters ----</span>
+<p>First let’s change some default parameters of the create user system. We will
+increase privacy of user personal directory in such manner that only the user
+and its primary group can access to this content.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Backup original config file ----</span>
 
-$ sudo cp /etc/adduser.conf /etc/adduser.conf.original         <span class="c1">## Backup original config file</span>
+$ sudo cp /etc/adduser.conf /etc/adduser.conf.original
+
+
+<span class="c1">## Edit adduser config file ----</span>
 
 $ sudo nano /etc/adduser.conf
-
-<span class="c1">#... change the following parameters:</span>
-
-<span class="c1"># &gt;&gt;&gt; DIR_MODE=0750                                            ## Only user and group can access user personal space</span>
-
-
-<span class="c1">## Create new user ----</span>
-
-$ sudo adduser psmith                                          <span class="c1">## Create new user &#39;psmith&#39;</span>
-$ sudo passwd -e psmith                                        <span class="c1">## &#39;psmith&#39; needs to change its password at first login</span>
-$ sudo usermod -aG sshlogin psmith                             <span class="c1">## Add &#39;psmith&#39; to &#39;sshlogin&#39; group (SSH access)</span>
 </pre></div>
+</div>
+<p>Let’s change the following parameters in the <code class="docutils literal notranslate"><span class="pre">adduser.conf</span></code> file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">DIR_MODE</span><span class="o">=</span><span class="m">0750</span>                                <span class="c1">## Personal directory permissions</span>
+</pre></div>
+</div>
+<p>Finally let’s create the user <code class="docutils literal notranslate"><span class="pre">psmith</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create new user ----</span>
+
+$ sudo adduser psmith                        <span class="c1">## Create new user &#39;psmith&#39;</span>
+$ sudo passwd -e psmith                      <span class="c1">## &#39;psmith&#39; needs to change its password at first login</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add &#39;psmith&#39; to the group &#39;sshlogin&#39; ----</span>
+
+$ sudo usermod -aG sshlogin psmith
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="softwares-installation">
@@ -283,14 +355,25 @@ $ sudo apt install  <span class="se">\</span>
 </section>
 <section id="r-and-rstudio-server">
 <h3>R and RStudio Server<a class="headerlink" href="#r-and-rstudio-server" title="Permalink to this headline"></a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add the R 4.0 repository from CRAN ----</span>
+<dl class="simple">
+<dt>Tutorials:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/">https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/</a></p></li>
+<li><p><a class="reference external" href="https://rtask.thinkr.fr/fr/installation-de-r-4-0-sur-ubuntu-20-04-lts-et-astuces-pour-les-packages-de-cartographie/">https://rtask.thinkr.fr/fr/installation-de-r-4-0-sur-ubuntu-20-04-lts-et-astuces-pour-les-packages-de-cartographie/</a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add GPG keys ----</span>
+
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+
+
+<span class="c1">## Add the R 4.0 repository from CRAN ----</span>
 
 $ sudo add-apt-repository <span class="s1">&#39;deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/&#39;</span>
 
 
-<span class="c1">## Add GPG keys ----</span>
+<span class="c1">## Update packages list ----</span>
 
-$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 $ sudo apt update
 
 
@@ -309,21 +392,48 @@ $ sudo apt install libmagick++-dev libpoppler-cpp-dev libgmp3-dev
 <span class="c1">## Install LaTeX and Pandoc ----</span>
 
 $ sudo apt install pandoc pandoc-citeproc texlive-full
-
-
-<span class="c1">## Install RStudio Server ----</span>
+</pre></div>
+</div>
+<section id="rstudio-server">
+<h4>RStudio Server<a class="headerlink" href="#rstudio-server" title="Permalink to this headline"></a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install RStudio Server ----</span>
 
 $ sudo apt install gdebi-core
 $ wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
 
 $ sudo gdebi rstudio-server-1.4.1717-amd64.deb
 $ rm rstudio-server-1.4.1717-amd64.deb
-
-
-<span class="c1">## Open Firewall Port ----</span>
-sudo ufw allow <span class="m">8787</span>
 </pre></div>
 </div>
+<p>Let’s configure RStudio Server.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Edit server config file ----</span>
+
+$ sudo nano /etc/rstudio/rserver.conf
+</pre></div>
+</div>
+<p>Let’s add the following line:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>www-port<span class="o">=</span><span class="m">8787</span>
+<span class="c1"># www-address=127.0.0.1                     ## Replace by VPN address</span>
+</pre></div>
+</div>
+<p>Apply changes.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ sudo rstudio-server restart
+</pre></div>
+</div>
+<p>Let’s configure users sessions.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Edit server config file ----</span>
+
+$ sudo nano /etc/rstudio/rsession.conf
+</pre></div>
+</div>
+<p>Let’s add the following option (no limit).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>session-timeout-minutes<span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
 </section>
 <section id="python-and-miniconda">
 <h3>Python and Miniconda<a class="headerlink" href="#python-and-miniconda" title="Permalink to this headline"></a></h3>
@@ -379,16 +489,15 @@ $ sudo touch /opt/miniconda3/.condarc
 $ sudo chown root:conda /opt/miniconda3/.condarc
 
 
-<span class="c1">## Remove (base) from prompt ----</span>
-
-$ conda config --set auto_activate_base <span class="nb">false</span>
-
-
 <span class="c1">## Cleanup ----</span>
 
 $ rm Miniconda3-py39_4.10.3-Linux-x86_64.sh
 
 <span class="c1"># &gt;&gt;&gt; Logout</span>
+
+<span class="c1">## Remove (base) from prompt ----</span>
+
+$ conda config --set auto_activate_base <span class="nb">false</span>
 </pre></div>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Install Python packages ----</span>
@@ -468,58 +577,10 @@ $ sudo systemctl status docker
 $ sudo usermod -aG docker psmith
 </pre></div>
 </div>
-</section>
-</section>
-<section id="nvidia-driver">
-<h2>NVIDIA driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this headline"></a></h2>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Disable Nouveau driver ----</span>
-<span class="c1"># (https://clay-atlas.com/us/blog/2021/06/22/linux-en-nvidia-driver-nouveau-kernel/)</span>
-
-$ sudo nano /etc/modprobe.d/nvidia-installer-disable-nouveau.conf
-<span class="c1"># &gt;&gt;&gt; ... add the two following lines:</span>
-<span class="c1"># &gt;&gt;&gt; blacklist nouveau</span>
-<span class="c1"># &gt;&gt;&gt; options nouveau modeset=0</span>
-
-
-<span class="c1">## Regenerate kernel ----</span>
-
-$ sudo update-initramfs -u
-$ sudo reboot
-
-
-<span class="c1">## Check ----</span>
-
-$ lsmod <span class="p">|</span> grep nouveau
-
-
-<span class="c1">## Install utilities ----</span>
-
-$ sudo apt install pkg-config libglvnd-dev
-
-
-<span class="c1">## Download NVIDIA driver installer ---</span>
-<span class="c1"># (https://www.nvidia.fr/Download/Find.aspx)</span>
-
-$ wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.91.03/NVIDIA-Linux-x86_64-460.91.03.run
-
-
-<span class="c1">## Make it executable ----</span>
-
-$ chmod +x NVIDIA-Linux-x86_64-460.91.03.run
-
-
-<span class="c1">## Install NVIDIA driver ----</span>
-
-$ sudo ./NVIDIA-Linux-x86_64-460.91.03.run
-
-$ sudo reboot
-
-
-<span class="c1">## Check ---</span>
-
-$ nvtop
-</pre></div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
+</section>
 </section>
 <section id="cuda-and-cudnn">
 <h2>CUDA and cuDNN<a class="headerlink" href="#cuda-and-cudnn" title="Permalink to this headline"></a></h2>
@@ -588,20 +649,6 @@ rm libcudnn8*
 rm cudnn-11.4-linux-x64-v8.2.4.15.tgz
 rm -rf cudnn_samples_v8
 rm -rf cuda
-</pre></div>
-</div>
-</section>
-<section id="notes">
-<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline"></a></h3>
-<p><a class="reference external" href="https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/">https://linuxize.com/post/how-to-install-r-on-ubuntu-20-04/</a>
-<a class="reference external" href="https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux">https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux</a>
-<a class="reference external" href="https://linuxize.com/post/how-to-nvidia-drivers-on-ubuntu-20-04/">https://linuxize.com/post/how-to-nvidia-drivers-on-ubuntu-20-04/</a>
-<a class="reference external" href="https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/">https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/</a>
-<a class="reference external" href="https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/">https://linuxize.com/post/how-to-set-dns-nameservers-on-ubuntu-18-04/</a>
-<a class="reference external" href="https://libredns.gr/">https://libredns.gr/</a>
-<a class="reference external" href="https://linuxize.com/post/bash-write-to-file/">https://linuxize.com/post/bash-write-to-file/</a>
-<a class="reference external" href="https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/">https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/</a></p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get install --no-install-recommends nvidia-driver-*
 </pre></div>
 </div>
 </section>
