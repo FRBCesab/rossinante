@@ -14,6 +14,10 @@ command.
 
 
 
+|
+
+
+
 .. _rstudio:
 
 RStudio Server
@@ -31,16 +35,35 @@ RStudio Server
 
 
 
+To open the RStudio Server interface, we first need to create an **SSH
+tunneling** (or port forwarding). This method consists in creating an encrypted
+SSH connection between a client (your laptop) and a server (Rossinante) through
+which a service (Rstudio Server) port (8787) can be relayed.
+
+To create an SSH port forwarding, pass the ``-L`` option to the ssh client:
+
+.. code-block:: shell
+
+  # Open an SSH port forwarding ----
+  jane@laptop:~$ ssh -L 8787:localhost:8787 rossinante
+
+**NB --** The first ``8787`` is your local port through RStudio Server will be relayed.
+The second ``8787`` is the port on Rossinante through RStudio Server is running.
+In short, ``localhost`` is your laptop. Instead of ``localhost`` we could have
+written ``127.0.0.1``. You can change the first ``8787`` for any number greater
+than ``1024``.
+
+
+You are now connected to Rossinante.
+
+
 To start the RStudio Server interface, open a web browser (Firefox, Chrome,
-etc.) and enter the URL of the RStudio Server following by the port:
-``http://92.168.45.3:3528`` (for example).
+etc.) and enter the following URL: ``localhost:8787``.
 
 After entering your Rossinante log in information, you are connected to a
 new RStudio Server instance. You can now use this interface as the one you
 know (RStudio Desktop).
 
-
-|
 
 
 **Important --** RStudio Server has two buttons to close the interface:
@@ -52,10 +75,17 @@ on ``Quit current R session`` you will stop all analyses and you were not able
 to access R objects. Click on that button to terminate your session.
 
 
-|
 
 
-If you have been disconnected from RStudio Server (network crash, power failure,
+**Warning --** If you stop your SSH (port forwarding) session, you will close the
+RStudio Server session. Before shutting down the SSH connection, click on
+``Sign out`` or ``Quit current R session`` to securely close the RStudio Server
+instance.
+
+
+
+
+**Trick --** If you have been disconnected from RStudio Server (network crash, power failure,
 etc.), you may not be able to restart RStudio Server (blank page). In that case,
 you need to kill your previous R sessions (still active) as follow:
 
@@ -69,12 +99,16 @@ you need to kill your previous R sessions (still active) as follow:
 
 
 
-**Note --** With RStudio Server, you can also upload distant files (D in Figure 5).
+**Tip --** With RStudio Server, you can also upload distant files (D in Figure 5).
 
 
 
-R in the terminal
------------------
+|
+
+
+
+R console
+---------
 
 
 
@@ -118,43 +152,54 @@ To close your R session:
 
 
 
-If you want, you can also use the command ``Rscript`` to run an R script
-(or R expression) without opening an R console, directly from the terminal.
+|
+
+
+**The Rscript command**
+  If you want, you can also use the command ``Rscript`` to run an R script
+  (or R expression) without opening an R console, directly from the terminal.
 
 .. code-block:: shell
 
   # Run an R expression (option '-e') ----
-  jdoe@rossinante:~$ Rscript -e 'print("Hello World!")'
-  ## [1] "Hello World!"
+  jdoe@rossinante:~$ Rscript -e 'print("El ingenioso hidalgo don Quijote de la Mancha")'
+  ## [1] "El ingenioso hidalgo don Quijote de la Mancha"
 
   # Write an R script on the personal folder ----
-  jdoe@rossinante:~$ echo 'print("Hello World!")' > ~/hello.R
+  jdoe@rossinante:~$ echo 'print("El ingenioso hidalgo don Quijote de la Mancha")' > ~/quijote.R
 
-  # Print 'hello.R' file content ----
-  jdoe@rossinante:~$ cat ~/hello.R
-  ## print("Hello World!")
+  # Print 'quijote.R' file content ----
+  jdoe@rossinante:~$ cat ~/quijote.R
+  ## print("El ingenioso hidalgo don Quijote de la Mancha")
 
-  # Run an R script ----
-  jdoe@rossinante:~$ Rscript ~/hello.R
-  ## [1] "Hello World!"
+  # Run the R script ----
+  jdoe@rossinante:~$ Rscript ~/quijote.R
+  ## [1] "El ingenioso hidalgo don Quijote de la Mancha"
+
+  # Remove the R script ----
+  jdoe@rossinante:~$ rm ~/quijote.R
 
 
 
 |
 
 
-**Important --** If you launch R in the terminal (or ``Rscript``) and your code
-takes time to be computed, you cannot use the terminal until the computation is
-done. The job is running in foreground. Moreover, if your SSH connection is
-stopped, your R session is aborted and your work is lost.
+
+**Problem**
+  If you launch R in the terminal (or ``Rscript``) and your code takes time to
+  be computed, you cannot use the terminal until the computation is done. The job
+  is running in foreground. Moreover, if your SSH connection is stopped, your R
+  session is aborted and your work is lost.
 
 
-**Solution --** You can use a terminal multiplexer like ``screen`` or ``tmux``. These
-tools open *virtual* terminals (screens) in the main terminal and you can navigate between
-screens and the main terminal. The idea is to create (attach) a new screen, launch
-your analysis, go back to the main terminal (detach), and work on other stuffs.
-If you stop your SSH connection, the analysis is still running, and if you make
-a new SSH connection to Rossinante, you can reattach the screen and resume your R session.
+**Solution**
+  You can use a terminal multiplexer like ``screen`` or ``tmux``. These tools
+  open *virtual* terminals (screens) in the main terminal and you can navigate
+  between screens and the main terminal. The idea is to create (attach) a new
+  screen, launch your analysis, go back to the main terminal (detach), and work
+  on other stuffs. If you stop your SSH connection, the analysis is still
+  running, and if you make a new SSH connection to Rossinante, you can reattach
+  the screen and resume your R session.
 
 
 
@@ -206,4 +251,57 @@ To reattach a screen session, use the following command:
 
 
 
-To close a screen, type `exit` in the screen or press `CTRL + A`` and ``K``.
+To close a screen, type ``exit`` in the screen or press ``CTRL + A`` and ``K``.
+
+More information on ``screen``:
+https://www.malekal.com/screen-linux-lancer-plusieurs-commandes-sans-perdre-execution/
+
+
+|
+
+
+
+R packages
+----------
+
+
+
+Only base R packages are installed and shared among users.
+Each user has a personal R library in which he can install/update every R packages he
+wants (independently of other users). This library is located in
+``~/R/x86_64-pc-linux-gnu-library/4.1/``.
+
+To install a new R package, use the interface of RStudio Server or run:
+
+.. code-block:: r
+
+  install.packages("sf")
+
+If you want you can also update your packages:
+
+.. code-block:: r
+
+  update.packages()
+
+
+**NB --** Some R packages require system libraries and some of them may be
+missing on Rossinante. Please contact the administrator to solve the issue.
+
+You can find a list of common R packages used in Ecology
+`here <https://raw.githubusercontent.com/FRBCesab/rossinante/main/tools/list-of-rpackages.R>`_.
+To install these packages on Rossinante (or elsewhere), open an R console or
+RStudio Server and run:
+
+.. code-block:: r
+
+  ## Script URL ----
+  url <- "https://raw.githubusercontent.com/FRBCesab/rossinante/main/tools/list-of-rpackages.R"
+
+  ## Download script ----
+  download.file(url, destfile = "list-of-rpackages.R")
+
+  ## Install R packages ----
+  source("list-of-rpackages.R")
+
+  ## Delete downloaded script ----
+  file.remove("list-of-rpackages.R")

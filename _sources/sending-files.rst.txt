@@ -10,12 +10,17 @@ Sending files
 
 
 When you want to run analyses on Rossinante, you need to transfer files (code
-and data) from your laptop to the server. Here we will see four methods.
+and data) from your laptop to the server. Here we will see three methods.
+
+
+
+|
 
 
 
 sFTP
 ----
+
 
 
 The easiest way to transfer files from your laptop to Rossinante (or vice versa)
@@ -54,13 +59,17 @@ on **Download**.
 
 
 
+|
+
+
+
 scp command
 -----------
 
 
 
 An alternative to transfer files is by using the command ``scp`` that allows
-to copy files using the SSH protocol (secure copy).
+you to copy files using the SSH protocol (secure copy).
 
 Let's say we want to copy the local file ``script.R``, located in the
 ``Documents/`` folder, to Rossinante (in the folder ``~/projects/``).
@@ -111,34 +120,32 @@ you want to copy a project tracked by **git**.
 
 
 
-rsync
------
+**NB --** You can also use the command ``rsync`` instead of ``scp``. For further
+information: https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/
 
-Tutorial:
-  * https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/
 
-The command ``rsync`` is an alternative to ``scp`` and has the advantage to copy
-files only if necessary. It's also can be used as a backup system.
+
+|
+
 
 
 GitHub
 ------
 
 
+
 If your project is tracked by the versioning system control **git**, you may
 prefer sending files through GitHub (or GitLab). This method has the advantage
-of keeping your project tracked by git, synchronized with GitHub, and backed up
-on Rossinante.
+of keeping your project tracked by git and synchronized with GitHub.
 
 
 The workflow is the following (Figure 2):
 
 1. On your laptop, commit changes
-1. Then push changes to your repository on GitHub
-1. Connect to Rossinante via SSH (or RStudio Server, see :ref: `rstudio`)
-1. Clone the GitHub repository on Rossinante or pull changes if your project is
-already cloned
-1. Run analysis on Rossinante
+2. Then push changes to your repository on GitHub
+3. Connect to Rossinante via SSH (or RStudio Server)
+4. Clone the GitHub repository on Rossinante or pull changes if your project is already cloned
+5. Run analysis on Rossinante
 
 
 .. figure:: ./images/github-1.png
@@ -154,8 +161,8 @@ already cloned
 Once your analysis is finished, you can (Figure 3):
 
 1. Track new files and commit changes
-1. Push changes to your repository on GitHub
-1. On your laptop, pull changes
+2. Push changes to your repository on GitHub
+3. On your laptop, pull changes
 
 
 .. figure:: ./images/github-2.png

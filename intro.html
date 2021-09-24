@@ -63,6 +63,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
 </ul>
 
         </div>
@@ -101,8 +102,7 @@ to <em>medium</em> performance scientific computing (Table 1). You can run progr
 implemented in R, Python, Julia, C, and C++ directly from a terminal or using
 Web clients like RStudio Server and Jupyter Notebook. Unlike traditional clusters,
 Rossinante does not have a job scheduling system (e.g. SLURM, Torque) meaning
-that you can launch jobs whenever you want. But only if there is cores and
-RAM available (see <a class="reference internal" href="good-practices.html#good-practices"><span class="std std-ref">Good practices</span></a> section).</p>
+that you can launch jobs whenever you want. But see <a class="reference internal" href="good-practices.html#good-practices"><span class="std std-ref">Good practices</span></a> section.</p>
 <table class="docutils align-center" id="id1" style="width: 100%">
 <caption><span class="caption-text"><strong>Table 1</strong> – Rossinante hardware specifications</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
 <colgroup>
@@ -174,10 +174,11 @@ RAM available (see <a class="reference internal" href="good-practices.html#good-
 </div>
 <dl>
 <dt>Can you do what you want on Rossinante?</dt><dd><p>No! Rossinante has only one administrator, Nicolas Casajus. Regular users,
-like you, have only access to a personal directory, <code class="docutils literal notranslate"><span class="pre">/home/you/</span></code> and to a shared
-directory <code class="docutils literal notranslate"><span class="pre">/home/cesab/</span></code>. You can store your files in one of these two folders.
-But keep in mind that only you have access to your personal space whereas
-everybody can access the shared space.</p>
+like you, have only access to a personal directory, <code class="docutils literal notranslate"><span class="pre">/home/you/</span></code> and to one
+or several shared directory. The command <code class="docutils literal notranslate"><span class="pre">groups</span></code> lists all groups you are
+member of. You can store your files in one of these folders. But keep in mind
+that only you have access to your personal space whereas everybody can access
+the shared spaces.</p>
 <p>If you need to use a non-installed software, please contact the administrator.
 Note that each user has a personal R library in which he can install every
 R packages he wants (independently of other users). For Python, packages are
@@ -185,7 +186,7 @@ shared among all users (except if you work with virtual environments [recommende
 </dd>
 </dl>
 <p><strong>Important –</strong> Rossinante is <strong>not a storage server</strong>. Its 6 TB storage are shared
-among all users. You can store large datasets on your personal space to run yours
+among all users. You can store large datasets in your personal space to run yours
 analyses, but once you’ve finished, please remove large files.</p>
 </section>
 

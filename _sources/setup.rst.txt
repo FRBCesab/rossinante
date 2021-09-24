@@ -18,6 +18,7 @@ For this tutorial, let's say:
 
 * your laptop name is ``laptop``
 * your name is ``Jane DOE``
+* your email is ``jane.doe@mail.com``
 * your username on your laptop is ``jane``
 * your username on Rossinante is ``jdoe``
 * the IP address of Rossinante is ``92.168.45.3``
@@ -25,11 +26,17 @@ For this tutorial, let's say:
 
 **NB --** When you are inside the CESAB, you can use the local IP address of the
 server. When you are outside, you need to use the public IP through a VPN
-connection.
+connection (not yet available).
+
+
+
+|
+
 
 
 SSH connection
 --------------
+
 
 
 To open an SSH connection on Unix-based OS (macOS and Linux), open a Terminal
@@ -69,6 +76,10 @@ To stop the SSH connection, use the command ``exit`` (or ``logout``):
   # Close the SSH connection ----
   jdoe@rossinante:~$ exit
   ## Connection to 92.168.45.3 closed.
+
+
+
+|
 
 
 
@@ -131,6 +142,10 @@ You can now connect to Rossinante as follow:
 
 
 
+|
+
+
+
 Generating SSH keys
 -------------------
 
@@ -138,16 +153,16 @@ Generating SSH keys
 
 SSH keys are a more secure method of logging into a remote server, because they
 are not vulnerable to common brute-force password hacking attacks. Generating
-an SSH key pair consists in creating two long strings of characters: a public
+an SSH keys pair consists in creating two long strings of characters: a public
 and a private key. You can place the public key on any server, and then connect
 to the server using a device that has access to the private key.
 
 Let's create a new SSH keys pair using the cryptosystem ``ed25519``. You will
-create this SSH keys pair locally (i.e. on **your laptop**).
+create this SSH keys pair locally (i.e. **on your laptop**).
 
 
 
-.. code-block::
+.. code-block:: shell
 
   # Create a new SSH key pair (on your laptop) ----
   jane@laptop:~$ ssh-keygen -t ed25519 -C "jane.doe@mail.com"
@@ -162,21 +177,21 @@ This SSH keys pair has been stored in ``~/.ssh/``.
 
 
 
-.. code-block::
+.. code-block:: shell
 
   # Content of the ~/.ssh folder ----
-  jane@laptop:~$ ls ~/.ssh/
+  jane@laptop:~$ ls ~/.ssh
   ## config       id_ed25519       id_ed25519.pub
 
 
 
-The private key is `id_ed25519` and the public one `id_ed25519.pub`.
+The private key is ``id_ed25519`` and the public one ``id_ed25519.pub``.
 Nobody (except you) can have access to the private key. So you need to change
 the permissions of this file.
 
 
 
-.. code-block::
+.. code-block:: shell
 
   # Change private key permissions (only Jane can only read this file) ----
   jane@laptop:~$ chmod 400 ~/.ssh/id_ed25519
@@ -188,19 +203,19 @@ it on the Rossinante server.
 
 
 
-.. code-block::
+.. code-block:: shell
 
   # Copying public key to Rossinante ----
   jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_ed25519.pub rossinante
 
 
 
-Now we can connect to Rossinante without entering any password (except if you
-have added a passphrase to your SSH key pair).
+Now we can connect to Rossinante more securely and without entering any password
+(except if you have added a passphrase to your SSH keys pair).
 
 
 
-.. code-block::
+.. code-block:: shell
 
   jane@laptop:~$ ssh rossinante
 
@@ -224,7 +239,7 @@ Our SSH public key on Rossinante has been stored under the name ``authorized_key
 
 
 
-.. code-block::
+.. code-block:: shell
 
   # Content of the ~/.ssh folder ----
   jdoe@rossinante:~$ ls ~/.ssh
@@ -234,6 +249,10 @@ Our SSH public key on Rossinante has been stored under the name ``authorized_key
 
 **NB --** If you lose you private key you will still be able to log in with
 your password.
+
+
+
+|
 
 
 
@@ -253,7 +272,7 @@ Run the following lines:
   # Connection to Rossinante ----
   jane@laptop:~$ ssh rossinante
 
-  # Set Git credentials (globally) ----
+  # Set Git credentials on Rossinante (globally) ----
   jdoe@rossinante:~$ git config --global user.name "Jane Doe"
   jdoe@rossinante:~$ git config --global user.email jane.doe@mail.com
 
@@ -276,13 +295,17 @@ information: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
 
 
 
+|
+
+
+
 GitHub SSH keys
 ---------------
 
 
 
 If you want to communicate with GitHub through the SSH protocol (recommended)
-you need to generate a new SSH key pair (different from the one used to connect
+you need to generate a new SSH keys pair (different from the one used to connect
 to Rossinante).
 
 Let's create a new SSH keys pair using the cryptosystem ``RSA`` and a key size of
@@ -298,16 +321,16 @@ Let's create a new SSH keys pair using the cryptosystem ``RSA`` and a key size o
 
 
 **NB --** To be detected by RStudio Server, this SSH keys pair must be named
-``id_rsa``.
+``id_rsa`` and created using the cryptosystem ``RSA``.
 
 
 
-This new SSH key pair has been stored in ``~/.ssh/``.
+This new SSH keys pair has been stored in ``~/.ssh/``.
 
 .. code-block:: shell
 
   # Content of the ~/.ssh folder ----
-  jdoe@rossinante:~$ ls ~/.ssh/
+  jdoe@rossinante:~$ ls ~/.ssh
   ## authorized_keys       id_rsa       id_rsa.pub
 
 
@@ -323,12 +346,12 @@ Let's restrict the access to the private key.
 
 
 
-Now we need to store the public key on GitHub server. Go to this page
+Now we need to store the public key on GitHub server. Visit
 https://github.com/settings/keys and click on **New SSH key**.
 
 
 
-On Rossinante, print the SSH **public** key and copy it.
+On Rossinante, print the **public** SSH key and copy it.
 
 
 
@@ -359,21 +382,29 @@ a connection with GitHub (from Rossinante). You'll need to delete your SSH key
 on GitHub (i.e. *Rossinante key*) and to create a new one.
 
 **NB --** You will need to add your private GitHub SSH key on your other devices.
-Alternatively (recommended) you can create a new GitHub SSH keys pair on each device.
+Alternatively (recommended) you can create a new GitHub SSH keys pair on each
+device (if not already done).
+
+
+
+|
 
 
 
 GitHub PAT
 ----------
 
-If you want to use the GitHub API, essentially with the R package `usethis <https://usethis.r-lib.org/>`_
-you need to create a GitHub Personal Access Token (PAT). Visit the page
+
+
+If you want to use the GitHub API, essentially with the R package
+`usethis <https://usethis.r-lib.org/>`_,
+you need to create a GitHub Personal Access Token (PAT). Visit
 https://github.com/settings/tokens and click on **Generate new token**.
 Choose a name for the token (for example *Rossinante token*), select
 an expiration date, and choose the scope (at least): **repo** and **workflow**.
+Copy the GitHub PAT and go back to Rossinante shell.
 
-Copy the GitHub PAT and go back to Rossinante shell. You will store this
-token in the file ``~/.Renviron`` (readable by R).
+You will store this token in the file ``~/.Renviron`` (readable by R).
 
 .. code-block:: shell
 

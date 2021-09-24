@@ -50,7 +50,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Sending files</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#sftp">sFTP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#scp-command">scp command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rsync">rsync</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#github">GitHub</a></li>
 </ul>
 </li>
@@ -69,6 +68,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
 </ul>
 
         </div>
@@ -103,7 +103,10 @@
 <p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
 <p>When you want to run analyses on Rossinante, you need to transfer files (code
-and data) from your laptop to the server. Here we will see four methods.</p>
+and data) from your laptop to the server. Here we will see three methods.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <section id="sftp">
 <h2>sFTP<a class="headerlink" href="#sftp" title="Permalink to this headline"></a></h2>
 <p>The easiest way to transfer files from your laptop to Rossinante (or vice versa)
@@ -135,11 +138,14 @@ on <strong>Upload</strong>.</p>
 <p>To send remote files <strong>to your laptop</strong>, first select the directory in <code class="docutils literal notranslate"><span class="pre">A</span></code> to
 send these files in. Then select the files in <code class="docutils literal notranslate"><span class="pre">B</span></code>, right click, and click
 on <strong>Download</strong>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="scp-command">
 <h2>scp command<a class="headerlink" href="#scp-command" title="Permalink to this headline"></a></h2>
 <p>An alternative to transfer files is by using the command <code class="docutils literal notranslate"><span class="pre">scp</span></code> that allows
-to copy files using the SSH protocol (secure copy).</p>
+you to copy files using the SSH protocol (secure copy).</p>
 <p>Let’s say we want to copy the local file <code class="docutils literal notranslate"><span class="pre">script.R</span></code>, located in the
 <code class="docutils literal notranslate"><span class="pre">Documents/</span></code> folder, to Rossinante (in the folder <code class="docutils literal notranslate"><span class="pre">~/projects/</span></code>).
 We will use <code class="docutils literal notranslate"><span class="pre">scp</span></code> as follow:</p>
@@ -167,31 +173,25 @@ you want to copy a project tracked by <strong>git</strong>.</p>
 jane@laptop:~$ scp -r -p ~/Documents/project_1 rossinante:projects/
 </pre></div>
 </div>
-</section>
-<section id="rsync">
-<h2>rsync<a class="headerlink" href="#rsync" title="Permalink to this headline"></a></h2>
-<dl class="simple">
-<dt>Tutorial:</dt><dd><ul class="simple">
-<li><p><a class="reference external" href="https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/">https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/</a></p></li>
-</ul>
-</dd>
-</dl>
-<p>The command <code class="docutils literal notranslate"><span class="pre">rsync</span></code> is an alternative to <code class="docutils literal notranslate"><span class="pre">scp</span></code> and has the advantage to copy
-files only if necessary. It’s also can be used as a backup system.</p>
+<p><strong>NB –</strong> You can also use the command <code class="docutils literal notranslate"><span class="pre">rsync</span></code> instead of <code class="docutils literal notranslate"><span class="pre">scp</span></code>. For further
+information: <a class="reference external" href="https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/">https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/</a></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="github">
 <h2>GitHub<a class="headerlink" href="#github" title="Permalink to this headline"></a></h2>
 <p>If your project is tracked by the versioning system control <strong>git</strong>, you may
 prefer sending files through GitHub (or GitLab). This method has the advantage
-of keeping your project tracked by git, synchronized with GitHub, and backed up
-on Rossinante.</p>
+of keeping your project tracked by git and synchronized with GitHub.</p>
 <p>The workflow is the following (Figure 2):</p>
-<p>1. On your laptop, commit changes
-1. Then push changes to your repository on GitHub
-1. Connect to Rossinante via SSH (or RStudio Server, see :ref: <cite>rstudio</cite>)
-1. Clone the GitHub repository on Rossinante or pull changes if your project is
-already cloned
-1. Run analysis on Rossinante</p>
+<ol class="arabic simple">
+<li><p>On your laptop, commit changes</p></li>
+<li><p>Then push changes to your repository on GitHub</p></li>
+<li><p>Connect to Rossinante via SSH (or RStudio Server)</p></li>
+<li><p>Clone the GitHub repository on Rossinante or pull changes if your project is already cloned</p></li>
+<li><p>Run analysis on Rossinante</p></li>
+</ol>
 <figure class="align-center" id="id2">
 <img alt="GitHub 1" src="_images/github-1.png" />
 <figcaption>
@@ -202,9 +202,11 @@ already cloned
 <div class="line"><br /></div>
 </div>
 <p>Once your analysis is finished, you can (Figure 3):</p>
-<p>1. Track new files and commit changes
-1. Push changes to your repository on GitHub
-1. On your laptop, pull changes</p>
+<ol class="arabic simple">
+<li><p>Track new files and commit changes</p></li>
+<li><p>Push changes to your repository on GitHub</p></li>
+<li><p>On your laptop, pull changes</p></li>
+</ol>
 <figure class="align-center" id="id3">
 <img alt="GitHub 2" src="_images/github-2.png" />
 <figcaption>
