@@ -7,31 +7,46 @@ MOTD
 
 -----
 
+This page presents how to customize the Message Of The Day (MOTD).
+
 
 .. code-block:: shell
 
-  ## Install package ----
-
+  # Install packages ----
   $ sudo apt install update-motd figlet
 
 
-  ## Edit header ----
 
+**Banner**
+
+
+.. code-block:: shell
+
+  # Backup original Header file ----
   $ sudo cp /etc/update-motd.d/00-header /etc/update-motd.d/00-header.original
-  $ sudo nano /etc/update-motd.d/00-header
 
-  # >>> #!/bin/sh
-  # >>>
-  # >>> figlet -f small ROSSINANTE
-
-
-  ## Edit Landscape ----
-
-  $ sudo cp /etc/update-motd.d/50-landscape-sysinfo /etc/update-motd.d/50-landscape-sysinfo.original
-  $ sudo nano /etc/update-motd.d/50-landscape-sysinfo
-
+  # Edit Header file ----
+  $ sudo cat << EOF > /etc/update-motd.d/00-header
   #!/bin/sh
-  # pam_motd does not carry the environment
+
+  figlet -f small ROSSINANTE
+  EOF
+
+
+
+**System information**
+
+
+
+.. code-block:: shell
+
+  # Backup original Landscape SysInfo file ----
+  $ sudo cp /etc/update-motd.d/50-landscape-sysinfo /etc/update-motd.d/50-landscape-sysinfo.original
+
+  # Edit Landscape SysInfo file ----
+  $ sudo cat << EOF > /etc/update-motd.d/50-landscape-sysinfo
+  #!/bin/sh
+
   [ -f /etc/default/locale ] && . /etc/default/locale
   export LANG
   os=$(lsb_release -s -d)
@@ -41,7 +56,6 @@ MOTD
   if [ $(echo "`cut -f1 -d ' ' /proc/loadavg` < $threshold" | bc) -eq 1 ]; then
       echo
       echo "(*) System Information"
-      #/bin/date
       echo "\n  OS:             $os"
       echo
       /usr/bin/landscape-sysinfo
@@ -49,15 +63,23 @@ MOTD
       echo
       echo " System information disabled due to load higher than $threshold"
   fi
+  EOF
 
 
-  ## Edit Updates ----
 
+**Available updates**
+
+
+
+.. code-block:: shell
+
+  # Backup original Available Updates file ----
   $ sudo cp /etc/update-motd.d/90-updates-available /etc/update-motd.d/90-updates-available.original
-  $ sudo nano /etc/update-motd.d/90-updates-available
 
-  # >>> #!/bin/sh
-  # >>>
+  # Edit Available Updates file ----
+  $ sudo cat << EOF > /etc/update-motd.d/90-updates-available
+  #!/bin/sh
+
   echo "\n(*) System Updates"
 
   stamp="/var/lib/update-notifier/updates-available"
@@ -65,10 +87,16 @@ MOTD
   [ ! -r "$stamp" ] || cat "$stamp"
 
   find $stamp -newermt 'now-7 days' 2> /dev/null | grep -q -m 1 '.' || /usr/share/update-notifier/notify-updates-outdated
+  EOF
 
 
-  ## Disable infos ----
 
+**Disable other information**
+
+
+.. code-block:: shell
+
+  # Disable other infos ----
   $ sudo chmod -x /etc/update-motd.d/00-header.original
   $ sudo chmod -x /etc/update-motd.d/50-landscape-sysinfo.original
   $ sudo chmod -x /etc/update-motd.d/90-updates-available.original
@@ -76,6 +104,12 @@ MOTD
   $ sudo chmod -x /etc/update-motd.d/50-motd-news
 
 
-  ## Update MOTD ----
 
+**Apply changes**
+
+
+
+.. code-block:: shell
+
+  # Update MOTD ----
   $ sudo update-motd
