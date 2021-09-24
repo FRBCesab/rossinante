@@ -38,6 +38,7 @@ Rossinante's User Guide
 
   ./installation.rst
   ./security.rst
+  ./motd.rst
   ./monitoring.rst
 
 .. toctree::
@@ -45,5 +46,4 @@ Rossinante's User Guide
   :caption: Appendix
 
   ./linux-cmd.rst
-  ./motd.rst
   ./shell.rst

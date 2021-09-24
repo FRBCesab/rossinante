@@ -18,7 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Monitoring" href="monitoring.html" />
+    <link rel="next" title="MOTD" href="motd.html" />
     <link rel="prev" title="Installation" href="installation.html" />
   <link href="_static/style.css" rel="stylesheet" type="text/css">
 
@@ -56,13 +56,17 @@
 <p class="caption" role="heading"><span class="caption-text">Admin guide</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Security</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#firewall">Firewall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fail2ban">Fail2ban</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
 </ul>
 
@@ -86,7 +90,7 @@
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="monitoring.html" class="btn btn-neutral float-right" title="Monitoring" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="motd.html" class="btn btn-neutral float-right" title="MOTD" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -97,16 +101,81 @@
 <h1>Security<a class="headerlink" href="#security" title="Permalink to this headline"></a></h1>
 <p><img alt="admin" src="https://img.shields.io/static/v1?label=-&amp;message=Admin%20only&amp;color=red&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
-<p>Coming soon…</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Firewall Configuration ----</span>
+<p>During Rossinante installation, some security aspects have been set
+(user access control, least privileges, encrypted communication, minimal
+installation, etc.). Here we will improve the security.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="firewall">
+<h2>Firewall<a class="headerlink" href="#firewall" title="Permalink to this headline"></a></h2>
+<p>Let’s configure the firewall <strong>UFW</strong> (Uncomplicated Firewall).</p>
+<dl class="simple">
+<dt>Tutorial:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04">https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04</a></p></li>
+</ul>
+</dd>
+</dl>
+<hr class="docutils" />
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install UFW ----</span>
+$ sudo apt install ufw
 
+<span class="c1"># Disable firewall ----</span>
 $ sudo ufw disable
+
+<span class="c1"># Deny all incoming connections ----</span>
 $ sudo ufw default deny incoming
+
+<span class="c1"># Allow all outgoing connections ----</span>
+$ sudo ufw default allow outgoing
+
+<span class="c1"># Allow SSH port ----</span>
 $ sudo ufw allow <span class="m">2222</span>/tcp
+
+<span class="c1"># Activate firewall ----</span>
 $ sudo ufw <span class="nb">enable</span>
+
+<span class="c1"># Check firewall status ----</span>
 $ sudo ufw status
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="fail2ban">
+<h2>Fail2ban<a class="headerlink" href="#fail2ban" title="Permalink to this headline"></a></h2>
+<p>Coming soon…</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Fail2ban ----</span>
+$ sudo apt install fail2ban
+
+<span class="c1"># Duplicate config file ----</span>
+$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+
+<span class="c1"># Edit config file ----</span>
+$ sudo nano /etc/fail2ban/jail.local
+</pre></div>
+</div>
+<p>Change the following value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">ssh</span><span class="p">]</span> <span class="ow">and</span> <span class="p">[</span><span class="n">ssh</span><span class="o">-</span><span class="n">ddos</span><span class="p">]</span>
+
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">port</span>    <span class="o">=</span> <span class="mi">2222</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restart service ----</span>
+$ sudo service fail2ban restart
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monitoring ----</span>
+$ sudo fail2ban-client status
+
+$ sudo fail2ban-client status ssh
+
+$ cat /var/log/auth.log <span class="p">|</span> grep sshd
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -114,7 +183,7 @@ $ sudo ufw status
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="monitoring.html" class="btn btn-neutral float-right" title="Monitoring" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="motd.html" class="btn btn-neutral float-right" title="MOTD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
