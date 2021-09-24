@@ -50,7 +50,8 @@
 <li class="toctree-l1"><a class="reference internal" href="sending-files.html">Sending files</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Working with R</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#rstudio-server">RStudio Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#r-in-the-terminal">R in the terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#r-console">R console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#r-packages">R packages</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="working-with-python.html">Working with Python</a></li>
@@ -67,6 +68,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
 </ul>
 
         </div>
@@ -103,6 +105,9 @@
 <p>To execute R code on Rossinante, you can use either the RStudio Server interface
 or directly the R console in the terminal. You can also use the <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>
 command.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <section id="rstudio-server">
 <span id="rstudio"></span><h2>RStudio Server<a class="headerlink" href="#rstudio-server" title="Permalink to this headline"></a></h2>
 <figure class="align-center" id="id1">
@@ -114,15 +119,26 @@ command.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<p>To open the RStudio Server interface, we first need to create an <strong>SSH
+tunneling</strong> (or port forwarding). This method consists in creating an encrypted
+SSH connection between a client (your laptop) and a server (Rossinante) through
+which a service (Rstudio Server) port (8787) can be relayed.</p>
+<p>To create an SSH port forwarding, pass the <code class="docutils literal notranslate"><span class="pre">-L</span></code> option to the ssh client:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open an SSH port forwarding ----</span>
+jane@laptop:~$ ssh -L <span class="m">8787</span>:localhost:8787 rossinante
+</pre></div>
+</div>
+<p><strong>NB –</strong> The first <code class="docutils literal notranslate"><span class="pre">8787</span></code> is your local port through RStudio Server will be relayed.
+The second <code class="docutils literal notranslate"><span class="pre">8787</span></code> is the port on Rossinante through RStudio Server is running.
+In short, <code class="docutils literal notranslate"><span class="pre">localhost</span></code> is your laptop. Instead of <code class="docutils literal notranslate"><span class="pre">localhost</span></code> we could have
+written <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. You can change the first <code class="docutils literal notranslate"><span class="pre">8787</span></code> for any number greater
+than <code class="docutils literal notranslate"><span class="pre">1024</span></code>.</p>
+<p>You are now connected to Rossinante.</p>
 <p>To start the RStudio Server interface, open a web browser (Firefox, Chrome,
-etc.) and enter the URL of the RStudio Server following by the port:
-<code class="docutils literal notranslate"><span class="pre">http://92.168.45.3:3528</span></code> (for example).</p>
+etc.) and enter the following URL: <code class="docutils literal notranslate"><span class="pre">localhost:8787</span></code>.</p>
 <p>After entering your Rossinante log in information, you are connected to a
 new RStudio Server instance. You can now use this interface as the one you
 know (RStudio Desktop).</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p><strong>Important –</strong> RStudio Server has two buttons to close the interface:
 <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">out</span></code> (B in Figure 5) and <code class="docutils literal notranslate"><span class="pre">Quit</span> <span class="pre">current</span> <span class="pre">R</span> <span class="pre">session</span></code> (C in Figure 5).
 If you click on <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">out</span></code>, your session will be still active (in background)
@@ -130,10 +146,11 @@ and you will have access to objects when you will log in again. You need to
 click on that button if you have launched time consuming analysis. If you click
 on <code class="docutils literal notranslate"><span class="pre">Quit</span> <span class="pre">current</span> <span class="pre">R</span> <span class="pre">session</span></code> you will stop all analyses and you were not able
 to access R objects. Click on that button to terminate your session.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>If you have been disconnected from RStudio Server (network crash, power failure,
+<p><strong>Warning –</strong> If you stop your SSH (port forwarding) session, you will close the
+RStudio Server session. Before shutting down the SSH connection, click on
+<code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">out</span></code> or <code class="docutils literal notranslate"><span class="pre">Quit</span> <span class="pre">current</span> <span class="pre">R</span> <span class="pre">session</span></code> to securely close the RStudio Server
+instance.</p>
+<p><strong>Trick –</strong> If you have been disconnected from RStudio Server (network crash, power failure,
 etc.), you may not be able to restart RStudio Server (blank page). In that case,
 you need to kill your previous R sessions (still active) as follow:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># SSH connection to Rossinante ----</span>
@@ -143,10 +160,13 @@ jane@laptop:~$ ssh rossinante
 jdoe@rossinante:~$ rm -rf ~/.local/share/rstudio/sessions/active/session-*
 </pre></div>
 </div>
-<p><strong>Note –</strong> With RStudio Server, you can also upload distant files (D in Figure 5).</p>
+<p><strong>Tip –</strong> With RStudio Server, you can also upload distant files (D in Figure 5).</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
-<section id="r-in-the-terminal">
-<h2>R in the terminal<a class="headerlink" href="#r-in-the-terminal" title="Permalink to this headline"></a></h2>
+<section id="r-console">
+<h2>R console<a class="headerlink" href="#r-console" title="Permalink to this headline"></a></h2>
 <p>An alternative is to launch the R console directly from the terminal of Rossinante.
 And this is very easy.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># SSH connection to Rossinante ----</span>
@@ -179,37 +199,51 @@ jdoe@rossinante:~$ R
 <span class="o">&gt;</span> <span class="nf">q</span><span class="p">(</span><span class="s">&quot;no&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If you want, you can also use the command <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> to run an R script
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="simple">
+<dt><strong>The Rscript command</strong></dt><dd><p>If you want, you can also use the command <code class="docutils literal notranslate"><span class="pre">Rscript</span></code> to run an R script
 (or R expression) without opening an R console, directly from the terminal.</p>
+</dd>
+</dl>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run an R expression (option &#39;-e&#39;) ----</span>
-jdoe@rossinante:~$ Rscript -e <span class="s1">&#39;print(&quot;Hello World!&quot;)&#39;</span>
-<span class="c1">## [1] &quot;Hello World!&quot;</span>
+jdoe@rossinante:~$ Rscript -e <span class="s1">&#39;print(&quot;El ingenioso hidalgo don Quijote de la Mancha&quot;)&#39;</span>
+<span class="c1">## [1] &quot;El ingenioso hidalgo don Quijote de la Mancha&quot;</span>
 
 <span class="c1"># Write an R script on the personal folder ----</span>
-jdoe@rossinante:~$ <span class="nb">echo</span> <span class="s1">&#39;print(&quot;Hello World!&quot;)&#39;</span> &gt; ~/hello.R
+jdoe@rossinante:~$ <span class="nb">echo</span> <span class="s1">&#39;print(&quot;El ingenioso hidalgo don Quijote de la Mancha&quot;)&#39;</span> &gt; ~/quijote.R
 
-<span class="c1"># Print &#39;hello.R&#39; file content ----</span>
-jdoe@rossinante:~$ cat ~/hello.R
-<span class="c1">## print(&quot;Hello World!&quot;)</span>
+<span class="c1"># Print &#39;quijote.R&#39; file content ----</span>
+jdoe@rossinante:~$ cat ~/quijote.R
+<span class="c1">## print(&quot;El ingenioso hidalgo don Quijote de la Mancha&quot;)</span>
 
-<span class="c1"># Run an R script ----</span>
-jdoe@rossinante:~$ Rscript ~/hello.R
-<span class="c1">## [1] &quot;Hello World!&quot;</span>
+<span class="c1"># Run the R script ----</span>
+jdoe@rossinante:~$ Rscript ~/quijote.R
+<span class="c1">## [1] &quot;El ingenioso hidalgo don Quijote de la Mancha&quot;</span>
+
+<span class="c1"># Remove the R script ----</span>
+jdoe@rossinante:~$ rm ~/quijote.R
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p><strong>Important –</strong> If you launch R in the terminal (or <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>) and your code
-takes time to be computed, you cannot use the terminal until the computation is
-done. The job is running in foreground. Moreover, if your SSH connection is
-stopped, your R session is aborted and your work is lost.</p>
-<p><strong>Solution –</strong> You can use a terminal multiplexer like <code class="docutils literal notranslate"><span class="pre">screen</span></code> or <code class="docutils literal notranslate"><span class="pre">tmux</span></code>. These
-tools open <em>virtual</em> terminals (screens) in the main terminal and you can navigate between
-screens and the main terminal. The idea is to create (attach) a new screen, launch
-your analysis, go back to the main terminal (detach), and work on other stuffs.
-If you stop your SSH connection, the analysis is still running, and if you make
-a new SSH connection to Rossinante, you can reattach the screen and resume your R session.</p>
+<dl class="simple">
+<dt><strong>Problem</strong></dt><dd><p>If you launch R in the terminal (or <code class="docutils literal notranslate"><span class="pre">Rscript</span></code>) and your code takes time to
+be computed, you cannot use the terminal until the computation is done. The job
+is running in foreground. Moreover, if your SSH connection is stopped, your R
+session is aborted and your work is lost.</p>
+</dd>
+<dt><strong>Solution</strong></dt><dd><p>You can use a terminal multiplexer like <code class="docutils literal notranslate"><span class="pre">screen</span></code> or <code class="docutils literal notranslate"><span class="pre">tmux</span></code>. These tools
+open <em>virtual</em> terminals (screens) in the main terminal and you can navigate
+between screens and the main terminal. The idea is to create (attach) a new
+screen, launch your analysis, go back to the main terminal (detach), and work
+on other stuffs. If you stop your SSH connection, the analysis is still
+running, and if you make a new SSH connection to Rossinante, you can reattach
+the screen and resume your R session.</p>
+</dd>
+</dl>
 <p>Let’s take an example with <code class="docutils literal notranslate"><span class="pre">screen</span></code>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># SSH connection to Rossinante ----</span>
 jane@laptop:~$ ssh rossinante
@@ -239,7 +273,46 @@ jdoe@rossinante:~$ screen -r r_analysis
 <span class="o">(</span>r_analysis<span class="o">)</span> jdoe@rossinante:~$
 </pre></div>
 </div>
-<p>To close a screen, type <cite>exit</cite> in the screen or press <cite>CTRL + A`</cite> and <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
+<p>To close a screen, type <code class="docutils literal notranslate"><span class="pre">exit</span></code> in the screen or press <code class="docutils literal notranslate"><span class="pre">CTRL</span> <span class="pre">+</span> <span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
+<p>More information on <code class="docutils literal notranslate"><span class="pre">screen</span></code>:
+<a class="reference external" href="https://www.malekal.com/screen-linux-lancer-plusieurs-commandes-sans-perdre-execution/">https://www.malekal.com/screen-linux-lancer-plusieurs-commandes-sans-perdre-execution/</a></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="r-packages">
+<h2>R packages<a class="headerlink" href="#r-packages" title="Permalink to this headline"></a></h2>
+<p>Only base R packages are installed and shared among users.
+Each user has a personal R library in which he can install/update every R packages he
+wants (independently of other users). This library is located in
+<code class="docutils literal notranslate"><span class="pre">~/R/x86_64-pc-linux-gnu-library/4.1/</span></code>.</p>
+<p>To install a new R package, use the interface of RStudio Server or run:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;sf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want you can also update your packages:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">update.packages</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>NB –</strong> Some R packages require system libraries and some of them may be
+missing on Rossinante. Please contact the administrator to solve the issue.</p>
+<p>You can find a list of common R packages used in Ecology
+<a class="reference external" href="https://raw.githubusercontent.com/FRBCesab/rossinante/main/tools/list-of-rpackages.R">here</a>.
+To install these packages on Rossinante (or elsewhere), open an R console or
+RStudio Server and run:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">## Script URL ----</span>
+<span class="n">url</span> <span class="o">&lt;-</span> <span class="s">&quot;https://raw.githubusercontent.com/FRBCesab/rossinante/main/tools/list-of-rpackages.R&quot;</span>
+
+<span class="c1">## Download script ----</span>
+<span class="nf">download.file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">destfile</span> <span class="o">=</span> <span class="s">&quot;list-of-rpackages.R&quot;</span><span class="p">)</span>
+
+<span class="c1">## Install R packages ----</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;list-of-rpackages.R&quot;</span><span class="p">)</span>
+
+<span class="c1">## Delete downloaded script ----</span>
+<span class="nf">file.remove</span><span class="p">(</span><span class="s">&quot;list-of-rpackages.R&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 

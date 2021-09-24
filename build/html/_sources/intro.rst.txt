@@ -13,8 +13,7 @@ to *medium* performance scientific computing (Table 1). You can run programs
 implemented in R, Python, Julia, C, and C++ directly from a terminal or using
 Web clients like RStudio Server and Jupyter Notebook. Unlike traditional clusters,
 Rossinante does not have a job scheduling system (e.g. SLURM, Torque) meaning
-that you can launch jobs whenever you want. But only if there is cores and
-RAM available (see :ref:`good-practices` section).
+that you can launch jobs whenever you want. But see :ref:`good-practices` section.
 
 
 .. table:: **Table 1** -- Rossinante hardware specifications
@@ -73,10 +72,11 @@ And some useful utilities:
 
 Can you do what you want on Rossinante?
   No! Rossinante has only one administrator, Nicolas Casajus. Regular users,
-  like you, have only access to a personal directory, ``/home/you/`` and to a shared
-  directory ``/home/cesab/``. You can store your files in one of these two folders.
-  But keep in mind that only you have access to your personal space whereas
-  everybody can access the shared space.
+  like you, have only access to a personal directory, ``/home/you/`` and to one
+  or several shared directory. The command ``groups`` lists all groups you are
+  member of. You can store your files in one of these folders. But keep in mind
+  that only you have access to your personal space whereas everybody can access
+  the shared spaces.
 
 
   If you need to use a non-installed software, please contact the administrator.
@@ -89,5 +89,5 @@ Can you do what you want on Rossinante?
 
 
 **Important --** Rossinante is **not a storage server**. Its 6 TB storage are shared
-among all users. You can store large datasets on your personal space to run yours
+among all users. You can store large datasets in your personal space to run yours
 analyses, but once you've finished, please remove large files.

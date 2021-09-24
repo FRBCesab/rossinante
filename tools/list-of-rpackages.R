@@ -7,7 +7,7 @@
 #' @notes Some other packages will be installed. For instance, installing the
 #' package `rmarkdown` will also install `knitr`, `htmltools`, `jsonlite`,
 #' `tinytex`, and `stringr` (among others).
-#' A total of 459 packages will be installed (2.1GB).  
+#' A total of 459 packages will be installed (2.1GB).
 
 ## CRAN Packages ----
 
@@ -23,15 +23,14 @@ install.packages(
     "hexSticker", "pkgdown", "rhub", "usethis",
 
     ## Compendium/Workflow ----
-    "here", "rcompendium", "rens", "targets",
+    "here", "rcompendium", "renv", "targets",
 
     ## Ecological analyses ----
-    "ade", "adehabitatHR", "adehabitatHS", "betapart", "biomod2", "factoextra",
+    "ade4", "adehabitatHR", "adehabitatHS", "betapart", "biomod2", "factoextra",
     "mclust", "sdmpredictors", "vegan",
 
     ## Bayesian analyses ----
-
-    "brms", "nimble", "R2jags", "rstan",
+    "brms", "nimble", "rstan",
 
     ## Phylogeny ----
     "ape",
