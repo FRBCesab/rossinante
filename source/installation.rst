@@ -129,6 +129,30 @@ Tutorial:
 The option ``--no-install-recommends`` avoids to install ``gnome-shell``.
 
 
+
+|
+
+
+CUDA toolkit
+------------
+
+
+Tutorial:
+  - https://linuxconfig.org/how-to-install-cuda-on-ubuntu-20-04-focal-fossa-linux
+
+.. code-block:: shell
+
+  ## Install CUDA ----
+
+  $ sudo apt install nvidia-cuda-toolkit
+
+
+  ## Check version ----
+
+  $ nvcc --version
+
+
+
 |
 
 
@@ -271,6 +295,44 @@ Utilities
       zsh                              ## Shell with lots of feature
 
 
+**NB --** In case you've got an error message (https://github.com/Syllo/nvtop/issues/51)
+while trying to install ``nvtop``, follow these steps:
+
+
+.. code-block:: shell
+
+  ## Manual build of nvtop ----
+
+  $ sudo apt install cmake libncurses5-dev libncursesw5-dev
+  $ git clone https://github.com/Syllo/nvtop.git
+  $ mkdir -p nvtop/build && cd nvtop/build
+  $ cmake ..
+  $ make
+  $ sudo make install  ## Global installation on the system
+  $ rm -rf nvtop/
+
+
+
+|
+
+
+
+LaTeX and Pandoc
+~~~~~~~~~~~~~~~~
+
+
+
+.. code-block:: shell
+
+  ## Install LaTeX and Pandoc ----
+
+  $ sudo apt install pandoc pandoc-citeproc texlive-full
+
+
+
+|
+
+
 
 R and RStudio Server
 ~~~~~~~~~~~~~~~~~~~~
@@ -285,7 +347,15 @@ Tutorials:
 
 .. code-block:: shell
 
-  ## Add GPG keys ----
+
+  ## Install system libraries ----
+
+  $ sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
+  $ sudo apt install libnode-dev libcairo2-dev libnetcdf-dev
+  $ sudo apt install libmagick++-dev libpoppler-cpp-dev libgmp3-dev
+
+
+  ## Add CRAN GPG keys ----
 
   $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 
@@ -305,21 +375,8 @@ Tutorials:
   $ sudo apt install r-base r-base-dev
 
 
-  ## Install system libraries ----
 
-  $ sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
-  $ sudo apt install libnode-dev libcairo2-dev libnetcdf-dev
-  $ sudo apt install libmagick++-dev libpoppler-cpp-dev libgmp3-dev
-
-
-  ## Install LaTeX and Pandoc ----
-
-  $ sudo apt install pandoc pandoc-citeproc texlive-full
-
-
-
-RStudio Server
-^^^^^^^^^^^^^^
+Let's install RStudio Server now.
 
 
 .. code-block:: shell
@@ -534,87 +591,3 @@ Docker
   ## Use Docker without sudo ----
 
   $ sudo usermod -aG docker psmith
-
-
-|
-
-CUDA and cuDNN
---------------
-
-CUDA Toolkit 11.4
-~~~~~~~~~~~~~~~~~
-
-Source: https://developer.nvidia.com/cuda-downloads
-
-.. code-block:: shell
-
-  ## Install CUDA Toolkit 11.4 ----
-
-  $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-
-  $ sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-
-  $ wget https://developer.download.nvidia.com/compute/cuda/11.4.2/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.2-470.57.02-1_amd64.deb
-
-  $ sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.2-470.57.02-1_amd64.deb
-  $ sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
-  $ sudo apt update
-  $ sudo apt install cuda
-
-
-
-cuDNN 8.2
-~~~~~~~~~
-
-Visit the page: https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html,
-and download from a web browser on local device (login required):
-
-* cuDNN Library for Linux (x86_64)
-* cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)
-* cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)
-* cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)
-
-Then send these files through SSH to Rossinante:
-
-.. code-block:: shell
-
-  $ scp cudnn-11.4-linux-x64-v8.2.4.15.tgz rossinante:~/
-  $ scp libcudnn8* rossinante:~/
-
-
-On Rossinante:
-
-.. code-block:: shell
-
-
-  ## Install cuDNN ----
-
-  $ tar -xzvf cudnn-11.4-linux-x64-v8.2.4.15.tgz
-
-  $ sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
-  $ sudo cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64
-
-  $ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-
-  $ sudo dpkg -i libcudnn8_2.4.15-1+cuda11.4_amd64.deb
-  $ sudo dpkg -i libcudnn8-dev_8.2.4.15-1+cuda11.4_amd64.deb
-  $ sudo dpkg -i libcudnn8-samples_8.2.4.15-1+cuda11.4_amd64.deb
-
-  $ sudo apt install libfreeimage3 libfreeimage-dev
-
-
-  ## Check install ----
-
-  $ cp -r /usr/src/cudnn_samples_v8/ $HOME
-  $ cd $HOME/cudnn_samples_v8/mnistCUDNN
-
-  $ make clean && make
-  $ ./mnistCUDNN
-
-
-  ## Cleanup ----
-
-  rm libcudnn8*
-  rm cudnn-11.4-linux-x64-v8.2.4.15.tgz
-  rm -rf cudnn_samples_v8
-  rm -rf cuda
