@@ -145,7 +145,6 @@ $ sudo ufw status
 </section>
 <section id="fail2ban">
 <h2>Fail2ban<a class="headerlink" href="#fail2ban" title="Permalink to this headline"></a></h2>
-<p>Coming soon…</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Fail2ban ----</span>
 $ sudo apt install fail2ban
 
@@ -157,9 +156,9 @@ $ sudo nano /etc/fail2ban/jail.local
 </pre></div>
 </div>
 <p>Change the following value:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">ssh</span><span class="p">]</span> <span class="ow">and</span> <span class="p">[</span><span class="n">ssh</span><span class="o">-</span><span class="n">ddos</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sshd</span><span class="p">]</span>
 
-<span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">mode</span>    <span class="o">=</span> <span class="n">aggressive</span>
 <span class="n">port</span>    <span class="o">=</span> <span class="mi">2222</span>
 </pre></div>
 </div>
@@ -170,7 +169,7 @@ $ sudo service fail2ban restart
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monitoring ----</span>
 $ sudo fail2ban-client status
 
-$ sudo fail2ban-client status ssh
+$ sudo fail2ban-client status sshd
 
 $ cat /var/log/auth.log <span class="p">|</span> grep sshd
 </pre></div>
