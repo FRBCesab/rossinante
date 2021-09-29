@@ -60,9 +60,6 @@ Fail2ban
 --------
 
 
-Coming soon...
-
-
 .. code-block:: shell
 
   # Install Fail2ban ----
@@ -79,9 +76,9 @@ Change the following value:
 
 .. code-block::
 
-  [ssh] and [ssh-ddos]
+  [sshd]
 
-  enabled = true
+  mode    = aggressive
   port    = 2222
 
 
@@ -96,6 +93,6 @@ Change the following value:
   # Monitoring ----
   $ sudo fail2ban-client status
 
-  $ sudo fail2ban-client status ssh
+  $ sudo fail2ban-client status sshd
 
   $ cat /var/log/auth.log | grep sshd
