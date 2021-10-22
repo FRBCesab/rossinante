@@ -62,6 +62,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#nvidia-driver">NVIDIA driver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cuda-toolkit">CUDA toolkit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#openssh-server">OpenSSH server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#change-timezone">Change timezone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-linux-users">Create Linux users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#softwares-installation">Softwares installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a></li>
@@ -305,6 +306,33 @@ $ sudo usermod -aG sshlogin dquichotte
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Apply changes ----</span>
 
 $ sudo service ssh restart
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="change-timezone">
+<h2>Change timezone<a class="headerlink" href="#change-timezone" title="Permalink to this headline"></a></h2>
+<p>Let’s change the timezone from UTC to Paris.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Check current timezone ----</span>
+
+$ cat /etc/timezone
+
+
+<span class="c1">## Available timezones ----</span>
+
+$ timedatectl list-timezones <span class="p">|</span> grep Europe
+
+
+<span class="c1">## Change timezone ----</span>
+
+$ sudo timedatectl set-timezone Europe/Paris
+
+
+<span class="c1">## Check new timezone ----</span>
+
+$ cat /etc/timezone
 </pre></div>
 </div>
 <div class="line-block">
