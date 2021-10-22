@@ -216,6 +216,36 @@ Apply new SSH config.
 |
 
 
+Change timezone
+---------------
+
+Let's change the timezone from UTC to Paris.
+
+.. code-block:: shell
+
+  ## Check current timezone ----
+
+  $ cat /etc/timezone
+
+
+  ## Available timezones ----
+
+  $ timedatectl list-timezones | grep Europe
+
+
+  ## Change timezone ----
+
+  $ sudo timedatectl set-timezone Europe/Paris
+
+
+  ## Check new timezone ----
+
+  $ cat /etc/timezone
+
+
+|
+
+
 Create Linux users
 ------------------
 
