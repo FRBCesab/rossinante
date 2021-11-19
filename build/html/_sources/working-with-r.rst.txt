@@ -95,6 +95,9 @@ you need to kill your previous R sessions (still active) as follow:
   jane@laptop:~$ ssh rossinante
 
   # Erase all active R sessions ----
+  jdoe@rossinante:~$ killall -u jdoe rsession
+
+  # Hardcore method ----
   jdoe@rossinante:~$ rm -rf ~/.local/share/rstudio/sessions/active/session-*
 
 

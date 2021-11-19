@@ -62,12 +62,12 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linux-cmd.html">Linux Cheat Sheet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="motd.html">MOTD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
 </ul>
 
@@ -157,6 +157,9 @@ you need to kill your previous R sessions (still active) as follow:</p>
 jane@laptop:~$ ssh rossinante
 
 <span class="c1"># Erase all active R sessions ----</span>
+jdoe@rossinante:~$ killall -u jdoe rsession
+
+<span class="c1"># Hardcore method ----</span>
 jdoe@rossinante:~$ rm -rf ~/.local/share/rstudio/sessions/active/session-*
 </pre></div>
 </div>
