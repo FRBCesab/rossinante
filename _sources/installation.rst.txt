@@ -383,6 +383,8 @@ Tutorials:
   $ sudo apt install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
   $ sudo apt install libnode-dev libcairo2-dev libnetcdf-dev
   $ sudo apt install libmagick++-dev libpoppler-cpp-dev libgmp3-dev
+  $ sudo apt install libharfbuzz-dev libfribidi-dev
+  $ sudo apt install libmpfrc++-dev libfftw3-bin libfftw3-dev libgsl-dev 
 
 
   ## Add CRAN GPG keys ----
