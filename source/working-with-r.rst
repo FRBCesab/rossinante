@@ -102,10 +102,6 @@ you need to kill your previous R sessions (still active) as follow:
 
 
 
-**Tip --** With RStudio Server, you can also upload distant files (D in Figure 5).
-
-
-
 |
 
 
@@ -222,7 +218,7 @@ Let's take an example with ``screen``:
   (r_analysis) jdoe@rossinante:~$ R
 
   # Launch the analysis ----
-  (r_analysis) jdoe@rossinante:~$ source("script_analysis.R")
+  (r_analysis) > source("script_analysis.R")
 
 
 
@@ -274,7 +270,7 @@ Each user has a personal R library in which he can install/update every R packag
 wants (independently of other users). This library is located in
 ``~/R/x86_64-pc-linux-gnu-library/4.1/``.
 
-To install a new R package, use the interface of RStudio Server or run:
+To install a new R package, use the interface of RStudio Server or the R console and run:
 
 .. code-block:: r
 
