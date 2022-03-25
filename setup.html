@@ -136,6 +136,13 @@ jane@laptop:~$ ssh -p <span class="m">22</span> jdoe@92.168.45.3
 </div>
 <p><strong>NB –</strong> <code class="docutils literal notranslate"><span class="pre">jane&#64;laptop:~$</span></code> is the prompt on an Unix terminal. On Windows,
 it looks like <code class="docutils literal notranslate"><span class="pre">C:\Users\jane&gt;</span></code>.</p>
+<p>The first time, you will see:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>The authenticity of host &#39;[92.168.45.3]:22&#39; can&#39;t be established.
+RSA key fingerprint is ...
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+</pre></div>
+</div>
+<p>Just write <code class="docutils literal notranslate"><span class="pre">yes</span></code> and press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
 <p>You’ll be asked to change your password. Enter the old password and set your new
 password (twice). Then, your prompt will look like (a reconnection may be
 necessary): <code class="docutils literal notranslate"><span class="pre">jdoe&#64;rossinante:~$</span></code>. This means that you are now connected to
@@ -165,28 +172,28 @@ connection information in a special file located on <strong>your laptop</strong>
 <code class="docutils literal notranslate"><span class="pre">.ssh/</span></code> located in your personal home directory.</p>
 <p>To create this <code class="docutils literal notranslate"><span class="pre">config</span></code> file, open <strong>RStudio</strong> (for multi-OS support) and
 follow these steps:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Navigate to your home directory (symbolized by ~) ----</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">setwd</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Navigate to your home directory ----</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">setwd</span><span class="p">(</span><span class="n">fs</span><span class="o">::</span><span class="nf">path_home</span><span class="p">())</span>
 
 <span class="c1"># Create a new hidden folder ----</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">dir.create</span><span class="p">(</span><span class="s">&quot;~/.ssh&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">dir.create</span><span class="p">(</span><span class="s">&quot;.ssh&quot;</span><span class="p">)</span>
 
 <span class="c1"># Change folder permissions ----</span>
 <span class="c1"># (only Jane can read, write, and execute this folder) ----</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">Sys.chmod</span><span class="p">(</span><span class="s">&quot;~/.ssh&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;0700&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">Sys.chmod</span><span class="p">(</span><span class="s">&quot;.ssh&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;0700&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create an (empty) SSH config file ----</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">file.create</span><span class="p">(</span><span class="s">&quot;~/.ssh/config&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">file.create</span><span class="p">(</span><span class="s">&quot;.ssh/config&quot;</span><span class="p">)</span>
 
 <span class="c1"># Change config file permissions ----</span>
 <span class="c1"># (only Jane can read and write this file) ----</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">Sys.chmod</span><span class="p">(</span><span class="s">&quot;~/.ssh/config&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;0600&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">Sys.chmod</span><span class="p">(</span><span class="s">&quot;.ssh/config&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;0600&quot;</span><span class="p">)</span>
 
 <span class="c1"># Open the SSH config file with RStudio editor ----</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">file.edit</span><span class="p">(</span><span class="s">&quot;~/.ssh/config&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">file.edit</span><span class="p">(</span><span class="s">&quot;.ssh/config&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now add the follow lines in the SSH config file:</p>
+<p>Now add the follow lines in the SSH <code class="docutils literal notranslate"><span class="pre">config</span></code> file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">rossinante</span>
    <span class="n">HostName</span> <span class="mf">92.168.45.3</span>
    <span class="n">Port</span> <span class="mi">22</span>
@@ -225,15 +232,18 @@ jane@laptop:~$ ls ~/.ssh
 </div>
 <p>The private key is <code class="docutils literal notranslate"><span class="pre">id_ed25519</span></code> and the public one <code class="docutils literal notranslate"><span class="pre">id_ed25519.pub</span></code>.
 Nobody (except you) can have access to the private key. So you need to change
-the permissions of this file.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change private key permissions (only Jane can only read this file) ----</span>
-jane@laptop:~$ chmod <span class="m">400</span> ~/.ssh/id_ed25519
+the permissions of this file. Open <strong>RStudio</strong> and run:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Navigate to your home directory ----</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">setwd</span><span class="p">(</span><span class="n">fs</span><span class="o">::</span><span class="nf">path_home</span><span class="p">())</span>
+
+<span class="c1"># Change private key permissions (only Jane can only read this file) ----</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">Sys.chmod</span><span class="p">(</span><span class="s">&quot;.ssh/id_ed25519&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;0400&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>On the opposite your SSH public key can be deployed everywhere. In our case, we will store
 it on the Rossinante server.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copying public key to Rossinante ----</span>
-jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_ed25519.pub rossinante
+jane@laptop:~$ scp .ssh/id_ed25519.pub rossinante:~/.ssh/authorized_keys
 </pre></div>
 </div>
 <p>Now we can connect to Rossinante more securely and without entering any password
@@ -241,13 +251,6 @@ jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_ed25519.pub rossinante
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>jane@laptop:~$ ssh rossinante
 </pre></div>
 </div>
-<p>The first time you use your new SSH keys pair you will see:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>The authenticity of host &#39;[92.168.45.3]:22&#39; can&#39;t be established.
-RSA key fingerprint is ...
-Are you sure you want to continue connecting (yes/no/[fingerprint])?
-</pre></div>
-</div>
-<p>Just write <code class="docutils literal notranslate"><span class="pre">yes</span></code> and press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
 <p>Our SSH public key on Rossinante has been stored under the name <code class="docutils literal notranslate"><span class="pre">authorized_keys</span></code>.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Content of the ~/.ssh folder ----</span>
 jdoe@rossinante:~$ ls ~/.ssh
@@ -348,10 +351,10 @@ an expiration date, and choose the scope (at least): <strong>repo</strong> and <
 Copy the GitHub PAT and go back to Rossinante shell.</p>
 <p>You will store this token in the file <code class="docutils literal notranslate"><span class="pre">~/.Renviron</span></code> (readable by R).</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store GitHub PAT on Rossinante (for R only) ----</span>
-jdoe@rossinante:~$ <span class="nb">echo</span> <span class="s2">&quot;GITHUB_PAT=XXX&quot;</span> &gt;&gt; ~/.Renviron
+jdoe@rossinante:~$ <span class="nb">echo</span> <span class="s2">&quot;GITHUB_PAT=ghp_XXX&quot;</span> &gt;&gt; ~/.Renviron
 </pre></div>
 </div>
-<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">XXX</span></code> by your token value.</p>
+<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">ghp_XXX</span></code> by your token value.</p>
 </section>
 </section>
 

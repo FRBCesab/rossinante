@@ -54,6 +54,19 @@ command:
 it looks like ``C:\Users\jane>``.
 
 
+The first time, you will see:
+
+
+.. code-block::
+
+  The authenticity of host '[92.168.45.3]:22' can't be established.
+  RSA key fingerprint is ...
+  Are you sure you want to continue connecting (yes/no/[fingerprint])?
+
+
+
+Just write ``yes`` and press ``Enter``.
+
 You'll be asked to change your password. Enter the old password and set your new
 password (twice). Then, your prompt will look like (a reconnection may be
 necessary): ``jdoe@rossinante:~$``. This means that you are now connected to
@@ -100,28 +113,28 @@ follow these steps:
 
 .. code-block:: r
 
-  # Navigate to your home directory (symbolized by ~) ----
-  R> setwd("~")
+  # Navigate to your home directory ----
+  R> setwd(fs::path_home())
 
   # Create a new hidden folder ----
-  R> dir.create("~/.ssh")
+  R> dir.create(".ssh")
 
   # Change folder permissions ----
   # (only Jane can read, write, and execute this folder) ----
-  R> Sys.chmod("~/.ssh", mode = "0700")
+  R> Sys.chmod(".ssh", mode = "0700")
 
   # Create an (empty) SSH config file ----
-  R> file.create("~/.ssh/config")
+  R> file.create(".ssh/config")
 
   # Change config file permissions ----
   # (only Jane can read and write this file) ----
-  R> Sys.chmod("~/.ssh/config", mode = "0600")
+  R> Sys.chmod(".ssh/config", mode = "0600")
 
   # Open the SSH config file with RStudio editor ----
-  R> file.edit("~/.ssh/config")
+  R> file.edit(".ssh/config")
 
 
-Now add the follow lines in the SSH config file:
+Now add the follow lines in the SSH ``config`` file:
 
 .. code-block::
 
@@ -184,14 +197,17 @@ This SSH keys pair has been stored in ``~/.ssh/``.
 
 The private key is ``id_ed25519`` and the public one ``id_ed25519.pub``.
 Nobody (except you) can have access to the private key. So you need to change
-the permissions of this file.
+the permissions of this file. Open **RStudio** and run:
 
 
 
-.. code-block:: shell
+.. code-block:: r
+
+  # Navigate to your home directory ----
+  R> setwd(fs::path_home())
 
   # Change private key permissions (only Jane can only read this file) ----
-  jane@laptop:~$ chmod 400 ~/.ssh/id_ed25519
+  R> Sys.chmod(".ssh/id_ed25519", mode = "0400")
 
 
 
@@ -203,7 +219,7 @@ it on the Rossinante server.
 .. code-block:: shell
 
   # Copying public key to Rossinante ----
-  jane@laptop:~$ ssh-copy-id -i ~/.ssh/id_ed25519.pub rossinante
+  jane@laptop:~$ scp .ssh/id_ed25519.pub rossinante:~/.ssh/authorized_keys
 
 
 
@@ -216,21 +232,6 @@ Now we can connect to Rossinante more securely and without entering any password
 
   jane@laptop:~$ ssh rossinante
 
-
-
-The first time you use your new SSH keys pair you will see:
-
-
-
-.. code-block::
-
-  The authenticity of host '[92.168.45.3]:22' can't be established.
-  RSA key fingerprint is ...
-  Are you sure you want to continue connecting (yes/no/[fingerprint])?
-
-
-
-Just write ``yes`` and press ``Enter``.
 
 Our SSH public key on Rossinante has been stored under the name ``authorized_keys``.
 
@@ -406,6 +407,6 @@ You will store this token in the file ``~/.Renviron`` (readable by R).
 .. code-block:: shell
 
   # Store GitHub PAT on Rossinante (for R only) ----
-  jdoe@rossinante:~$ echo "GITHUB_PAT=XXX" >> ~/.Renviron
+  jdoe@rossinante:~$ echo "GITHUB_PAT=ghp_XXX" >> ~/.Renviron
 
-Make sure to replace ``XXX`` by your token value.
+Make sure to replace ``ghp_XXX`` by your token value.
