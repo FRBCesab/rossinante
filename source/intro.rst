@@ -40,6 +40,7 @@ When do you need to use Rossinante?
   * You need to analyse large datasets (RAM operations), and/or,
   * You need to repeat tasks many times (parallelization on CPU/GPU).
 
+|
 
 What are the available software?
   * `R 4.1 <https://cran.r-project.org/>`_
@@ -52,7 +53,7 @@ What are the available software?
   * `Pandoc <https://pandoc.org/>`_
   * `git <https://git-scm.com/>`_
 
-
+|
 
 And some useful utilities:
   * `CUDA 11.4 <https://developer.nvidia.com/cuda-downloads>`_ and `NVIDIA cuDNN 8.1 <https://developer.nvidia.com/cudnn>`_ -- Deep Learning

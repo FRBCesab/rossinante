@@ -26,7 +26,7 @@ For this tutorial, let's say:
 
 **NB --** When you are inside the CESAB, you can use the local IP address of the
 server. When you are outside, you need to use the public IP through a VPN
-connection (not yet available).
+connection (contact the administrator for further information).
 
 
 
@@ -94,31 +94,31 @@ connection information in a special file located on **your laptop**
 (not in the server): ``config``. The file must be stored in an hidden folder
 ``.ssh/`` located in your personal home directory.
 
-To create this ``config`` file, open a Terminal and follow these steps (works
-only for Unix systems):
+To create this ``config`` file, open **RStudio** (for multi-OS support) and
+follow these steps:
 
 
-.. code-block:: shell
+.. code-block:: r
 
   # Navigate to your home directory (symbolized by ~) ----
-  jane@laptop:~$ cd ~
+  R> setwd("~")
 
   # Create a new hidden folder ----
-  jane@laptop:~$ mkdir .ssh/
+  R> dir.create("~/.ssh")
 
   # Change folder permissions ----
   # (only Jane can read, write, and execute this folder) ----
-  jane@laptop:~$ chmod 700 .ssh/
+  R> Sys.chmod("~/.ssh", mode = "0700")
 
   # Create an (empty) SSH config file ----
-  jane@laptop:~$ touch .ssh/config
+  R> file.create("~/.ssh/config")
 
   # Change config file permissions ----
   # (only Jane can read and write this file) ----
-  jane@laptop:~$ chmod 600 ~/.ssh/config
+  R> Sys.chmod("~/.ssh/config", mode = "0600")
 
-  # Open the SSH config file with the CLI text editor nano ----
-  jane@laptop:~$ nano ~/.ssh/config
+  # Open the SSH config file with RStudio editor ----
+  R> file.edit("~/.ssh/config")
 
 
 Now add the follow lines in the SSH config file:
@@ -129,9 +129,6 @@ Now add the follow lines in the SSH config file:
      HostName 92.168.45.3
      Port 22
      User jdoe
-
-To save changes press ``CTRL + X`` (to quit) and ``Y``/``O`` (to save changes)
-and then press ``Enter``.
 
 
 You can now connect to Rossinante as follow:
