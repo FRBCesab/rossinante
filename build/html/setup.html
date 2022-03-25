@@ -121,7 +121,7 @@ server.</p>
 </ul>
 <p><strong>NB –</strong> When you are inside the CESAB, you can use the local IP address of the
 server. When you are outside, you need to use the public IP through a VPN
-connection (not yet available).</p>
+connection (contact the administrator for further information).</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -163,27 +163,27 @@ especially if you use several servers. Fortunately you can store Rossinante
 connection information in a special file located on <strong>your laptop</strong>
 (not in the server): <code class="docutils literal notranslate"><span class="pre">config</span></code>. The file must be stored in an hidden folder
 <code class="docutils literal notranslate"><span class="pre">.ssh/</span></code> located in your personal home directory.</p>
-<p>To create this <code class="docutils literal notranslate"><span class="pre">config</span></code> file, open a Terminal and follow these steps (works
-only for Unix systems):</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Navigate to your home directory (symbolized by ~) ----</span>
-jane@laptop:~$ <span class="nb">cd</span> ~
+<p>To create this <code class="docutils literal notranslate"><span class="pre">config</span></code> file, open <strong>RStudio</strong> (for multi-OS support) and
+follow these steps:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Navigate to your home directory (symbolized by ~) ----</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">setwd</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create a new hidden folder ----</span>
-jane@laptop:~$ mkdir .ssh/
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">dir.create</span><span class="p">(</span><span class="s">&quot;~/.ssh&quot;</span><span class="p">)</span>
 
 <span class="c1"># Change folder permissions ----</span>
 <span class="c1"># (only Jane can read, write, and execute this folder) ----</span>
-jane@laptop:~$ chmod <span class="m">700</span> .ssh/
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">Sys.chmod</span><span class="p">(</span><span class="s">&quot;~/.ssh&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;0700&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create an (empty) SSH config file ----</span>
-jane@laptop:~$ touch .ssh/config
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">file.create</span><span class="p">(</span><span class="s">&quot;~/.ssh/config&quot;</span><span class="p">)</span>
 
 <span class="c1"># Change config file permissions ----</span>
 <span class="c1"># (only Jane can read and write this file) ----</span>
-jane@laptop:~$ chmod <span class="m">600</span> ~/.ssh/config
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">Sys.chmod</span><span class="p">(</span><span class="s">&quot;~/.ssh/config&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;0600&quot;</span><span class="p">)</span>
 
-<span class="c1"># Open the SSH config file with the CLI text editor nano ----</span>
-jane@laptop:~$ nano ~/.ssh/config
+<span class="c1"># Open the SSH config file with RStudio editor ----</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">file.edit</span><span class="p">(</span><span class="s">&quot;~/.ssh/config&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now add the follow lines in the SSH config file:</p>
@@ -193,8 +193,6 @@ jane@laptop:~$ nano ~/.ssh/config
    <span class="n">User</span> <span class="n">jdoe</span>
 </pre></div>
 </div>
-<p>To save changes press <code class="docutils literal notranslate"><span class="pre">CTRL</span> <span class="pre">+</span> <span class="pre">X</span></code> (to quit) and <code class="docutils literal notranslate"><span class="pre">Y</span></code>/<code class="docutils literal notranslate"><span class="pre">O</span></code> (to save changes)
-and then press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
 <p>You can now connect to Rossinante as follow:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>jane@laptop:~$ ssh rossinante
 </pre></div>
