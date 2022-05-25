@@ -8,6 +8,20 @@ Linux Cheat Sheet
 ----
 
 
+Getting help
+------------
+
+.. code-block:: shell
+
+  ## Getting help ----
+
+  $ man ls                                   # Print the manual of the command <ls>
+  $ curl https://cheat.sh/ls                 # Print examples of the command <ls>
+
+|
+
+
+
 Directory navigation
 --------------------
 
@@ -52,6 +66,7 @@ Directory content
   $ ls -al                                   # List content in a table-like format with hidden files
   $ ll                                       # Idem
   $ ls -R                                    # List content recursively
+  $ ls -lh                                   # List content in a table-like format and human-readable
 
 
   ## List content in a tree-like format ----
@@ -88,3 +103,67 @@ Working with files
 
   $ nano file.txt                            # Open an existing file in the PICO text editor
   $ pico file.txt                            # Idem
+
+
+  ## Print file content ----
+
+  ...
+
+
+  ## Moving file ----
+
+  ...
+
+
+  ## Renaming file ----
+
+  ...
+
+
+  ## Deleting file ----
+
+  ...
+
+|
+
+
+Working with directories
+------------------------
+
+.. code-block:: shell
+
+  ## Creating directories ----
+
+  ...
+
+
+  ## Moving directories ----
+
+  ...
+
+
+  ## Renaming directories ----
+
+  ...
+
+
+  ## Deleting directories ----
+
+  ...
+  
+|
+
+
+Useful commands
+---------------
+
+.. code-block:: shell
+
+  ## Get the size of the current directory ----
+  
+  $ du -sh .
+
+
+  ## Print the command lines history ----
+
+  $ history
