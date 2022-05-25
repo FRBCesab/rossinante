@@ -63,9 +63,12 @@
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Linux Cheat Sheet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting help</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#directory-navigation">Directory navigation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#directory-content">Directory content</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#working-with-files">Working with files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-directories">Working with directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#useful-commands">Useful commands</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
@@ -102,6 +105,18 @@
 <h1>Linux Cheat Sheet<a class="headerlink" href="#linux-cheat-sheet" title="Permalink to this headline"></a></h1>
 <p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
+<section id="getting-help">
+<h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Getting help ----</span>
+
+$ man ls                                   <span class="c1"># Print the manual of the command &lt;ls&gt;</span>
+$ curl https://cheat.sh/ls                 <span class="c1"># Print examples of the command &lt;ls&gt;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
 <section id="directory-navigation">
 <h2>Directory navigation<a class="headerlink" href="#directory-navigation" title="Permalink to this headline"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Navigate to HOME directory ----</span>
@@ -141,6 +156,7 @@ $ ls -a                                    <span class="c1"># List content inclu
 $ ls -al                                   <span class="c1"># List content in a table-like format with hidden files</span>
 $ ll                                       <span class="c1"># Idem</span>
 $ ls -R                                    <span class="c1"># List content recursively</span>
+$ ls -lh                                   <span class="c1"># List content in a table-like format and human-readable</span>
 
 
 <span class="c1">## List content in a tree-like format ----</span>
@@ -176,6 +192,68 @@ $ <span class="nb">echo</span> <span class="s2">&quot;Line 3\nLine 4&quot;</span
 
 $ nano file.txt                            <span class="c1"># Open an existing file in the PICO text editor</span>
 $ pico file.txt                            <span class="c1"># Idem</span>
+
+
+<span class="c1">## Print file content ----</span>
+
+...
+
+
+<span class="c1">## Moving file ----</span>
+
+...
+
+
+<span class="c1">## Renaming file ----</span>
+
+...
+
+
+<span class="c1">## Deleting file ----</span>
+
+...
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="working-with-directories">
+<h2>Working with directories<a class="headerlink" href="#working-with-directories" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Creating directories ----</span>
+
+...
+
+
+<span class="c1">## Moving directories ----</span>
+
+...
+
+
+<span class="c1">## Renaming directories ----</span>
+
+...
+
+
+<span class="c1">## Deleting directories ----</span>
+
+...
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="useful-commands">
+<h2>Useful commands<a class="headerlink" href="#useful-commands" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Get the size of the current directory ----</span>
+
+$ du -sh .
+
+
+<span class="c1">## Print the command lines history ----</span>
+
+$ <span class="nb">history</span>
 </pre></div>
 </div>
 </section>
