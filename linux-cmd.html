@@ -62,7 +62,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Linux Cheat Sheet</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Linux Cheat Sheet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#directory-navigation">Directory navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-content">Directory content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-files">Working with files</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="shell.html">Pimp your shell</a></li>
 </ul>
 
@@ -97,7 +102,83 @@
 <h1>Linux Cheat Sheet<a class="headerlink" href="#linux-cheat-sheet" title="Permalink to this headline"></a></h1>
 <p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
-<p>Coming soon…</p>
+<section id="directory-navigation">
+<h2>Directory navigation<a class="headerlink" href="#directory-navigation" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Navigate to HOME directory ----</span>
+
+$ <span class="nb">cd</span>                                       <span class="c1"># Go to HOME directory (/home/jdoe)</span>
+$ <span class="nb">cd</span> ~                                     <span class="c1"># Idem</span>
+$ <span class="nb">cd</span> <span class="nv">$HOME</span>                                 <span class="c1"># Idem</span>
+$ <span class="nb">cd</span> /home/jdoe                            <span class="c1"># Idem</span>
+
+
+<span class="c1">## Navigate between directories ----</span>
+
+$ <span class="nb">cd</span> ..                                    <span class="c1"># Move one level up</span>
+$ <span class="nb">cd</span> ../..                                 <span class="c1"># Move two levels up</span>
+
+$ <span class="nb">cd</span> Pictures                              <span class="c1"># Go to a directory</span>
+$ <span class="nb">cd</span> Pictures/wallpapers                   <span class="c1"># Go to a subdirectory (relative path)</span>
+$ <span class="nb">cd</span> /home/jdoe/Pictures/wallpapers        <span class="c1"># Go to a subdirectory (absolute path)</span>
+
+
+<span class="c1">## Print current directory ----</span>
+
+$ <span class="nb">pwd</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="directory-content">
+<h2>Directory content<a class="headerlink" href="#directory-content" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## List directory content ----</span>
+
+$ ls                                       <span class="c1"># List content</span>
+$ ls -l                                    <span class="c1"># List content in a table-like format</span>
+$ ls -a                                    <span class="c1"># List content including hidden files</span>
+$ ls -al                                   <span class="c1"># List content in a table-like format with hidden files</span>
+$ ll                                       <span class="c1"># Idem</span>
+$ ls -R                                    <span class="c1"># List content recursively</span>
+
+
+<span class="c1">## List content in a tree-like format ----</span>
+
+$ tree                                     <span class="c1"># List content in a tree-like format</span>
+$ tree -a                                  <span class="c1"># List content including hidden files</span>
+$ tree -L <span class="m">2</span>                                <span class="c1"># Limit to two subdirectory levels</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="working-with-files">
+<h2>Working with files<a class="headerlink" href="#working-with-files" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Creating new files ----</span>
+
+$ touch newfile.txt                        <span class="c1"># Create a new empty file</span>
+
+$ <span class="nb">echo</span> <span class="s2">&quot;Line 1\nLine 2&quot;</span> &gt; newfile.txt      <span class="c1"># Create a new file and add content on-the-fly</span>
+
+$ nano newfile.txt                         <span class="c1"># Create and open a new file in the PICO text editor</span>
+                                           <span class="c1"># Press CTRL + X to exit (and Y and ENTER to save the file)</span>
+$ pico newfile.txt                         <span class="c1"># Idem</span>
+
+$ cat &gt; newfile.txt                        <span class="c1"># Create new file and add content interactively</span>
+                                           <span class="c1"># Press CTRL + D to save the file</span>
+
+
+<span class="c1">## Editing an existing file ----</span>
+
+$ <span class="nb">echo</span> <span class="s2">&quot;Line 3\nLine 4&quot;</span> &gt;&gt; file.txt        <span class="c1"># Add content to an existing file</span>
+
+$ nano file.txt                            <span class="c1"># Open an existing file in the PICO text editor</span>
+$ pico file.txt                            <span class="c1"># Idem</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
