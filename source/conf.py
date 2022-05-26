@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Rossinante'
-copyright = '2021, Nicolas Casajus'
+copyright = '2022, Nicolas Casajus'
 author = 'Nicolas Casajus'
 
 # The full version, including alpha/beta/rc tags
