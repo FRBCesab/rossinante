@@ -22,37 +22,6 @@ Getting help
 
 
 
-Directory navigation
---------------------
-
-.. code-block:: shell
-
-  ## Navigate to HOME directory ----
-
-  $ cd                                       # Go to HOME directory (/home/jdoe)
-  $ cd ~                                     # Idem
-  $ cd $HOME                                 # Idem
-  $ cd /home/jdoe                            # Idem
-
-
-  ## Navigate between directories ----
-
-  $ cd ..                                    # Move one level up
-  $ cd ../..                                 # Move two levels up
-
-  $ cd Pictures                              # Go to a directory
-  $ cd Pictures/wallpapers                   # Go to a subdirectory (relative path)
-  $ cd /home/jdoe/Pictures/wallpapers        # Go to a subdirectory (absolute path)
-
-
-  ## Print current directory ----
-
-  $ pwd
-
-|
-
-
-
 Directory content
 -----------------
 
@@ -61,6 +30,7 @@ Directory content
   ## List directory content ----
 
   $ ls                                       # List content
+  $ ls folder
   $ ls -l                                    # List content in a table-like format
   $ ls -a                                    # List content including hidden files
   $ ls -al                                   # List content in a table-like format with hidden files
@@ -78,6 +48,39 @@ Directory content
 |
 
 
+
+Directory navigation
+--------------------
+
+.. code-block:: shell
+
+  ## Navigate to HOME directory ----
+
+  $ cd                                       # Go to HOME directory (/home/jdoe)
+  $ cd ~                                     # Idem
+  $ cd /home/jdoe                            # Idem
+
+
+  ## Navigate between directories ----
+
+  $ cd ..                                    # Move one level up
+  $ cd ../..                                 # Move two levels up
+
+  $ cd Pictures                              # Go to a directory
+  $ cd Pictures/wallpapers                   # Go to a subdirectory (relative path)
+  $ cd /home/jdoe/Pictures/wallpapers        # Go to a subdirectory (absolute path)
+
+  $ cd -
+
+
+  ## Print current directory ----
+
+  $ pwd
+
+|
+
+
+
 Working with files
 ------------------
 
@@ -87,7 +90,7 @@ Working with files
 
   $ touch newfile.txt                        # Create a new empty file
 
-  $ echo "Line 1\nLine 2" > newfile.txt      # Create a new file and add content on-the-fly
+  $ echo 'Line 1\nLine 2' > newfile.txt      # Create a new file and add content on-the-fly
 
   $ nano newfile.txt                         # Create and open a new file in the NANO text editor
                                              # Press CTRL + X to exit (and Y and ENTER to save the file)
@@ -98,9 +101,12 @@ Working with files
 
   ## Editing an existing file ----
 
-  $ echo "Line 3\nLine 4" >> file.txt        # Add content to an existing file
+  $ echo 'Line 3\nLine 4' >> file.txt        # Add content to the end of an existing file
 
   $ nano file.txt                            # Open an existing file in the NANO text editor
+
+  $ cat >> file.txt                          # Add content interactively to an existing file
+                                             # Press CTRL + D to save the file
 
 
   ## Print file content ----
@@ -109,8 +115,12 @@ Working with files
 
   $ less file.txt                            # Open a file for interactive reading
 
-  $ head file.txt                            # Print the first part of a file
-  $ tail file.txt                            # Print the last part of a file
+  $ head file.txt                            # Print the first 10 lines of a file
+  $ head -n 6 file.txt                       # Print the first 6 lines of a file
+
+  $ tail file.txt                            # Print the last 10 lines of a file
+  $ tail -n 6 file.txt                       # Print the last 6 lines of a file
+  $ tail -f file.txt                         # Dynamic - Useful for logs
 
 
   ## Copying file ----
