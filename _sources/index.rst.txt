@@ -12,6 +12,7 @@ Rossinante's User Guide
   :align: left
 
 |
+|
 
 .. toctree::
   :maxdepth: 1
