@@ -9,9 +9,8 @@ Rossinante's User Guide
 |
 
 .. image:: ./images/quichotte.jpg
-  :align: left
+  :align: center
 
-|
 |
 
 .. toctree::
