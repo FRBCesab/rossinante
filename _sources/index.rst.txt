@@ -9,7 +9,7 @@ Rossinante's User Guide
 |
 
 .. image:: ./images/quichotte.jpg
-  :align: center
+  :align: left
 
 |
 
