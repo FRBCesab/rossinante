@@ -113,6 +113,12 @@ Working with files
   $ tail file.txt                            # Print the last part of a file
 
 
+  ## Copying file ----
+
+  $ cp file.txt copy.txt                     # Copy a file in the same location
+  $ cp file.txt folder/copy.txt              # Copy a file in another directory
+
+
   ## Moving file ----
 
   $ mv file.txt new/location/                # Move a file to a new location
@@ -146,6 +152,11 @@ Working with directories
   ...
 
 
+  ## Copying directories ----
+
+  ...
+  
+  
   ## Moving directories ----
 
   ...
