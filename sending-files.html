@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sending files &mdash; Doc</title>
@@ -11,10 +11,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Rossinante
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Rossinante
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -84,8 +88,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Sending files</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Sending files</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/sending-files.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -99,7 +103,7 @@
            <div itemprop="articleBody">
              
   <section id="sending-files">
-<h1>Sending files<a class="headerlink" href="#sending-files" title="Permalink to this headline"></a></h1>
+<h1>Sending files<a class="headerlink" href="#sending-files" title="Permalink to this heading"></a></h1>
 <p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
 <p>When you want to run analyses on Rossinante, you need to transfer files (code
@@ -108,7 +112,7 @@ and data) from your laptop to the server. Here we will see three methods.</p>
 <div class="line"><br /></div>
 </div>
 <section id="sftp">
-<h2>sFTP<a class="headerlink" href="#sftp" title="Permalink to this headline"></a></h2>
+<h2>sFTP<a class="headerlink" href="#sftp" title="Permalink to this heading"></a></h2>
 <p>The easiest way to transfer files from your laptop to Rossinante (or vice versa)
 is by using the sFTP protocol (Secure File Transfer Protocol).
 The <a class="reference external" href="https://filezilla-project.org/">Filezilla</a> client is a
@@ -143,34 +147,34 @@ on <strong>Download</strong>.</p>
 </div>
 </section>
 <section id="scp-command">
-<h2>scp command<a class="headerlink" href="#scp-command" title="Permalink to this headline"></a></h2>
+<h2>scp command<a class="headerlink" href="#scp-command" title="Permalink to this heading"></a></h2>
 <p>An alternative to transfer files is by using the command <code class="docutils literal notranslate"><span class="pre">scp</span></code> that allows
 you to copy files using the SSH protocol (secure copy).</p>
 <p>Let’s say we want to copy the local file <code class="docutils literal notranslate"><span class="pre">script.R</span></code>, located in the
 <code class="docutils literal notranslate"><span class="pre">Documents/</span></code> folder, to Rossinante (in the folder <code class="docutils literal notranslate"><span class="pre">~/projects/</span></code>).
 We will use <code class="docutils literal notranslate"><span class="pre">scp</span></code> as follow:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Send a file from local to Rossinante ----</span>
-jane@laptop:~$ scp ~/Documents/script.R rossinante:projects/
+jane@laptop:~$<span class="w"> </span>scp<span class="w"> </span>~/Documents/script.R<span class="w"> </span>rossinante:projects/
 </pre></div>
 </div>
 <p>If we want to download a file from Rossinante:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Send a file from Rossinante to local ----</span>
-jane@laptop:~$ scp rossinante:projects/script.R ~/Documents/
+jane@laptop:~$<span class="w"> </span>scp<span class="w"> </span>rossinante:projects/script.R<span class="w"> </span>~/Documents/
 </pre></div>
 </div>
 <p>To copy folders we will add the option <code class="docutils literal notranslate"><span class="pre">-r</span></code> (for recursive):</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Send a folder from local to Rossinante ----</span>
-jane@laptop:~$ scp -r ~/Documents/project_1 rossinante:projects/
+jane@laptop:~$<span class="w"> </span>scp<span class="w"> </span>-r<span class="w"> </span>~/Documents/project_1<span class="w"> </span>rossinante:projects/
 
 <span class="c1"># Send a folder from Rossinante to local ----</span>
-jane@laptop:~$ scp -r rossinante:projects/project_1 ~/Documents/
+jane@laptop:~$<span class="w"> </span>scp<span class="w"> </span>-r<span class="w"> </span>rossinante:projects/project_1<span class="w"> </span>~/Documents/
 </pre></div>
 </div>
 <p>You can use the option <code class="docutils literal notranslate"><span class="pre">-p</span></code> to preserve modification times,
 access times, and modes from the original file(s). This can be useful when
 you want to copy a project tracked by <strong>git</strong>.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Send a folder from local to Rossinante (preserve modification times) ----</span>
-jane@laptop:~$ scp -r -p ~/Documents/project_1 rossinante:projects/
+jane@laptop:~$<span class="w"> </span>scp<span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span>~/Documents/project_1<span class="w"> </span>rossinante:projects/
 </pre></div>
 </div>
 <p><strong>NB –</strong> You can also use the command <code class="docutils literal notranslate"><span class="pre">rsync</span></code> instead of <code class="docutils literal notranslate"><span class="pre">scp</span></code>. For further
@@ -180,7 +184,7 @@ information: <a class="reference external" href="https://linuxize.com/post/how-t
 </div>
 </section>
 <section id="github">
-<h2>GitHub<a class="headerlink" href="#github" title="Permalink to this headline"></a></h2>
+<h2>GitHub<a class="headerlink" href="#github" title="Permalink to this heading"></a></h2>
 <p>If your project is tracked by the versioning system control <strong>git</strong>, you may
 prefer sending files through GitHub (or GitLab). This method has the advantage
 of keeping your project tracked by git and synchronized with GitHub.</p>

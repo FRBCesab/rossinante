@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Working with Python &mdash; Doc</title>
@@ -11,10 +11,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Rossinante
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Rossinante
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -79,8 +83,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Working with Python</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Working with Python</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/working-with-python.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,23 +98,23 @@
            <div itemprop="articleBody">
              
   <section id="working-with-python">
-<h1>Working with Python<a class="headerlink" href="#working-with-python" title="Permalink to this headline"></a></h1>
+<h1>Working with Python<a class="headerlink" href="#working-with-python" title="Permalink to this heading"></a></h1>
 <p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
 <p>Coming soon…</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create an SSH Tunneling ----</span>
 
-$ ssh -L <span class="m">8000</span>:localhost:8888 rossinante
+$<span class="w"> </span>ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:localhost:8888<span class="w"> </span>rossinante
 
 
 <span class="c1">## Start Jupyter Notebook server ----</span>
 
-$ jupyter notebook --no-browser --port <span class="m">8888</span>
+$<span class="w"> </span>jupyter<span class="w"> </span>notebook<span class="w"> </span>--no-browser<span class="w"> </span>--port<span class="w"> </span><span class="m">8888</span>
 
 
 <span class="c1">## Start Jupyter Notebook server ----</span>
 
-$ jupyter lab --no-browser --port <span class="m">8989</span>
+$<span class="w"> </span>jupyter<span class="w"> </span>lab<span class="w"> </span>--no-browser<span class="w"> </span>--port<span class="w"> </span><span class="m">8989</span>
 
 
 <span class="c1">## On local browser ----</span>
@@ -120,9 +124,9 @@ http://127.0.0.1:8000
 
 <span class="c1">## Open RStudio through SSH tunnel port forwarding in background ----</span>
 
-$ ssh -Nf -L <span class="m">8787</span>:localhost:8787 rossinante
-$ ps aux <span class="p">|</span> grep ssh
-$ <span class="nb">kill</span> <span class="si">${</span><span class="nv">pid</span><span class="si">}</span>
+$<span class="w"> </span>ssh<span class="w"> </span>-Nf<span class="w"> </span>-L<span class="w"> </span><span class="m">8787</span>:localhost:8787<span class="w"> </span>rossinante
+$<span class="w"> </span>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ssh
+$<span class="w"> </span><span class="nb">kill</span><span class="w"> </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span>
 </pre></div>
 </div>
 </section>

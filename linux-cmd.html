@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Linux Cheat Sheet &mdash; Doc</title>
@@ -11,10 +11,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Rossinante
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Rossinante
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -87,8 +91,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Linux Cheat Sheet</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Linux Cheat Sheet</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/linux-cmd.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -102,15 +106,15 @@
            <div itemprop="articleBody">
              
   <section id="linux-cheat-sheet">
-<h1>Linux Cheat Sheet<a class="headerlink" href="#linux-cheat-sheet" title="Permalink to this headline"></a></h1>
+<h1>Linux Cheat Sheet<a class="headerlink" href="#linux-cheat-sheet" title="Permalink to this heading"></a></h1>
 <p><img alt="all-users" src="https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
 <section id="getting-help">
-<h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this heading"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Getting help ----</span>
 
-$ man ls                                   <span class="c1"># Print the manual of the command &lt;ls&gt;</span>
-$ curl https://cheat.sh/ls                 <span class="c1"># Print examples of the command &lt;ls&gt;</span>
+$<span class="w"> </span>man<span class="w"> </span>ls<span class="w">                                   </span><span class="c1"># Print the manual of the command &lt;ls&gt;</span>
+$<span class="w"> </span>curl<span class="w"> </span>https://cheat.sh/ls<span class="w">                 </span><span class="c1"># Print examples of the command &lt;ls&gt;</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -118,24 +122,24 @@ $ curl https://cheat.sh/ls                 <span class="c1"># Print examples of 
 </div>
 </section>
 <section id="directory-content">
-<h2>Directory content<a class="headerlink" href="#directory-content" title="Permalink to this headline"></a></h2>
+<h2>Directory content<a class="headerlink" href="#directory-content" title="Permalink to this heading"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## List directory content ----</span>
 
-$ ls                                       <span class="c1"># List content</span>
-$ ls folder
-$ ls -l                                    <span class="c1"># List content in a table-like format</span>
-$ ls -a                                    <span class="c1"># List content including hidden files</span>
-$ ls -al                                   <span class="c1"># List content in a table-like format with hidden files</span>
-$ ll                                       <span class="c1"># Idem</span>
-$ ls -R                                    <span class="c1"># List content recursively</span>
-$ ls -lh                                   <span class="c1"># List content in a table-like format and human-readable</span>
+$<span class="w"> </span>ls<span class="w">                                       </span><span class="c1"># List content</span>
+$<span class="w"> </span>ls<span class="w"> </span>folder
+$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w">                                    </span><span class="c1"># List content in a table-like format</span>
+$<span class="w"> </span>ls<span class="w"> </span>-a<span class="w">                                    </span><span class="c1"># List content including hidden files</span>
+$<span class="w"> </span>ls<span class="w"> </span>-al<span class="w">                                   </span><span class="c1"># List content in a table-like format with hidden files</span>
+$<span class="w"> </span>ll<span class="w">                                       </span><span class="c1"># Idem</span>
+$<span class="w"> </span>ls<span class="w"> </span>-R<span class="w">                                    </span><span class="c1"># List content recursively</span>
+$<span class="w"> </span>ls<span class="w"> </span>-lh<span class="w">                                   </span><span class="c1"># List content in a table-like format and human-readable</span>
 
 
 <span class="c1">## List content in a tree-like format ----</span>
 
-$ tree                                     <span class="c1"># List content in a tree-like format</span>
-$ tree -a                                  <span class="c1"># List content including hidden files</span>
-$ tree -L <span class="m">2</span>                                <span class="c1"># Limit to two subdirectory levels</span>
+$<span class="w"> </span>tree<span class="w">                                     </span><span class="c1"># List content in a tree-like format</span>
+$<span class="w"> </span>tree<span class="w"> </span>-a<span class="w">                                  </span><span class="c1"># List content including hidden files</span>
+$<span class="w"> </span>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w">                                </span><span class="c1"># Limit to two subdirectory levels</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -143,29 +147,29 @@ $ tree -L <span class="m">2</span>                                <span class="c
 </div>
 </section>
 <section id="directory-navigation">
-<h2>Directory navigation<a class="headerlink" href="#directory-navigation" title="Permalink to this headline"></a></h2>
+<h2>Directory navigation<a class="headerlink" href="#directory-navigation" title="Permalink to this heading"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Navigate to HOME directory ----</span>
 
-$ <span class="nb">cd</span>                                       <span class="c1"># Go to HOME directory (/home/jdoe)</span>
-$ <span class="nb">cd</span> ~                                     <span class="c1"># Idem</span>
-$ <span class="nb">cd</span> /home/jdoe                            <span class="c1"># Idem</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w">                                       </span><span class="c1"># Go to HOME directory (/home/jdoe)</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~<span class="w">                                     </span><span class="c1"># Idem</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/home/jdoe<span class="w">                            </span><span class="c1"># Idem</span>
 
 
 <span class="c1">## Navigate between directories ----</span>
 
-$ <span class="nb">cd</span> ..                                    <span class="c1"># Move one level up</span>
-$ <span class="nb">cd</span> ../..                                 <span class="c1"># Move two levels up</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..<span class="w">                                    </span><span class="c1"># Move one level up</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>../..<span class="w">                                 </span><span class="c1"># Move two levels up</span>
 
-$ <span class="nb">cd</span> Pictures                              <span class="c1"># Go to a directory</span>
-$ <span class="nb">cd</span> Pictures/wallpapers                   <span class="c1"># Go to a subdirectory (relative path)</span>
-$ <span class="nb">cd</span> /home/jdoe/Pictures/wallpapers        <span class="c1"># Go to a subdirectory (absolute path)</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>Pictures<span class="w">                              </span><span class="c1"># Go to a directory</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>Pictures/wallpapers<span class="w">                   </span><span class="c1"># Go to a subdirectory (relative path)</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/home/jdoe/Pictures/wallpapers<span class="w">        </span><span class="c1"># Go to a subdirectory (absolute path)</span>
 
-$ <span class="nb">cd</span> -
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>-
 
 
 <span class="c1">## Print current directory ----</span>
 
-$ <span class="nb">pwd</span>
+$<span class="w"> </span><span class="nb">pwd</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -173,69 +177,69 @@ $ <span class="nb">pwd</span>
 </div>
 </section>
 <section id="working-with-files">
-<h2>Working with files<a class="headerlink" href="#working-with-files" title="Permalink to this headline"></a></h2>
+<h2>Working with files<a class="headerlink" href="#working-with-files" title="Permalink to this heading"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Creating new files ----</span>
 
-$ touch newfile.txt                        <span class="c1"># Create a new empty file</span>
+$<span class="w"> </span>touch<span class="w"> </span>newfile.txt<span class="w">                        </span><span class="c1"># Create a new empty file</span>
 
-$ <span class="nb">echo</span> <span class="s1">&#39;Line 1\nLine 2&#39;</span> &gt; newfile.txt      <span class="c1"># Create a new file and add content on-the-fly</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Line 1\nLine 2&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>newfile.txt<span class="w">      </span><span class="c1"># Create a new file and add content on-the-fly</span>
 
-$ nano newfile.txt                         <span class="c1"># Create and open a new file in the NANO text editor</span>
-                                           <span class="c1"># Press CTRL + X to exit (and Y and ENTER to save the file)</span>
+$<span class="w"> </span>nano<span class="w"> </span>newfile.txt<span class="w">                         </span><span class="c1"># Create and open a new file in the NANO text editor</span>
+<span class="w">                                           </span><span class="c1"># Press CTRL + X to exit (and Y and ENTER to save the file)</span>
 
-$ cat &gt; newfile.txt                        <span class="c1"># Create new file and add content interactively</span>
-                                           <span class="c1"># Press CTRL + D to save the file</span>
+$<span class="w"> </span>cat<span class="w"> </span>&gt;<span class="w"> </span>newfile.txt<span class="w">                        </span><span class="c1"># Create new file and add content interactively</span>
+<span class="w">                                           </span><span class="c1"># Press CTRL + D to save the file</span>
 
 
 <span class="c1">## Editing an existing file ----</span>
 
-$ <span class="nb">echo</span> <span class="s1">&#39;Line 3\nLine 4&#39;</span> &gt;&gt; file.txt        <span class="c1"># Add content to the end of an existing file</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Line 3\nLine 4&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>file.txt<span class="w">        </span><span class="c1"># Add content to the end of an existing file</span>
 
-$ nano file.txt                            <span class="c1"># Open an existing file in the NANO text editor</span>
+$<span class="w"> </span>nano<span class="w"> </span>file.txt<span class="w">                            </span><span class="c1"># Open an existing file in the NANO text editor</span>
 
-$ cat &gt;&gt; file.txt                          <span class="c1"># Add content interactively to an existing file</span>
-                                           <span class="c1"># Press CTRL + D to save the file</span>
+$<span class="w"> </span>cat<span class="w"> </span>&gt;&gt;<span class="w"> </span>file.txt<span class="w">                          </span><span class="c1"># Add content interactively to an existing file</span>
+<span class="w">                                           </span><span class="c1"># Press CTRL + D to save the file</span>
 
 
 <span class="c1">## Print file content ----</span>
 
-$ cat file.txt                             <span class="c1"># Print file content</span>
+$<span class="w"> </span>cat<span class="w"> </span>file.txt<span class="w">                             </span><span class="c1"># Print file content</span>
 
-$ less file.txt                            <span class="c1"># Open a file for interactive reading</span>
+$<span class="w"> </span>less<span class="w"> </span>file.txt<span class="w">                            </span><span class="c1"># Open a file for interactive reading</span>
 
-$ head file.txt                            <span class="c1"># Print the first 10 lines of a file</span>
-$ head -n <span class="m">6</span> file.txt                       <span class="c1"># Print the first 6 lines of a file</span>
+$<span class="w"> </span>head<span class="w"> </span>file.txt<span class="w">                            </span><span class="c1"># Print the first 10 lines of a file</span>
+$<span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">6</span><span class="w"> </span>file.txt<span class="w">                       </span><span class="c1"># Print the first 6 lines of a file</span>
 
-$ tail file.txt                            <span class="c1"># Print the last 10 lines of a file</span>
-$ tail -n <span class="m">6</span> file.txt                       <span class="c1"># Print the last 6 lines of a file</span>
-$ tail -f file.txt                         <span class="c1"># Dynamic - Useful for logs</span>
+$<span class="w"> </span>tail<span class="w"> </span>file.txt<span class="w">                            </span><span class="c1"># Print the last 10 lines of a file</span>
+$<span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">6</span><span class="w"> </span>file.txt<span class="w">                       </span><span class="c1"># Print the last 6 lines of a file</span>
+$<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>file.txt<span class="w">                         </span><span class="c1"># Dynamic - Useful for logs</span>
 
 
 <span class="c1">## Copying file ----</span>
 
-$ cp file.txt copy.txt                     <span class="c1"># Copy a file in the same location</span>
-$ cp file.txt folder/copy.txt              <span class="c1"># Copy a file in another directory</span>
+$<span class="w"> </span>cp<span class="w"> </span>file.txt<span class="w"> </span>copy.txt<span class="w">                     </span><span class="c1"># Copy a file in the same location</span>
+$<span class="w"> </span>cp<span class="w"> </span>file.txt<span class="w"> </span>folder/copy.txt<span class="w">              </span><span class="c1"># Copy a file in another directory</span>
 
 
 <span class="c1">## Moving file ----</span>
 
-$ mv file.txt new/location/                <span class="c1"># Move a file to a new location</span>
+$<span class="w"> </span>mv<span class="w"> </span>file.txt<span class="w"> </span>new/location/<span class="w">                </span><span class="c1"># Move a file to a new location</span>
 
 
 <span class="c1">## Renaming file ----</span>
 
-$ mv file.txt new_name.txt                 <span class="c1"># Rename a file</span>
-$ mv file.txt new/location/new_name.txt    <span class="c1"># Move and rename a file</span>
+$<span class="w"> </span>mv<span class="w"> </span>file.txt<span class="w"> </span>new_name.txt<span class="w">                 </span><span class="c1"># Rename a file</span>
+$<span class="w"> </span>mv<span class="w"> </span>file.txt<span class="w"> </span>new/location/new_name.txt<span class="w">    </span><span class="c1"># Move and rename a file</span>
 
 
 <span class="c1">## Deleting file ----</span>
 
-$ rm file.txt                              <span class="c1"># Delete a file</span>
+$<span class="w"> </span>rm<span class="w"> </span>file.txt<span class="w">                              </span><span class="c1"># Delete a file</span>
 
 
 <span class="c1">## Joining files ----</span>
 
-$ cat file-1.txt file-2.txt &gt; file-3.txt   <span class="c1"># Merge two files in one</span>
+$<span class="w"> </span>cat<span class="w"> </span>file-1.txt<span class="w"> </span>file-2.txt<span class="w"> </span>&gt;<span class="w"> </span>file-3.txt<span class="w">   </span><span class="c1"># Merge two files in one</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -243,7 +247,7 @@ $ cat file-1.txt file-2.txt &gt; file-3.txt   <span class="c1"># Merge two files
 </div>
 </section>
 <section id="working-with-directories">
-<h2>Working with directories<a class="headerlink" href="#working-with-directories" title="Permalink to this headline"></a></h2>
+<h2>Working with directories<a class="headerlink" href="#working-with-directories" title="Permalink to this heading"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Creating directories ----</span>
 
 ...
@@ -274,20 +278,20 @@ $ cat file-1.txt file-2.txt &gt; file-3.txt   <span class="c1"># Merge two files
 </div>
 </section>
 <section id="useful-commands">
-<h2>Useful commands<a class="headerlink" href="#useful-commands" title="Permalink to this headline"></a></h2>
+<h2>Useful commands<a class="headerlink" href="#useful-commands" title="Permalink to this heading"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">## Clears the screen of the terminal ----</span>
 
-$ clear
+$<span class="w"> </span>clear
 
 
 <span class="c1">## Get the size of the current directory ----</span>
 
-$ du -sh .
+$<span class="w"> </span>du<span class="w"> </span>-sh<span class="w"> </span>.
 
 
 <span class="c1">## Print the command lines history ----</span>
 
-$ <span class="nb">history</span>
+$<span class="w"> </span><span class="nb">history</span>
 
 
 <span class="c1">## Search for a previous command ----</span>
