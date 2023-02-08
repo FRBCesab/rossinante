@@ -1,16 +1,12 @@
-rossinante
-================
+# rossinante
 
 [![Build and Deploy Website](https://github.com/FRBCesab/rossinante/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/FRBCesab/rossinante/actions/workflows/gh-pages.yml)
 
-This repository contains the Sphinx documentation of the FRB-CESAB server. 
+This repository contains the Sphinx documentation of the FRB-CESAB server.
 
+## System requirements
 
-
-System requirements
--------------------
-
-
+- Debian based distro
 
 ```sh
 ## Install Python 3 environment ----
@@ -20,12 +16,17 @@ $ sudo apt install python3 python3-pip python3-venv python3-dev
 $ sudo apt install build-essential
 ```
 
+- Arch based distro
 
+```sh
+## Install Python 3 environment ----
+$ sudo pacman -S python python-pip --needed
 
-Installation
-------------
+## Install Make tools ----
+$ sudo apt install gcc
+```
 
-
+## Installation
 
 ```sh
 ## Clone repo ----
@@ -44,12 +45,7 @@ $ pip3 install sphinx sphinx-rtd-theme
 $ cd rossinante
 ```
 
-
-
-Usage
------
-
-
+## Usage
 
 Edit/add **reStructuredText** (`.rst`) pages in `source/`, then update HTML content:
 
