@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MOTD &mdash; Doc</title>
@@ -11,10 +11,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Rossinante
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Rossinante
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -79,8 +83,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>MOTD</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MOTD</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/motd.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,20 +98,20 @@
            <div itemprop="articleBody">
              
   <section id="motd">
-<h1>MOTD<a class="headerlink" href="#motd" title="Permalink to this headline"></a></h1>
+<h1>MOTD<a class="headerlink" href="#motd" title="Permalink to this heading"></a></h1>
 <p><img alt="admin" src="https://img.shields.io/static/v1?label=-&amp;message=Admin%20only&amp;color=red&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
 <p>This page presents how to customize the Message Of The Day (MOTD).</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install packages ----</span>
-$ sudo apt install update-motd figlet
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>update-motd<span class="w"> </span>figlet
 </pre></div>
 </div>
 <p><strong>Banner</strong></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backup original Header file ----</span>
-$ sudo cp /etc/update-motd.d/00-header /etc/update-motd.d/00-header.original
+$<span class="w"> </span>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/update-motd.d/00-header<span class="w"> </span>/etc/update-motd.d/00-header.original
 
 <span class="c1"># Edit Header file ----</span>
-$ sudo cat <span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/00-header</span>
+$<span class="w"> </span>sudo<span class="w"> </span>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/00-header</span>
 <span class="s">#!/bin/sh</span>
 
 <span class="s">figlet -f small ROSSINANTE</span>
@@ -116,10 +120,10 @@ $ sudo cat <span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/00-header</span>
 </div>
 <p><strong>System information</strong></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backup original Landscape SysInfo file ----</span>
-$ sudo cp /etc/update-motd.d/50-landscape-sysinfo /etc/update-motd.d/50-landscape-sysinfo.original
+$<span class="w"> </span>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/update-motd.d/50-landscape-sysinfo<span class="w"> </span>/etc/update-motd.d/50-landscape-sysinfo.original
 
 <span class="c1"># Edit Landscape SysInfo file ----</span>
-$ sudo cat <span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/50-landscape-sysinfo</span>
+$<span class="w"> </span>sudo<span class="w"> </span>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/50-landscape-sysinfo</span>
 <span class="s">#!/bin/sh</span>
 
 <span class="s">[ -f /etc/default/locale ] &amp;&amp; . /etc/default/locale</span>
@@ -143,10 +147,10 @@ $ sudo cat <span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/50-landscape-sys
 </div>
 <p><strong>Available updates</strong></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backup original Available Updates file ----</span>
-$ sudo cp /etc/update-motd.d/90-updates-available /etc/update-motd.d/90-updates-available.original
+$<span class="w"> </span>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/update-motd.d/90-updates-available<span class="w"> </span>/etc/update-motd.d/90-updates-available.original
 
 <span class="c1"># Edit Available Updates file ----</span>
-$ sudo cat <span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/90-updates-available</span>
+$<span class="w"> </span>sudo<span class="w"> </span>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/90-updates-available</span>
 <span class="s">#!/bin/sh</span>
 
 <span class="s">echo &quot;\n(*) System Updates&quot;</span>
@@ -161,16 +165,16 @@ $ sudo cat <span class="s">&lt;&lt; EOF &gt; /etc/update-motd.d/90-updates-avail
 </div>
 <p><strong>Disable other information</strong></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Disable other infos ----</span>
-$ sudo chmod -x /etc/update-motd.d/00-header.original
-$ sudo chmod -x /etc/update-motd.d/50-landscape-sysinfo.original
-$ sudo chmod -x /etc/update-motd.d/90-updates-available.original
-$ sudo chmod -x /etc/update-motd.d/10-help-text
-$ sudo chmod -x /etc/update-motd.d/50-motd-news
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-x<span class="w"> </span>/etc/update-motd.d/00-header.original
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-x<span class="w"> </span>/etc/update-motd.d/50-landscape-sysinfo.original
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-x<span class="w"> </span>/etc/update-motd.d/90-updates-available.original
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-x<span class="w"> </span>/etc/update-motd.d/10-help-text
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-x<span class="w"> </span>/etc/update-motd.d/50-motd-news
 </pre></div>
 </div>
 <p><strong>Apply changes</strong></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update MOTD ----</span>
-$ sudo update-motd
+$<span class="w"> </span>sudo<span class="w"> </span>update-motd
 </pre></div>
 </div>
 </section>

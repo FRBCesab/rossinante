@@ -317,6 +317,7 @@ Utilities
       ffmpeg          \                ## Tools for transcoding multimedia files
       git             \                ## Revision control system
       imagemagick     \                ## Image manipulation program
+      screen          \                ## Terminal multiplexer
       nvtop           \                ## GPU monitor
       tree            \                ## Displays an indented directory tree
       tldr            \                ## Haskell tldr client
@@ -386,15 +387,17 @@ Tutorials:
   $ sudo apt install libharfbuzz-dev libfribidi-dev
   $ sudo apt install libmpfrc++-dev libfftw3-bin libfftw3-dev libgsl-dev 
 
+  $ sudo apt install software-properties-common dirmngr --no-install-recommends
+
 
   ## Add CRAN GPG keys ----
-
-  $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+  
+  $ wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 
 
   ## Add the R 4.0 repository from CRAN ----
 
-  $ sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+  $ sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/'
 
 
   ## Update packages list ----

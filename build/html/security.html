@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Security &mdash; Doc</title>
@@ -11,10 +11,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Rossinante
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Rossinante
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,8 +87,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Security</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Security</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/security.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -98,7 +102,7 @@
            <div itemprop="articleBody">
              
   <section id="security">
-<h1>Security<a class="headerlink" href="#security" title="Permalink to this headline"></a></h1>
+<h1>Security<a class="headerlink" href="#security" title="Permalink to this heading"></a></h1>
 <p><img alt="admin" src="https://img.shields.io/static/v1?label=-&amp;message=Admin%20only&amp;color=red&amp;logo=ubuntu&amp;style=flat-square" /></p>
 <hr class="docutils" />
 <p>During Rossinante installation, some security aspects have been set
@@ -108,7 +112,7 @@ installation, etc.). Here we will improve the security.</p>
 <div class="line"><br /></div>
 </div>
 <section id="firewall">
-<h2>Firewall<a class="headerlink" href="#firewall" title="Permalink to this headline"></a></h2>
+<h2>Firewall<a class="headerlink" href="#firewall" title="Permalink to this heading"></a></h2>
 <p>Let’s configure the firewall <strong>UFW</strong> (Uncomplicated Firewall).</p>
 <dl class="simple">
 <dt>Tutorial:</dt><dd><ul class="simple">
@@ -118,25 +122,25 @@ installation, etc.). Here we will improve the security.</p>
 </dl>
 <hr class="docutils" />
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install UFW ----</span>
-$ sudo apt install ufw
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ufw
 
 <span class="c1"># Disable firewall ----</span>
-$ sudo ufw disable
+$<span class="w"> </span>sudo<span class="w"> </span>ufw<span class="w"> </span>disable
 
 <span class="c1"># Deny all incoming connections ----</span>
-$ sudo ufw default deny incoming
+$<span class="w"> </span>sudo<span class="w"> </span>ufw<span class="w"> </span>default<span class="w"> </span>deny<span class="w"> </span>incoming
 
 <span class="c1"># Allow all outgoing connections ----</span>
-$ sudo ufw default allow outgoing
+$<span class="w"> </span>sudo<span class="w"> </span>ufw<span class="w"> </span>default<span class="w"> </span>allow<span class="w"> </span>outgoing
 
 <span class="c1"># Allow SSH port ----</span>
-$ sudo ufw allow <span class="m">2222</span>/tcp
+$<span class="w"> </span>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">2222</span>/tcp
 
 <span class="c1"># Activate firewall ----</span>
-$ sudo ufw <span class="nb">enable</span>
+$<span class="w"> </span>sudo<span class="w"> </span>ufw<span class="w"> </span><span class="nb">enable</span>
 
 <span class="c1"># Check firewall status ----</span>
-$ sudo ufw status
+$<span class="w"> </span>sudo<span class="w"> </span>ufw<span class="w"> </span>status
 </pre></div>
 </div>
 <div class="line-block">
@@ -144,15 +148,15 @@ $ sudo ufw status
 </div>
 </section>
 <section id="fail2ban">
-<h2>Fail2ban<a class="headerlink" href="#fail2ban" title="Permalink to this headline"></a></h2>
+<h2>Fail2ban<a class="headerlink" href="#fail2ban" title="Permalink to this heading"></a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Fail2ban ----</span>
-$ sudo apt install fail2ban
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fail2ban
 
 <span class="c1"># Duplicate config file ----</span>
-$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+$<span class="w"> </span>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/fail2ban/jail.conf<span class="w"> </span>/etc/fail2ban/jail.local
 
 <span class="c1"># Edit config file ----</span>
-$ sudo nano /etc/fail2ban/jail.local
+$<span class="w"> </span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/fail2ban/jail.local
 </pre></div>
 </div>
 <p>Change the following value:</p>
@@ -163,15 +167,15 @@ $ sudo nano /etc/fail2ban/jail.local
 </pre></div>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restart service ----</span>
-$ sudo service fail2ban restart
+$<span class="w"> </span>sudo<span class="w"> </span>service<span class="w"> </span>fail2ban<span class="w"> </span>restart
 </pre></div>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monitoring ----</span>
-$ sudo fail2ban-client status
+$<span class="w"> </span>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status
 
-$ sudo fail2ban-client status sshd
+$<span class="w"> </span>sudo<span class="w"> </span>fail2ban-client<span class="w"> </span>status<span class="w"> </span>sshd
 
-$ cat /var/log/auth.log <span class="p">|</span> grep sshd
+$<span class="w"> </span>cat<span class="w"> </span>/var/log/auth.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>sshd
 </pre></div>
 </div>
 </section>
