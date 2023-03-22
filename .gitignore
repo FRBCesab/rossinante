@@ -23,3 +23,6 @@ inst/doc
 # Quarto files ----
 /.quarto/
 _book
+
+# R development files ----
+.Rbuildignore
