@@ -1,0 +1,18 @@
+Package: rossinante
+Type: Package
+Title: Quarto Book: Rossinante User Guide
+Version: 0.0.1
+Authors@R: c(
+    person(given   = "Nicolas",
+           family  = "Casajus",
+           role    = c("aut", "cre", "cph"),
+           email   = "nicolas.casajus@fondationbiodiversite.fr",
+           comment = c(ORCID = "0000-0002-5537-5294")))
+Description: An online book about how to use the FRB-CESAB server Rossinante.
+    This book was written with 'Quarto' (https://quarto.org).
+URL: https://frbcesab.github.io/rossinante
+BugReports: https://github.com/frbcesab/rossinante/issues
+License: CC BY 4.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3

@@ -1,39 +1,25 @@
-name: "Build and Deploy Website"
-
 on:
   push:
-    branches:
-      - main
+    branches: main
+
+name: Render and Publish
 
 jobs:
-
-  build-and-deploy:
+  build-deploy:
     runs-on: ubuntu-latest
-
     steps:
-
-      - name: "Checkout"
-        uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v2 
+        
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
         with:
-          persist-credentials: false
+          # To install LaTeX to build PDF book 
+          tinytex: false 
 
-      - name: "Set up Python"
-        uses: actions/setup-python@v1
+      - name: Publish to GitHub Pages (and render)
+        uses: quarto-dev/quarto-actions/publish@v2
         with:
-          python-version: 3.9
-
-      - name: "Install Python dependencies"
-        run: |
-          pip3 install setuptools
-          pip3 install sphinx sphinx-rtd-theme
-
-      - name: "Build Sphinx Doc"
-        run: |
-          make html
-
-      - name: "Deploy Github Pages"
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
+          target: gh-pages
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build/html/

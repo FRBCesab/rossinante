@@ -1,0 +1,14 @@
+## Working with Python
+
+
+Work in progress...
+
+```bash
+# Create an SSH Tunneling ----
+ssh -L 8888:localhost:8888 rossinante
+
+# Start Jupyter Notebook server ----
+jupyter notebook --no-browser --port 8888
+```
+
+Then, on your Web browser, go to <http://127.0.0.1:8888>

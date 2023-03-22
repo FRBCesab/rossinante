@@ -1,0 +1,137 @@
+# Sending files
+
+
+When you want to run analyses on Rossinante, you need to transfer files (code
+and data) from your laptop to the server. Here we will see three methods.
+
+
+
+## sFTP
+
+
+The easiest way to transfer files from your laptop to Rossinante (or vice versa)
+is by using the sFTP protocol (Secure File Transfer Protocol).
+The [Filezilla](https://filezilla-project.org/) client is a
+freeware that supports this protocol. You will need to define the following
+parameters (@fig-filezilla):
+
+
+- Host: `sftp://92.168.45.3`
+- Username: `jdoe` (Rossinante username)
+- Password: your Rossinante user's password
+- Port: `22` (SSH port)
+
+To make the connection, click on **Quick connect**.
+
+![Filezilla interface](../images/filezilla.png){#fig-filezilla fig-align="center" width=100%}
+
+
+
+The left panel `A` lists your local folders/files. The right panel `B`
+shows the content of your personal directory on Rossinante.
+
+To send local files **to Rossinante**, first select the directory in `B` to
+send these files in. Then select files/folders in `A`, right click, and click
+on **Upload**.
+
+To send remote files **to your laptop**, first select the directory in `A` to
+send these files in. Then select the files in `B`, right click, and click
+on **Download**.
+
+
+## The scp command
+
+The [Secure copy](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/) utility allows you to copy files from your laptop to a remote server (and vice versa) using the SSH protocol.
+
+Let's say we want to copy the local file `script.R`, located in the
+`Documents/` folder, to Rossinante in the folder `~/projects/`.
+We will use ``scp`` as follow:
+
+```bash
+# Send a file to Rossinante ----
+scp ~/Documents/script.R rossinante:~/projects/
+```
+
+
+If we want to download a file from Rossinante:
+
+
+```bash
+# Download a file from Rossinante ----
+scp rossinante:~/projects/script.R ~/Documents/
+```
+
+
+To copy a folder (and its subfolders), we will add the option `-r` (for recursive):
+
+```bash
+# Send a folder to Rossinante ----
+scp -r ~/Documents/project_1 rossinante:~/projects/
+
+# Download a folder from Rossinante ----
+scp -r rossinante:~/projects/project_1 ~/Documents/
+```
+
+
+You can use the option `-p` to preserve modification times,
+access times, and modes from the original file(s). This can be useful when
+you want to copy a project tracked by **git**.
+
+
+```bash
+# Send a folder to Rossinante (and preserve modification times) ----
+scp -r -p ~/Documents/project_1 rossinante:~/projects/
+```
+
+
+**NB --** You can also use the command ``rsync`` instead of ``scp``. 
+[For further information](https://linuxize.com/post/how-to-transfer-files-with-rsync-over-ssh/).
+
+
+
+## GitHub
+
+
+
+
+If your project is tracked by the versioning system control **git**, you may
+prefer sending files through GitHub (or GitLab). This method has the advantage
+of keeping your project tracked by git and synchronized with GitHub.
+
+
+The workflow is the following (@fig-github_1):
+
+1. On your laptop, commit changes
+2. Then push changes to your repository on GitHub
+3. Connect to Rossinante via SSH (or RStudio Server)
+4. Clone the GitHub repository on Rossinante or pull changes if your project is already cloned
+5. Run analysis on Rossinante
+
+
+![Sending files from local to Rossinante using GitHub](../images/github-1.png){#fig-github_1 fig-align="center" width=100%}
+
+
+
+Once your analysis is finished, you can (@fig-github_2):
+
+1. Track new files and commit changes
+2. Push changes to your repository on GitHub
+3. On your laptop, pull changes
+
+
+![Sending files from Rossinante to local using GitHub](../images/github-2.png){#fig-github_2 fig-align="center" width=100%}
+
+
+At this stage, the project on your laptop, GitHub and Rossinante is in the same state.
+
+
+**Important --** GitHub does not accept file > 100MB. If your project contains large
+datasets (added in the `.gitignore`), you need to send these files through `sFTP`
+or `scp` (@fig-github_3).
+
+![Sending files between devices using GitHub and sFTP](../images/github-3.png){#fig-github_3 fig-align="center" width=100%}
+
+
+
+If your results (created on Rossinante) are > 100MB, you will need to add theses
+files to the `.gitignore` and send them to your laptop with the sFTP protocol.

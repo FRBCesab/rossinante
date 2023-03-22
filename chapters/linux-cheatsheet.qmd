@@ -1,0 +1,299 @@
+# Linux Cheat Sheet
+
+
+## Getting help
+
+```bash
+# Print the manual of the command <ls>
+man ls
+
+# Print examples of the command <ls>
+curl https://cheat.sh/ls
+```
+
+## Working w/ directories
+
+### Directory content
+
+```bash
+# List the content of the current directory
+ls .
+
+# List the content of the current directory (shortcut)
+ls
+
+# List the content of the folder <sancho> (relative path)
+ls sancho
+
+# List the content of the folder <sancho> (absolute path)
+ls /media/sancho
+
+# List the content including hidden files
+ls -a
+
+# List the content in a table-like format
+ls -l
+
+# List the content in a table-like format with hidden files
+ls -al
+
+# List the content recursively
+ls -R
+
+# List the content in a table-like format and human-readable
+ls -lh
+
+# List the content in a tree-like format
+tree
+
+# List the content including hidden files
+tree -a
+
+# Limit to two levels
+tree -L 2
+```
+
+### Directory navigation
+
+```bash
+# Print the current directory
+pwd
+
+# Go to your home directory
+cd /home/jdoe
+
+# Go to your home directory (shortcut)
+cd ~
+
+# Go to your home directory (shortcut)
+cd
+
+# Move one level up (parent directory)
+cd ..
+
+# Move two levels up
+cd ../..
+
+# Go to a directory (relative path)
+cd .ssh
+
+# Go to a directory (absolute path)
+cd ~/.ssh
+
+# Go to a subdirectory (absolute path)
+cd /media/sancho
+```
+
+### Creating directories
+
+```bash
+# Create the directory <foo> in the current directory
+mkdir ./foo
+
+# Create the directory <foo> in the current directory (shortcut)
+mkdir foo
+
+# Create nested directories
+mkdir -p foo/bar/baz
+
+# Create <foo/bar> and <foo/baz> directories
+mkdir -p foo/{bar,baz}
+```
+
+### Copying directories
+
+```bash
+# Copy a directory and its content
+# (if bar/ exists foo/ is copied inside)
+cp -r foo bar
+
+# Copy only the content of a directory
+# (bar/ must exist)
+cp -r foo/* bar/
+
+# Copy a directory and ask before overwriting
+cp -i -r foo/* bar/
+```
+
+### Moving directories
+
+```bash
+# Move a directory into an existing directory
+mv source existing_directory
+```
+
+### Renaming directories
+
+```bash
+# Rename a directory (the target is not an existing directory)
+mv source target
+```
+
+
+### Deleting directories
+
+```bash
+# Delete a directory and its content
+rm -r foo
+
+# Delete a subdirectory
+rm -r foo/bar
+
+# Delete a directory and its content (force mode)
+rm -rf foo
+```
+
+
+## Working w/ files
+
+### Creating files
+
+```bash
+# Create a new empty file in the current directory
+touch newfile.txt
+
+# Create a new file and add content on-the-fly
+echo 'Line 1\nLine 2' > newfile.txt
+
+# Create and open a new file in the NANO text editor
+# (press CTRL + X, then Y and ENTER to save and exit)
+nano newfile.txt
+                                         
+# Create a new file and add content interactively
+# (press CTRL + D to save the file)
+cat > newfile.txt
+```
+
+### Editing files
+
+```bash
+# Add content at the end of an existing file
+echo 'Line 3\nLine 4' >> file.txt
+
+# Open an existing file in the NANO text editor
+# (press CTRL + X, then Y and ENTER to save and exit)
+nano file.txt
+
+# Add content interactively to an existing file
+# (press CTRL + D to save the file)
+cat >> file.txt
+```
+
+### Printing file content
+
+```bash
+# Print file content
+cat file.txt
+
+# Open a file for interactive reading
+less file.txt
+
+# Print the first 10 lines of a file
+head file.txt
+
+# Print the first 6 lines of a file
+head -n 6 file.txt
+
+# Print the last 10 lines of a file
+tail file.txt
+
+# Print the last 6 lines of a file
+tail -n 6 file.txt
+
+# Dynamic - Useful for logs
+tail -f file.txt
+```
+
+### Copying files
+
+```bash
+# Copy a file in the same location
+cp file.txt copy.txt
+
+# Copy a file in a different directory
+cp file.txt folder/copy.txt
+```
+
+### Moving files
+
+```bash
+# Move a file to a new location
+mv file.txt new/location/
+```
+
+### Renaming files
+
+```bash
+# Rename a file
+mv file.txt new_name.txt
+
+# Move and rename a file
+mv file.txt new/location/new_name.txt
+```
+
+### Deleting file
+
+```bash
+# Delete a file
+rm file.txt
+
+# Delete a file (force mode)
+rm -f file.txt
+```
+
+### Joining files
+
+```bash
+# Merge two files in one
+cat file-1.txt file-2.txt > file-3.txt
+```
+
+
+## Useful commands
+
+
+```bash
+# Clear the terminal
+clear
+
+# Get the size of the current directory
+du -sh .
+
+# Print the command lines history
+history
+
+# Search for a previous command
+# CTRL + R and type some characters of the command
+
+# Create a new screen
+screen -S screen_name
+
+# Detach a screen
+# (press CTRL + A + D to leave the screen)
+
+# Reattach a screen
+screen -r screen_name
+
+# List existing screens
+screen -ls
+
+# Kill all R processes for a specific user
+killall -u jdoe R
+
+# Kill all RStudio processes for a specific user
+killall -u jdoe rsession
+
+# System monitoring utilities
+top
+htop
+btop
+
+# Count number of files (and folders) in the current directory
+ls | wc -l
+
+# List all files/folders matching a pattern
+ls | grep "\\.md$"
+
+# List all files/folders matching a pattern (case insensitive)
+ls | grep -i "\\.md$"
+```
