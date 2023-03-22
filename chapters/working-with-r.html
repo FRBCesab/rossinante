@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="A user guide to learn how to use the FRB-CESAB server">
+
+<title>Rossinante Book - 5&nbsp; Working with R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/working-with-python.html" rel="next">
+<link href="../chapters/sending-files.html" rel="prev">
+<link href="../images/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Working with R</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/logo-FRB_CESAB.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Rossinante Book</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frbcesab/rossinante/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Get started</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/good-practices.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Good practices</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">User guide</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/sending-files.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sending files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/working-with-r.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Working with R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/working-with-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Working with Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/working-with-docker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Working with Docker</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/parallel-computing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel computing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/linux-cheatsheet.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Linux Cheat Sheet</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#rstudio-server" id="toc-rstudio-server" class="nav-link active" data-scroll-target="#rstudio-server"><span class="toc-section-number">5.1</span>  RStudio Server</a></li>
+  <li><a href="#r-console" id="toc-r-console" class="nav-link" data-scroll-target="#r-console"><span class="toc-section-number">5.2</span>  R console</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages"><span class="toc-section-number">5.3</span>  R packages</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/frbcesab/rossinante/blob/main/chapters/working-with-r.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/frbcesab/rossinante/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Working with R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>|all-users|</p>
+<p>.. |all-users| image:: https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square</p>
+<hr>
+<p>To execute R code on Rossinante, you can use either the RStudio Server interface or directly the R console in the terminal. You can also use the <code>Rscript</code> command.</p>
+<p>.. _rstudio:</p>
+<section id="rstudio-server" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="rstudio-server"><span class="header-section-number">5.1</span> RStudio Server</h2>
+<p>.. figure:: ./images/rstudio-server.png :align: center :alt: RStudio Server interface</p>
+<p><strong>Figure 5</strong> – RStudio Server interface</p>
+<p>To open the RStudio Server interface, we first need to create an <strong>SSH tunneling</strong> (or port forwarding). This method consists in creating an encrypted SSH connection between a client (your laptop) and a server (Rossinante) through which a service (Rstudio Server) port (8787) can be relayed.</p>
+<p>To create an SSH port forwarding, pass the <code>-L</code> option to the ssh client:</p>
+<p>.. code-block:: shell</p>
+<p># Open an SSH port forwarding —- jane@laptop:~$ ssh -L 8787:localhost:8787 rossinante</p>
+<p><strong>NB –</strong> The first <code>8787</code> is your local port through RStudio Server will be relayed. The second <code>8787</code> is the port on Rossinante through RStudio Server is running. In short, <code>localhost</code> is your laptop. Instead of <code>localhost</code> we could have written <code>127.0.0.1</code>. You can change the first <code>8787</code> for any number greater than <code>1024</code>.</p>
+<p>You are now connected to Rossinante.</p>
+<p>To start the RStudio Server interface, open a web browser (Firefox, Chrome, etc.) and enter the following URL: <code>localhost:8787</code>.</p>
+<p>After entering your Rossinante log in information, you are connected to a new RStudio Server instance. You can now use this interface as the one you know (RStudio Desktop).</p>
+<p><strong>Important –</strong> RStudio Server has two buttons to close the interface: <code>Sign out</code> (B in Figure 5) and <code>Quit current R session</code> (C in Figure 5). If you click on <code>Sign out</code>, your session will be still active (in background) and you will have access to objects when you will log in again. You need to click on that button if you have launched time consuming analysis. If you click on <code>Quit current R session</code> you will stop all analyses and you were not able to access R objects. Click on that button to terminate your session.</p>
+<p><strong>Warning –</strong> If you stop your SSH (port forwarding) session, you will close the RStudio Server session. Before shutting down the SSH connection, click on <code>Sign out</code> or <code>Quit current R session</code> to securely close the RStudio Server instance.</p>
+<p><strong>Trick –</strong> If you have been disconnected from RStudio Server (network crash, power failure, etc.), you may not be able to restart RStudio Server (blank page). In that case, you need to kill your previous R sessions (still active) as follow:</p>
+<p>.. code-block:: shell</p>
+<p># SSH connection to Rossinante —- jane@laptop:~$ ssh rossinante</p>
+<p># Erase all active R sessions —- jdoe@rossinante:~$ killall -u jdoe rsession</p>
+<p># Hardcore method —- jdoe@rossinante:~$ rm -rf ~/.local/share/rstudio/sessions/active/session-*</p>
+</section>
+<section id="r-console" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="r-console"><span class="header-section-number">5.2</span> R console</h2>
+<p>An alternative is to launch the R console directly from the terminal of Rossinante. And this is very easy.</p>
+<p>.. code-block:: shell</p>
+<p># SSH connection to Rossinante —- jane@laptop:~$ ssh rossinante</p>
+<p># Launch R console from terminal —- jdoe@rossinante:~$ R</p>
+<p>## R version 4.1.1 (2021-08-10) – “Kick Things” ## Copyright (C) 2021 The R Foundation for Statistical Computing ## Platform: x86_64-pc-linux-gnu (64-bit) ## ## R is free software and comes with ABSOLUTELY NO WARRANTY. ## You are welcome to redistribute it under certain conditions. ## Type ‘license()’ or ‘licence()’ for distribution details. ## ## R is a collaborative project with many contributors. ## Type ‘contributors()’ for more information and ## ‘citation()’ on how to cite R or R packages in publications. ## ## Type ‘demo()’ for some demos, ‘help()’ for on-line help, or ## ‘help.start()’ for an HTML browser interface to help. ## Type ‘q()’ to quit R. ## &gt;</p>
+<p>To close your R session:</p>
+<p>.. code-block:: r</p>
+<p># Close R session —- &gt; q(“no”)</p>
+<p><strong>The Rscript command</strong> If you want, you can also use the command <code>Rscript</code> to run an R script (or R expression) without opening an R console, directly from the terminal.</p>
+<p>.. code-block:: shell</p>
+<p># Run an R expression (option ‘-e’) —- jdoe@rossinante:~$ Rscript -e ‘print(“El ingenioso hidalgo don Quijote de la Mancha”)’ ## [1] “El ingenioso hidalgo don Quijote de la Mancha”</p>
+<p># Write an R script on the personal folder —- jdoe@rossinante:~$ echo ‘print(“El ingenioso hidalgo don Quijote de la Mancha”)’ &gt; ~/quijote.R</p>
+<p># Print ‘quijote.R’ file content —- jdoe@rossinante:~$ cat ~/quijote.R ## print(“El ingenioso hidalgo don Quijote de la Mancha”)</p>
+<p># Run the R script —- jdoe@rossinante:~$ Rscript ~/quijote.R ## [1] “El ingenioso hidalgo don Quijote de la Mancha”</p>
+<p># Remove the R script —- jdoe@rossinante:~$ rm ~/quijote.R</p>
+<p><strong>Problem</strong> If you launch R in the terminal (or <code>Rscript</code>) and your code takes time to be computed, you cannot use the terminal until the computation is done. The job is running in foreground. Moreover, if your SSH connection is stopped, your R session is aborted and your work is lost.</p>
+<p><strong>Solution</strong> You can use a terminal multiplexer like <code>screen</code> or <code>tmux</code>. These tools open <em>virtual</em> terminals (screens) in the main terminal and you can navigate between screens and the main terminal. The idea is to create (attach) a new screen, launch your analysis, go back to the main terminal (detach), and work on other stuffs. If you stop your SSH connection, the analysis is still running, and if you make a new SSH connection to Rossinante, you can reattach the screen and resume your R session.</p>
+<p>Let’s take an example with <code>screen</code>:</p>
+<p>.. code-block:: shell</p>
+<p># SSH connection to Rossinante —- jane@laptop:~$ ssh rossinante</p>
+<p># Attach (create) a new screen (named ‘r_analysis’, for instance) —- jdoe@rossinante:~$ screen -S r_analysis</p>
+<p># Open R console (in the new screen) —- (r_analysis) jdoe@rossinante:~$ R</p>
+<p># Launch the analysis —- (r_analysis) &gt; source(“script_analysis.R”)</p>
+<p>To detach from the screen session, type <code>CTRL + A</code> and <code>D</code>.</p>
+<p>You can list running screens as follow:</p>
+<p>.. code-block:: shell</p>
+<p># List running screens —- jdoe@rossinante:~$ screen -ls ## There is a screen on: ## 4002.r_analysis (Detached)</p>
+<p>To reattach a screen session, use the following command:</p>
+<p>.. code-block:: shell</p>
+<p># Reattach a screen —- jdoe@rossinante:~$ screen -r r_analysis</p>
+<p>(r_analysis) jdoe@rossinante:~$</p>
+<p>To close a screen, type <code>exit</code> in the screen or press <code>CTRL + A</code> and <code>K</code>.</p>
+<p>More information on <code>screen</code>: https://www.malekal.com/screen-linux-lancer-plusieurs-commandes-sans-perdre-execution/</p>
+</section>
+<section id="r-packages" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="r-packages"><span class="header-section-number">5.3</span> R packages</h2>
+<p>Only base R packages are installed and shared among users. Each user has a personal R library in which he can install/update every R packages he wants (independently of other users). This library is located in <code>~/R/x86_64-pc-linux-gnu-library/4.1/</code>.</p>
+<p>To install a new R package, use the interface of RStudio Server or the R console and run:</p>
+<p>.. code-block:: r</p>
+<p>install.packages(“sf”)</p>
+<p>If you want you can also update your packages:</p>
+<p>.. code-block:: r</p>
+<p>update.packages()</p>
+<p><strong>NB –</strong> Some R packages require system libraries and some of them may be missing on Rossinante. Please contact the administrator to solve the issue.</p>
+<p>You can find a list of common R packages used in Ecology <code>here &lt;https://raw.githubusercontent.com/FRBCesab/rossinante/main/tools/list-of-rpackages.R&gt;</code>_. To install these packages on Rossinante (or elsewhere), open an R console or RStudio Server and run:</p>
+<p>.. code-block:: r</p>
+<p>## Script URL —- url &lt;- “https://raw.githubusercontent.com/FRBCesab/rossinante/main/tools/list-of-rpackages.R”</p>
+<p>## Download script —- download.file(url, destfile = “list-of-rpackages.R”)</p>
+<p>## Install R packages —- source(“list-of-rpackages.R”)</p>
+<p>## Delete downloaded script —- file.remove(“list-of-rpackages.R”)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/sending-files.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sending files</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/working-with-python.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Working with Python</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ This book was built with <a href="https://quarto.org/">Quarto</a>
+  </li>  
+</ul>
+    </div>   
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+  </li>  
+</ul>
+      </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/frbcesab/rossinante">Code source &nbsp;<i class="bi bi-github" role="img"></i></a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

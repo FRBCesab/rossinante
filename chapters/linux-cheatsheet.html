@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="A user guide to learn how to use the FRB-CESAB server">
+
+<title>Rossinante Book - Appendix A — Linux Cheat Sheet</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/parallel-computing.html" rel="prev">
+<link href="../images/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Appendix A — Linux Cheat Sheet</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/logo-FRB_CESAB.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Rossinante Book</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frbcesab/rossinante/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Get started</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/good-practices.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Good practices</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">User guide</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/sending-files.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sending files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/working-with-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Working with R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/working-with-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Working with Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/working-with-docker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Working with Docker</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/parallel-computing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel computing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/linux-cheatsheet.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Linux Cheat Sheet</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link active" data-scroll-target="#getting-help"><span class="toc-section-number">A.1</span>  Getting help</a></li>
+  <li><a href="#working-w-directories" id="toc-working-w-directories" class="nav-link" data-scroll-target="#working-w-directories"><span class="toc-section-number">A.2</span>  Working w/ directories</a>
+  <ul class="collapse">
+  <li><a href="#directory-content" id="toc-directory-content" class="nav-link" data-scroll-target="#directory-content"><span class="toc-section-number">A.2.1</span>  Directory content</a></li>
+  <li><a href="#directory-navigation" id="toc-directory-navigation" class="nav-link" data-scroll-target="#directory-navigation"><span class="toc-section-number">A.2.2</span>  Directory navigation</a></li>
+  <li><a href="#creating-directories" id="toc-creating-directories" class="nav-link" data-scroll-target="#creating-directories"><span class="toc-section-number">A.2.3</span>  Creating directories</a></li>
+  <li><a href="#copying-directories" id="toc-copying-directories" class="nav-link" data-scroll-target="#copying-directories"><span class="toc-section-number">A.2.4</span>  Copying directories</a></li>
+  <li><a href="#moving-directories" id="toc-moving-directories" class="nav-link" data-scroll-target="#moving-directories"><span class="toc-section-number">A.2.5</span>  Moving directories</a></li>
+  <li><a href="#renaming-directories" id="toc-renaming-directories" class="nav-link" data-scroll-target="#renaming-directories"><span class="toc-section-number">A.2.6</span>  Renaming directories</a></li>
+  <li><a href="#deleting-directories" id="toc-deleting-directories" class="nav-link" data-scroll-target="#deleting-directories"><span class="toc-section-number">A.2.7</span>  Deleting directories</a></li>
+  </ul></li>
+  <li><a href="#working-w-files" id="toc-working-w-files" class="nav-link" data-scroll-target="#working-w-files"><span class="toc-section-number">A.3</span>  Working w/ files</a>
+  <ul class="collapse">
+  <li><a href="#creating-files" id="toc-creating-files" class="nav-link" data-scroll-target="#creating-files"><span class="toc-section-number">A.3.1</span>  Creating files</a></li>
+  <li><a href="#editing-files" id="toc-editing-files" class="nav-link" data-scroll-target="#editing-files"><span class="toc-section-number">A.3.2</span>  Editing files</a></li>
+  <li><a href="#printing-file-content" id="toc-printing-file-content" class="nav-link" data-scroll-target="#printing-file-content"><span class="toc-section-number">A.3.3</span>  Printing file content</a></li>
+  <li><a href="#copying-files" id="toc-copying-files" class="nav-link" data-scroll-target="#copying-files"><span class="toc-section-number">A.3.4</span>  Copying files</a></li>
+  <li><a href="#moving-files" id="toc-moving-files" class="nav-link" data-scroll-target="#moving-files"><span class="toc-section-number">A.3.5</span>  Moving files</a></li>
+  <li><a href="#renaming-files" id="toc-renaming-files" class="nav-link" data-scroll-target="#renaming-files"><span class="toc-section-number">A.3.6</span>  Renaming files</a></li>
+  <li><a href="#deleting-file" id="toc-deleting-file" class="nav-link" data-scroll-target="#deleting-file"><span class="toc-section-number">A.3.7</span>  Deleting file</a></li>
+  <li><a href="#joining-files" id="toc-joining-files" class="nav-link" data-scroll-target="#joining-files"><span class="toc-section-number">A.3.8</span>  Joining files</a></li>
+  </ul></li>
+  <li><a href="#useful-commands" id="toc-useful-commands" class="nav-link" data-scroll-target="#useful-commands"><span class="toc-section-number">A.4</span>  Useful commands</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/frbcesab/rossinante/blob/main/chapters/linux-cheatsheet.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/frbcesab/rossinante/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Appendix A — Linux Cheat Sheet</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="getting-help" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="getting-help"><span class="header-section-number">A.1</span> Getting help</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Print the manual of the command &lt;ls&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">man</span> ls</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Print examples of the command &lt;ls&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="ex">curl</span> https://cheat.sh/ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="working-w-directories" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="working-w-directories"><span class="header-section-number">A.2</span> Working w/ directories</h2>
+<section id="directory-content" class="level3" data-number="A.2.1">
+<h3 data-number="A.2.1" class="anchored" data-anchor-id="directory-content"><span class="header-section-number">A.2.1</span> Directory content</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># List the content of the current directory</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">ls</span> .</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># List the content of the current directory (shortcut)</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">ls</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># List the content of the folder &lt;sancho&gt; (relative path)</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="fu">ls</span> sancho</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># List the content of the folder &lt;sancho&gt; (absolute path)</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="fu">ls</span> /media/sancho</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># List the content including hidden files</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="fu">ls</span> <span class="at">-a</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># List the content in a table-like format</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># List the content in a table-like format with hidden files</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="fu">ls</span> <span class="at">-al</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co"># List the content recursively</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="fu">ls</span> <span class="at">-R</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co"># List the content in a table-like format and human-readable</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="fu">ls</span> <span class="at">-lh</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="co"># List the content in a tree-like format</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="ex">tree</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="co"># List the content including hidden files</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="ex">tree</span> <span class="at">-a</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="co"># Limit to two levels</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="ex">tree</span> <span class="at">-L</span> 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="directory-navigation" class="level3" data-number="A.2.2">
+<h3 data-number="A.2.2" class="anchored" data-anchor-id="directory-navigation"><span class="header-section-number">A.2.2</span> Directory navigation</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Print the current directory</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">pwd</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># Go to your home directory</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="bu">cd</span> /home/jdoe</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Go to your home directory (shortcut)</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="bu">cd</span> ~</span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co"># Go to your home directory (shortcut)</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="bu">cd</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># Move one level up (parent directory)</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="bu">cd</span> ..</span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co"># Move two levels up</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="bu">cd</span> ../..</span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co"># Go to a directory (relative path)</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="bu">cd</span> .ssh</span>
+<span id="cb3-21"><a href="#cb3-21"></a></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co"># Go to a directory (absolute path)</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="bu">cd</span> ~/.ssh</span>
+<span id="cb3-24"><a href="#cb3-24"></a></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co"># Go to a subdirectory (absolute path)</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="bu">cd</span> /media/sancho</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="creating-directories" class="level3" data-number="A.2.3">
+<h3 data-number="A.2.3" class="anchored" data-anchor-id="creating-directories"><span class="header-section-number">A.2.3</span> Creating directories</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Create the directory &lt;foo&gt; in the current directory</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">mkdir</span> ./foo</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Create the directory &lt;foo&gt; in the current directory (shortcut)</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">mkdir</span> foo</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># Create nested directories</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="fu">mkdir</span> <span class="at">-p</span> foo/bar/baz</span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co"># Create &lt;foo/bar&gt; and &lt;foo/baz&gt; directories</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="fu">mkdir</span> <span class="at">-p</span> foo/<span class="dt">{bar</span><span class="op">,</span><span class="dt">baz}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="copying-directories" class="level3" data-number="A.2.4">
+<h3 data-number="A.2.4" class="anchored" data-anchor-id="copying-directories"><span class="header-section-number">A.2.4</span> Copying directories</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Copy a directory and its content</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># (if bar/ exists foo/ is copied inside)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">cp</span> <span class="at">-r</span> foo bar</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Copy only the content of a directory</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># (bar/ must exist)</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="fu">cp</span> <span class="at">-r</span> foo/<span class="pp">*</span> bar/</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># Copy a directory and ask before overwriting</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">cp</span> <span class="at">-i</span> <span class="at">-r</span> foo/<span class="pp">*</span> bar/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="moving-directories" class="level3" data-number="A.2.5">
+<h3 data-number="A.2.5" class="anchored" data-anchor-id="moving-directories"><span class="header-section-number">A.2.5</span> Moving directories</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Move a directory into an existing directory</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">mv</span> source existing_directory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="renaming-directories" class="level3" data-number="A.2.6">
+<h3 data-number="A.2.6" class="anchored" data-anchor-id="renaming-directories"><span class="header-section-number">A.2.6</span> Renaming directories</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Rename a directory (the target is not an existing directory)</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">mv</span> source target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="deleting-directories" class="level3" data-number="A.2.7">
+<h3 data-number="A.2.7" class="anchored" data-anchor-id="deleting-directories"><span class="header-section-number">A.2.7</span> Deleting directories</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Delete a directory and its content</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">rm</span> <span class="at">-r</span> foo</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Delete a subdirectory</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">rm</span> <span class="at">-r</span> foo/bar</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Delete a directory and its content (force mode)</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="fu">rm</span> <span class="at">-rf</span> foo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="working-w-files" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="working-w-files"><span class="header-section-number">A.3</span> Working w/ files</h2>
+<section id="creating-files" class="level3" data-number="A.3.1">
+<h3 data-number="A.3.1" class="anchored" data-anchor-id="creating-files"><span class="header-section-number">A.3.1</span> Creating files</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Create a new empty file in the current directory</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">touch</span> newfile.txt</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Create a new file and add content on-the-fly</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="bu">echo</span> <span class="st">'Line 1\nLine 2'</span> <span class="op">&gt;</span> newfile.txt</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># Create and open a new file in the NANO text editor</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># (press CTRL + X, then Y and ENTER to save and exit)</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">nano</span> newfile.txt</span>
+<span id="cb9-10"><a href="#cb9-10"></a>                                         </span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co"># Create a new file and add content interactively</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co"># (press CTRL + D to save the file)</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="fu">cat</span> <span class="op">&gt;</span> newfile.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="editing-files" class="level3" data-number="A.3.2">
+<h3 data-number="A.3.2" class="anchored" data-anchor-id="editing-files"><span class="header-section-number">A.3.2</span> Editing files</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Add content at the end of an existing file</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="bu">echo</span> <span class="st">'Line 3\nLine 4'</span> <span class="op">&gt;&gt;</span> file.txt</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># Open an existing file in the NANO text editor</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># (press CTRL + X, then Y and ENTER to save and exit)</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">nano</span> file.txt</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co"># Add content interactively to an existing file</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co"># (press CTRL + D to save the file)</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="fu">cat</span> <span class="op">&gt;&gt;</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="printing-file-content" class="level3" data-number="A.3.3">
+<h3 data-number="A.3.3" class="anchored" data-anchor-id="printing-file-content"><span class="header-section-number">A.3.3</span> Printing file content</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Print file content</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">cat</span> file.txt</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Open a file for interactive reading</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="fu">less</span> file.txt</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># Print the first 10 lines of a file</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="fu">head</span> file.txt</span>
+<span id="cb11-9"><a href="#cb11-9"></a></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co"># Print the first 6 lines of a file</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="fu">head</span> <span class="at">-n</span> 6 file.txt</span>
+<span id="cb11-12"><a href="#cb11-12"></a></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co"># Print the last 10 lines of a file</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="fu">tail</span> file.txt</span>
+<span id="cb11-15"><a href="#cb11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co"># Print the last 6 lines of a file</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="fu">tail</span> <span class="at">-n</span> 6 file.txt</span>
+<span id="cb11-18"><a href="#cb11-18"></a></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co"># Dynamic - Useful for logs</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="fu">tail</span> <span class="at">-f</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="copying-files" class="level3" data-number="A.3.4">
+<h3 data-number="A.3.4" class="anchored" data-anchor-id="copying-files"><span class="header-section-number">A.3.4</span> Copying files</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Copy a file in the same location</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">cp</span> file.txt copy.txt</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Copy a file in a different directory</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">cp</span> file.txt folder/copy.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="moving-files" class="level3" data-number="A.3.5">
+<h3 data-number="A.3.5" class="anchored" data-anchor-id="moving-files"><span class="header-section-number">A.3.5</span> Moving files</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Move a file to a new location</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">mv</span> file.txt new/location/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="renaming-files" class="level3" data-number="A.3.6">
+<h3 data-number="A.3.6" class="anchored" data-anchor-id="renaming-files"><span class="header-section-number">A.3.6</span> Renaming files</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Rename a file</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">mv</span> file.txt new_name.txt</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># Move and rename a file</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="fu">mv</span> file.txt new/location/new_name.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="deleting-file" class="level3" data-number="A.3.7">
+<h3 data-number="A.3.7" class="anchored" data-anchor-id="deleting-file"><span class="header-section-number">A.3.7</span> Deleting file</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Delete a file</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">rm</span> file.txt</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Delete a file (force mode)</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">rm</span> <span class="at">-f</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="joining-files" class="level3" data-number="A.3.8">
+<h3 data-number="A.3.8" class="anchored" data-anchor-id="joining-files"><span class="header-section-number">A.3.8</span> Joining files</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Merge two files in one</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">cat</span> file-1.txt file-2.txt <span class="op">&gt;</span> file-3.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="useful-commands" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="useful-commands"><span class="header-section-number">A.4</span> Useful commands</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Clear the terminal</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">clear</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Get the size of the current directory</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">du</span> <span class="at">-sh</span> .</span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Print the command lines history</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="bu">history</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="co"># Search for a previous command</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="co"># CTRL + R and type some characters of the command</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a></span>
+<span id="cb17-13"><a href="#cb17-13"></a><span class="co"># Create a new screen</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a><span class="ex">screen</span> <span class="at">-S</span> screen_name</span>
+<span id="cb17-15"><a href="#cb17-15"></a></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="co"># Detach a screen</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="co"># (press CTRL + A + D to leave the screen)</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a></span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="co"># Reattach a screen</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a><span class="ex">screen</span> <span class="at">-r</span> screen_name</span>
+<span id="cb17-21"><a href="#cb17-21"></a></span>
+<span id="cb17-22"><a href="#cb17-22"></a><span class="co"># List existing screens</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a><span class="ex">screen</span> <span class="at">-ls</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a></span>
+<span id="cb17-25"><a href="#cb17-25"></a><span class="co"># Kill all R processes for a specific user</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a><span class="fu">killall</span> <span class="at">-u</span> jdoe R</span>
+<span id="cb17-27"><a href="#cb17-27"></a></span>
+<span id="cb17-28"><a href="#cb17-28"></a><span class="co"># Kill all RStudio processes for a specific user</span></span>
+<span id="cb17-29"><a href="#cb17-29"></a><span class="fu">killall</span> <span class="at">-u</span> jdoe rsession</span>
+<span id="cb17-30"><a href="#cb17-30"></a></span>
+<span id="cb17-31"><a href="#cb17-31"></a><span class="co"># System monitoring utilities</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a><span class="ex">top</span></span>
+<span id="cb17-33"><a href="#cb17-33"></a><span class="ex">htop</span></span>
+<span id="cb17-34"><a href="#cb17-34"></a><span class="ex">btop</span></span>
+<span id="cb17-35"><a href="#cb17-35"></a></span>
+<span id="cb17-36"><a href="#cb17-36"></a><span class="co"># Count number of files (and folders) in the current directory</span></span>
+<span id="cb17-37"><a href="#cb17-37"></a><span class="fu">ls</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb17-38"><a href="#cb17-38"></a></span>
+<span id="cb17-39"><a href="#cb17-39"></a><span class="co"># List all files/folders matching a pattern</span></span>
+<span id="cb17-40"><a href="#cb17-40"></a><span class="fu">ls</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"</span><span class="dt">\\</span><span class="st">.md$"</span></span>
+<span id="cb17-41"><a href="#cb17-41"></a></span>
+<span id="cb17-42"><a href="#cb17-42"></a><span class="co"># List all files/folders matching a pattern (case insensitive)</span></span>
+<span id="cb17-43"><a href="#cb17-43"></a><span class="fu">ls</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"</span><span class="dt">\\</span><span class="st">.md$"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/parallel-computing.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel computing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ This book was built with <a href="https://quarto.org/">Quarto</a>
+  </li>  
+</ul>
+    </div>   
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+  </li>  
+</ul>
+      </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/frbcesab/rossinante">Code source &nbsp;<i class="bi bi-github" role="img"></i></a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
