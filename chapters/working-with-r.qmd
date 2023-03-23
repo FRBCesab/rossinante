@@ -216,19 +216,5 @@ Each user has a personal R library in which he can install/update every R packag
 wants (independently of other users). This library is located in
 `~/R/x86_64-pc-linux-gnu-library/4.2/`.
 
-To install a new R package, use the interface of RStudio Server or the R console and run:
-
-```{r}
-#| eval: false
-install.packages("sf")
-```
-
-If you want you can also update your packages:
-
-```{r}
-#| eval: false
-update.packages()
-```
-
 **NB --** Some R packages require system libraries and some of them may be
 missing on Rossinante. Please contact the administrator to solve the issue.
