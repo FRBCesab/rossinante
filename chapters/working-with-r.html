@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.475">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,6 +21,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -196,8 +259,9 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#rstudio-server" id="toc-rstudio-server" class="nav-link active" data-scroll-target="#rstudio-server"><span class="toc-section-number">5.1</span>  RStudio Server</a></li>
-  <li><a href="#r-console" id="toc-r-console" class="nav-link" data-scroll-target="#r-console"><span class="toc-section-number">5.2</span>  R console</a></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages"><span class="toc-section-number">5.3</span>  R packages</a></li>
+  <li><a href="#r-in-the-terminal" id="toc-r-in-the-terminal" class="nav-link" data-scroll-target="#r-in-the-terminal"><span class="toc-section-number">5.2</span>  R in the terminal</a></li>
+  <li><a href="#r-in-a-screen" id="toc-r-in-a-screen" class="nav-link" data-scroll-target="#r-in-a-screen"><span class="toc-section-number">5.3</span>  R in a screen</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages"><span class="toc-section-number">5.4</span>  R packages</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/frbcesab/rossinante/blob/main/chapters/working-with-r.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/frbcesab/rossinante/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -221,83 +285,148 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>|all-users|</p>
-<p>.. |all-users| image:: https://img.shields.io/static/v1?label=-&amp;message=All%20users&amp;color=yellowgreen&amp;logo=ubuntu&amp;style=flat-square</p>
-<hr>
 <p>To execute R code on Rossinante, you can use either the RStudio Server interface or directly the R console in the terminal. You can also use the <code>Rscript</code> command.</p>
-<p>.. _rstudio:</p>
 <section id="rstudio-server" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="rstudio-server"><span class="header-section-number">5.1</span> RStudio Server</h2>
-<p>.. figure:: ./images/rstudio-server.png :align: center :alt: RStudio Server interface</p>
-<p><strong>Figure 5</strong> – RStudio Server interface</p>
-<p>To open the RStudio Server interface, we first need to create an <strong>SSH tunneling</strong> (or port forwarding). This method consists in creating an encrypted SSH connection between a client (your laptop) and a server (Rossinante) through which a service (Rstudio Server) port (8787) can be relayed.</p>
+<div id="fig-rstudio" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../images/rstudio-server.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: RStudio Server interface</figcaption><p></p>
+</figure>
+</div>
+<p>To open the RStudio Server interface, you first need to create an <strong>SSH tunneling</strong> (or port forwarding). This method consists in creating an encrypted SSH connection between a client (your laptop) and a server (Rossinante) through which a service (Rstudio Server) port (8787) can be relayed.</p>
 <p>To create an SSH port forwarding, pass the <code>-L</code> option to the ssh client:</p>
-<p>.. code-block:: shell</p>
-<p># Open an SSH port forwarding —- jane@laptop:~$ ssh -L 8787:localhost:8787 rossinante</p>
-<p><strong>NB –</strong> The first <code>8787</code> is your local port through RStudio Server will be relayed. The second <code>8787</code> is the port on Rossinante through RStudio Server is running. In short, <code>localhost</code> is your laptop. Instead of <code>localhost</code> we could have written <code>127.0.0.1</code>. You can change the first <code>8787</code> for any number greater than <code>1024</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Start an SSH port forwarding ----</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">ssh</span> <span class="at">-L</span> 8787:localhost:8787 rossinante</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first <code>8787</code> is your local port through RStudio Server will be relayed. The second <code>8787</code> is the port on Rossinante through RStudio Server is running. In short, <code>localhost</code> is your laptop. Instead of <code>localhost</code> you could have written <code>127.0.0.1</code>. You can change the first <code>8787</code> for any number greater than <code>1024</code>.</p>
 <p>You are now connected to Rossinante.</p>
-<p>To start the RStudio Server interface, open a web browser (Firefox, Chrome, etc.) and enter the following URL: <code>localhost:8787</code>.</p>
+<p>To start the RStudio Server interface, open a web browser (Firefox, Chrome, etc.) and enter the following URL: <a href="http://localhost:8787" class="uri">http://localhost:8787</a>.</p>
 <p>After entering your Rossinante log in information, you are connected to a new RStudio Server instance. You can now use this interface as the one you know (RStudio Desktop).</p>
-<p><strong>Important –</strong> RStudio Server has two buttons to close the interface: <code>Sign out</code> (B in Figure 5) and <code>Quit current R session</code> (C in Figure 5). If you click on <code>Sign out</code>, your session will be still active (in background) and you will have access to objects when you will log in again. You need to click on that button if you have launched time consuming analysis. If you click on <code>Quit current R session</code> you will stop all analyses and you were not able to access R objects. Click on that button to terminate your session.</p>
-<p><strong>Warning –</strong> If you stop your SSH (port forwarding) session, you will close the RStudio Server session. Before shutting down the SSH connection, click on <code>Sign out</code> or <code>Quit current R session</code> to securely close the RStudio Server instance.</p>
-<p><strong>Trick –</strong> If you have been disconnected from RStudio Server (network crash, power failure, etc.), you may not be able to restart RStudio Server (blank page). In that case, you need to kill your previous R sessions (still active) as follow:</p>
-<p>.. code-block:: shell</p>
-<p># SSH connection to Rossinante —- jane@laptop:~$ ssh rossinante</p>
-<p># Erase all active R sessions —- jdoe@rossinante:~$ killall -u jdoe rsession</p>
-<p># Hardcore method —- jdoe@rossinante:~$ rm -rf ~/.local/share/rstudio/sessions/active/session-*</p>
+<p>RStudio Server has two buttons to close the interface: <code>Sign out</code> (B in <a href="#fig-rstudio">Figure&nbsp;<span>5.1</span></a>) and <code>Quit current R session</code> (C in <a href="#fig-rstudio">Figure&nbsp;<span>5.1</span></a>). If you click on <code>Sign out</code>, your session will be still active (in background) and you will have access to objects when you will log in again. You need to click on that button if you have launched time consuming analysis. If you click on <code>Quit current R session</code> you will stop all analyses and you were not able to access R objects. Click on that button to terminate your session.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you stop your SSH (port forwarding) session, you will close the RStudio Server session. Before shutting down the SSH connection, click on <code>Sign out</code> or <code>Quit current R session</code> to securely close the RStudio Server instance.</p>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Trick
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have been disconnected from RStudio Server (network crash, power failure, etc.), you may not be able to restart RStudio Server (blank page). In that case, you need to kill your previous R sessions (still active) as follow:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># SSH connection to Rossinante ----</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">ssh</span> rossinante</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Erase all active R sessions ----</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">killall</span> <span class="at">-u</span> jdoe rsession</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Hardcore method ----</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="fu">rm</span> <span class="at">-rf</span> ~/.local/share/rstudio/sessions/active/session-<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
-<section id="r-console" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="r-console"><span class="header-section-number">5.2</span> R console</h2>
+<section id="r-in-the-terminal" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="r-in-the-terminal"><span class="header-section-number">5.2</span> R in the terminal</h2>
 <p>An alternative is to launch the R console directly from the terminal of Rossinante. And this is very easy.</p>
-<p>.. code-block:: shell</p>
-<p># SSH connection to Rossinante —- jane@laptop:~$ ssh rossinante</p>
-<p># Launch R console from terminal —- jdoe@rossinante:~$ R</p>
-<p>## R version 4.1.1 (2021-08-10) – “Kick Things” ## Copyright (C) 2021 The R Foundation for Statistical Computing ## Platform: x86_64-pc-linux-gnu (64-bit) ## ## R is free software and comes with ABSOLUTELY NO WARRANTY. ## You are welcome to redistribute it under certain conditions. ## Type ‘license()’ or ‘licence()’ for distribution details. ## ## R is a collaborative project with many contributors. ## Type ‘contributors()’ for more information and ## ‘citation()’ on how to cite R or R packages in publications. ## ## Type ‘demo()’ for some demos, ‘help()’ for on-line help, or ## ‘help.start()’ for an HTML browser interface to help. ## Type ‘q()’ to quit R. ## &gt;</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># SSH connection to Rossinante ----</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">ssh</span> rossinante</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># Launch R console from terminal ----</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="ex">R</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">## R version 4.2.3 (2023-03-15) -- "Shortstop Beagle"</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">## Copyright (C) 2023 The R Foundation for Statistical Computing</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">##</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">## R is free software and comes with ABSOLUTELY NO WARRANTY.</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">## You are welcome to redistribute it under certain conditions.</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">## Type 'license()' or 'licence()' for distribution details.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">##</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">## R is a collaborative project with many contributors.</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">## Type 'contributors()' for more information and</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">## 'citation()' on how to cite R or R packages in publications.</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">##</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">## Type 'demo()' for some demos, 'help()' for on-line help, or</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">## 'help.start()' for an HTML browser interface to help.</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">## Type 'q()' to quit R.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To close your R session:</p>
-<p>.. code-block:: r</p>
-<p># Close R session —- &gt; q(“no”)</p>
-<p><strong>The Rscript command</strong> If you want, you can also use the command <code>Rscript</code> to run an R script (or R expression) without opening an R console, directly from the terminal.</p>
-<p>.. code-block:: shell</p>
-<p># Run an R expression (option ‘-e’) —- jdoe@rossinante:~$ Rscript -e ‘print(“El ingenioso hidalgo don Quijote de la Mancha”)’ ## [1] “El ingenioso hidalgo don Quijote de la Mancha”</p>
-<p># Write an R script on the personal folder —- jdoe@rossinante:~$ echo ‘print(“El ingenioso hidalgo don Quijote de la Mancha”)’ &gt; ~/quijote.R</p>
-<p># Print ‘quijote.R’ file content —- jdoe@rossinante:~$ cat ~/quijote.R ## print(“El ingenioso hidalgo don Quijote de la Mancha”)</p>
-<p># Run the R script —- jdoe@rossinante:~$ Rscript ~/quijote.R ## [1] “El ingenioso hidalgo don Quijote de la Mancha”</p>
-<p># Remove the R script —- jdoe@rossinante:~$ rm ~/quijote.R</p>
-<p><strong>Problem</strong> If you launch R in the terminal (or <code>Rscript</code>) and your code takes time to be computed, you cannot use the terminal until the computation is done. The job is running in foreground. Moreover, if your SSH connection is stopped, your R session is aborted and your work is lost.</p>
-<p><strong>Solution</strong> You can use a terminal multiplexer like <code>screen</code> or <code>tmux</code>. These tools open <em>virtual</em> terminals (screens) in the main terminal and you can navigate between screens and the main terminal. The idea is to create (attach) a new screen, launch your analysis, go back to the main terminal (detach), and work on other stuffs. If you stop your SSH connection, the analysis is still running, and if you make a new SSH connection to Rossinante, you can reattach the screen and resume your R session.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Close R session ----</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">q</span><span class="er">(</span><span class="st">"no"</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+The Rscript command
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you want, you can also use the command <code>Rscript</code> to run an R script (or an R expression) without opening the R console, directly from the terminal.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Run an R expression (option '-e') ----</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'print("El ingenioso Hidalgo don Quijote de la Mancha")'</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">## [1] "El ingenioso Hidalgo don Quijote de la Mancha"</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Write an R script on the personal folder ----</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="bu">echo</span> <span class="st">'print("El ingenioso Hidalgo don Quijote de la Mancha")'</span> <span class="op">&gt;</span> ~/quijote.R</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co"># Print 'quijote.R' file content ----</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="fu">cat</span> ~/quijote.R</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">## print("El ingenioso Hidalgo don Quijote de la Mancha")</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co"># Run the R script ----</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="ex">Rscript</span> ~/quijote.R</span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">## [1] "El ingenioso Hidalgo don Quijote de la Mancha"</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co"># Remove the R script ----</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="fu">rm</span> ~/quijote.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="r-in-a-screen" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="r-in-a-screen"><span class="header-section-number">5.3</span> R in a screen</h2>
+<p>If you launch R in the terminal (or <code>Rscript</code>) and your code takes time to be computed, you cannot use the terminal until the computation is done. The job is running in foreground. Moreover, if your SSH connection is stopped, your R session is aborted and your work is lost.</p>
+<p>The solution is to use a terminal multiplexer like <code>screen</code> or <code>tmux</code>. These tools open <em>virtual</em> terminals (screens) in the main terminal and you can navigate between screens and the main terminal. The idea is to create (attach) a new screen, launch your analysis, go back to the main terminal (detach), and work on other stuffs. If you stop your SSH connection, the analysis is still running, and if you make a new SSH connection to Rossinante, you can reattach the screen and resume your R session.</p>
 <p>Let’s take an example with <code>screen</code>:</p>
-<p>.. code-block:: shell</p>
-<p># SSH connection to Rossinante —- jane@laptop:~$ ssh rossinante</p>
-<p># Attach (create) a new screen (named ‘r_analysis’, for instance) —- jdoe@rossinante:~$ screen -S r_analysis</p>
-<p># Open R console (in the new screen) —- (r_analysis) jdoe@rossinante:~$ R</p>
-<p># Launch the analysis —- (r_analysis) &gt; source(“script_analysis.R”)</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># SSH connection to Rossinante ----</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">ssh</span> rossinante</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Attach (create) a new screen (named 'r_analysis', for instance) ----</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">screen</span> <span class="at">-S</span> r_analysis</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Open R console (in the new screen) ----</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="ex">R</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># Launch the analysis ----</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="bu">source</span><span class="er">(</span><span class="st">"script_analysis.R"</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To detach from the screen session, type <code>CTRL + A</code> and <code>D</code>.</p>
 <p>You can list running screens as follow:</p>
-<p>.. code-block:: shell</p>
-<p># List running screens —- jdoe@rossinante:~$ screen -ls ## There is a screen on: ## 4002.r_analysis (Detached)</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># List running screens ----</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">screen</span> <span class="at">-ls</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">## There is a screen on:</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">##         4002.r_analysis (Detached)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To reattach a screen session, use the following command:</p>
-<p>.. code-block:: shell</p>
-<p># Reattach a screen —- jdoe@rossinante:~$ screen -r r_analysis</p>
-<p>(r_analysis) jdoe@rossinante:~$</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Reattach a screen ----</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">screen</span> <span class="at">-r</span> r_analysis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To close a screen, type <code>exit</code> in the screen or press <code>CTRL + A</code> and <code>K</code>.</p>
-<p>More information on <code>screen</code>: https://www.malekal.com/screen-linux-lancer-plusieurs-commandes-sans-perdre-execution/</p>
 </section>
-<section id="r-packages" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="r-packages"><span class="header-section-number">5.3</span> R packages</h2>
-<p>Only base R packages are installed and shared among users. Each user has a personal R library in which he can install/update every R packages he wants (independently of other users). This library is located in <code>~/R/x86_64-pc-linux-gnu-library/4.1/</code>.</p>
-<p>To install a new R package, use the interface of RStudio Server or the R console and run:</p>
-<p>.. code-block:: r</p>
-<p>install.packages(“sf”)</p>
-<p>If you want you can also update your packages:</p>
-<p>.. code-block:: r</p>
-<p>update.packages()</p>
+<section id="r-packages" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="r-packages"><span class="header-section-number">5.4</span> R packages</h2>
+<p>Only base R packages are installed and shared among users. Each user has a personal R library in which he can install/update every R packages he wants (independently of other users). This library is located in <code>~/R/x86_64-pc-linux-gnu-library/4.2/</code>.</p>
 <p><strong>NB –</strong> Some R packages require system libraries and some of them may be missing on Rossinante. Please contact the administrator to solve the issue.</p>
-<p>You can find a list of common R packages used in Ecology <code>here &lt;https://raw.githubusercontent.com/FRBCesab/rossinante/main/tools/list-of-rpackages.R&gt;</code>_. To install these packages on Rossinante (or elsewhere), open an R console or RStudio Server and run:</p>
-<p>.. code-block:: r</p>
-<p>## Script URL —- url &lt;- “https://raw.githubusercontent.com/FRBCesab/rossinante/main/tools/list-of-rpackages.R”</p>
-<p>## Download script —- download.file(url, destfile = “list-of-rpackages.R”)</p>
-<p>## Install R packages —- source(“list-of-rpackages.R”)</p>
-<p>## Delete downloaded script —- file.remove(“list-of-rpackages.R”)</p>
 
 
 </section>
