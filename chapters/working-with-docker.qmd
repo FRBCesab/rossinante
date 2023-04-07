@@ -1,4 +1,84 @@
 ## Working with Docker
 
+[Docker](https://www.docker.com/) is already installed on Rossinante. It can be 
+a good solution to work in a sandbox environment. A lot of images can be downloaded 
+from [Docker Hub](https://hub.docker.com/search?q=).
 
-Work in progress...
+
+::: {.callout-warning}
+## Information
+
+If you want to use Docker on Rossinante, you need to contact the administrator.
+To check if you can use Docker, run this command on Rossinante:
+
+```bash
+groups
+## jdoe ... docker ...
+```
+
+If you see that you are member of the Unix group `docker`, you can use the software.
+:::
+
+### Docker with R
+
+Rossinante is updated everyday: this means that you'll always use the latest version of R.
+But in some cases, you may want to use a previous version or you may want to freeze
+the version of R you use. Docker is perfect for that.
+
+The initiative [Rocker](https://rocker-project.org/) provides different Docker images for R.
+Each image is available for different versions of R. 
+The @tbl-rocker presents some common Docker images for R.
+
+| Image 	            | Base image 	       | Description                                               |
+|---------------------|--------------------|-----------------------------------------------------------|
+| `rocker/r-ver` 	    | `ubuntu` 	         | Install only R from source                                |
+| `rocker/rstudio` 	  | `rocker/r-ver` 	   | Adds RStudio Server                                       |
+| `rocker/tidyverse` 	| `rocker/rstudio` 	 | Adds tidyverse packages & devtools                        |
+| `rocker/verse` 	    | `rocker/tidyverse` | Adds tex & publishing-related package                     |
+| `rocker/geospatial` | `rocker/verse` 	   | Adds geospatial packages                                  |
+
+: Some common Docker images for R {#tbl-rocker}
+
+
+If you want to use the `rocker/tidyverse` image with the version 4.1.3 of R, first
+check if this image is already downloaded on Rossinante:
+
+```bash
+# List available Docker images on Rossinante ----
+docker images
+
+## REPOSITORY          TAG       IMAGE ID       CREATED        SIZE
+## rocker/r-ver        4.2.3     4ea29847d93e   13 days ago    825MB
+## rocker/geospatial   4.2.2     4a1f8be3b4ef   3 weeks ago    4.42GB
+## rocker/geospatial   latest    4a1f8be3b4ef   3 weeks ago    4.42GB
+```
+
+If this image is not available, you can install it with:
+
+```bash
+# Pull a Docker image ----
+docker pull rocker/r-ver:4.1.3
+```
+
+And check the new list of Docker images:
+
+```bash
+# List available Docker images on Rossinante ----
+docker images
+
+## REPOSITORY          TAG       IMAGE ID       CREATED        SIZE
+## rocker/r-ver        4.2.3     4ea29847d93e   13 days ago    825MB
+## rocker/r-ver        4.1.3     c7c1edfe6a8d   13 days ago    857MB
+## rocker/geospatial   4.2.2     4a1f8be3b4ef   3 weeks ago    4.42GB
+## rocker/geospatial   latest    4a1f8be3b4ef   3 weeks ago    4.42GB
+```
+
+To use this version of R, we need to create a **Docker container** from this 
+Docker image.
+
+```bash
+docker run -it --rm rocker/r-ver:4.1.3
+```
+
+
+
