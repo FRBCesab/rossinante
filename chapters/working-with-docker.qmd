@@ -19,6 +19,7 @@ groups
 If you see that you are member of the Unix group `docker`, you can use the software.
 :::
 
+
 ### Docker with R
 
 Rossinante is updated everyday: this means that you'll always use the latest version of R.
@@ -40,7 +41,7 @@ The @tbl-rocker presents some common Docker images for R.
 : Some common Docker images for R {#tbl-rocker}
 
 
-If you want to use the `rocker/tidyverse` image with the version 4.1.3 of R, first
+If you want to use the `rocker/r-ver` image with the version 4.1.3 of R, first
 check if this image is already downloaded on Rossinante:
 
 ```bash
