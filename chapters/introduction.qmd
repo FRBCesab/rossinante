@@ -3,12 +3,12 @@
 
 The FRB-CESAB server **Rossinante** is dedicated to *medium* performance 
 scientific computing (see @tbl-hardware for hardware specification). 
-It runs under the Operating System (OS) **Ubuntu Server 20.04 LTS** (Focal Fossa).
+It runs under the Operating System (OS) **Debian 12** (Bookworm).
 
 
-**When do you need to use Rossinante?**
+**When do you want to use Rossinante?**
 
-- You need to analyse large datasets (RAM operations), and/or,
+- You need to analyse large datasets (RAM operations) and/or,
 - You need to repeat tasks many times (parallelization on CPU/GPU).
 
 
@@ -45,32 +45,30 @@ that you can launch jobs whenever you want. However you are invited to read
 
 - [`R`](https://cran.r-project.org/) (latest version)
 - [`RStudio Server`](https://www.rstudio.com/products/rstudio/download-server/)
-- [`Python`](https://www.python.org/) (latest version)
-- [`pip3`](https://pip.pypa.io/) and [`Conda`](https://docs.conda.io/en/latest/) -- Python packages managers
-- [`Jupyter Notebook`](https://jupyter-notebook.readthedocs.io/)
-- [`Julia`](https://julialang.org/)
-- [`LaTeX3`](https://www.latex-project.org/)
+- [`Python 3`](https://www.python.org/) (latest version)
+- [`pip3`](https://pip.pypa.io/) -- Python packages managers
 - [`Pandoc`](https://pandoc.org/)
 - [`Quarto`](https://quarto.org/)
 - [`git`](https://git-scm.com/)
+- [`make`](https://www.gnu.org/software/make/)
 - [`Docker`](https://www.docker.com/)
 
 
 And some useful utilities:
 
-- [`CUDA`](https://developer.nvidia.com/cuda-downloads) -- Deep Learning
 - [`FFmpeg`](https://ffmpeg.org/) -- Transcoding multimedia files
 - [`ImageMagick`](https://imagemagick.org) -- Image manipulation program
 - [`Poppler`](https://poppler.freedesktop.org/) -- PDF utility library
+- [`ExifTool`](https://exiftool.org/) - File metadata utility
 - [`GDAL`](https://gdal.org/), [`GEOS`](https://trac.osgeo.org/geos), [`PROJ`](https://proj.org/) -- Spatial libraries
 - [`htop`](https://htop.dev/) and [`btop`](https://github.com/aristocratos/btop) -- CPU, RAM, and processes monitoring tool
-- [`nvtop`](https://github.com/Syllo/nvtop) -- NVIDIA GPU monitoring tool
-- [`nano`](https://www.nano-editor.org/) and [`vim`](https://www.vim.org/) -- CLI text editors
+- [`ctop`](https://github.com/bcicen/ctop) -- Docker containers monitoring tool
+- [`nano`](https://www.nano-editor.org/), [`Vim`](https://www.vim.org/) and [`Neovim`](https://neovim.io/) -- CLI text editors
 - [`screen`](https://www.gnu.org/software/screen/) and [`tmux`](https://github.com/tmux/tmux/wiki) -- Terminal multiplexers
 - [`tree`](http://mama.indstate.edu/users/ice/tree/) -- Recursive directory listing program
 - [`curl`](https://curl.se/) and [`wget`](https://www.gnu.org/software/wget/manual/wget.html) -- Download managers
 - [`zip`](https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/) and [`unzip`](https://linuxize.com/post/how-to-unzip-files-in-linux/) -- ZIP files managers
-
+- [`zsh`](https://www.zsh.org/) - Unix shell (alternative to Bash)
 
 **Can you do everything you want on Rossinante?**
 
@@ -79,9 +77,13 @@ No!
 Rossinante has only **one administrator**. Regular user,
 like you, has limited permissions.
 
-For instance, you have only access to a personal directory: `/home/you/`. If you ask
-you can also have a personal space in one or more external drives 
-(e.g. `/media/cervantes/you`).
+You have access to four personal directories:
+
+- `/home/you/`
+- `/media/sancho/you` (external drive)
+- `/media/seagate/you` (external drive)
+- `/media/cervantes/you` (external drive)
+
 
 If you need to use a non-installed software, please contact the administrator.
 Note that each user has a personal R library in which he/she can install every
@@ -95,4 +97,6 @@ shared among all users (except if you work with virtual environments **[recommen
 Rossinante is **not a storage server**. Its limited storage is shared
 among all users. You can store large dataset to run yours
 analyses, but once you've finished, please remove these files.
+
+**There is no backup system!**. You are responsible for your data.
 :::
