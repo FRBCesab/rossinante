@@ -231,7 +231,7 @@ ls ~/.ssh
 ```
 
 
-**NB --** If you lose you private key you will still be able to log in with
+**NB --** If you lose your private key you will still be able to log in with
 your password.
 
 
