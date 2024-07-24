@@ -12,12 +12,67 @@
   {
     "objectID": "chapters/introduction.html",
     "href": "chapters/introduction.html",
-    "title": "1  Introduction",
+    "title": "1  Overview",
     "section": "",
-    "text": "The FRB-CESAB server Rossinante is dedicated to medium performance scientific computing (see Table 1.1 for hardware specification). It runs under the Operating System (OS) Debian 12 (Bookworm).\nWhen do you want to use Rossinante?\n\nYou need to analyse large datasets (RAM operations) and/or,\nYou need to repeat tasks many times (parallelization on CPU/GPU).\n\n\n\n\nTable 1.1: Hardware specifications\n\n\n\n\n\n\n\n\n\nHardware\nSpecifications\n\n\n\n\nCPU\n80 threads (2 x Intel Xeon Gold 5218R)\n\n\nRAM\n384 GB (12 x Cells 32 Go RDIMM)\n\n\nGPU\nNVIDIA Quadro RTX 6000\n\n\nInternal storage\n6 TB (8 x 960 GB SSD SATA)\n\n\nExternal storage (Seagate)\n8 TB (1 x 8 To HDD USB 3.0 5900 tr/min)\n\n\nExternal storage (Cervantes)\n8 TB (1 x 8 To HDD USB 3.0 5900 tr/min)\n\n\nExternal storage (Sancho)\n8 TB (1 x 8 To HDD USB 3.0 5900 tr/min)\n\n\n\n\n\n\nYou can run programs implemented in R, Python, Julia, Shell script, C, C++, etc. directly from a terminal or using Web clients like RStudio Server or Jupyter Notebook.\n\n\n\n\n\n\nImportant\n\n\n\nNo job scheduling system (e.g. SLURM, Torque) has been installed. This means that you can launch jobs whenever you want. However you are invited to read Chapter 3 (Good practices).\n\n\nWhat are the available software?\n\nR (latest version)\nRStudio Server\nPython 3 (latest version)\npip3 – Python packages managers\nPandoc\nQuarto\ngit\nmake\nDocker\n\nAnd some useful utilities:\n\nFFmpeg – Transcoding multimedia files\nImageMagick – Image manipulation program\nPoppler – PDF utility library\nExifTool - File metadata utility\nGDAL, GEOS, PROJ – Spatial libraries\nhtop and btop – CPU, RAM, and processes monitoring tool\nctop – Docker containers monitoring tool\nnano, Vim and Neovim – CLI text editors\nscreen and tmux – Terminal multiplexers\ntree – Recursive directory listing program\ncurl and wget – Download managers\nzip and unzip – ZIP files managers\nzsh - Unix shell (alternative to Bash)\n\nCan you do everything you want on Rossinante?\nNo!\nRossinante has only one administrator. Regular user, like you, has limited permissions.\nYou have access to four personal directories:\n\n/home/you/\n/media/sancho/you (external drive)\n/media/seagate/you (external drive)\n/media/cervantes/you (external drive)\n\nIf you need to use a non-installed software, please contact the administrator. Note that each user has a personal R library in which he/she can install every R packages he/she wants (independently of other users). For Python, packages are shared among all users (except if you work with virtual environments [recommended]).\n\n\n\n\n\n\nImportant\n\n\n\nRossinante is not a storage server. Its limited storage is shared among all users. You can store large dataset to run yours analyses, but once you’ve finished, please remove these files.\nThere is no backup system!. You are responsible for your data.\n\n\n\n\nCode source  \n\n:::",
+    "text": "1.1 Introduction\nThe FRB-CESAB server Rossinante is dedicated to medium performance scientific computing (see Table 1.1 for hardware specification). It runs under the GNU/Linux distribution Debian 12 (Bookworm).\nWhen do you want to use Rossinante?\nYou can run programs implemented in R, Python, Shell script, C, C++, etc. directly from a terminal, using Web clients like RStudio Server or inside Docker containers.",
     "crumbs": [
       "Get started",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#introduction",
+    "href": "chapters/introduction.html#introduction",
+    "title": "1  Overview",
+    "section": "",
+    "text": "You need to analyse large datasets (RAM operations) and/or,\nYou need to repeat tasks many times (parallelization on CPU/GPU).\n\n\n\n\nTable 1.1: Hardware specifications\n\n\n\n\n\n\n\n\n\nHardware\nSpecifications\n\n\n\n\nCPU\n80 threads (2 x Intel Xeon Gold 5218R)\n\n\nRAM\n384 GB (12 x Cells 32 Go RDIMM)\n\n\nGPU\nNVIDIA Quadro RTX 6000\n\n\nInternal storage\n6 TB (8 x 960 GB SSD SATA)\n\n\nExternal storage (Seagate)\n8 TB (1 x 8 To HDD USB 3.0 5900 tr/min)\n\n\nExternal storage (Cervantes)\n8 TB (1 x 8 To HDD USB 3.0 5900 tr/min)\n\n\nExternal storage (Sancho)\n8 TB (1 x 8 To HDD USB 3.0 5900 tr/min)\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nNo job scheduling system (e.g. SLURM, Torque) has been installed. This means that you can launch jobs whenever you want. However you are invited to respect some rules (Chapter 3).",
+    "crumbs": [
+      "Get started",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#storage",
+    "href": "chapters/introduction.html#storage",
+    "title": "1  Overview",
+    "section": "1.2 Storage",
+    "text": "1.2 Storage\nYou have access to four personal directories:\n\n/home/you/\n/media/sancho/you (external drive)\n/media/seagate/you (external drive)\n/media/cervantes/you (external drive)\n\nYou can create, edit and remove any files/directories you want inside these directories.\n\n\n\n\n\n\nImportant\n\n\n\nRossinante is not a storage server. The 30 TB of storage are shared among all users. You can store large datasets to run yours analyses, but once you’re done, please remove these files.\nThere is no backup system! You are responsible for your data.",
+    "crumbs": [
+      "Get started",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#available-software",
+    "href": "chapters/introduction.html#available-software",
+    "title": "1  Overview",
+    "section": "1.3 Available software",
+    "text": "1.3 Available software\n\nR – Scientific computing (among others)\nRStudio Server – Web interface for R\nPython 3 – Scientific computing (among others)\npip3 – Python packages managers\nPandoc – Universal document converter\nQuarto – Scientific publishing system\ngit – Version control system\nmake – Project compilation\nDocker – Containerization",
+    "crumbs": [
+      "Get started",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#useful-utilities",
+    "href": "chapters/introduction.html#useful-utilities",
+    "title": "1  Overview",
+    "section": "1.4 Useful utilities",
+    "text": "1.4 Useful utilities\n\nFFmpeg – Transcoding multimedia files\nImageMagick – Image manipulation program\nPoppler – PDF utility library\nExifTool - File metadata utility\nGDAL, GEOS, PROJ – Spatial libraries\nhtop and btop – CPU, RAM, and processes monitoring tool\nctop – Docker containers monitoring tool\nnano, Vim and Neovim – CLI text editors\nscreen and tmux – Terminal multiplexers\ntree – Recursive directory listing program\ncurl and wget – Download managers\nzip and unzip – ZIP files managers\nzsh – Unix shell (alternative to Bash)",
+    "crumbs": [
+      "Get started",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#missing-software",
+    "href": "chapters/introduction.html#missing-software",
+    "title": "1  Overview",
+    "section": "1.5 Missing software",
+    "text": "1.5 Missing software\nIf you need to use a non-installed software, please contact the administrator.\nNote that each user has a personal R library in which he/she can install every R packages he/she wants (independently of other users). For Python, packages are shared among all users (except if you work with virtual environments [recommended]).\n\n\nCode source  \n\n:::",
+    "crumbs": [
+      "Get started",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
   },
   {
