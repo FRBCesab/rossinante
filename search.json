@@ -58,7 +58,7 @@
     "href": "chapters/introduction.html#useful-utilities",
     "title": "1  Overview",
     "section": "1.4 Useful utilities",
-    "text": "1.4 Useful utilities\n\nFFmpeg – Transcoding multimedia files\nImageMagick – Image manipulation program\nPoppler – PDF utility library\nExifTool - File metadata utility\nGDAL, GEOS, PROJ – Spatial libraries\nhtop and btop – CPU, RAM, and processes monitoring tool\nctop – Docker containers monitoring tool\nnano, Vim and Neovim – CLI text editors\nscreen and tmux – Terminal multiplexers\ntree – Recursive directory listing program\ncurl and wget – Download managers\nzip and unzip – ZIP files managers\nzsh – Unix shell (alternative to Bash)",
+    "text": "1.4 Useful utilities\n\nFFmpeg – Transcoding multimedia files\nImageMagick – Image manipulation program\nPoppler – PDF utility library\nExifTool - File metadata utility\nGDAL, GEOS, PROJ – Spatial libraries\nhtop – CPU, RAM, and processes monitoring tool\nctop – Docker containers monitoring tool\nnano, Vim and Neovim – CLI text editors\nscreen and tmux – Terminal multiplexers\ntree – Recursive directory listing program\ncurl and wget – Download managers\nzip and unzip – ZIP files managers\nzsh – Unix shell (alternative to Bash)\nlazygit – CLI interface for git",
     "crumbs": [
       "Get started",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
