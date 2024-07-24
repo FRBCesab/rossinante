@@ -85,7 +85,7 @@ analyses, but once you're done, please remove these files.
 - [`Poppler`](https://poppler.freedesktop.org/) -- PDF utility library
 - [`ExifTool`](https://exiftool.org/) - File metadata utility
 - [`GDAL`](https://gdal.org/), [`GEOS`](https://trac.osgeo.org/geos), [`PROJ`](https://proj.org/) -- Spatial libraries
-- [`htop`](https://htop.dev/) and [`btop`](https://github.com/aristocratos/btop) -- CPU, RAM, and processes monitoring tool
+- [`htop`](https://htop.dev/) -- CPU, RAM, and processes monitoring tool
 - [`ctop`](https://github.com/bcicen/ctop) -- Docker containers monitoring tool
 - [`nano`](https://www.nano-editor.org/), [`Vim`](https://www.vim.org/) and [`Neovim`](https://neovim.io/) -- CLI text editors
 - [`screen`](https://www.gnu.org/software/screen/) and [`tmux`](https://github.com/tmux/tmux/wiki) -- Terminal multiplexers
@@ -93,7 +93,7 @@ analyses, but once you're done, please remove these files.
 - [`curl`](https://curl.se/) and [`wget`](https://www.gnu.org/software/wget/manual/wget.html) -- Download managers
 - [`zip`](https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/) and [`unzip`](https://linuxize.com/post/how-to-unzip-files-in-linux/) -- ZIP files managers
 - [`zsh`](https://www.zsh.org/) -- Unix shell (alternative to Bash)
-
+- [`lazygit`](https://github.com/jesseduffield/lazygit) -- CLI interface for git
 
 ## Missing software
 
