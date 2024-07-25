@@ -6,13 +6,11 @@ One rule: **BE ALTRUISTIC**
 1. Always ask others if you can use the server. Post a message on the Slack 
 Channel `#rossinante` and explain your needs.
 2. Do not use all available cores. 
-3. Do not use Rossinante for developing code (except for small fixes). Write 
-your code on your laptop and only use Rossinante to run analyses.
+3. Do not use all available memory.
 4. Do not use RStudio Server to run time consuming analyses. Prefer using the 
-command `screen`.
-5. Rossinante is **NOT A STORAGE SERVER**. Remove your large dataset if you do 
+command `screen` (see @sec-r-in-a-screen).
+5. Rossinante is **NOT A STORAGE SERVER**. Remove your large datasets if you do 
 not need them anymore.
-6. Store your large dataset in the external drives (e.g. `/media/seagate/jdoe/`).
 
 
 ::: {.callout-important}
@@ -20,4 +18,3 @@ not need them anymore.
 
 If you do not respect these rules the administrator will act accordingly.
 :::
-

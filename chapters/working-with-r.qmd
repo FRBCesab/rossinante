@@ -144,7 +144,7 @@ rm ~/quijote.R
 ```
 :::
 
-## R in a screen
+## R in a screen {#sec-r-in-a-screen}
 
 If you launch R in the terminal (or `Rscript`) and your code takes time to
 be computed, you cannot use the terminal until the computation is done. The job
