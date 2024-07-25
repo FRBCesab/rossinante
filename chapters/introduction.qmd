@@ -3,7 +3,7 @@
 ## Introduction
 
 
-The FRB-CESAB server **Rossinante** is dedicated to *medium* performance 
+The FRB-CESAB server **Rossinante** is dedicated to 
 scientific computing (see @tbl-hardware for hardware specification). 
 It runs under the GNU/Linux distribution **Debian 12** (Bookworm).
 
@@ -47,16 +47,16 @@ that you can launch jobs whenever you want. However you are invited to respect s
 You have access to four personal directories:
 
 - `/home/you/`
-- `/media/sancho/you` (external drive)
-- `/media/seagate/you` (external drive)
-- `/media/cervantes/you` (external drive)
+- `/media/sancho/you/` (external drive)
+- `/media/seagate/you/` (external drive)
+- `/media/cervantes/you/` (external drive)
 
-You can create, edit and remove any files/directories you want inside these directories.
+You can create, edit, rename and remove any files/directories you want inside these directories.
 
 ::: {.callout-important}
 ## Important
 
-Rossinante is **not a storage server**. The 30 TB of storage are shared
+Rossinante is **not a storage server**. The 30 TB storage are shared
 among all users. You can store large datasets to run yours
 analyses, but once you're done, please remove these files.
 
@@ -83,7 +83,7 @@ analyses, but once you're done, please remove these files.
 - [`FFmpeg`](https://ffmpeg.org/) -- Transcoding multimedia files
 - [`ImageMagick`](https://imagemagick.org) -- Image manipulation program
 - [`Poppler`](https://poppler.freedesktop.org/) -- PDF utility library
-- [`ExifTool`](https://exiftool.org/) - File metadata utility
+- [`ExifTool`](https://exiftool.org/) -- File metadata utility
 - [`GDAL`](https://gdal.org/), [`GEOS`](https://trac.osgeo.org/geos), [`PROJ`](https://proj.org/) -- Spatial libraries
 - [`htop`](https://htop.dev/) -- CPU, RAM, and processes monitoring tool
 - [`ctop`](https://github.com/bcicen/ctop) -- Docker containers monitoring tool
@@ -91,9 +91,12 @@ analyses, but once you're done, please remove these files.
 - [`screen`](https://www.gnu.org/software/screen/) and [`tmux`](https://github.com/tmux/tmux/wiki) -- Terminal multiplexers
 - [`tree`](http://mama.indstate.edu/users/ice/tree/) -- Recursive directory listing program
 - [`curl`](https://curl.se/) and [`wget`](https://www.gnu.org/software/wget/manual/wget.html) -- Download managers
+- [`rsync`](https://rsync.samba.org/) -- Incremental file transfer
 - [`zip`](https://linuxize.com/post/how-to-zip-files-and-directories-in-linux/) and [`unzip`](https://linuxize.com/post/how-to-unzip-files-in-linux/) -- ZIP files managers
 - [`zsh`](https://www.zsh.org/) -- Unix shell (alternative to Bash)
 - [`lazygit`](https://github.com/jesseduffield/lazygit) -- CLI interface for git
+
+
 
 ## Missing software
 
@@ -102,6 +105,3 @@ If you need to use a non-installed software, please contact the administrator.
 Note that each user has a personal R library in which he/she can install every
 R packages he/she wants (independently of other users). For Python, packages are
 shared among all users (except if you work with virtual environments **[recommended]**).
-
-
-

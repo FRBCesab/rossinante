@@ -4,5 +4,4 @@
 
 # Welcome {.unnumbered}
 
-The purpose of this book is to show how to use the FRB-CESAB server **Rossinante**, dedicated to *medium* performance scientific computing. 
-
+The purpose of this book is to show how to use the FRB-CESAB server **Rossinante**, dedicated to scientific computing. 

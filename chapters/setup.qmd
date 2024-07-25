@@ -22,6 +22,9 @@ Let's say that:
 | `22`                | The port of the SSH server   |
 +---------------------+------------------------------+
 
+**N.B.** You have to replace these values by the ones provided by the administrator.
+
+
 
 ## SSH connection
 
@@ -33,8 +36,8 @@ SSH client[^1]):
 - On Windows, open the [Git Bash](https://www.atlassian.com/git/tutorials/git-bash) 
 app[^2] (installed by default with the [git](https://git-scm.com/) software)
 
-[^1]: On Windows, you don't need anymore to install Putty.
-[^2]: Don't use PowerShell or RStudio terminal. They can be unstable. Git Bash
+[^1]: On Windows, you don't need to install Putty anymore.
+[^2]: Don't use PowerShell or RStudio terminal. Git Bash
 allows you to use GNU/Linux commands on Windows.
 
 
@@ -104,7 +107,7 @@ cd ~
 # Check if the folder .ssh/ exists ----
 ls -al
 
-# Create a new hidden folder (if required) ----
+# Create a new hidden folder (if not already existing) ----
 mkdir -p ~/.ssh
 
 # Change folder permissions ----
@@ -281,13 +284,13 @@ If you want to communicate with GitHub through the SSH protocol (recommended)
 you need to generate a new SSH keys pair (different from the one used to connect
 to Rossinante).
 
-Let's create a new SSH keys pair using the cryptosystem `RSA` and a key size of
-``4096`` bits. But this time, this SSH keys pair will be generated **on Rossinante**.
+Let's create a new SSH keys pair using the cryptosystem `ed25519`. But this time, 
+this SSH keys pair will be generated **on Rossinante**.
 
 
 ```bash
 # Create a new SSH key pair (on Rossinante) ----
-ssh-keygen -f ~/.ssh/id_rsa -t rsa -b 4096 -C "jane.doe@mail.com"
+ssh-keygen -f ~/.ssh/id_ed25519 -t ed25519 -C "jane.doe@mail.com"
 ```
 
 
@@ -296,7 +299,7 @@ This new SSH keys pair has been stored in `~/.ssh/`.
 ```bash
 # Content of the ~/.ssh folder ----
 ls ~/.ssh
-## authorized_keys       id_rsa       id_rsa.pub
+## authorized_keys       id_ed25519       id_ed25519.pub
 ```
 
 
@@ -305,7 +308,7 @@ Let's restrict the access to the private key.
 ```bash
 # Change private key permissions ----
 # (only jdoe can only read this file)
-chmod 400 ~/.ssh/id_rsa
+chmod 400 ~/.ssh/id_ed25519
 ```
 
 
@@ -319,7 +322,7 @@ On Rossinante, print the **public** SSH key:
 
 ```bash
 # Print the public SSH key ----
-cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_ed25519.pub
 ```
 
 
@@ -328,7 +331,7 @@ new SSH key (for example *Rossinante key*) and paste your public SSH key.
 Click on **Add SSH key**.
 
 
-Congratulation! You can know communicate with GitHub using the SSH protocol from Rossinante.
+**Congratulations!** You can know communicate with GitHub using the SSH protocol from Rossinante.
 Let's test the SSH connection between Rossinante and GitHub:
 
 ```bash
