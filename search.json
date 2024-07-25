@@ -157,7 +157,7 @@
     "href": "chapters/good-practices.html",
     "title": "3  Good practices",
     "section": "",
-    "text": "One rule: BE ALTRUISTIC\n\nAlways ask others if you can use the server. Post a message on the Slack Channel #rossinante and explain your needs.\nDo not use all available cores.\nDo not use Rossinante for developing code (except for small fixes). Write your code on your laptop and only use Rossinante to run analyses.\nDo not use RStudio Server to run time consuming analyses. Prefer using the command screen.\nRossinante is NOT A STORAGE SERVER. Remove your large dataset if you do not need them anymore.\nStore your large dataset in the external drives (e.g. /media/seagate/jdoe/).\n\n\n\n\n\n\n\nImportant\n\n\n\nIf you do not respect these rules the administrator will act accordingly.\n\n\n\n\nCode source  \n\n:::",
+    "text": "One rule: BE ALTRUISTIC\n\nAlways ask others if you can use the server. Post a message on the Slack Channel #rossinante and explain your needs.\nDo not use all available cores.\nDo not use all available memory.\nDo not use RStudio Server to run time consuming analyses. Prefer using the command screen (see Section 5.3).\nRossinante is NOT A STORAGE SERVER. Remove your large datasets if you do not need them anymore.\n\n\n\n\n\n\n\nImportant\n\n\n\nIf you do not respect these rules the administrator will act accordingly.\n\n\n\n\nCode source  \n\n:::",
     "crumbs": [
       "Get started",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Good practices</span>"
@@ -241,8 +241,8 @@
     ]
   },
   {
-    "objectID": "chapters/working-with-r.html#r-in-a-screen",
-    "href": "chapters/working-with-r.html#r-in-a-screen",
+    "objectID": "chapters/working-with-r.html#sec-r-in-a-screen",
+    "href": "chapters/working-with-r.html#sec-r-in-a-screen",
     "title": "5  Working with R",
     "section": "5.3 R in a screen",
     "text": "5.3 R in a screen\nIf you launch R in the terminal (or Rscript) and your code takes time to be computed, you cannot use the terminal until the computation is done. The job is running in foreground. Moreover, if your SSH connection is stopped, your R session is aborted and your work is lost.\nThe solution is to use a terminal multiplexer like screen or tmux. These tools open virtual terminals (screens) in the main terminal and you can navigate between screens and the main terminal. The idea is to create (attach) a new screen, launch your analysis, go back to the main terminal (detach), and work on other stuffs. If you stop your SSH connection, the analysis is still running, and if you make a new SSH connection to Rossinante, you can reattach the screen and resume your R session.\nLet’s take an example with screen:\n# SSH connection to Rossinante ----\nssh rossinante\n\n# Attach (create) a new screen (named 'r_analysis', for instance) ----\nscreen -S r_analysis\n\n# Open R console (in the new screen) ----\nR\n\n# Launch the analysis ----\nsource(\"script_analysis.R\")\nTo detach from the screen session, type CTRL + A and D.\nYou can list running screens as follow:\n# List running screens ----\nscreen -ls\n## There is a screen on:\n##         4002.r_analysis (Detached)\nTo reattach a screen session, use the following command:\n# Reattach a screen ----\nscreen -r r_analysis\nTo close a screen, type exit in the screen or press CTRL + A and K.",

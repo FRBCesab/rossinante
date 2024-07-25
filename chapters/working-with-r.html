@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#rstudio-server" id="toc-rstudio-server" class="nav-link active" data-scroll-target="#rstudio-server"><span class="header-section-number">5.1</span> RStudio Server</a></li>
   <li><a href="#r-in-the-terminal" id="toc-r-in-the-terminal" class="nav-link" data-scroll-target="#r-in-the-terminal"><span class="header-section-number">5.2</span> R in the terminal</a></li>
-  <li><a href="#r-in-a-screen" id="toc-r-in-a-screen" class="nav-link" data-scroll-target="#r-in-a-screen"><span class="header-section-number">5.3</span> R in a screen</a></li>
+  <li><a href="#sec-r-in-a-screen" id="toc-sec-r-in-a-screen" class="nav-link" data-scroll-target="#sec-r-in-a-screen"><span class="header-section-number">5.3</span> R in a screen</a></li>
   <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages"><span class="header-section-number">5.4</span> R packages</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frbcesab/rossinante/blob/main/chapters/working-with-r.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/frbcesab/rossinante/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -400,8 +400,8 @@ The Rscript command
 </div>
 </div>
 </section>
-<section id="r-in-a-screen" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="r-in-a-screen"><span class="header-section-number">5.3</span> R in a screen</h2>
+<section id="sec-r-in-a-screen" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-r-in-a-screen"><span class="header-section-number">5.3</span> R in a screen</h2>
 <p>If you launch R in the terminal (or <code>Rscript</code>) and your code takes time to be computed, you cannot use the terminal until the computation is done. The job is running in foreground. Moreover, if your SSH connection is stopped, your R session is aborted and your work is lost.</p>
 <p>The solution is to use a terminal multiplexer like <code>screen</code> or <code>tmux</code>. These tools open <em>virtual</em> terminals (screens) in the main terminal and you can navigate between screens and the main terminal. The idea is to create (attach) a new screen, launch your analysis, go back to the main terminal (detach), and work on other stuffs. If you stop your SSH connection, the analysis is still running, and if you make a new SSH connection to Rossinante, you can reattach the screen and resume your R session.</p>
 <p>Let’s take an example with <code>screen</code>:</p>
