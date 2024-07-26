@@ -36,6 +36,7 @@ book:
         - chapters/working-with-docker.qmd
         - chapters/parallel-computing.qmd
   appendices:
+    - chapters/administration.qmd
     - chapters/linux-cheatsheet.qmd
     
   sidebar: 

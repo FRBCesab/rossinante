@@ -44,14 +44,14 @@ that you can launch jobs whenever you want. However you are invited to respect s
 
 ## Storage
 
-You have access to four personal directories:
+As a regular user, you have access to four personal directories:
 
 - `/home/you/`
 - `/media/sancho/you/` (external drive)
 - `/media/seagate/you/` (external drive)
 - `/media/cervantes/you/` (external drive)
 
-You can create, edit, rename and remove any files/directories you want inside these directories.
+Inside these directories, you can create, edit, rename and remove any files/directories you want.
 
 ::: {.callout-important}
 ## Important
@@ -60,7 +60,7 @@ Rossinante is **not a storage server**. The 30 TB storage are shared
 among all users. You can store large datasets to run yours
 analyses, but once you're done, please remove these files.
 
-**There is no backup system!** You are responsible for your data.
+**There is no backup system!** You are responsible for your own data.
 :::
 
 
@@ -71,6 +71,7 @@ analyses, but once you're done, please remove these files.
 - [`RStudio Server`](https://www.rstudio.com/products/rstudio/download-server/) -- Web interface for R
 - [`Python 3`](https://www.python.org/) -- Scientific computing (among others)
 - [`pip3`](https://pip.pypa.io/) -- Python packages managers
+- [`venv`](https://docs.python.org/3/library/venv.html) -- Python virtual environments
 - [`Pandoc`](https://pandoc.org/) -- Universal document converter
 - [`Quarto`](https://quarto.org/) -- Scientific publishing system
 - [`git`](https://git-scm.com/) -- Version control system
@@ -102,6 +103,11 @@ analyses, but once you're done, please remove these files.
 
 If you need to use a non-installed software, please contact the administrator.
 
-Note that each user has a personal R library in which he/she can install every
-R packages he/she wants (independently of other users). For Python, packages are
-shared among all users (except if you work with virtual environments **[recommended]**).
+::: {.callout-note}
+## Note on R packages
+
+Each user has a personal R library in which he/she can install every
+R packages he/she wants (independently of other users).
+
+For Python, packages are shared among all users except if you work with virtual environments (**recommended**).
+:::
