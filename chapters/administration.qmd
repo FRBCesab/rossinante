@@ -1,3 +1,608 @@
 # System administration
 
-Coming soon...
+## System installation
+
+Proceed as follow to install Debian (server configuration):
+
+- Download the official Debian image at <https://www.debian.org/>.
+- Create a bootable USB drive w/:
+
+```sh
+## Create bootable USB drive on Linux ----
+dd if=debian-99.9.9-amd64.iso of=/dev/sdX bs=4M status=progress && sync
+```
+
+- Restart and boot from the USB drive.
+- Select `Graphical install` and follow instructions.
+- Partition disks as follow:
+
++-----------------------------------+--------+-------------+
+| Storage virtualization technology |  Space | Path        |
++===================================+========+=============+
+|                                   | 512 Mo | `/boot/efi` |
++                                   +--------+-------------+
+|             RAID 1                |  50 Go | `swap`      |
++                                   +--------+-------------+
+|                                   | 396 Go | `/`         |
++-----------------------------------+--------+-------------+
+|             RAID 5                |   6 To | `/home`     |
++-----------------------------------+--------+-------------+
+
+- Install `SSH server` and `Standard system utilities` only.
+- Restart and remove USB drive.
+
+
+## System configuration
+
+Use the command `su -` to switch to root user (`sudo` utility is not installed).
+
+### System update
+
+```sh
+## Update system ----
+apt-get update && apt-get upgrade
+```
+
+
+
+### Timezone
+
+```sh
+## Set timezone ----
+timedatectl set-timezone Europe/Paris
+
+## Set automatic time synchronization ----
+systemctl enable systemd-timesyncd
+```
+
+
+
+### Network configuration
+
+Use `ip link` to list network interfaces.
+
+```sh
+## Edit network configuration file ----
+nano /etc/network/interfaces
+
+## # This file describes the network interfaces available on your system
+## # and how to activate them. For more information, see interfaces(5).
+## 
+## source /etc/network/interfaces.d/*
+## 
+## # The loopback network interface
+## auto lo
+## iface lo inet loopback
+## 
+## # The primary network interface
+## auto eno1np0
+## iface eno1np0 inet static
+##         address 92.168.45.3                         [ ## ]
+##         netmask 255.255.255.0
+##         network 192.168.0.0
+##         broadcast 192.168.0.255
+##         gateway 192.168.0.254
+##         dns-nameservers 999.99.999.99 999.99.999.99 [ ## ]
+
+## Apply changes ----
+systemctl restart networking.service
+
+## Check network ----
+ping -c 5 1.1.1.1
+
+## Check DNS ----
+ping -c 5 archlinux.org
+```
+
+
+
+### APT sources
+
+```sh
+## Edit APT software repositories (add contrib & non-free sources) ----
+nano /etc/apt/sources.list
+
+## deb http://deb.debian.org/debian/ bookworm main contrib non-free non-free-firmware
+## deb-src http://deb.debian.org/debian/ bookworm main contrib non-free non-free-firmware
+## 
+## deb http://security.debian.org/debian-security bookworm-security main non-free-firmware
+## deb-src http://security.debian.org/debian-security bookworm-security main non-free-firmware
+##
+## # bookworm-updates, to get updates before a point release is made;
+## # see https://www.debian.org/doc/manuals/debian-reference/ch02.en.html#_updates_and_backports
+## deb http://deb.debian.org/debian/ bookworm-updates main non-free-firmware
+## deb-src http://deb.debian.org/debian/ bookworm-updates main non-free-firmware
+
+## Apply changes ----
+apt-get update
+```
+
+
+
+### SSH server
+
+```sh
+## Configure SSH server ----
+nano /etc/ssh/sshd_config
+
+## Port 2222
+## LoginGraceTime 30s
+## MaxAuthTries 6
+## PermitRootLogin no
+## PermitEmptyPasswords no
+## PubkeyAuthentication yes
+## AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2
+## AllowGroups sshlogin
+
+## Create new group -----
+groupadd sshlogin
+
+## Add user to <sshlogin> ----
+usermod -aG sshlogin <user>
+
+## Apply SSH server changes ----
+systemctl restart ssh
+```
+
+
+
+### Firewall
+
+```sh
+## Install firewall ----
+apt-get install ufw
+
+## Deny all incoming ----
+ufw default deny incoming
+
+## Accept all outgoing ----
+ufw default allow outgoing
+
+## Accept SSH protocol ----
+ufw allow 2222/tcp
+
+## Apply changes ----
+ufw enable
+
+## Check ----
+ufw status
+```
+
+
+
+### Reboot system
+
+```sh
+## Reboot system ----
+reboot
+```
+
+
+
+## Software installation
+
+Use the command `su -` to switch to root user.
+
+
+
+### Install utilities
+
+```sh
+## Update APT sources ----
+apt-get update
+
+## Install utilities ----
+apt-get install              \
+  apt-transport-https        \   ## Secure APT transport
+  build-essential            \   ## Tools for compiling software
+  ca-certificates            \   ## Common CA certificates
+  curl                       \   ## File download manager
+  dirmngr                    \   ## Network certificate management service
+  ffmpeg                     \   ## Tools for transcoding multimedia files
+  figlet                     \   ## ASCII banners generator
+  fontconfig                 \   ## Font configuration library 
+  git                        \   ## Version control system
+  gnupg                      \   ## Secure communication and data storage
+  htop                       \   ## Interactive processes viewer
+  imagemagick                \   ## Image manipulation program
+  lsb-release                \   ## Linux release reporting utility
+  ncdu                       \   ## Disk usage viewer
+  neofetch                   \   ## Display system information & logo
+  neovim                     \   ## Fork of Vim CLI editor
+  ntfs-3g                    \   ## Support for the NTFS filesystem
+  rsync                      \   ## File-copying tool
+  screen                     \   ## Terminal multiplexer
+  software-properties-common \   ## Repositories manager
+  tmux                       \   ## Terminal multiplexer
+  tree                       \   ## Displays an indented directory tree
+  vim                        \   ## CLI editor
+  wget                       \   ## File download manager
+  zip                        \   ## Archiver for .zip files
+  zsh                            ## Shell with lots of feature
+```
+
+
+
+### Install R
+
+```sh
+## Add CRAN GPG key ----
+gpg --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
+gpg --armor --export '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' | gpg --dearmor | tee /usr/share/keyrings/cran.gpg > /dev/null
+
+## Add CRAN repository ----
+echo "deb [signed-by=/usr/share/keyrings/cran.gpg] https://cloud.r-project.org/bin/linux/debian bookworm-cran40/" | tee /etc/apt/sources.list.d/cran.list
+
+## Update APT sources ----
+apt-get update
+
+## Install R ----
+apt-get install r-base r-base-dev
+
+## Install Pandoc ----
+apt-get install pandoc
+```
+
+```sh
+## Install additional tools for some R packages ----
+apt-get install        \
+  libgdal-dev          \
+  libproj-dev          \
+  libgeos-dev          \
+  libudunits2-dev      \
+  libnode-dev          \
+  libcairo2-dev        \
+  libnetcdf-dev        \
+  libmagick++-dev      \
+  libpoppler-cpp-dev   \
+  libgmp3-dev          \
+  libharfbuzz-dev      \
+  libfribidi-dev       \
+  libmpfrc++-dev       \
+  libfftw3-bin         \
+  libfftw3-dev         \
+  libgsl-dev           \
+  libssl-dev           \
+  libxml2-dev          \
+  libcurl4-openssl-dev
+```
+
+
+
+### Install RStudio server
+
+```sh
+## Install utility ----
+apt-get install gdebi-core
+
+## Download RStudio server installer ----
+wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2024.04.2-764-amd64.deb
+
+## Install RStudio server ----
+gdebi rstudio-server-2024.04.2-764-amd64.deb
+
+## Configure RStudio server ----
+nano /etc/rstudio/rserver.conf
+
+## # Server Configuration File
+## www-port=8787
+
+## Configure RStudio session ----
+nano /etc/rstudio/rsession.conf
+
+## # R Session Configuration File
+## session-timeout-minutes=0
+```
+
+
+
+### Install Quarto
+
+```sh
+## Download Quarto installer ----
+wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.55/quarto-1.5.55-linux-amd64.deb
+
+## Install Quarto ----
+dpkg -i quarto-1.5.55-linux-amd64.deb
+```
+
+
+
+### Install Python
+
+```sh
+## Install Python ----
+apt-get install   \
+  python3         \
+  python3-dev     \
+  python3-pip     \
+  python3-venv    \
+  python3-sphinx
+```
+
+
+
+### Install Docker
+
+```sh
+## Download Docker GPG key ----
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+## Add Docker repository ----
+echo \
+ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+ tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+## Update APT sources ----
+apt-get update
+
+## Install Docker ----
+apt-get install docker-ce
+
+## Add user to Docker group ----
+usermod -aG docker <user>
+```
+
+
+
+### Install others
+
+```sh
+## Install exiftool ----
+wget https://exiftool.org/Image-ExifTool-12.90.tar.gz
+gzip -dc Image-ExifTool-12.90.tar.gz | tar -xf -
+cd Image-ExifTool-12.90
+make install
+cd .. && rm -rf Image-ExifTool-12.90
+rm Image-ExifTool-12.90.tar.gz
+
+## Install ctop ----
+wget https://github.com/bcicen/ctop/releases/download/v0.7.7/ctop-0.7.7-linux-amd64 -O /usr/local/bin/ctop
+chmod +x /usr/local/bin/ctop
+
+## Install lazygit ----
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+install lazygit /usr/local/bin
+rm -rf lazygit
+```
+
+
+
+## System administration
+
+
+
+### Create group
+
+```sh
+## Create new group -----
+groupadd cesab
+
+## Add user to group ----
+usermod -aG cesab <user>
+```
+
+
+
+### Mount disk
+
+```sh
+## Create mount point ----
+mkdir /media/sancho
+
+## Change owner ----
+chown -R root:cesab /media/sancho
+
+## Change permissions ----
+chmod 770 -R /media/sancho
+
+## Mount disk ----
+mount /dev/sdX1 /media/sancho
+
+## Get disk UUID ----
+ls -l /dev/disk/by-uuid/*
+
+## Mount disk at start up ----
+nano /etc/fstab
+
+## /dev/disk/by-uuid/cdda4997-fdbd-4dff-af35-24b46f697f03 /media/sancho ext4 defaults 0 0
+
+## Mount all ----
+mount -a
+
+## Test fstab configuration ----
+systemctl daemon-reload
+```
+
+
+
+### Create user
+
+```sh
+## Define variable ----
+username="jdoe"
+
+## Create new user ----
+useradd -m -G sshlogin,cesab,docker -s /bin/bash $username -p 12345678
+
+## Reset password on first login ----
+passwd -e $username
+
+## Create external drive directory ----
+mkdir -p /media/sancho/$username
+
+## Change owner ----
+chown -R $username:$username /media/sancho/$username
+    
+## Set permissions ----
+chmod 750 -R /media/sancho/$username
+```
+
+
+
+### Delete user
+
+```sh
+## Delete user from system ----
+userdel -r $username
+
+## Remove external drive directory ----
+rm -rf /media/sancho/$username
+```
+
+
+
+## Customization
+
+### Nerd fonts
+
+```sh
+## Install font utility ----
+apt-get install fontconfig
+
+## Create fonts/ directory ----
+mkdir -p /usr/share/fonts/truetype/
+cd /usr/share/fonts/truetype/
+
+## Get latest release of NF GitHub repo ----
+NF_VERSION=$(curl -s "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
+
+## Download Nerd Fonts ----
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/${NF_VERSION}/FiraCode.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/${NF_VERSION}/Hack.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/${NF_VERSION}/Meslo.zip
+
+## Extract ZIP content ----
+unzip FiraCode.zip -d FiraCode && rm FiraCode.zip
+unzip Hack.zip -d Hack && rm Hack.zip
+unzip Meslo.zip -d Meslo && rm Meslo.zip
+
+## Install fonts ----
+fc-cache -f -v
+```
+
+
+### ZSH and plugins
+
+```sh
+## Change ZSH dotfile location ----
+nano /etc/zsh/zshenv
+
+## ZDOTDIR=$HOME/.config/zsh
+
+## Create zsh directories ----
+mkdir -p ~/.cache/zsh
+mkdir -p ~/.config/zsh
+
+## Define ZSH as default shell ----
+chsh -s /usr/bin/zsh root
+
+## Download Oh My ZSH installer ----
+wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+
+## Install Oh My ZSH ----
+ZSH="$HOME/.config/oh-my-zsh" sh install.sh
+
+## Remove Oh My ZSH installer ----
+rm install.sh
+
+## Install prompt theme ----
+ZSH_CUSTOM=$HOME/.config/oh-my-zsh
+
+git clone https://github.com/romkatv/powerlevel10k.git             ${ZSH_CUSTOM}/themes/powerlevel10k
+
+## Install ZSH plugins ----
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-autosuggestions.git     ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+
+## Edit ZSH configuration file ----
+nano ~/.config/zsh/.zshrc
+
+## # Path to your Oh My Zsh installation.
+## export ZSH="$HOME/.config/oh-my-zsh"
+
+## # History
+## HISTFILE=$HOME/.cache/zsh/history
+
+## # Prompt Theme
+## ZSH_THEME="powerlevel10k/powerlevel10k"
+
+## # ZSH plugins
+## plugins=(git zsh-autosuggestions zsh-syntax-highlighting z)
+
+## # Aliases
+## alias ..='cd ..'
+## alias ls='ls --color=auto'
+## alias ll='ls --color=auto -al'
+## alias r="R"
+## alias gs='git status'
+## alias ga='git add'
+## alias gc='git commit -m'
+## alias gp='git push'
+
+## # Hotkeys
+## bindkey '[C' forward-word
+## bindkey '[D' backward-word
+
+## Apply changes ----
+source ~/.config/zsh/.zshrc
+```
+
+
+
+### MOTD
+
+```sh
+## Move to MOTD config directory ----
+cd /etc/update-motd.d
+
+## Remove content ----
+rm -rf ./*
+
+## Define colorscheme ----
+nano colors
+
+## NONE="\033[m"
+## WHITE="\033[1;37m"
+## GREEN="\033[1;32m"
+## RED="\033[0;32;31m"
+## YELLOW="\033[1;33m"
+## BLUE="\033[34m"
+## CYAN="\033[36m"
+## LIGHT_GREEN="\033[1;32m"
+## LIGHT_RED="\033[1;31m"
+
+## Print hostname (Figlet) ----
+nano 00-hostname
+
+## #!/bin/sh
+## 
+## . /etc/update-motd.d/colors
+## 
+## printf "\n"$LIGHT_RED
+## figlet "  "$(hostname -s)
+## printf $NONE
+## printf "\n"
+
+## Print system info (Neofetch) ----
+nano 10-banner
+
+## #!/bin/bash
+## 
+## echo ""
+## neofetch --config /home/ncasajus/.config/neofetch/config.conf
+## 
+## echo "Welcome to Rossinante  !"
+## echo ""
+
+## Remove previous MOTD ----
+rm /etc/motd
+
+## Apply changes ----
+ln -s /var/run/motd /etc/motd
+```
+
