@@ -36,7 +36,7 @@
     "href": "chapters/introduction.html#storage",
     "title": "1  Overview",
     "section": "1.2 Storage",
-    "text": "1.2 Storage\nYou have access to four personal directories:\n\n/home/you/\n/media/sancho/you/ (external drive)\n/media/seagate/you/ (external drive)\n/media/cervantes/you/ (external drive)\n\nYou can create, edit, rename and remove any files/directories you want inside these directories.\n\n\n\n\n\n\nImportant\n\n\n\nRossinante is not a storage server. The 30 TB storage are shared among all users. You can store large datasets to run yours analyses, but once you’re done, please remove these files.\nThere is no backup system! You are responsible for your data.",
+    "text": "1.2 Storage\nAs a regular user, you have access to four personal directories:\n\n/home/you/\n/media/sancho/you/ (external drive)\n/media/seagate/you/ (external drive)\n/media/cervantes/you/ (external drive)\n\nInside these directories, you can create, edit, rename and remove any files/directories you want.\n\n\n\n\n\n\nImportant\n\n\n\nRossinante is not a storage server. The 30 TB storage are shared among all users. You can store large datasets to run yours analyses, but once you’re done, please remove these files.\nThere is no backup system! You are responsible for your own data.",
     "crumbs": [
       "Get started",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
@@ -47,7 +47,7 @@
     "href": "chapters/introduction.html#available-software",
     "title": "1  Overview",
     "section": "1.3 Available software",
-    "text": "1.3 Available software\n\nR – Scientific computing (among others)\nRStudio Server – Web interface for R\nPython 3 – Scientific computing (among others)\npip3 – Python packages managers\nPandoc – Universal document converter\nQuarto – Scientific publishing system\ngit – Version control system\nmake – Project compilation\nDocker – Containerization",
+    "text": "1.3 Available software\n\nR – Scientific computing (among others)\nRStudio Server – Web interface for R\nPython 3 – Scientific computing (among others)\npip3 – Python packages managers\nvenv – Python virtual environments\nPandoc – Universal document converter\nQuarto – Scientific publishing system\ngit – Version control system\nmake – Project compilation\nDocker – Containerization",
     "crumbs": [
       "Get started",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
@@ -69,7 +69,7 @@
     "href": "chapters/introduction.html#missing-software",
     "title": "1  Overview",
     "section": "1.5 Missing software",
-    "text": "1.5 Missing software\nIf you need to use a non-installed software, please contact the administrator.\nNote that each user has a personal R library in which he/she can install every R packages he/she wants (independently of other users). For Python, packages are shared among all users (except if you work with virtual environments [recommended]).\n\n\nCode source  \n\n:::",
+    "text": "1.5 Missing software\nIf you need to use a non-installed software, please contact the administrator.\n\n\n\n\n\n\nNote on R packages\n\n\n\nEach user has a personal R library in which he/she can install every R packages he/she wants (independently of other users).\nFor Python, packages are shared among all users except if you work with virtual environments (recommended).\n\n\n\n\nCode source  \n\n:::",
     "crumbs": [
       "Get started",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
@@ -296,58 +296,69 @@
     ]
   },
   {
-    "objectID": "chapters/linux-cheatsheet.html",
-    "href": "chapters/linux-cheatsheet.html",
-    "title": "Appendix A — Linux Cheat Sheet",
+    "objectID": "chapters/administration.html",
+    "href": "chapters/administration.html",
+    "title": "Appendix A — System administration",
     "section": "",
-    "text": "A.1 Getting help",
+    "text": "Coming soon…\n\n\nCode source  \n\n:::",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>System administration</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/linux-cheatsheet.html",
+    "href": "chapters/linux-cheatsheet.html",
+    "title": "Appendix B — Linux Cheat Sheet",
+    "section": "",
+    "text": "B.1 Getting help",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
     ]
   },
   {
     "objectID": "chapters/linux-cheatsheet.html#getting-help",
     "href": "chapters/linux-cheatsheet.html#getting-help",
-    "title": "Appendix A — Linux Cheat Sheet",
+    "title": "Appendix B — Linux Cheat Sheet",
     "section": "",
     "text": "# Print the manual of the command &lt;ls&gt;\nman ls\n\n# Print examples of the command &lt;ls&gt;\ncurl https://cheat.sh/ls",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
     ]
   },
   {
     "objectID": "chapters/linux-cheatsheet.html#working-w-directories",
     "href": "chapters/linux-cheatsheet.html#working-w-directories",
-    "title": "Appendix A — Linux Cheat Sheet",
-    "section": "A.2 Working w/ directories",
-    "text": "A.2 Working w/ directories\n\nA.2.1 Directory content\n# List the content of the current directory\nls .\n\n# List the content of the current directory (shortcut)\nls\n\n# List the content of the folder &lt;sancho&gt; (relative path)\nls sancho\n\n# List the content of the folder &lt;sancho&gt; (absolute path)\nls /media/sancho\n\n# List the content including hidden files\nls -a\n\n# List the content in a table-like format\nls -l\n\n# List the content in a table-like format with hidden files\nls -al\n\n# List the content recursively\nls -R\n\n# List the content in a table-like format and human-readable\nls -lh\n\n# List the content in a tree-like format\ntree\n\n# List the content including hidden files\ntree -a\n\n# Limit to two levels\ntree -L 2\n\n\nA.2.2 Directory navigation\n# Print the current directory\npwd\n\n# Go to your home directory\ncd /home/jdoe\n\n# Go to your home directory (shortcut)\ncd ~\n\n# Go to your home directory (shortcut)\ncd\n\n# Move one level up (parent directory)\ncd ..\n\n# Move two levels up\ncd ../..\n\n# Go to a directory (relative path)\ncd .ssh\n\n# Go to a directory (absolute path)\ncd ~/.ssh\n\n# Go to a subdirectory (absolute path)\ncd /media/sancho\n\n\nA.2.3 Creating directories\n# Create the directory &lt;foo&gt; in the current directory\nmkdir ./foo\n\n# Create the directory &lt;foo&gt; in the current directory (shortcut)\nmkdir foo\n\n# Create nested directories\nmkdir -p foo/bar/baz\n\n# Create &lt;foo/bar&gt; and &lt;foo/baz&gt; directories\nmkdir -p foo/{bar,baz}\n\n\nA.2.4 Copying directories\n# Copy a directory and its content\n# (if bar/ exists foo/ is copied inside)\ncp -r foo bar\n\n# Copy only the content of a directory\n# (bar/ must exist)\ncp -r foo/* bar/\n\n# Copy a directory and ask before overwriting\ncp -i -r foo/* bar/\n\n\nA.2.5 Moving directories\n# Move a directory into an existing directory\nmv source existing_directory\n\n\nA.2.6 Renaming directories\n# Rename a directory (the target is not an existing directory)\nmv source target\n\n\nA.2.7 Deleting directories\n# Delete a directory and its content\nrm -r foo\n\n# Delete a subdirectory\nrm -r foo/bar\n\n# Delete a directory and its content (force mode)\nrm -rf foo",
+    "title": "Appendix B — Linux Cheat Sheet",
+    "section": "B.2 Working w/ directories",
+    "text": "B.2 Working w/ directories\n\nB.2.1 Directory content\n# List the content of the current directory\nls .\n\n# List the content of the current directory (shortcut)\nls\n\n# List the content of the folder &lt;sancho&gt; (relative path)\nls sancho\n\n# List the content of the folder &lt;sancho&gt; (absolute path)\nls /media/sancho\n\n# List the content including hidden files\nls -a\n\n# List the content in a table-like format\nls -l\n\n# List the content in a table-like format with hidden files\nls -al\n\n# List the content recursively\nls -R\n\n# List the content in a table-like format and human-readable\nls -lh\n\n# List the content in a tree-like format\ntree\n\n# List the content including hidden files\ntree -a\n\n# Limit to two levels\ntree -L 2\n\n\nB.2.2 Directory navigation\n# Print the current directory\npwd\n\n# Go to your home directory\ncd /home/jdoe\n\n# Go to your home directory (shortcut)\ncd ~\n\n# Go to your home directory (shortcut)\ncd\n\n# Move one level up (parent directory)\ncd ..\n\n# Move two levels up\ncd ../..\n\n# Go to a directory (relative path)\ncd .ssh\n\n# Go to a directory (absolute path)\ncd ~/.ssh\n\n# Go to a subdirectory (absolute path)\ncd /media/sancho\n\n\nB.2.3 Creating directories\n# Create the directory &lt;foo&gt; in the current directory\nmkdir ./foo\n\n# Create the directory &lt;foo&gt; in the current directory (shortcut)\nmkdir foo\n\n# Create nested directories\nmkdir -p foo/bar/baz\n\n# Create &lt;foo/bar&gt; and &lt;foo/baz&gt; directories\nmkdir -p foo/{bar,baz}\n\n\nB.2.4 Copying directories\n# Copy a directory and its content\n# (if bar/ exists foo/ is copied inside)\ncp -r foo bar\n\n# Copy only the content of a directory\n# (bar/ must exist)\ncp -r foo/* bar/\n\n# Copy a directory and ask before overwriting\ncp -i -r foo/* bar/\n\n\nB.2.5 Moving directories\n# Move a directory into an existing directory\nmv source existing_directory\n\n\nB.2.6 Renaming directories\n# Rename a directory (the target is not an existing directory)\nmv source target\n\n\nB.2.7 Deleting directories\n# Delete a directory and its content\nrm -r foo\n\n# Delete a subdirectory\nrm -r foo/bar\n\n# Delete a directory and its content (force mode)\nrm -rf foo",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
     ]
   },
   {
     "objectID": "chapters/linux-cheatsheet.html#working-w-files",
     "href": "chapters/linux-cheatsheet.html#working-w-files",
-    "title": "Appendix A — Linux Cheat Sheet",
-    "section": "A.3 Working w/ files",
-    "text": "A.3 Working w/ files\n\nA.3.1 Creating files\n# Create a new empty file in the current directory\ntouch newfile.txt\n\n# Create a new file and add content on-the-fly\necho 'Line 1\\nLine 2' &gt; newfile.txt\n\n# Create and open a new file in the NANO text editor\n# (press CTRL + X, then Y and ENTER to save and exit)\nnano newfile.txt\n                                         \n# Create a new file and add content interactively\n# (press CTRL + D to save the file)\ncat &gt; newfile.txt\n\n\nA.3.2 Editing files\n# Add content at the end of an existing file\necho 'Line 3\\nLine 4' &gt;&gt; file.txt\n\n# Open an existing file in the NANO text editor\n# (press CTRL + X, then Y and ENTER to save and exit)\nnano file.txt\n\n# Add content interactively to an existing file\n# (press CTRL + D to save the file)\ncat &gt;&gt; file.txt\n\n\nA.3.3 Printing file content\n# Print file content\ncat file.txt\n\n# Open a file for interactive reading\nless file.txt\n\n# Print the first 10 lines of a file\nhead file.txt\n\n# Print the first 6 lines of a file\nhead -n 6 file.txt\n\n# Print the last 10 lines of a file\ntail file.txt\n\n# Print the last 6 lines of a file\ntail -n 6 file.txt\n\n# Dynamic - Useful for logs\ntail -f file.txt\n\n\nA.3.4 Copying files\n# Copy a file in the same location\ncp file.txt copy.txt\n\n# Copy a file in a different directory\ncp file.txt folder/copy.txt\n\n\nA.3.5 Moving files\n# Move a file to a new location\nmv file.txt new/location/\n\n\nA.3.6 Renaming files\n# Rename a file\nmv file.txt new_name.txt\n\n# Move and rename a file\nmv file.txt new/location/new_name.txt\n\n\nA.3.7 Deleting file\n# Delete a file\nrm file.txt\n\n# Delete a file (force mode)\nrm -f file.txt\n\n\nA.3.8 Joining files\n# Merge two files in one\ncat file-1.txt file-2.txt &gt; file-3.txt",
+    "title": "Appendix B — Linux Cheat Sheet",
+    "section": "B.3 Working w/ files",
+    "text": "B.3 Working w/ files\n\nB.3.1 Creating files\n# Create a new empty file in the current directory\ntouch newfile.txt\n\n# Create a new file and add content on-the-fly\necho 'Line 1\\nLine 2' &gt; newfile.txt\n\n# Create and open a new file in the NANO text editor\n# (press CTRL + X, then Y and ENTER to save and exit)\nnano newfile.txt\n                                         \n# Create a new file and add content interactively\n# (press CTRL + D to save the file)\ncat &gt; newfile.txt\n\n\nB.3.2 Editing files\n# Add content at the end of an existing file\necho 'Line 3\\nLine 4' &gt;&gt; file.txt\n\n# Open an existing file in the NANO text editor\n# (press CTRL + X, then Y and ENTER to save and exit)\nnano file.txt\n\n# Add content interactively to an existing file\n# (press CTRL + D to save the file)\ncat &gt;&gt; file.txt\n\n\nB.3.3 Printing file content\n# Print file content\ncat file.txt\n\n# Open a file for interactive reading\nless file.txt\n\n# Print the first 10 lines of a file\nhead file.txt\n\n# Print the first 6 lines of a file\nhead -n 6 file.txt\n\n# Print the last 10 lines of a file\ntail file.txt\n\n# Print the last 6 lines of a file\ntail -n 6 file.txt\n\n# Dynamic - Useful for logs\ntail -f file.txt\n\n\nB.3.4 Copying files\n# Copy a file in the same location\ncp file.txt copy.txt\n\n# Copy a file in a different directory\ncp file.txt folder/copy.txt\n\n\nB.3.5 Moving files\n# Move a file to a new location\nmv file.txt new/location/\n\n\nB.3.6 Renaming files\n# Rename a file\nmv file.txt new_name.txt\n\n# Move and rename a file\nmv file.txt new/location/new_name.txt\n\n\nB.3.7 Deleting file\n# Delete a file\nrm file.txt\n\n# Delete a file (force mode)\nrm -f file.txt\n\n\nB.3.8 Joining files\n# Merge two files in one\ncat file-1.txt file-2.txt &gt; file-3.txt",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
     ]
   },
   {
     "objectID": "chapters/linux-cheatsheet.html#useful-commands",
     "href": "chapters/linux-cheatsheet.html#useful-commands",
-    "title": "Appendix A — Linux Cheat Sheet",
-    "section": "A.4 Useful commands",
-    "text": "A.4 Useful commands\n# Clear the terminal\nclear\n\n# Get the size of the current directory\ndu -sh .\n\n# Print the command lines history\nhistory\n\n# Search for a previous command\n# CTRL + R and type some characters of the command\n\n# Create a new screen\nscreen -S screen_name\n\n# Detach a screen\n# (press CTRL + A + D to leave the screen)\n\n# Reattach a screen\nscreen -r screen_name\n\n# List existing screens\nscreen -ls\n\n# Kill all R processes for a specific user\nkillall -u jdoe R\n\n# Kill all RStudio processes for a specific user\nkillall -u jdoe rsession\n\n# System monitoring utilities\ntop\nhtop\nbtop\n\n# Count number of files (and folders) in the current directory\nls | wc -l\n\n# List all files/folders matching a pattern\nls | grep \"\\\\.md$\"\n\n# List all files/folders matching a pattern (case insensitive)\nls | grep -i \"\\\\.md$\"\n\n\nCode source  \n\n:::",
+    "title": "Appendix B — Linux Cheat Sheet",
+    "section": "B.4 Useful commands",
+    "text": "B.4 Useful commands\n# Clear the terminal\nclear\n\n# Get the size of the current directory\ndu -sh .\n\n# Print the command lines history\nhistory\n\n# Search for a previous command\n# CTRL + R and type some characters of the command\n\n# Create a new screen\nscreen -S screen_name\n\n# Detach a screen\n# (press CTRL + A + D to leave the screen)\n\n# Reattach a screen\nscreen -r screen_name\n\n# List existing screens\nscreen -ls\n\n# Kill all R processes for a specific user\nkillall -u jdoe R\n\n# Kill all RStudio processes for a specific user\nkillall -u jdoe rsession\n\n# System monitoring utilities\ntop\nhtop\nbtop\n\n# Count number of files (and folders) in the current directory\nls | wc -l\n\n# List all files/folders matching a pattern\nls | grep \"\\\\.md$\"\n\n# List all files/folders matching a pattern (case insensitive)\nls | grep -i \"\\\\.md$\"\n\n\nCode source  \n\n:::",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Linux Cheat Sheet</span>"
     ]
   }
 ]

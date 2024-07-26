@@ -8,7 +8,7 @@
 
 <meta name="description" content="A user guide to learn how to use the FRB-CESAB server">
 
-<title>Appendix A — Linux Cheat Sheet – Rossinante Book</title>
+<title>Appendix B — Linux Cheat Sheet – Rossinante Book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/parallel-computing.html" rel="prev">
+<link href="../chapters/administration.html" rel="prev">
 <link href="../images/favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/linux-cheatsheet.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/linux-cheatsheet.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Linux Cheat Sheet</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/administration.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/linux-cheatsheet.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linux Cheat Sheet</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -239,8 +239,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/administration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">System administration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/linux-cheatsheet.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Linux Cheat Sheet</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linux Cheat Sheet</span></span></a>
   </div>
 </li>
       </ul>
@@ -255,38 +261,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#getting-help" id="toc-getting-help" class="nav-link active" data-scroll-target="#getting-help"><span class="header-section-number">A.1</span> Getting help</a></li>
-  <li><a href="#working-w-directories" id="toc-working-w-directories" class="nav-link" data-scroll-target="#working-w-directories"><span class="header-section-number">A.2</span> Working w/ directories</a>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link active" data-scroll-target="#getting-help"><span class="header-section-number">B.1</span> Getting help</a></li>
+  <li><a href="#working-w-directories" id="toc-working-w-directories" class="nav-link" data-scroll-target="#working-w-directories"><span class="header-section-number">B.2</span> Working w/ directories</a>
   <ul class="collapse">
-  <li><a href="#directory-content" id="toc-directory-content" class="nav-link" data-scroll-target="#directory-content"><span class="header-section-number">A.2.1</span> Directory content</a></li>
-  <li><a href="#directory-navigation" id="toc-directory-navigation" class="nav-link" data-scroll-target="#directory-navigation"><span class="header-section-number">A.2.2</span> Directory navigation</a></li>
-  <li><a href="#creating-directories" id="toc-creating-directories" class="nav-link" data-scroll-target="#creating-directories"><span class="header-section-number">A.2.3</span> Creating directories</a></li>
-  <li><a href="#copying-directories" id="toc-copying-directories" class="nav-link" data-scroll-target="#copying-directories"><span class="header-section-number">A.2.4</span> Copying directories</a></li>
-  <li><a href="#moving-directories" id="toc-moving-directories" class="nav-link" data-scroll-target="#moving-directories"><span class="header-section-number">A.2.5</span> Moving directories</a></li>
-  <li><a href="#renaming-directories" id="toc-renaming-directories" class="nav-link" data-scroll-target="#renaming-directories"><span class="header-section-number">A.2.6</span> Renaming directories</a></li>
-  <li><a href="#deleting-directories" id="toc-deleting-directories" class="nav-link" data-scroll-target="#deleting-directories"><span class="header-section-number">A.2.7</span> Deleting directories</a></li>
+  <li><a href="#directory-content" id="toc-directory-content" class="nav-link" data-scroll-target="#directory-content"><span class="header-section-number">B.2.1</span> Directory content</a></li>
+  <li><a href="#directory-navigation" id="toc-directory-navigation" class="nav-link" data-scroll-target="#directory-navigation"><span class="header-section-number">B.2.2</span> Directory navigation</a></li>
+  <li><a href="#creating-directories" id="toc-creating-directories" class="nav-link" data-scroll-target="#creating-directories"><span class="header-section-number">B.2.3</span> Creating directories</a></li>
+  <li><a href="#copying-directories" id="toc-copying-directories" class="nav-link" data-scroll-target="#copying-directories"><span class="header-section-number">B.2.4</span> Copying directories</a></li>
+  <li><a href="#moving-directories" id="toc-moving-directories" class="nav-link" data-scroll-target="#moving-directories"><span class="header-section-number">B.2.5</span> Moving directories</a></li>
+  <li><a href="#renaming-directories" id="toc-renaming-directories" class="nav-link" data-scroll-target="#renaming-directories"><span class="header-section-number">B.2.6</span> Renaming directories</a></li>
+  <li><a href="#deleting-directories" id="toc-deleting-directories" class="nav-link" data-scroll-target="#deleting-directories"><span class="header-section-number">B.2.7</span> Deleting directories</a></li>
   </ul></li>
-  <li><a href="#working-w-files" id="toc-working-w-files" class="nav-link" data-scroll-target="#working-w-files"><span class="header-section-number">A.3</span> Working w/ files</a>
+  <li><a href="#working-w-files" id="toc-working-w-files" class="nav-link" data-scroll-target="#working-w-files"><span class="header-section-number">B.3</span> Working w/ files</a>
   <ul class="collapse">
-  <li><a href="#creating-files" id="toc-creating-files" class="nav-link" data-scroll-target="#creating-files"><span class="header-section-number">A.3.1</span> Creating files</a></li>
-  <li><a href="#editing-files" id="toc-editing-files" class="nav-link" data-scroll-target="#editing-files"><span class="header-section-number">A.3.2</span> Editing files</a></li>
-  <li><a href="#printing-file-content" id="toc-printing-file-content" class="nav-link" data-scroll-target="#printing-file-content"><span class="header-section-number">A.3.3</span> Printing file content</a></li>
-  <li><a href="#copying-files" id="toc-copying-files" class="nav-link" data-scroll-target="#copying-files"><span class="header-section-number">A.3.4</span> Copying files</a></li>
-  <li><a href="#moving-files" id="toc-moving-files" class="nav-link" data-scroll-target="#moving-files"><span class="header-section-number">A.3.5</span> Moving files</a></li>
-  <li><a href="#renaming-files" id="toc-renaming-files" class="nav-link" data-scroll-target="#renaming-files"><span class="header-section-number">A.3.6</span> Renaming files</a></li>
-  <li><a href="#deleting-file" id="toc-deleting-file" class="nav-link" data-scroll-target="#deleting-file"><span class="header-section-number">A.3.7</span> Deleting file</a></li>
-  <li><a href="#joining-files" id="toc-joining-files" class="nav-link" data-scroll-target="#joining-files"><span class="header-section-number">A.3.8</span> Joining files</a></li>
+  <li><a href="#creating-files" id="toc-creating-files" class="nav-link" data-scroll-target="#creating-files"><span class="header-section-number">B.3.1</span> Creating files</a></li>
+  <li><a href="#editing-files" id="toc-editing-files" class="nav-link" data-scroll-target="#editing-files"><span class="header-section-number">B.3.2</span> Editing files</a></li>
+  <li><a href="#printing-file-content" id="toc-printing-file-content" class="nav-link" data-scroll-target="#printing-file-content"><span class="header-section-number">B.3.3</span> Printing file content</a></li>
+  <li><a href="#copying-files" id="toc-copying-files" class="nav-link" data-scroll-target="#copying-files"><span class="header-section-number">B.3.4</span> Copying files</a></li>
+  <li><a href="#moving-files" id="toc-moving-files" class="nav-link" data-scroll-target="#moving-files"><span class="header-section-number">B.3.5</span> Moving files</a></li>
+  <li><a href="#renaming-files" id="toc-renaming-files" class="nav-link" data-scroll-target="#renaming-files"><span class="header-section-number">B.3.6</span> Renaming files</a></li>
+  <li><a href="#deleting-file" id="toc-deleting-file" class="nav-link" data-scroll-target="#deleting-file"><span class="header-section-number">B.3.7</span> Deleting file</a></li>
+  <li><a href="#joining-files" id="toc-joining-files" class="nav-link" data-scroll-target="#joining-files"><span class="header-section-number">B.3.8</span> Joining files</a></li>
   </ul></li>
-  <li><a href="#useful-commands" id="toc-useful-commands" class="nav-link" data-scroll-target="#useful-commands"><span class="header-section-number">A.4</span> Useful commands</a></li>
+  <li><a href="#useful-commands" id="toc-useful-commands" class="nav-link" data-scroll-target="#useful-commands"><span class="header-section-number">B.4</span> Useful commands</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frbcesab/rossinante/blob/main/chapters/linux-cheatsheet.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/frbcesab/rossinante/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/linux-cheatsheet.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/linux-cheatsheet.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Linux Cheat Sheet</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/administration.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/linux-cheatsheet.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Linux Cheat Sheet</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix A — Linux Cheat Sheet</h1>
+<h1 class="title">Appendix B — Linux Cheat Sheet</h1>
 </div>
 
 
@@ -303,18 +309,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="getting-help" class="level2" data-number="A.1">
-<h2 data-number="A.1" class="anchored" data-anchor-id="getting-help"><span class="header-section-number">A.1</span> Getting help</h2>
+<section id="getting-help" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="getting-help"><span class="header-section-number">B.1</span> Getting help</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Print the manual of the command &lt;ls&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">man</span> ls</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Print examples of the command &lt;ls&gt;</span></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="ex">curl</span> https://cheat.sh/ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="working-w-directories" class="level2" data-number="A.2">
-<h2 data-number="A.2" class="anchored" data-anchor-id="working-w-directories"><span class="header-section-number">A.2</span> Working w/ directories</h2>
-<section id="directory-content" class="level3" data-number="A.2.1">
-<h3 data-number="A.2.1" class="anchored" data-anchor-id="directory-content"><span class="header-section-number">A.2.1</span> Directory content</h3>
+<section id="working-w-directories" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="working-w-directories"><span class="header-section-number">B.2</span> Working w/ directories</h2>
+<section id="directory-content" class="level3" data-number="B.2.1">
+<h3 data-number="B.2.1" class="anchored" data-anchor-id="directory-content"><span class="header-section-number">B.2.1</span> Directory content</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># List the content of the current directory</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">ls</span> .</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
@@ -351,8 +357,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-34"><a href="#cb2-34"></a><span class="co"># Limit to two levels</span></span>
 <span id="cb2-35"><a href="#cb2-35"></a><span class="ex">tree</span> <span class="at">-L</span> 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="directory-navigation" class="level3" data-number="A.2.2">
-<h3 data-number="A.2.2" class="anchored" data-anchor-id="directory-navigation"><span class="header-section-number">A.2.2</span> Directory navigation</h3>
+<section id="directory-navigation" class="level3" data-number="B.2.2">
+<h3 data-number="B.2.2" class="anchored" data-anchor-id="directory-navigation"><span class="header-section-number">B.2.2</span> Directory navigation</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Print the current directory</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="bu">pwd</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
@@ -380,8 +386,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-25"><a href="#cb3-25"></a><span class="co"># Go to a subdirectory (absolute path)</span></span>
 <span id="cb3-26"><a href="#cb3-26"></a><span class="bu">cd</span> /media/sancho</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="creating-directories" class="level3" data-number="A.2.3">
-<h3 data-number="A.2.3" class="anchored" data-anchor-id="creating-directories"><span class="header-section-number">A.2.3</span> Creating directories</h3>
+<section id="creating-directories" class="level3" data-number="B.2.3">
+<h3 data-number="B.2.3" class="anchored" data-anchor-id="creating-directories"><span class="header-section-number">B.2.3</span> Creating directories</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Create the directory &lt;foo&gt; in the current directory</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">mkdir</span> ./foo</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
@@ -394,8 +400,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-10"><a href="#cb4-10"></a><span class="co"># Create &lt;foo/bar&gt; and &lt;foo/baz&gt; directories</span></span>
 <span id="cb4-11"><a href="#cb4-11"></a><span class="fu">mkdir</span> <span class="at">-p</span> foo/<span class="dt">{bar</span><span class="op">,</span><span class="dt">baz}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="copying-directories" class="level3" data-number="A.2.4">
-<h3 data-number="A.2.4" class="anchored" data-anchor-id="copying-directories"><span class="header-section-number">A.2.4</span> Copying directories</h3>
+<section id="copying-directories" class="level3" data-number="B.2.4">
+<h3 data-number="B.2.4" class="anchored" data-anchor-id="copying-directories"><span class="header-section-number">B.2.4</span> Copying directories</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Copy a directory and its content</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="co"># (if bar/ exists foo/ is copied inside)</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">cp</span> <span class="at">-r</span> foo bar</span>
@@ -407,18 +413,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-9"><a href="#cb5-9"></a><span class="co"># Copy a directory and ask before overwriting</span></span>
 <span id="cb5-10"><a href="#cb5-10"></a><span class="fu">cp</span> <span class="at">-i</span> <span class="at">-r</span> foo/<span class="pp">*</span> bar/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="moving-directories" class="level3" data-number="A.2.5">
-<h3 data-number="A.2.5" class="anchored" data-anchor-id="moving-directories"><span class="header-section-number">A.2.5</span> Moving directories</h3>
+<section id="moving-directories" class="level3" data-number="B.2.5">
+<h3 data-number="B.2.5" class="anchored" data-anchor-id="moving-directories"><span class="header-section-number">B.2.5</span> Moving directories</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Move a directory into an existing directory</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="fu">mv</span> source existing_directory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="renaming-directories" class="level3" data-number="A.2.6">
-<h3 data-number="A.2.6" class="anchored" data-anchor-id="renaming-directories"><span class="header-section-number">A.2.6</span> Renaming directories</h3>
+<section id="renaming-directories" class="level3" data-number="B.2.6">
+<h3 data-number="B.2.6" class="anchored" data-anchor-id="renaming-directories"><span class="header-section-number">B.2.6</span> Renaming directories</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Rename a directory (the target is not an existing directory)</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">mv</span> source target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="deleting-directories" class="level3" data-number="A.2.7">
-<h3 data-number="A.2.7" class="anchored" data-anchor-id="deleting-directories"><span class="header-section-number">A.2.7</span> Deleting directories</h3>
+<section id="deleting-directories" class="level3" data-number="B.2.7">
+<h3 data-number="B.2.7" class="anchored" data-anchor-id="deleting-directories"><span class="header-section-number">B.2.7</span> Deleting directories</h3>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Delete a directory and its content</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="fu">rm</span> <span class="at">-r</span> foo</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
@@ -429,10 +435,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-8"><a href="#cb8-8"></a><span class="fu">rm</span> <span class="at">-rf</span> foo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="working-w-files" class="level2" data-number="A.3">
-<h2 data-number="A.3" class="anchored" data-anchor-id="working-w-files"><span class="header-section-number">A.3</span> Working w/ files</h2>
-<section id="creating-files" class="level3" data-number="A.3.1">
-<h3 data-number="A.3.1" class="anchored" data-anchor-id="creating-files"><span class="header-section-number">A.3.1</span> Creating files</h3>
+<section id="working-w-files" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="working-w-files"><span class="header-section-number">B.3</span> Working w/ files</h2>
+<section id="creating-files" class="level3" data-number="B.3.1">
+<h3 data-number="B.3.1" class="anchored" data-anchor-id="creating-files"><span class="header-section-number">B.3.1</span> Creating files</h3>
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Create a new empty file in the current directory</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="fu">touch</span> newfile.txt</span>
 <span id="cb9-3"><a href="#cb9-3"></a></span>
@@ -447,8 +453,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-12"><a href="#cb9-12"></a><span class="co"># (press CTRL + D to save the file)</span></span>
 <span id="cb9-13"><a href="#cb9-13"></a><span class="fu">cat</span> <span class="op">&gt;</span> newfile.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="editing-files" class="level3" data-number="A.3.2">
-<h3 data-number="A.3.2" class="anchored" data-anchor-id="editing-files"><span class="header-section-number">A.3.2</span> Editing files</h3>
+<section id="editing-files" class="level3" data-number="B.3.2">
+<h3 data-number="B.3.2" class="anchored" data-anchor-id="editing-files"><span class="header-section-number">B.3.2</span> Editing files</h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Add content at the end of an existing file</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="bu">echo</span> <span class="st">'Line 3\nLine 4'</span> <span class="op">&gt;&gt;</span> file.txt</span>
 <span id="cb10-3"><a href="#cb10-3"></a></span>
@@ -460,8 +466,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-9"><a href="#cb10-9"></a><span class="co"># (press CTRL + D to save the file)</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a><span class="fu">cat</span> <span class="op">&gt;&gt;</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="printing-file-content" class="level3" data-number="A.3.3">
-<h3 data-number="A.3.3" class="anchored" data-anchor-id="printing-file-content"><span class="header-section-number">A.3.3</span> Printing file content</h3>
+<section id="printing-file-content" class="level3" data-number="B.3.3">
+<h3 data-number="B.3.3" class="anchored" data-anchor-id="printing-file-content"><span class="header-section-number">B.3.3</span> Printing file content</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Print file content</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="fu">cat</span> file.txt</span>
 <span id="cb11-3"><a href="#cb11-3"></a></span>
@@ -483,43 +489,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-19"><a href="#cb11-19"></a><span class="co"># Dynamic - Useful for logs</span></span>
 <span id="cb11-20"><a href="#cb11-20"></a><span class="fu">tail</span> <span class="at">-f</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="copying-files" class="level3" data-number="A.3.4">
-<h3 data-number="A.3.4" class="anchored" data-anchor-id="copying-files"><span class="header-section-number">A.3.4</span> Copying files</h3>
+<section id="copying-files" class="level3" data-number="B.3.4">
+<h3 data-number="B.3.4" class="anchored" data-anchor-id="copying-files"><span class="header-section-number">B.3.4</span> Copying files</h3>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Copy a file in the same location</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="fu">cp</span> file.txt copy.txt</span>
 <span id="cb12-3"><a href="#cb12-3"></a></span>
 <span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Copy a file in a different directory</span></span>
 <span id="cb12-5"><a href="#cb12-5"></a><span class="fu">cp</span> file.txt folder/copy.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="moving-files" class="level3" data-number="A.3.5">
-<h3 data-number="A.3.5" class="anchored" data-anchor-id="moving-files"><span class="header-section-number">A.3.5</span> Moving files</h3>
+<section id="moving-files" class="level3" data-number="B.3.5">
+<h3 data-number="B.3.5" class="anchored" data-anchor-id="moving-files"><span class="header-section-number">B.3.5</span> Moving files</h3>
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Move a file to a new location</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="fu">mv</span> file.txt new/location/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="renaming-files" class="level3" data-number="A.3.6">
-<h3 data-number="A.3.6" class="anchored" data-anchor-id="renaming-files"><span class="header-section-number">A.3.6</span> Renaming files</h3>
+<section id="renaming-files" class="level3" data-number="B.3.6">
+<h3 data-number="B.3.6" class="anchored" data-anchor-id="renaming-files"><span class="header-section-number">B.3.6</span> Renaming files</h3>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Rename a file</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="fu">mv</span> file.txt new_name.txt</span>
 <span id="cb14-3"><a href="#cb14-3"></a></span>
 <span id="cb14-4"><a href="#cb14-4"></a><span class="co"># Move and rename a file</span></span>
 <span id="cb14-5"><a href="#cb14-5"></a><span class="fu">mv</span> file.txt new/location/new_name.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="deleting-file" class="level3" data-number="A.3.7">
-<h3 data-number="A.3.7" class="anchored" data-anchor-id="deleting-file"><span class="header-section-number">A.3.7</span> Deleting file</h3>
+<section id="deleting-file" class="level3" data-number="B.3.7">
+<h3 data-number="B.3.7" class="anchored" data-anchor-id="deleting-file"><span class="header-section-number">B.3.7</span> Deleting file</h3>
 <div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Delete a file</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">rm</span> file.txt</span>
 <span id="cb15-3"><a href="#cb15-3"></a></span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Delete a file (force mode)</span></span>
 <span id="cb15-5"><a href="#cb15-5"></a><span class="fu">rm</span> <span class="at">-f</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="joining-files" class="level3" data-number="A.3.8">
-<h3 data-number="A.3.8" class="anchored" data-anchor-id="joining-files"><span class="header-section-number">A.3.8</span> Joining files</h3>
+<section id="joining-files" class="level3" data-number="B.3.8">
+<h3 data-number="B.3.8" class="anchored" data-anchor-id="joining-files"><span class="header-section-number">B.3.8</span> Joining files</h3>
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Merge two files in one</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="fu">cat</span> file-1.txt file-2.txt <span class="op">&gt;</span> file-3.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="useful-commands" class="level2" data-number="A.4">
-<h2 data-number="A.4" class="anchored" data-anchor-id="useful-commands"><span class="header-section-number">A.4</span> Useful commands</h2>
+<section id="useful-commands" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="useful-commands"><span class="header-section-number">B.4</span> Useful commands</h2>
 <div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Clear the terminal</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="fu">clear</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a></span>
@@ -994,8 +1000,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/parallel-computing.html" class="pagination-link" aria-label="Parallel computing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel computing</span></span>
+      <a href="../chapters/administration.html" class="pagination-link" aria-label="System administration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">System administration</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
