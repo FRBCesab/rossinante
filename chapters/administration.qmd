@@ -119,6 +119,21 @@ apt-get update
 
 
 
+### Nvidia driver
+
+```sh
+## Install Nvidia utility ----
+apt install nvidia-detect
+
+## Detect graphic card ----
+nvidia-detect
+
+## Install Nvidia driver ----
+apt install nvidia-driver
+```
+
+
+
 ### SSH server
 
 ```sh
