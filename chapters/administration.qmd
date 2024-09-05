@@ -225,6 +225,7 @@ apt-get install              \
   neofetch                   \   ## Display system information & logo
   neovim                     \   ## Fork of Vim CLI editor
   ntfs-3g                    \   ## Support for the NTFS filesystem
+  nvtop                      \   ## GPU monitoring tool
   rsync                      \   ## File-copying tool
   screen                     \   ## Terminal multiplexer
   software-properties-common \   ## Repositories manager
