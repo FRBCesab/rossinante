@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -269,9 +269,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#timezone" id="toc-timezone" class="nav-link" data-scroll-target="#timezone"><span class="header-section-number">A.2.2</span> Timezone</a></li>
   <li><a href="#network-configuration" id="toc-network-configuration" class="nav-link" data-scroll-target="#network-configuration"><span class="header-section-number">A.2.3</span> Network configuration</a></li>
   <li><a href="#apt-sources" id="toc-apt-sources" class="nav-link" data-scroll-target="#apt-sources"><span class="header-section-number">A.2.4</span> APT sources</a></li>
-  <li><a href="#ssh-server" id="toc-ssh-server" class="nav-link" data-scroll-target="#ssh-server"><span class="header-section-number">A.2.5</span> SSH server</a></li>
-  <li><a href="#firewall" id="toc-firewall" class="nav-link" data-scroll-target="#firewall"><span class="header-section-number">A.2.6</span> Firewall</a></li>
-  <li><a href="#reboot-system" id="toc-reboot-system" class="nav-link" data-scroll-target="#reboot-system"><span class="header-section-number">A.2.7</span> Reboot system</a></li>
+  <li><a href="#nvidia-driver" id="toc-nvidia-driver" class="nav-link" data-scroll-target="#nvidia-driver"><span class="header-section-number">A.2.5</span> Nvidia driver</a></li>
+  <li><a href="#ssh-server" id="toc-ssh-server" class="nav-link" data-scroll-target="#ssh-server"><span class="header-section-number">A.2.6</span> SSH server</a></li>
+  <li><a href="#firewall" id="toc-firewall" class="nav-link" data-scroll-target="#firewall"><span class="header-section-number">A.2.7</span> Firewall</a></li>
+  <li><a href="#reboot-system" id="toc-reboot-system" class="nav-link" data-scroll-target="#reboot-system"><span class="header-section-number">A.2.8</span> Reboot system</a></li>
   </ul></li>
   <li><a href="#software-installation" id="toc-software-installation" class="nav-link" data-scroll-target="#software-installation"><span class="header-section-number">A.3</span> Software installation</a>
   <ul class="collapse">
@@ -443,53 +444,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-15"><a href="#cb7-15"></a><span class="co">## Apply changes ----</span></span>
 <span id="cb7-16"><a href="#cb7-16"></a><span class="ex">apt-get</span> update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="ssh-server" class="level3" data-number="A.2.5">
-<h3 data-number="A.2.5" class="anchored" data-anchor-id="ssh-server"><span class="header-section-number">A.2.5</span> SSH server</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## Configure SSH server ----</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">nano</span> /etc/ssh/sshd_config</span>
+<section id="nvidia-driver" class="level3" data-number="A.2.5">
+<h3 data-number="A.2.5" class="anchored" data-anchor-id="nvidia-driver"><span class="header-section-number">A.2.5</span> Nvidia driver</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## Install Nvidia utility ----</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">apt</span> install nvidia-detect</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">## Port 2222</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">## LoginGraceTime 30s</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">## MaxAuthTries 6</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">## PermitRootLogin no</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">## PermitEmptyPasswords no</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">## PubkeyAuthentication yes</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">## AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">## AllowGroups sshlogin</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">## Create new group -----</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="ex">groupadd</span> sshlogin</span>
-<span id="cb8-15"><a href="#cb8-15"></a></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">## Add user to &lt;sshlogin&gt; ----</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="ex">usermod</span> <span class="at">-aG</span> sshlogin <span class="op">&lt;</span>user<span class="op">&gt;</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="co">## Apply SSH server changes ----</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a><span class="ex">systemctl</span> restart ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">## Detect graphic card ----</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="ex">nvidia-detect</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">## Install Nvidia driver ----</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="ex">apt</span> install nvidia-driver</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="firewall" class="level3" data-number="A.2.6">
-<h3 data-number="A.2.6" class="anchored" data-anchor-id="firewall"><span class="header-section-number">A.2.6</span> Firewall</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## Install firewall ----</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">apt-get</span> install ufw</span>
+<section id="ssh-server" class="level3" data-number="A.2.6">
+<h3 data-number="A.2.6" class="anchored" data-anchor-id="ssh-server"><span class="header-section-number">A.2.6</span> SSH server</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## Configure SSH server ----</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">nano</span> /etc/ssh/sshd_config</span>
 <span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">## Deny all incoming ----</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="ex">ufw</span> default deny incoming</span>
-<span id="cb9-6"><a href="#cb9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">## Accept all outgoing ----</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="ex">ufw</span> default allow outgoing</span>
-<span id="cb9-9"><a href="#cb9-9"></a></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">## Accept SSH protocol ----</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="ex">ufw</span> allow 2222/tcp</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">## Port 2222</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">## LoginGraceTime 30s</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">## MaxAuthTries 6</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">## PermitRootLogin no</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">## PermitEmptyPasswords no</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">## PubkeyAuthentication yes</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">## AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">## AllowGroups sshlogin</span></span>
 <span id="cb9-12"><a href="#cb9-12"></a></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">## Apply changes ----</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="ex">ufw</span> enable</span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">## Create new group -----</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="ex">groupadd</span> sshlogin</span>
 <span id="cb9-15"><a href="#cb9-15"></a></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="co">## Check ----</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="ex">ufw</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">## Add user to &lt;sshlogin&gt; ----</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="ex">usermod</span> <span class="at">-aG</span> sshlogin <span class="op">&lt;</span>user<span class="op">&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">## Apply SSH server changes ----</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="ex">systemctl</span> restart ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="reboot-system" class="level3" data-number="A.2.7">
-<h3 data-number="A.2.7" class="anchored" data-anchor-id="reboot-system"><span class="header-section-number">A.2.7</span> Reboot system</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## Reboot system ----</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="ex">reboot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="firewall" class="level3" data-number="A.2.7">
+<h3 data-number="A.2.7" class="anchored" data-anchor-id="firewall"><span class="header-section-number">A.2.7</span> Firewall</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## Install firewall ----</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ex">apt-get</span> install ufw</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">## Deny all incoming ----</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="ex">ufw</span> default deny incoming</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">## Accept all outgoing ----</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="ex">ufw</span> default allow outgoing</span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">## Accept SSH protocol ----</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="ex">ufw</span> allow 2222/tcp</span>
+<span id="cb10-12"><a href="#cb10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">## Apply changes ----</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="ex">ufw</span> enable</span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">## Check ----</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="ex">ufw</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reboot-system" class="level3" data-number="A.2.8">
+<h3 data-number="A.2.8" class="anchored" data-anchor-id="reboot-system"><span class="header-section-number">A.2.8</span> Reboot system</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## Reboot system ----</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="ex">reboot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="software-installation" class="level2" data-number="A.3">
@@ -497,368 +509,368 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Use the command <code>su -</code> to switch to root user.</p>
 <section id="install-utilities" class="level3" data-number="A.3.1">
 <h3 data-number="A.3.1" class="anchored" data-anchor-id="install-utilities"><span class="header-section-number">A.3.1</span> Install utilities</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## Update APT sources ----</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="ex">apt-get</span> update</span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">## Install utilities ----</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="ex">apt-get</span> install              <span class="dt">\</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>  apt-transport-https        <span class="dt">\ </span>  <span class="co">## Secure APT transport</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>  <span class="ex">build-essential</span>            <span class="dt">\ </span>  <span class="co">## Tools for compiling software</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>  <span class="ex">ca-certificates</span>            <span class="dt">\ </span>  <span class="co">## Common CA certificates</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>  <span class="ex">curl</span>                       <span class="dt">\ </span>  <span class="co">## File download manager</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>  <span class="ex">dirmngr</span>                    <span class="dt">\ </span>  <span class="co">## Network certificate management service</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>  <span class="ex">ffmpeg</span>                     <span class="dt">\ </span>  <span class="co">## Tools for transcoding multimedia files</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>  <span class="ex">figlet</span>                     <span class="dt">\ </span>  <span class="co">## ASCII banners generator</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>  <span class="ex">fontconfig</span>                 <span class="dt">\ </span>  <span class="co">## Font configuration library </span></span>
-<span id="cb11-14"><a href="#cb11-14"></a>  <span class="fu">git</span>                        <span class="dt">\ </span>  <span class="co">## Version control system</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a>  <span class="ex">gnupg</span>                      <span class="dt">\ </span>  <span class="co">## Secure communication and data storage</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a>  <span class="ex">htop</span>                       <span class="dt">\ </span>  <span class="co">## Interactive processes viewer</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a>  <span class="ex">imagemagick</span>                <span class="dt">\ </span>  <span class="co">## Image manipulation program</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a>  <span class="ex">lsb-release</span>                <span class="dt">\ </span>  <span class="co">## Linux release reporting utility</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a>  <span class="ex">ncdu</span>                       <span class="dt">\ </span>  <span class="co">## Disk usage viewer</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a>  <span class="ex">neofetch</span>                   <span class="dt">\ </span>  <span class="co">## Display system information &amp; logo</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a>  <span class="ex">neovim</span>                     <span class="dt">\ </span>  <span class="co">## Fork of Vim CLI editor</span></span>
-<span id="cb11-22"><a href="#cb11-22"></a>  <span class="ex">ntfs-3g</span>                    <span class="dt">\ </span>  <span class="co">## Support for the NTFS filesystem</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a>  <span class="fu">rsync</span>                      <span class="dt">\ </span>  <span class="co">## File-copying tool</span></span>
-<span id="cb11-24"><a href="#cb11-24"></a>  <span class="ex">screen</span>                     <span class="dt">\ </span>  <span class="co">## Terminal multiplexer</span></span>
-<span id="cb11-25"><a href="#cb11-25"></a>  <span class="ex">software-properties-common</span> <span class="dt">\ </span>  <span class="co">## Repositories manager</span></span>
-<span id="cb11-26"><a href="#cb11-26"></a>  <span class="ex">tmux</span>                       <span class="dt">\ </span>  <span class="co">## Terminal multiplexer</span></span>
-<span id="cb11-27"><a href="#cb11-27"></a>  <span class="ex">tree</span>                       <span class="dt">\ </span>  <span class="co">## Displays an indented directory tree</span></span>
-<span id="cb11-28"><a href="#cb11-28"></a>  <span class="ex">vim</span>                        <span class="dt">\ </span>  <span class="co">## CLI editor</span></span>
-<span id="cb11-29"><a href="#cb11-29"></a>  <span class="fu">wget</span>                       <span class="dt">\ </span>  <span class="co">## File download manager</span></span>
-<span id="cb11-30"><a href="#cb11-30"></a>  <span class="fu">zip</span>                        <span class="dt">\ </span>  <span class="co">## Archiver for .zip files</span></span>
-<span id="cb11-31"><a href="#cb11-31"></a>  <span class="fu">zsh</span>                            <span class="co">## Shell with lots of feature</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## Update APT sources ----</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="ex">apt-get</span> update</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">## Install utilities ----</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="ex">apt-get</span> install              <span class="dt">\</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  apt-transport-https        <span class="dt">\ </span>  <span class="co">## Secure APT transport</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="ex">build-essential</span>            <span class="dt">\ </span>  <span class="co">## Tools for compiling software</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="ex">ca-certificates</span>            <span class="dt">\ </span>  <span class="co">## Common CA certificates</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="ex">curl</span>                       <span class="dt">\ </span>  <span class="co">## File download manager</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="ex">dirmngr</span>                    <span class="dt">\ </span>  <span class="co">## Network certificate management service</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  <span class="ex">ffmpeg</span>                     <span class="dt">\ </span>  <span class="co">## Tools for transcoding multimedia files</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  <span class="ex">figlet</span>                     <span class="dt">\ </span>  <span class="co">## ASCII banners generator</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="ex">fontconfig</span>                 <span class="dt">\ </span>  <span class="co">## Font configuration library </span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>  <span class="fu">git</span>                        <span class="dt">\ </span>  <span class="co">## Version control system</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>  <span class="ex">gnupg</span>                      <span class="dt">\ </span>  <span class="co">## Secure communication and data storage</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>  <span class="ex">htop</span>                       <span class="dt">\ </span>  <span class="co">## Interactive processes viewer</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a>  <span class="ex">imagemagick</span>                <span class="dt">\ </span>  <span class="co">## Image manipulation program</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>  <span class="ex">lsb-release</span>                <span class="dt">\ </span>  <span class="co">## Linux release reporting utility</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>  <span class="ex">ncdu</span>                       <span class="dt">\ </span>  <span class="co">## Disk usage viewer</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>  <span class="ex">neofetch</span>                   <span class="dt">\ </span>  <span class="co">## Display system information &amp; logo</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>  <span class="ex">neovim</span>                     <span class="dt">\ </span>  <span class="co">## Fork of Vim CLI editor</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>  <span class="ex">ntfs-3g</span>                    <span class="dt">\ </span>  <span class="co">## Support for the NTFS filesystem</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a>  <span class="fu">rsync</span>                      <span class="dt">\ </span>  <span class="co">## File-copying tool</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a>  <span class="ex">screen</span>                     <span class="dt">\ </span>  <span class="co">## Terminal multiplexer</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a>  <span class="ex">software-properties-common</span> <span class="dt">\ </span>  <span class="co">## Repositories manager</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a>  <span class="ex">tmux</span>                       <span class="dt">\ </span>  <span class="co">## Terminal multiplexer</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a>  <span class="ex">tree</span>                       <span class="dt">\ </span>  <span class="co">## Displays an indented directory tree</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a>  <span class="ex">vim</span>                        <span class="dt">\ </span>  <span class="co">## CLI editor</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a>  <span class="fu">wget</span>                       <span class="dt">\ </span>  <span class="co">## File download manager</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a>  <span class="fu">zip</span>                        <span class="dt">\ </span>  <span class="co">## Archiver for .zip files</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a>  <span class="fu">zsh</span>                            <span class="co">## Shell with lots of feature</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="install-r" class="level3" data-number="A.3.2">
 <h3 data-number="A.3.2" class="anchored" data-anchor-id="install-r"><span class="header-section-number">A.3.2</span> Install R</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## Add CRAN GPG key ----</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="ex">gpg</span> <span class="at">--keyserver</span> keyserver.ubuntu.com <span class="at">--recv-key</span> <span class="st">'95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="ex">gpg</span> <span class="at">--armor</span> <span class="at">--export</span> <span class="st">'95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'</span> <span class="kw">|</span> <span class="ex">gpg</span> <span class="at">--dearmor</span> <span class="kw">|</span> <span class="fu">tee</span> /usr/share/keyrings/cran.gpg <span class="op">&gt;</span> /dev/null</span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co">## Add CRAN repository ----</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="bu">echo</span> <span class="st">"deb [signed-by=/usr/share/keyrings/cran.gpg] https://cloud.r-project.org/bin/linux/debian bookworm-cran40/"</span> <span class="kw">|</span> <span class="fu">tee</span> /etc/apt/sources.list.d/cran.list</span>
-<span id="cb12-7"><a href="#cb12-7"></a></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">## Update APT sources ----</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="ex">apt-get</span> update</span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co">## Install R ----</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="ex">apt-get</span> install r-base r-base-dev</span>
-<span id="cb12-13"><a href="#cb12-13"></a></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="co">## Install Pandoc ----</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="ex">apt-get</span> install pandoc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">## Install additional tools for some R packages ----</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">apt-get</span> install        <span class="dt">\</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  libgdal-dev          <span class="dt">\</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  libproj-dev          <span class="dt">\</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>  libgeos-dev          <span class="dt">\</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>  libudunits2-dev      <span class="dt">\</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>  libnode-dev          <span class="dt">\</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>  libcairo2-dev        <span class="dt">\</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>  libnetcdf-dev        <span class="dt">\</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>  libmagick++-dev      <span class="dt">\</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a>  libpoppler-cpp-dev   <span class="dt">\</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a>  libgmp3-dev          <span class="dt">\</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a>  libharfbuzz-dev      <span class="dt">\</span></span>
-<span id="cb13-14"><a href="#cb13-14"></a>  libfribidi-dev       <span class="dt">\</span></span>
-<span id="cb13-15"><a href="#cb13-15"></a>  libmpfrc++-dev       <span class="dt">\</span></span>
-<span id="cb13-16"><a href="#cb13-16"></a>  libfftw3-bin         <span class="dt">\</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a>  libfftw3-dev         <span class="dt">\</span></span>
-<span id="cb13-18"><a href="#cb13-18"></a>  libgsl-dev           <span class="dt">\</span></span>
-<span id="cb13-19"><a href="#cb13-19"></a>  libssl-dev           <span class="dt">\</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a>  libxml2-dev          <span class="dt">\</span></span>
-<span id="cb13-21"><a href="#cb13-21"></a>  libcurl4-openssl-dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">## Add CRAN GPG key ----</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">gpg</span> <span class="at">--keyserver</span> keyserver.ubuntu.com <span class="at">--recv-key</span> <span class="st">'95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="ex">gpg</span> <span class="at">--armor</span> <span class="at">--export</span> <span class="st">'95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'</span> <span class="kw">|</span> <span class="ex">gpg</span> <span class="at">--dearmor</span> <span class="kw">|</span> <span class="fu">tee</span> /usr/share/keyrings/cran.gpg <span class="op">&gt;</span> /dev/null</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">## Add CRAN repository ----</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="bu">echo</span> <span class="st">"deb [signed-by=/usr/share/keyrings/cran.gpg] https://cloud.r-project.org/bin/linux/debian bookworm-cran40/"</span> <span class="kw">|</span> <span class="fu">tee</span> /etc/apt/sources.list.d/cran.list</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">## Update APT sources ----</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="ex">apt-get</span> update</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">## Install R ----</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="ex">apt-get</span> install r-base r-base-dev</span>
+<span id="cb13-13"><a href="#cb13-13"></a></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">## Install Pandoc ----</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="ex">apt-get</span> install pandoc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">## Install additional tools for some R packages ----</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">apt-get</span> install        <span class="dt">\</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  libgdal-dev          <span class="dt">\</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  libproj-dev          <span class="dt">\</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  libgeos-dev          <span class="dt">\</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  libudunits2-dev      <span class="dt">\</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  libnode-dev          <span class="dt">\</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  libcairo2-dev        <span class="dt">\</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>  libnetcdf-dev        <span class="dt">\</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>  libmagick++-dev      <span class="dt">\</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a>  libpoppler-cpp-dev   <span class="dt">\</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>  libgmp3-dev          <span class="dt">\</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a>  libharfbuzz-dev      <span class="dt">\</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>  libfribidi-dev       <span class="dt">\</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>  libmpfrc++-dev       <span class="dt">\</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a>  libfftw3-bin         <span class="dt">\</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a>  libfftw3-dev         <span class="dt">\</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a>  libgsl-dev           <span class="dt">\</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a>  libssl-dev           <span class="dt">\</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a>  libxml2-dev          <span class="dt">\</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a>  libcurl4-openssl-dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="install-rstudio-server" class="level3" data-number="A.3.3">
 <h3 data-number="A.3.3" class="anchored" data-anchor-id="install-rstudio-server"><span class="header-section-number">A.3.3</span> Install RStudio server</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">## Install utility ----</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">apt-get</span> install gdebi-core</span>
-<span id="cb14-3"><a href="#cb14-3"></a></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co">## Download RStudio server installer ----</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="fu">wget</span> https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2024.04.2-764-amd64.deb</span>
-<span id="cb14-6"><a href="#cb14-6"></a></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="co">## Install RStudio server ----</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="ex">gdebi</span> rstudio-server-2024.04.2-764-amd64.deb</span>
-<span id="cb14-9"><a href="#cb14-9"></a></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="co">## Configure RStudio server ----</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="fu">nano</span> /etc/rstudio/rserver.conf</span>
-<span id="cb14-12"><a href="#cb14-12"></a></span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="co">## # Server Configuration File</span></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="co">## www-port=8787</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="co">## Configure RStudio session ----</span></span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="fu">nano</span> /etc/rstudio/rsession.conf</span>
-<span id="cb14-18"><a href="#cb14-18"></a></span>
-<span id="cb14-19"><a href="#cb14-19"></a><span class="co">## # R Session Configuration File</span></span>
-<span id="cb14-20"><a href="#cb14-20"></a><span class="co">## session-timeout-minutes=0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">## Install utility ----</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">apt-get</span> install gdebi-core</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co">## Download RStudio server installer ----</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">wget</span> https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2024.04.2-764-amd64.deb</span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co">## Install RStudio server ----</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="ex">gdebi</span> rstudio-server-2024.04.2-764-amd64.deb</span>
+<span id="cb15-9"><a href="#cb15-9"></a></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co">## Configure RStudio server ----</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="fu">nano</span> /etc/rstudio/rserver.conf</span>
+<span id="cb15-12"><a href="#cb15-12"></a></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="co">## # Server Configuration File</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="co">## www-port=8787</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a></span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="co">## Configure RStudio session ----</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="fu">nano</span> /etc/rstudio/rsession.conf</span>
+<span id="cb15-18"><a href="#cb15-18"></a></span>
+<span id="cb15-19"><a href="#cb15-19"></a><span class="co">## # R Session Configuration File</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a><span class="co">## session-timeout-minutes=0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="install-quarto" class="level3" data-number="A.3.4">
 <h3 data-number="A.3.4" class="anchored" data-anchor-id="install-quarto"><span class="header-section-number">A.3.4</span> Install Quarto</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">## Download Quarto installer ----</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">wget</span> https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.55/quarto-1.5.55-linux-amd64.deb</span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co">## Install Quarto ----</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="ex">dpkg</span> <span class="at">-i</span> quarto-1.5.55-linux-amd64.deb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">## Download Quarto installer ----</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">wget</span> https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.55/quarto-1.5.55-linux-amd64.deb</span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co">## Install Quarto ----</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="ex">dpkg</span> <span class="at">-i</span> quarto-1.5.55-linux-amd64.deb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="install-python" class="level3" data-number="A.3.5">
 <h3 data-number="A.3.5" class="anchored" data-anchor-id="install-python"><span class="header-section-number">A.3.5</span> Install Python</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">## Install Python ----</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="ex">apt-get</span> install   <span class="dt">\</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  python3         <span class="dt">\</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>  python3-dev     <span class="dt">\</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a>  python3-pip     <span class="dt">\</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>  python3-venv    <span class="dt">\</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a>  python3-sphinx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">## Install Python ----</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">apt-get</span> install   <span class="dt">\</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  python3         <span class="dt">\</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  python3-dev     <span class="dt">\</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>  python3-pip     <span class="dt">\</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>  python3-venv    <span class="dt">\</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>  python3-sphinx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="install-docker" class="level3" data-number="A.3.6">
 <h3 data-number="A.3.6" class="anchored" data-anchor-id="install-docker"><span class="header-section-number">A.3.6</span> Install Docker</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">## Download Docker GPG key ----</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://download.docker.com/linux/debian/gpg <span class="kw">|</span> <span class="ex">gpg</span> <span class="at">--dearmor</span> <span class="at">-o</span> /etc/apt/keyrings/docker.gpg</span>
-<span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co">## Add Docker repository ----</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="bu">echo</span> <span class="dt">\</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a> <span class="st">"deb [arch=</span><span class="va">$(</span><span class="ex">dpkg</span> <span class="at">--print-architecture</span><span class="va">)</span><span class="st"> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian </span><span class="dt">\</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="st"> </span><span class="va">$(</span><span class="bu">.</span> /etc/os-release <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"</span><span class="va">$VERSION_CODENAME</span><span class="st">"</span><span class="va">)</span><span class="st"> stable"</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a> <span class="fu">tee</span> /etc/apt/sources.list.d/docker.list <span class="op">&gt;</span> /dev/null</span>
-<span id="cb17-9"><a href="#cb17-9"></a></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="co">## Update APT sources ----</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="ex">apt-get</span> update</span>
-<span id="cb17-12"><a href="#cb17-12"></a></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="co">## Install Docker ----</span></span>
-<span id="cb17-14"><a href="#cb17-14"></a><span class="ex">apt-get</span> install docker-ce</span>
-<span id="cb17-15"><a href="#cb17-15"></a></span>
-<span id="cb17-16"><a href="#cb17-16"></a><span class="co">## Add user to Docker group ----</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a><span class="ex">usermod</span> <span class="at">-aG</span> docker <span class="op">&lt;</span>user<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">## Download Docker GPG key ----</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://download.docker.com/linux/debian/gpg <span class="kw">|</span> <span class="ex">gpg</span> <span class="at">--dearmor</span> <span class="at">-o</span> /etc/apt/keyrings/docker.gpg</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">## Add Docker repository ----</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="bu">echo</span> <span class="dt">\</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a> <span class="st">"deb [arch=</span><span class="va">$(</span><span class="ex">dpkg</span> <span class="at">--print-architecture</span><span class="va">)</span><span class="st"> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian </span><span class="dt">\</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="st"> </span><span class="va">$(</span><span class="bu">.</span> /etc/os-release <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"</span><span class="va">$VERSION_CODENAME</span><span class="st">"</span><span class="va">)</span><span class="st"> stable"</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a> <span class="fu">tee</span> /etc/apt/sources.list.d/docker.list <span class="op">&gt;</span> /dev/null</span>
+<span id="cb18-9"><a href="#cb18-9"></a></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="co">## Update APT sources ----</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="ex">apt-get</span> update</span>
+<span id="cb18-12"><a href="#cb18-12"></a></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="co">## Install Docker ----</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="ex">apt-get</span> install docker-ce</span>
+<span id="cb18-15"><a href="#cb18-15"></a></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="co">## Add user to Docker group ----</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="ex">usermod</span> <span class="at">-aG</span> docker <span class="op">&lt;</span>user<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="install-others" class="level3" data-number="A.3.7">
 <h3 data-number="A.3.7" class="anchored" data-anchor-id="install-others"><span class="header-section-number">A.3.7</span> Install others</h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">## Install exiftool ----</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">wget</span> https://exiftool.org/Image-ExifTool-12.90.tar.gz</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="fu">gzip</span> <span class="at">-dc</span> Image-ExifTool-12.90.tar.gz <span class="kw">|</span> <span class="fu">tar</span> <span class="at">-xf</span> <span class="at">-</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="bu">cd</span> Image-ExifTool-12.90</span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">make</span> install</span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="bu">cd</span> .. <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> Image-ExifTool-12.90</span>
-<span id="cb18-7"><a href="#cb18-7"></a><span class="fu">rm</span> Image-ExifTool-12.90.tar.gz</span>
-<span id="cb18-8"><a href="#cb18-8"></a></span>
-<span id="cb18-9"><a href="#cb18-9"></a><span class="co">## Install ctop ----</span></span>
-<span id="cb18-10"><a href="#cb18-10"></a><span class="fu">wget</span> https://github.com/bcicen/ctop/releases/download/v0.7.7/ctop-0.7.7-linux-amd64 <span class="at">-O</span> /usr/local/bin/ctop</span>
-<span id="cb18-11"><a href="#cb18-11"></a><span class="fu">chmod</span> +x /usr/local/bin/ctop</span>
-<span id="cb18-12"><a href="#cb18-12"></a></span>
-<span id="cb18-13"><a href="#cb18-13"></a><span class="co">## Install lazygit ----</span></span>
-<span id="cb18-14"><a href="#cb18-14"></a><span class="va">LAZYGIT_VERSION</span><span class="op">=</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-s</span> <span class="st">"https://api.github.com/repos/jesseduffield/lazygit/releases/latest"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-Po</span> <span class="st">'"tag_name": "v\K[^"]*'</span><span class="va">)</span></span>
-<span id="cb18-15"><a href="#cb18-15"></a><span class="ex">curl</span> <span class="at">-Lo</span> lazygit.tar.gz <span class="st">"https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_</span><span class="va">${LAZYGIT_VERSION}</span><span class="st">_Linux_x86_64.tar.gz"</span></span>
-<span id="cb18-16"><a href="#cb18-16"></a><span class="fu">tar</span> xf lazygit.tar.gz lazygit</span>
-<span id="cb18-17"><a href="#cb18-17"></a><span class="fu">install</span> lazygit /usr/local/bin</span>
-<span id="cb18-18"><a href="#cb18-18"></a><span class="fu">rm</span> <span class="at">-rf</span> lazygit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">## Install exiftool ----</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">wget</span> https://exiftool.org/Image-ExifTool-12.90.tar.gz</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">gzip</span> <span class="at">-dc</span> Image-ExifTool-12.90.tar.gz <span class="kw">|</span> <span class="fu">tar</span> <span class="at">-xf</span> <span class="at">-</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="bu">cd</span> Image-ExifTool-12.90</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="fu">make</span> install</span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="bu">cd</span> .. <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> Image-ExifTool-12.90</span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="fu">rm</span> Image-ExifTool-12.90.tar.gz</span>
+<span id="cb19-8"><a href="#cb19-8"></a></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co">## Install ctop ----</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="fu">wget</span> https://github.com/bcicen/ctop/releases/download/v0.7.7/ctop-0.7.7-linux-amd64 <span class="at">-O</span> /usr/local/bin/ctop</span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="fu">chmod</span> +x /usr/local/bin/ctop</span>
+<span id="cb19-12"><a href="#cb19-12"></a></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="co">## Install lazygit ----</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="va">LAZYGIT_VERSION</span><span class="op">=</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-s</span> <span class="st">"https://api.github.com/repos/jesseduffield/lazygit/releases/latest"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-Po</span> <span class="st">'"tag_name": "v\K[^"]*'</span><span class="va">)</span></span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="ex">curl</span> <span class="at">-Lo</span> lazygit.tar.gz <span class="st">"https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_</span><span class="va">${LAZYGIT_VERSION}</span><span class="st">_Linux_x86_64.tar.gz"</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="fu">tar</span> xf lazygit.tar.gz lazygit</span>
+<span id="cb19-17"><a href="#cb19-17"></a><span class="fu">install</span> lazygit /usr/local/bin</span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="fu">rm</span> <span class="at">-rf</span> lazygit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="system-administration" class="level2" data-number="A.4">
 <h2 data-number="A.4" class="anchored" data-anchor-id="system-administration"><span class="header-section-number">A.4</span> System administration</h2>
 <section id="create-group" class="level3" data-number="A.4.1">
 <h3 data-number="A.4.1" class="anchored" data-anchor-id="create-group"><span class="header-section-number">A.4.1</span> Create group</h3>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">## Create new group -----</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="ex">groupadd</span> cesab</span>
-<span id="cb19-3"><a href="#cb19-3"></a></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="co">## Add user to group ----</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="ex">usermod</span> <span class="at">-aG</span> cesab <span class="op">&lt;</span>user<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">## Create new group -----</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="ex">groupadd</span> cesab</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co">## Add user to group ----</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="ex">usermod</span> <span class="at">-aG</span> cesab <span class="op">&lt;</span>user<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="mount-disk" class="level3" data-number="A.4.2">
 <h3 data-number="A.4.2" class="anchored" data-anchor-id="mount-disk"><span class="header-section-number">A.4.2</span> Mount disk</h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">## Create mount point ----</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">mkdir</span> /media/sancho</span>
-<span id="cb20-3"><a href="#cb20-3"></a></span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="co">## Change owner ----</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="fu">chown</span> <span class="at">-R</span> root:cesab /media/sancho</span>
-<span id="cb20-6"><a href="#cb20-6"></a></span>
-<span id="cb20-7"><a href="#cb20-7"></a><span class="co">## Change permissions ----</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a><span class="fu">chmod</span> 770 <span class="at">-R</span> /media/sancho</span>
-<span id="cb20-9"><a href="#cb20-9"></a></span>
-<span id="cb20-10"><a href="#cb20-10"></a><span class="co">## Mount disk ----</span></span>
-<span id="cb20-11"><a href="#cb20-11"></a><span class="fu">mount</span> /dev/sdX1 /media/sancho</span>
-<span id="cb20-12"><a href="#cb20-12"></a></span>
-<span id="cb20-13"><a href="#cb20-13"></a><span class="co">## Get disk UUID ----</span></span>
-<span id="cb20-14"><a href="#cb20-14"></a><span class="fu">ls</span> <span class="at">-l</span> /dev/disk/by-uuid/<span class="pp">*</span></span>
-<span id="cb20-15"><a href="#cb20-15"></a></span>
-<span id="cb20-16"><a href="#cb20-16"></a><span class="co">## Mount disk at start up ----</span></span>
-<span id="cb20-17"><a href="#cb20-17"></a><span class="fu">nano</span> /etc/fstab</span>
-<span id="cb20-18"><a href="#cb20-18"></a></span>
-<span id="cb20-19"><a href="#cb20-19"></a><span class="co">## /dev/disk/by-uuid/cdda4997-fdbd-4dff-af35-24b46f697f03 /media/sancho ext4 defaults 0 0</span></span>
-<span id="cb20-20"><a href="#cb20-20"></a></span>
-<span id="cb20-21"><a href="#cb20-21"></a><span class="co">## Mount all ----</span></span>
-<span id="cb20-22"><a href="#cb20-22"></a><span class="fu">mount</span> <span class="at">-a</span></span>
-<span id="cb20-23"><a href="#cb20-23"></a></span>
-<span id="cb20-24"><a href="#cb20-24"></a><span class="co">## Test fstab configuration ----</span></span>
-<span id="cb20-25"><a href="#cb20-25"></a><span class="ex">systemctl</span> daemon-reload</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">## Create mount point ----</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">mkdir</span> /media/sancho</span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co">## Change owner ----</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="fu">chown</span> <span class="at">-R</span> root:cesab /media/sancho</span>
+<span id="cb21-6"><a href="#cb21-6"></a></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co">## Change permissions ----</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="fu">chmod</span> 770 <span class="at">-R</span> /media/sancho</span>
+<span id="cb21-9"><a href="#cb21-9"></a></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">## Mount disk ----</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="fu">mount</span> /dev/sdX1 /media/sancho</span>
+<span id="cb21-12"><a href="#cb21-12"></a></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="co">## Get disk UUID ----</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="fu">ls</span> <span class="at">-l</span> /dev/disk/by-uuid/<span class="pp">*</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="co">## Mount disk at start up ----</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="fu">nano</span> /etc/fstab</span>
+<span id="cb21-18"><a href="#cb21-18"></a></span>
+<span id="cb21-19"><a href="#cb21-19"></a><span class="co">## /dev/disk/by-uuid/cdda4997-fdbd-4dff-af35-24b46f697f03 /media/sancho ext4 defaults 0 0</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a></span>
+<span id="cb21-21"><a href="#cb21-21"></a><span class="co">## Mount all ----</span></span>
+<span id="cb21-22"><a href="#cb21-22"></a><span class="fu">mount</span> <span class="at">-a</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a></span>
+<span id="cb21-24"><a href="#cb21-24"></a><span class="co">## Test fstab configuration ----</span></span>
+<span id="cb21-25"><a href="#cb21-25"></a><span class="ex">systemctl</span> daemon-reload</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="create-user" class="level3" data-number="A.4.3">
 <h3 data-number="A.4.3" class="anchored" data-anchor-id="create-user"><span class="header-section-number">A.4.3</span> Create user</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">## Define variable ----</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="va">username</span><span class="op">=</span><span class="st">"jdoe"</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="co">## Create new user ----</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="ex">useradd</span> <span class="at">-m</span> <span class="at">-G</span> sshlogin,cesab,docker <span class="at">-s</span> /bin/bash <span class="va">$username</span> <span class="at">-p</span> 12345678</span>
-<span id="cb21-6"><a href="#cb21-6"></a></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="co">## Reset password on first login ----</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="fu">passwd</span> <span class="at">-e</span> <span class="va">$username</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="co">## Create external drive directory ----</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a><span class="fu">mkdir</span> <span class="at">-p</span> /media/sancho/<span class="va">$username</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a></span>
-<span id="cb21-13"><a href="#cb21-13"></a><span class="co">## Change owner ----</span></span>
-<span id="cb21-14"><a href="#cb21-14"></a><span class="fu">chown</span> <span class="at">-R</span> <span class="va">$username</span>:<span class="va">$username</span> /media/sancho/<span class="va">$username</span></span>
-<span id="cb21-15"><a href="#cb21-15"></a>    </span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="co">## Set permissions ----</span></span>
-<span id="cb21-17"><a href="#cb21-17"></a><span class="fu">chmod</span> 750 <span class="at">-R</span> /media/sancho/<span class="va">$username</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">## Define variable ----</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="va">username</span><span class="op">=</span><span class="st">"jdoe"</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">## Create new user ----</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="ex">useradd</span> <span class="at">-m</span> <span class="at">-G</span> sshlogin,cesab,docker <span class="at">-s</span> /bin/bash <span class="va">$username</span> <span class="at">-p</span> 12345678</span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co">## Reset password on first login ----</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="fu">passwd</span> <span class="at">-e</span> <span class="va">$username</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co">## Create external drive directory ----</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="fu">mkdir</span> <span class="at">-p</span> /media/sancho/<span class="va">$username</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="co">## Change owner ----</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="fu">chown</span> <span class="at">-R</span> <span class="va">$username</span>:<span class="va">$username</span> /media/sancho/<span class="va">$username</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a>    </span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co">## Set permissions ----</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="fu">chmod</span> 750 <span class="at">-R</span> /media/sancho/<span class="va">$username</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="delete-user" class="level3" data-number="A.4.4">
 <h3 data-number="A.4.4" class="anchored" data-anchor-id="delete-user"><span class="header-section-number">A.4.4</span> Delete user</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">## Delete user from system ----</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="ex">userdel</span> <span class="at">-r</span> <span class="va">$username</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="co">## Remove external drive directory ----</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="fu">rm</span> <span class="at">-rf</span> /media/sancho/<span class="va">$username</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">## Delete user from system ----</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="ex">userdel</span> <span class="at">-r</span> <span class="va">$username</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">## Remove external drive directory ----</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="fu">rm</span> <span class="at">-rf</span> /media/sancho/<span class="va">$username</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="customization" class="level2" data-number="A.5">
 <h2 data-number="A.5" class="anchored" data-anchor-id="customization"><span class="header-section-number">A.5</span> Customization</h2>
 <section id="nerd-fonts" class="level3" data-number="A.5.1">
 <h3 data-number="A.5.1" class="anchored" data-anchor-id="nerd-fonts"><span class="header-section-number">A.5.1</span> Nerd fonts</h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">## Install font utility ----</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="ex">apt-get</span> install fontconfig</span>
-<span id="cb23-3"><a href="#cb23-3"></a></span>
-<span id="cb23-4"><a href="#cb23-4"></a><span class="co">## Create fonts/ directory ----</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a><span class="fu">mkdir</span> <span class="at">-p</span> /usr/share/fonts/truetype/</span>
-<span id="cb23-6"><a href="#cb23-6"></a><span class="bu">cd</span> /usr/share/fonts/truetype/</span>
-<span id="cb23-7"><a href="#cb23-7"></a></span>
-<span id="cb23-8"><a href="#cb23-8"></a><span class="co">## Get latest release of NF GitHub repo ----</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a><span class="va">NF_VERSION</span><span class="op">=</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-s</span> <span class="st">"https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-Po</span> <span class="st">'"tag_name": "\K[^"]*'</span><span class="va">)</span></span>
-<span id="cb23-10"><a href="#cb23-10"></a></span>
-<span id="cb23-11"><a href="#cb23-11"></a><span class="co">## Download Nerd Fonts ----</span></span>
-<span id="cb23-12"><a href="#cb23-12"></a><span class="fu">wget</span> https://github.com/ryanoasis/nerd-fonts/releases/download/<span class="va">${NF_VERSION}</span>/FiraCode.zip</span>
-<span id="cb23-13"><a href="#cb23-13"></a><span class="fu">wget</span> https://github.com/ryanoasis/nerd-fonts/releases/download/<span class="va">${NF_VERSION}</span>/Hack.zip</span>
-<span id="cb23-14"><a href="#cb23-14"></a><span class="fu">wget</span> https://github.com/ryanoasis/nerd-fonts/releases/download/<span class="va">${NF_VERSION}</span>/Meslo.zip</span>
-<span id="cb23-15"><a href="#cb23-15"></a></span>
-<span id="cb23-16"><a href="#cb23-16"></a><span class="co">## Extract ZIP content ----</span></span>
-<span id="cb23-17"><a href="#cb23-17"></a><span class="fu">unzip</span> FiraCode.zip <span class="at">-d</span> FiraCode <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> FiraCode.zip</span>
-<span id="cb23-18"><a href="#cb23-18"></a><span class="fu">unzip</span> Hack.zip <span class="at">-d</span> Hack <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> Hack.zip</span>
-<span id="cb23-19"><a href="#cb23-19"></a><span class="fu">unzip</span> Meslo.zip <span class="at">-d</span> Meslo <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> Meslo.zip</span>
-<span id="cb23-20"><a href="#cb23-20"></a></span>
-<span id="cb23-21"><a href="#cb23-21"></a><span class="co">## Install fonts ----</span></span>
-<span id="cb23-22"><a href="#cb23-22"></a><span class="ex">fc-cache</span> <span class="at">-f</span> <span class="at">-v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">## Install font utility ----</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="ex">apt-get</span> install fontconfig</span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co">## Create fonts/ directory ----</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="fu">mkdir</span> <span class="at">-p</span> /usr/share/fonts/truetype/</span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="bu">cd</span> /usr/share/fonts/truetype/</span>
+<span id="cb24-7"><a href="#cb24-7"></a></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="co">## Get latest release of NF GitHub repo ----</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="va">NF_VERSION</span><span class="op">=</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-s</span> <span class="st">"https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-Po</span> <span class="st">'"tag_name": "\K[^"]*'</span><span class="va">)</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="co">## Download Nerd Fonts ----</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="fu">wget</span> https://github.com/ryanoasis/nerd-fonts/releases/download/<span class="va">${NF_VERSION}</span>/FiraCode.zip</span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="fu">wget</span> https://github.com/ryanoasis/nerd-fonts/releases/download/<span class="va">${NF_VERSION}</span>/Hack.zip</span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="fu">wget</span> https://github.com/ryanoasis/nerd-fonts/releases/download/<span class="va">${NF_VERSION}</span>/Meslo.zip</span>
+<span id="cb24-15"><a href="#cb24-15"></a></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="co">## Extract ZIP content ----</span></span>
+<span id="cb24-17"><a href="#cb24-17"></a><span class="fu">unzip</span> FiraCode.zip <span class="at">-d</span> FiraCode <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> FiraCode.zip</span>
+<span id="cb24-18"><a href="#cb24-18"></a><span class="fu">unzip</span> Hack.zip <span class="at">-d</span> Hack <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> Hack.zip</span>
+<span id="cb24-19"><a href="#cb24-19"></a><span class="fu">unzip</span> Meslo.zip <span class="at">-d</span> Meslo <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> Meslo.zip</span>
+<span id="cb24-20"><a href="#cb24-20"></a></span>
+<span id="cb24-21"><a href="#cb24-21"></a><span class="co">## Install fonts ----</span></span>
+<span id="cb24-22"><a href="#cb24-22"></a><span class="ex">fc-cache</span> <span class="at">-f</span> <span class="at">-v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="zsh-and-plugins" class="level3" data-number="A.5.2">
 <h3 data-number="A.5.2" class="anchored" data-anchor-id="zsh-and-plugins"><span class="header-section-number">A.5.2</span> ZSH and plugins</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">## Change ZSH dotfile location ----</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">nano</span> /etc/zsh/zshenv</span>
-<span id="cb24-3"><a href="#cb24-3"></a></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="co">## ZDOTDIR=$HOME/.config/zsh</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a></span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="co">## Create zsh directories ----</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.cache/zsh</span>
-<span id="cb24-8"><a href="#cb24-8"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.config/zsh</span>
-<span id="cb24-9"><a href="#cb24-9"></a></span>
-<span id="cb24-10"><a href="#cb24-10"></a><span class="co">## Define ZSH as default shell ----</span></span>
-<span id="cb24-11"><a href="#cb24-11"></a><span class="fu">chsh</span> <span class="at">-s</span> /usr/bin/zsh root</span>
-<span id="cb24-12"><a href="#cb24-12"></a></span>
-<span id="cb24-13"><a href="#cb24-13"></a><span class="co">## Download Oh My ZSH installer ----</span></span>
-<span id="cb24-14"><a href="#cb24-14"></a><span class="fu">wget</span> https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh</span>
-<span id="cb24-15"><a href="#cb24-15"></a></span>
-<span id="cb24-16"><a href="#cb24-16"></a><span class="co">## Install Oh My ZSH ----</span></span>
-<span id="cb24-17"><a href="#cb24-17"></a><span class="va">ZSH</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.config/oh-my-zsh"</span> <span class="fu">sh</span> install.sh</span>
-<span id="cb24-18"><a href="#cb24-18"></a></span>
-<span id="cb24-19"><a href="#cb24-19"></a><span class="co">## Remove Oh My ZSH installer ----</span></span>
-<span id="cb24-20"><a href="#cb24-20"></a><span class="fu">rm</span> install.sh</span>
-<span id="cb24-21"><a href="#cb24-21"></a></span>
-<span id="cb24-22"><a href="#cb24-22"></a><span class="co">## Install prompt theme ----</span></span>
-<span id="cb24-23"><a href="#cb24-23"></a><span class="va">ZSH_CUSTOM</span><span class="op">=</span><span class="va">$HOME</span>/.config/oh-my-zsh</span>
-<span id="cb24-24"><a href="#cb24-24"></a></span>
-<span id="cb24-25"><a href="#cb24-25"></a><span class="fu">git</span> clone https://github.com/romkatv/powerlevel10k.git             <span class="va">${ZSH_CUSTOM}</span>/themes/powerlevel10k</span>
-<span id="cb24-26"><a href="#cb24-26"></a></span>
-<span id="cb24-27"><a href="#cb24-27"></a><span class="co">## Install ZSH plugins ----</span></span>
-<span id="cb24-28"><a href="#cb24-28"></a><span class="fu">git</span> clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="va">${ZSH_CUSTOM}</span>/plugins/zsh-syntax-highlighting</span>
-<span id="cb24-29"><a href="#cb24-29"></a></span>
-<span id="cb24-30"><a href="#cb24-30"></a><span class="fu">git</span> clone https://github.com/zsh-users/zsh-autosuggestions.git     <span class="va">${ZSH_CUSTOM}</span>/plugins/zsh-autosuggestions</span>
-<span id="cb24-31"><a href="#cb24-31"></a></span>
-<span id="cb24-32"><a href="#cb24-32"></a><span class="co">## Edit ZSH configuration file ----</span></span>
-<span id="cb24-33"><a href="#cb24-33"></a><span class="fu">nano</span> ~/.config/zsh/.zshrc</span>
-<span id="cb24-34"><a href="#cb24-34"></a></span>
-<span id="cb24-35"><a href="#cb24-35"></a><span class="co">## # Path to your Oh My Zsh installation.</span></span>
-<span id="cb24-36"><a href="#cb24-36"></a><span class="co">## export ZSH="$HOME/.config/oh-my-zsh"</span></span>
-<span id="cb24-37"><a href="#cb24-37"></a></span>
-<span id="cb24-38"><a href="#cb24-38"></a><span class="co">## # History</span></span>
-<span id="cb24-39"><a href="#cb24-39"></a><span class="co">## HISTFILE=$HOME/.cache/zsh/history</span></span>
-<span id="cb24-40"><a href="#cb24-40"></a></span>
-<span id="cb24-41"><a href="#cb24-41"></a><span class="co">## # Prompt Theme</span></span>
-<span id="cb24-42"><a href="#cb24-42"></a><span class="co">## ZSH_THEME="powerlevel10k/powerlevel10k"</span></span>
-<span id="cb24-43"><a href="#cb24-43"></a></span>
-<span id="cb24-44"><a href="#cb24-44"></a><span class="co">## # ZSH plugins</span></span>
-<span id="cb24-45"><a href="#cb24-45"></a><span class="co">## plugins=(git zsh-autosuggestions zsh-syntax-highlighting z)</span></span>
-<span id="cb24-46"><a href="#cb24-46"></a></span>
-<span id="cb24-47"><a href="#cb24-47"></a><span class="co">## # Aliases</span></span>
-<span id="cb24-48"><a href="#cb24-48"></a><span class="co">## alias ..='cd ..'</span></span>
-<span id="cb24-49"><a href="#cb24-49"></a><span class="co">## alias ls='ls --color=auto'</span></span>
-<span id="cb24-50"><a href="#cb24-50"></a><span class="co">## alias ll='ls --color=auto -al'</span></span>
-<span id="cb24-51"><a href="#cb24-51"></a><span class="co">## alias r="R"</span></span>
-<span id="cb24-52"><a href="#cb24-52"></a><span class="co">## alias gs='git status'</span></span>
-<span id="cb24-53"><a href="#cb24-53"></a><span class="co">## alias ga='git add'</span></span>
-<span id="cb24-54"><a href="#cb24-54"></a><span class="co">## alias gc='git commit -m'</span></span>
-<span id="cb24-55"><a href="#cb24-55"></a><span class="co">## alias gp='git push'</span></span>
-<span id="cb24-56"><a href="#cb24-56"></a></span>
-<span id="cb24-57"><a href="#cb24-57"></a><span class="co">## # Hotkeys</span></span>
-<span id="cb24-58"><a href="#cb24-58"></a><span class="co">## bindkey '[C' forward-word</span></span>
-<span id="cb24-59"><a href="#cb24-59"></a><span class="co">## bindkey '[D' backward-word</span></span>
-<span id="cb24-60"><a href="#cb24-60"></a></span>
-<span id="cb24-61"><a href="#cb24-61"></a><span class="co">## Apply changes ----</span></span>
-<span id="cb24-62"><a href="#cb24-62"></a><span class="bu">source</span> ~/.config/zsh/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">## Change ZSH dotfile location ----</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">nano</span> /etc/zsh/zshenv</span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="co">## ZDOTDIR=$HOME/.config/zsh</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="co">## Create zsh directories ----</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.cache/zsh</span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.config/zsh</span>
+<span id="cb25-9"><a href="#cb25-9"></a></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="co">## Define ZSH as default shell ----</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="fu">chsh</span> <span class="at">-s</span> /usr/bin/zsh root</span>
+<span id="cb25-12"><a href="#cb25-12"></a></span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="co">## Download Oh My ZSH installer ----</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="fu">wget</span> https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh</span>
+<span id="cb25-15"><a href="#cb25-15"></a></span>
+<span id="cb25-16"><a href="#cb25-16"></a><span class="co">## Install Oh My ZSH ----</span></span>
+<span id="cb25-17"><a href="#cb25-17"></a><span class="va">ZSH</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.config/oh-my-zsh"</span> <span class="fu">sh</span> install.sh</span>
+<span id="cb25-18"><a href="#cb25-18"></a></span>
+<span id="cb25-19"><a href="#cb25-19"></a><span class="co">## Remove Oh My ZSH installer ----</span></span>
+<span id="cb25-20"><a href="#cb25-20"></a><span class="fu">rm</span> install.sh</span>
+<span id="cb25-21"><a href="#cb25-21"></a></span>
+<span id="cb25-22"><a href="#cb25-22"></a><span class="co">## Install prompt theme ----</span></span>
+<span id="cb25-23"><a href="#cb25-23"></a><span class="va">ZSH_CUSTOM</span><span class="op">=</span><span class="va">$HOME</span>/.config/oh-my-zsh</span>
+<span id="cb25-24"><a href="#cb25-24"></a></span>
+<span id="cb25-25"><a href="#cb25-25"></a><span class="fu">git</span> clone https://github.com/romkatv/powerlevel10k.git             <span class="va">${ZSH_CUSTOM}</span>/themes/powerlevel10k</span>
+<span id="cb25-26"><a href="#cb25-26"></a></span>
+<span id="cb25-27"><a href="#cb25-27"></a><span class="co">## Install ZSH plugins ----</span></span>
+<span id="cb25-28"><a href="#cb25-28"></a><span class="fu">git</span> clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="va">${ZSH_CUSTOM}</span>/plugins/zsh-syntax-highlighting</span>
+<span id="cb25-29"><a href="#cb25-29"></a></span>
+<span id="cb25-30"><a href="#cb25-30"></a><span class="fu">git</span> clone https://github.com/zsh-users/zsh-autosuggestions.git     <span class="va">${ZSH_CUSTOM}</span>/plugins/zsh-autosuggestions</span>
+<span id="cb25-31"><a href="#cb25-31"></a></span>
+<span id="cb25-32"><a href="#cb25-32"></a><span class="co">## Edit ZSH configuration file ----</span></span>
+<span id="cb25-33"><a href="#cb25-33"></a><span class="fu">nano</span> ~/.config/zsh/.zshrc</span>
+<span id="cb25-34"><a href="#cb25-34"></a></span>
+<span id="cb25-35"><a href="#cb25-35"></a><span class="co">## # Path to your Oh My Zsh installation.</span></span>
+<span id="cb25-36"><a href="#cb25-36"></a><span class="co">## export ZSH="$HOME/.config/oh-my-zsh"</span></span>
+<span id="cb25-37"><a href="#cb25-37"></a></span>
+<span id="cb25-38"><a href="#cb25-38"></a><span class="co">## # History</span></span>
+<span id="cb25-39"><a href="#cb25-39"></a><span class="co">## HISTFILE=$HOME/.cache/zsh/history</span></span>
+<span id="cb25-40"><a href="#cb25-40"></a></span>
+<span id="cb25-41"><a href="#cb25-41"></a><span class="co">## # Prompt Theme</span></span>
+<span id="cb25-42"><a href="#cb25-42"></a><span class="co">## ZSH_THEME="powerlevel10k/powerlevel10k"</span></span>
+<span id="cb25-43"><a href="#cb25-43"></a></span>
+<span id="cb25-44"><a href="#cb25-44"></a><span class="co">## # ZSH plugins</span></span>
+<span id="cb25-45"><a href="#cb25-45"></a><span class="co">## plugins=(git zsh-autosuggestions zsh-syntax-highlighting z)</span></span>
+<span id="cb25-46"><a href="#cb25-46"></a></span>
+<span id="cb25-47"><a href="#cb25-47"></a><span class="co">## # Aliases</span></span>
+<span id="cb25-48"><a href="#cb25-48"></a><span class="co">## alias ..='cd ..'</span></span>
+<span id="cb25-49"><a href="#cb25-49"></a><span class="co">## alias ls='ls --color=auto'</span></span>
+<span id="cb25-50"><a href="#cb25-50"></a><span class="co">## alias ll='ls --color=auto -al'</span></span>
+<span id="cb25-51"><a href="#cb25-51"></a><span class="co">## alias r="R"</span></span>
+<span id="cb25-52"><a href="#cb25-52"></a><span class="co">## alias gs='git status'</span></span>
+<span id="cb25-53"><a href="#cb25-53"></a><span class="co">## alias ga='git add'</span></span>
+<span id="cb25-54"><a href="#cb25-54"></a><span class="co">## alias gc='git commit -m'</span></span>
+<span id="cb25-55"><a href="#cb25-55"></a><span class="co">## alias gp='git push'</span></span>
+<span id="cb25-56"><a href="#cb25-56"></a></span>
+<span id="cb25-57"><a href="#cb25-57"></a><span class="co">## # Hotkeys</span></span>
+<span id="cb25-58"><a href="#cb25-58"></a><span class="co">## bindkey '[C' forward-word</span></span>
+<span id="cb25-59"><a href="#cb25-59"></a><span class="co">## bindkey '[D' backward-word</span></span>
+<span id="cb25-60"><a href="#cb25-60"></a></span>
+<span id="cb25-61"><a href="#cb25-61"></a><span class="co">## Apply changes ----</span></span>
+<span id="cb25-62"><a href="#cb25-62"></a><span class="bu">source</span> ~/.config/zsh/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="motd" class="level3" data-number="A.5.3">
 <h3 data-number="A.5.3" class="anchored" data-anchor-id="motd"><span class="header-section-number">A.5.3</span> MOTD</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">## Move to MOTD config directory ----</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="bu">cd</span> /etc/update-motd.d</span>
-<span id="cb25-3"><a href="#cb25-3"></a></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="co">## Remove content ----</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="fu">rm</span> <span class="at">-rf</span> ./<span class="pp">*</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a></span>
-<span id="cb25-7"><a href="#cb25-7"></a><span class="co">## Define colorscheme ----</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a><span class="fu">nano</span> colors</span>
-<span id="cb25-9"><a href="#cb25-9"></a></span>
-<span id="cb25-10"><a href="#cb25-10"></a><span class="co">## NONE="\033[m"</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a><span class="co">## WHITE="\033[1;37m"</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a><span class="co">## GREEN="\033[1;32m"</span></span>
-<span id="cb25-13"><a href="#cb25-13"></a><span class="co">## RED="\033[0;32;31m"</span></span>
-<span id="cb25-14"><a href="#cb25-14"></a><span class="co">## YELLOW="\033[1;33m"</span></span>
-<span id="cb25-15"><a href="#cb25-15"></a><span class="co">## BLUE="\033[34m"</span></span>
-<span id="cb25-16"><a href="#cb25-16"></a><span class="co">## CYAN="\033[36m"</span></span>
-<span id="cb25-17"><a href="#cb25-17"></a><span class="co">## LIGHT_GREEN="\033[1;32m"</span></span>
-<span id="cb25-18"><a href="#cb25-18"></a><span class="co">## LIGHT_RED="\033[1;31m"</span></span>
-<span id="cb25-19"><a href="#cb25-19"></a></span>
-<span id="cb25-20"><a href="#cb25-20"></a><span class="co">## Print hostname (Figlet) ----</span></span>
-<span id="cb25-21"><a href="#cb25-21"></a><span class="fu">nano</span> 00-hostname</span>
-<span id="cb25-22"><a href="#cb25-22"></a></span>
-<span id="cb25-23"><a href="#cb25-23"></a><span class="co">## #!/bin/sh</span></span>
-<span id="cb25-24"><a href="#cb25-24"></a><span class="co">## </span></span>
-<span id="cb25-25"><a href="#cb25-25"></a><span class="co">## . /etc/update-motd.d/colors</span></span>
-<span id="cb25-26"><a href="#cb25-26"></a><span class="co">## </span></span>
-<span id="cb25-27"><a href="#cb25-27"></a><span class="co">## printf "\n"$LIGHT_RED</span></span>
-<span id="cb25-28"><a href="#cb25-28"></a><span class="co">## figlet "  "$(hostname -s)</span></span>
-<span id="cb25-29"><a href="#cb25-29"></a><span class="co">## printf $NONE</span></span>
-<span id="cb25-30"><a href="#cb25-30"></a><span class="co">## printf "\n"</span></span>
-<span id="cb25-31"><a href="#cb25-31"></a></span>
-<span id="cb25-32"><a href="#cb25-32"></a><span class="co">## Print system info (Neofetch) ----</span></span>
-<span id="cb25-33"><a href="#cb25-33"></a><span class="fu">nano</span> 10-banner</span>
-<span id="cb25-34"><a href="#cb25-34"></a></span>
-<span id="cb25-35"><a href="#cb25-35"></a><span class="co">## #!/bin/bash</span></span>
-<span id="cb25-36"><a href="#cb25-36"></a><span class="co">## </span></span>
-<span id="cb25-37"><a href="#cb25-37"></a><span class="co">## echo ""</span></span>
-<span id="cb25-38"><a href="#cb25-38"></a><span class="co">## neofetch --config /home/ncasajus/.config/neofetch/config.conf</span></span>
-<span id="cb25-39"><a href="#cb25-39"></a><span class="co">## </span></span>
-<span id="cb25-40"><a href="#cb25-40"></a><span class="co">## echo "Welcome to Rossinante  !"</span></span>
-<span id="cb25-41"><a href="#cb25-41"></a><span class="co">## echo ""</span></span>
-<span id="cb25-42"><a href="#cb25-42"></a></span>
-<span id="cb25-43"><a href="#cb25-43"></a><span class="co">## Remove previous MOTD ----</span></span>
-<span id="cb25-44"><a href="#cb25-44"></a><span class="fu">rm</span> /etc/motd</span>
-<span id="cb25-45"><a href="#cb25-45"></a></span>
-<span id="cb25-46"><a href="#cb25-46"></a><span class="co">## Apply changes ----</span></span>
-<span id="cb25-47"><a href="#cb25-47"></a><span class="fu">ln</span> <span class="at">-s</span> /var/run/motd /etc/motd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">## Move to MOTD config directory ----</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="bu">cd</span> /etc/update-motd.d</span>
+<span id="cb26-3"><a href="#cb26-3"></a></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co">## Remove content ----</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="fu">rm</span> <span class="at">-rf</span> ./<span class="pp">*</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="co">## Define colorscheme ----</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="fu">nano</span> colors</span>
+<span id="cb26-9"><a href="#cb26-9"></a></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co">## NONE="\033[m"</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a><span class="co">## WHITE="\033[1;37m"</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="co">## GREEN="\033[1;32m"</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a><span class="co">## RED="\033[0;32;31m"</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a><span class="co">## YELLOW="\033[1;33m"</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a><span class="co">## BLUE="\033[34m"</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a><span class="co">## CYAN="\033[36m"</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a><span class="co">## LIGHT_GREEN="\033[1;32m"</span></span>
+<span id="cb26-18"><a href="#cb26-18"></a><span class="co">## LIGHT_RED="\033[1;31m"</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a></span>
+<span id="cb26-20"><a href="#cb26-20"></a><span class="co">## Print hostname (Figlet) ----</span></span>
+<span id="cb26-21"><a href="#cb26-21"></a><span class="fu">nano</span> 00-hostname</span>
+<span id="cb26-22"><a href="#cb26-22"></a></span>
+<span id="cb26-23"><a href="#cb26-23"></a><span class="co">## #!/bin/sh</span></span>
+<span id="cb26-24"><a href="#cb26-24"></a><span class="co">## </span></span>
+<span id="cb26-25"><a href="#cb26-25"></a><span class="co">## . /etc/update-motd.d/colors</span></span>
+<span id="cb26-26"><a href="#cb26-26"></a><span class="co">## </span></span>
+<span id="cb26-27"><a href="#cb26-27"></a><span class="co">## printf "\n"$LIGHT_RED</span></span>
+<span id="cb26-28"><a href="#cb26-28"></a><span class="co">## figlet "  "$(hostname -s)</span></span>
+<span id="cb26-29"><a href="#cb26-29"></a><span class="co">## printf $NONE</span></span>
+<span id="cb26-30"><a href="#cb26-30"></a><span class="co">## printf "\n"</span></span>
+<span id="cb26-31"><a href="#cb26-31"></a></span>
+<span id="cb26-32"><a href="#cb26-32"></a><span class="co">## Print system info (Neofetch) ----</span></span>
+<span id="cb26-33"><a href="#cb26-33"></a><span class="fu">nano</span> 10-banner</span>
+<span id="cb26-34"><a href="#cb26-34"></a></span>
+<span id="cb26-35"><a href="#cb26-35"></a><span class="co">## #!/bin/bash</span></span>
+<span id="cb26-36"><a href="#cb26-36"></a><span class="co">## </span></span>
+<span id="cb26-37"><a href="#cb26-37"></a><span class="co">## echo ""</span></span>
+<span id="cb26-38"><a href="#cb26-38"></a><span class="co">## neofetch --config /home/ncasajus/.config/neofetch/config.conf</span></span>
+<span id="cb26-39"><a href="#cb26-39"></a><span class="co">## </span></span>
+<span id="cb26-40"><a href="#cb26-40"></a><span class="co">## echo "Welcome to Rossinante  !"</span></span>
+<span id="cb26-41"><a href="#cb26-41"></a><span class="co">## echo ""</span></span>
+<span id="cb26-42"><a href="#cb26-42"></a></span>
+<span id="cb26-43"><a href="#cb26-43"></a><span class="co">## Remove previous MOTD ----</span></span>
+<span id="cb26-44"><a href="#cb26-44"></a><span class="fu">rm</span> /etc/motd</span>
+<span id="cb26-45"><a href="#cb26-45"></a></span>
+<span id="cb26-46"><a href="#cb26-46"></a><span class="co">## Apply changes ----</span></span>
+<span id="cb26-47"><a href="#cb26-47"></a><span class="fu">ln</span> <span class="at">-s</span> /var/run/motd /etc/motd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="hidden quarto-markdown-envelope-contents" data-render-id="footer-right-https://github.com/frbcesab/rossinante">
 <p>Code source &nbsp;<i class="bi bi-github" role="img"></i></p>
