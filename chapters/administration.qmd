@@ -262,6 +262,7 @@ apt-get install pandoc
 ```sh
 ## Install additional tools for some R packages ----
 apt-get install        \
+  cmake                \
   libgdal-dev          \
   libproj-dev          \
   libgeos-dev          \
